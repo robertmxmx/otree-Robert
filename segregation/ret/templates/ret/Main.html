@@ -1,0 +1,57 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Group Assignment Task
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <center>
+            Type the text below into the box and click <b>Next</b> <br>or hit the <b>Enter Key</b>
+        <br><br>
+            <canvas id="myCanvas" width="200" height="80" style="border:1px solid #f4f5ff;background: #f4e4e3">
+                    Your browser does not support the HTML5 canvas tag.</canvas>
+        </center>
+    </p>
+
+    <table class="table">
+        <tr>
+            <th style="vertical-align:middle">
+                <br>
+                {% formfield player.user_text with label="" %}
+                <br>
+                <script>
+                    window.onload = function() {
+                      document.getElementById("id_user_text").focus();
+                    }
+                </script>
+            </th>
+            <th style="vertical-align:middle; text-align: right">
+                <br>
+                {% next_button %}
+                <br>
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                Points earned: {{ total_payoff }}
+            </th>
+            <th style="vertical-align:top; text-align: left">
+                <h2><br></h2>
+            </th>
+        </tr>
+    </table>
+
+    <script>
+        var c=document.getElementById("myCanvas");
+        var ctx=c.getContext("2d");
+        ctx.font="30px Courier";
+        ctx.fillText('{{ player.correct_text }}',60,50);
+        // save img
+        Canvas2Image.saveAsImage(c, 300, 100, 'png');
+    </script>
+
+{% endblock %}

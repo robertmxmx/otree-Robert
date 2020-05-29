@@ -1,0 +1,51 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    {% if treatment == 1 %}
+        Task 3
+    {% elif treatment == 2 %}
+        Task 4
+    {% else %}
+        ERROR: Invalid treatment
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please read the following list of statements and indicate how much you agree
+        or disagree with each statement:
+    </p>
+
+    <ul>
+        {% for field in form %}
+            <li>
+                {{ field.label }}
+                <br/> <br/>
+                <table style="border-collapse: collapse; width: 100%;">
+                    <tr>
+                        {% for choice in field %}
+                            <td style="border: 1px solid #dddddd; background-color: #dddddd; text-align: center; width: 14%;">
+                                &nbsp{{ choice.choice_label }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for choice in field %}
+                            <td style="border: 1px solid #dddddd; text-align: center; width: 14%;">
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </li>
+            <br/> <br/>
+        {% endfor %}
+    </ul>
+
+    {% next_button %}
+
+{% endblock %}
+
+

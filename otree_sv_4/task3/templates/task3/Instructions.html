@@ -1,0 +1,38 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 3 - Instructions
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        In this task, you will interact with one other person in the room, 
+        chosen at random. The person you are interacting with is definitely 
+        NOT the person you interacted with in the first task.
+    </p>
+
+    <p>
+        You will have the same interaction as in Task 1 (instructions below), 
+        and you will play the same role as you had last time.
+    </p>
+
+    <p>
+        Before the interaction occurs, there is one important difference: Participant 
+        A will first receive some information about Participant B's responses in 
+        Task 2.
+    </p>
+
+    <p>
+        We have selected {{ Constants.reveal_statements|length }} of the statement 
+        pairs from Task 2. Participant B’s choice from those 
+        {{ Constants.reveal_statements|length }} pairs, together with the price 
+        named for switching those statements, will be revealed to Participant A.
+    </p>
+
+    <br>
+
+    {% include 'Task1Instructions.html' %}
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2a - Choice
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You have been assigned to version {{ player.a_version_assigned }}. To make your choice, click the
+        corresponding button below.
+    </p>
+    {% if player.a_version_assigned == 1 %}
+        {% include "V1Table.html" %}
+    {% else %}
+        {% include "V2Table.html" %}
+    {% endif %}
+    <br/>
+    <p>
+        Which option will you choose?
+    </p>
+    <div>
+        <button name="a_option" value="1" class="btn btn-primary btn-large">Option 1</button>
+        <button name="a_option" value="2" class="btn btn-primary btn-large">Option 2</button>
+    </div>
+    <br/>
+    {% include "T2aInstructions.html" %}
+
+{% endblock %}

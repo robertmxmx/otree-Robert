@@ -1,0 +1,112 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Final Payment
+{% endblock %}
+
+{% block content %}
+
+    <div id='before-hide'>
+        <p>
+            It has been randomly determined that Task {{ subsession.paid_task }} 
+            will be paid. 
+        </p>
+    
+        <h1>
+            Task {{ subsession.paid_task }} Earnings
+        </h1>
+    
+        {% if subsession.paid_task == 1 or subsession.paid_task == 3 %}
+            {% include 'Outcome.html'%}
+        {% else %} 
+    
+            <p>
+                We randomly selected the following statement for payment: 
+                {{ statement_label }}
+            </p>
+    
+            <p>
+                Your lowest acceptable price to accept the opposite statement was: 
+                {{ statement_bid }}
+            </p>
+    
+            <p>
+                Our randomly generated switching price was: ${{ subsession.switch_price }}
+            </p>
+    
+            {% if participant.payoff == 0 %}
+                <p>
+                    Therefore, you will not receive payment for this task, and you will not 
+                    be asked to sign the opposite statement.
+                </p>
+            {% else %}
+                <p>
+                    Therefore you will be paid ${{ subsession.switch_price }} for this task, 
+                    in exchange for signing the opposite statement
+                </p>
+            {% endif %}
+    
+            <p>
+                In order to collect your payment for Task 2, you must sign a printout of the 
+                statement you accepted. Please wait at your desk while we generate printouts 
+                of the relevant statements.
+            </p>
+    
+            <p>
+                If you change your mind, and do not wish to sign the statement, please mark 
+                a large cross against the print out when we bring it to you, and your final 
+                payment will be {{ session.config.participation_fee }}.
+            </p>
+    
+        {% endif %}
+    
+        <p>
+            Your earnings are therefore: {{ session.config.participation_fee }} 
+            participation fee, plus ${{ participant.payoff }} from task 
+            {{ subsession.paid_task }} = {{ participant.payoff_plus_participation_fee }}
+        </p>
+    
+        <p>
+            Please fill out your receipt for the total amount, sign it, and wait for your 
+            desk number to be called.
+        </p>
+    
+        <p>
+            Thank you very much for your participation. While you wait for others to finish, 
+            you may now use your phone, provided it is in silent mode and you continue not to 
+            distract other people in the room.
+        </p>
+        
+        <button 
+            type="button" 
+            onclick="handleHide()" 
+            class="otree-btn-next btn btn-primary"
+        >
+            Click here to conceal your payment information
+        </button>
+    </div>
+
+    <div id="after-hide" style="display: none">
+        <button 
+            type="button" 
+            onclick="handleBack()" 
+            class="otree-btn-next btn btn-primary"
+        >
+            Back
+        </button>
+    </div>
+
+    <script>
+        function handleHide() {
+            document.getElementById('before-hide').style.display = 'none';
+            document.getElementById('after-hide').style.display = ''; 
+        }
+
+        function handleBack() {
+            document.getElementById('before-hide').style.display = '';
+            document.getElementById('after-hide').style.display = 'none'; 
+        }
+    </script>
+
+{% endblock %}

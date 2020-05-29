@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Value statements
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You accepted the statement: <b>{{ original_statement }}</b>
+    </p>
+    <p>
+       Would you be willing to accept the statement: <b>{{ opposite_statement }}</b> for
+        an amount of cash up to ${{ Constants.exchange_amount }}?
+    </p>
+
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}
+
+

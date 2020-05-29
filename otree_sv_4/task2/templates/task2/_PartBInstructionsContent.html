@@ -1,0 +1,55 @@
+{% load otree %}
+
+<div class="card bg-light instructions card-body">
+
+    <p>
+        You will now be presented with each of the statements you accepted in the 
+        preceding part of this task.
+    </p>
+ 
+    <p>
+        For each statement, you will be asked whether you are willing to accept the 
+        opposite statement, in exchange for an amount of money between 
+        ${{ Constants.min_bid}} and ${{ Constants.max_bid }}. 
+    </p>
+
+    <p>
+        For example: If you are willing to accept the opposite statement for $35 or 
+        more, but not for any lesser amount, you would enter $35.
+    </p>
+
+    <p>
+        If you do not wish to change your statement for any amount in that range, 
+        type "{{ Constants.opt_out_text }}".
+    </p>
+
+    <p>
+        After all your bids are entered, we will select one of the 
+        {{ Constants.statements|length }} pairs at random and generate a random 
+        number between {{ Constants.min_bid}}-{{ Constants.max_bid }}.
+    </p>
+
+    <p>
+        If the number generated is greater than or equal to your lowest acceptable 
+        amount for that statement, we will pay you the randomly generated number 
+        (in dollars) in exchange for changing your statement. 
+    </p>
+
+    <p>
+        If the random number is less than your minimum amount, or if you opted out, 
+        we will pay you nothing, and your statement will be unchanged.
+    </p>
+
+    <p>
+        So for example: if we roll 33, and you nominated 30, we will pay you $33 to 
+        accept the opposite statement. If we roll 24, the number will be below your 
+        nominated price, so you will be paid nothing, and you won’t change which 
+        statement you accept.
+    </p>
+
+    <p>
+        At the end of the Task, we will ask you to sign a printed copy of the 
+        statement you have accepted.
+    </p>
+
+</div>

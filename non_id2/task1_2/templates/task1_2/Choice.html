@@ -1,0 +1,94 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task {{ subsession.round_number }} - Choice
+{% endblock %}
+
+{% block styles %}
+    <style>
+        td, th {
+            border: 1px solid #cccccc;
+            text-align: center;
+        }
+
+        td:not(:first-child) {
+            background-color: #eeeeee;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        The table below presents the two options available to one of the subjects participating
+        in this experiment (Individual X). For each of the choices, please indicate whether you believe that
+        Individual X choosing that option is very socially inappropriate, somewhat socially inappropriate,
+        somewhat socially appropriate, or very socially appropriate.
+
+        {% if this_task1 %}
+            Remember that you will earn money ($10) if your response to one of these questions (selected randomly)
+            is the same as the most common response provided in today's session.
+        {% else %}
+            Remember that you will earn money ($10) regardless of how other people respond in this task.
+        {% endif %}
+
+        To indicate your response, please select the corresponding button.
+    </p>
+
+
+    <table cellpadding="10">
+        <tr>
+            <th>Option</th>
+            <th>Very socially inappropriate</th>
+            <th>Somewhat socially inappropriate</th>
+            <th>Somewhat socially appropriate</th>
+            <th>Very socially appropriate</th>
+        </tr>
+        <tr>
+            {% if session.config.treatment == 1 %}
+                <td style="text-align: left">
+                    <b>Option 1</b> (Individual X receives $10, Participant A receives $10, Participant B receives $0)
+                </td>
+            {% else %}
+                <td style="text-align: left">
+                    <b>Option 1</b> (Individual X receives $10, Other Participant receives $10)
+                </td>
+            {% endif %}
+
+            {% for choice in form.option1 %}
+            <td>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}
+            </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% if session.config.treatment == 1 %}
+                <td style="text-align: left">
+                    <b>Option 2</b> (Individual X receives $12, Participant A receives $0, Participant B receives $2)
+                </td>
+            {% else %}
+                <td style="text-align: left">
+                    <b>Option 2</b> (Individual X receives $12, Other Participant Received $2)
+                </td>
+            {% endif %}
+
+            {% for choice in form.option2 %}
+            <td>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}
+            </td>
+            {% endfor %}
+        </tr>
+    </table>
+
+    <br>
+
+    {% next_button %}
+
+    {% if session.config.treatment == 1 %}
+        {% include Constants.treatment_instructions %}
+    {% else %}
+        {% include Constants.control_instructions %}
+    {% endif %}
+
+{% endblock %}

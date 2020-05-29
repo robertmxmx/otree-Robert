@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Round {{ subsession.round_number }} Decision
+{% endblock %}
+
+{% block content %}
+
+    <p>You are participant {{ player.p_id }}. Initial endowments are as follows:</p>
+    <table cellpadding="10" border="1" style="text-align:center;">
+        <tr>
+            {% for p in initial_payoffs %}
+                <th>{{ p.id }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for p in initial_payoffs %}
+                <td>{{ p.payoff }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}

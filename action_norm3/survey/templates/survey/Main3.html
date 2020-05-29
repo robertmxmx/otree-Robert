@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    General Survey
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .form-control {
+            display: inline;
+        }
+        .form-group {
+            margin-bottom: 0rem;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    {% for question in questions %}
+        {% include question %}
+        <br/>
+    {% endfor %}
+    <ul>
+        <li>{% formfield player.survey_cause_explain %}</li>
+    </ul>
+    {% next_button %}
+
+{% endblock %}

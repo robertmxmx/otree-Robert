@@ -1,0 +1,13 @@
+{{ field.label }}
+<table class="likert-table">
+    <tr>
+    {% for choice in field %}
+        <th>{{ choice.choice_label }}</th>
+    {% endfor %}
+    </tr>
+    <tr>
+    {% for choice in field %}
+        <td>&nbsp{{ choice.tag }}</td>
+    {% endfor %}
+    </tr>
+</table>

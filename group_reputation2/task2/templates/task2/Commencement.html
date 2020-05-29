@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    {% if subsession.round_number == 1 %}
+    Task 2a Commencement
+    {% else %}
+    Task 2b Commencement
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% include 'task2/Header.html' %}
+
+    {% if subsession.round_number == 1 %}
+    <p>
+        You will now begin Task 2a.
+    </p>
+    {% else %}
+    <p>
+        You will now begin Task 2b. You are in the same group as you were for Task 2a.
+    </p>
+    {% endif %}
+
+{% endblock %}
+
+

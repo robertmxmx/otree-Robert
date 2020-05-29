@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    End of Experiment
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Thank you for participating in the experiment today.
+    </p>
+
+    <p>
+        You have earned {{ participant.payoff }}
+    </p>
+
+    <p>
+        Please fill out your receipt and wait for the experimenter to call you for payment.
+        While you wait for other participants to complete the experiment, you can now take out and use your phone as
+        long as you do not disturb others.
+    </p>
+
+{% endblock %}

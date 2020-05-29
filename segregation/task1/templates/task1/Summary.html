@@ -1,0 +1,49 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+   Summary
+{% endblock %}
+
+{% block content %}
+
+    {% include "MainTasksHeader.html" %}
+
+    <p>
+        There
+        {% if group.num_red == 1 %}
+            is {{ group.num_red }} person
+        {% else %}
+            are {{ group.num_red }} people
+        {% endif %}
+        in <font color="red">Red Town</font>, and
+        {% if group.num_blue == 1 %}
+            {{ group.num_blue }} person
+        {% else %}
+            {{ group.num_blue }} people
+        {% endif %}
+        in <font color="blue">Blue Town</font>.
+    </p>
+
+    <p>
+        You are in <font color="{{ player.town }}">{{ player.town }} town</font>.
+    </p>
+
+    <p>
+        Above are the inhabitants in each town and their (i) payoff after moving decision and (ii) cost of
+        deduction received.
+    </p>
+
+    <p>
+        Your payoff after your moving decision: {{ player.pts_from_moving }}
+        <br/>
+        Cost of deduction points received: {{ player.deducted_pts_before_multiply }} x 3 = {{ player.pts_deducted }}
+        <br/>
+        Cost of deduction points assigned: {{ player.pts_assigned }}
+        <br/>
+        Your period {{ subsession.round_number }} total payoff: {{ player.payoff }}
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

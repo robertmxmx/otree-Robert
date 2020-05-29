@@ -1,0 +1,46 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        This task consists of a number of questions. You will earn an additional $3.00 for completing all
+        the questions.
+    </p>
+    <p>
+        Please answer the following questions.
+    </p>
+    {% formfield player.birth_region %}
+    {% formfield player.other_br %}
+    <p>
+        For the following items, indicate your agreement/disagreement
+    </p>
+    <ul>
+        {% for field in form %}
+        {% if forloop.counter > 2 %}
+        <li>
+            {{ field.label }}
+            <table class="likert-table">
+                <tr>
+                {% for choice in field %}
+                    <th>{{ choice.choice_label }}</th>
+                {% endfor %}
+                </tr>
+                <tr>
+                {% for choice in field %}
+                    <td>&nbsp{{ choice.tag }}</td>
+                {% endfor %}
+                </tr>
+            </table>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+
+    {% next_button %}
+
+{% endblock %}

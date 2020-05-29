@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 3 - Participant A Decision
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You have been assigned role A.
+    </p>
+    <p>
+        {% formfield group.a_transfer label="How many points do you wish to transfer to Participant B?" %}
+    </p>
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

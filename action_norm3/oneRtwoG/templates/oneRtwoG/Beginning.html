@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Beginning of round
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You are on Round {{ subsession.round_number }}
+        (out of {{ Constants.num_rounds }} rounds). Your ID for this round is {{ player.p_id}}
+    </p>
+
+    <p>Initial endowments are as follows:</p>
+    <table cellpadding="10" border="1" style="text-align:center;">
+        <tr>
+            {% for p in initial_payoffs %}
+                <th>{{ p.id }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for p in initial_payoffs %}
+                <td>{{ p.payoff }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+
+    <br><br>
+
+    {% next_button %}
+
+{% endblock %}

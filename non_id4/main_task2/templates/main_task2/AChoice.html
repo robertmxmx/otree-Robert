@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2a - Choice
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To make your choice, click the
+        corresponding button below. If you wish to reveal which of the two versions has been
+        assigned, click "Reveal". The other participant will not find out whether or not you
+        learned the actual version of the task.
+    </p>
+    <p>
+        Which option will you choose?
+    </p>
+    <div>
+        <button name="a_option" value="1" class="btn btn-primary btn-large">Option 1</button>
+        <button name="a_option" value="2" class="btn btn-primary btn-large">Option 2</button>
+        <button name="a_revealed" value="True" class="btn btn-primary btn-large">Reveal</button>
+    </div>
+    <br/>
+    {% include "T2aInstructions.html" %}
+
+{% endblock %}

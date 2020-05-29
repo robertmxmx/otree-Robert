@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 2 - Comprehension Question 2
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To check that you understand the rules, please answer the
+        following question:
+    </p>
+
+    <p>
+        {% formfield player.comp2 label="If Participant 1 sends 1 point, and Participant 2 therefore receives 3 points, how many points can Participant 2 send back to Participant 1?" %}
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

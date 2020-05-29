@@ -1,0 +1,34 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 3 - Participant B Decision
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You have been assigned role B.
+    </p>
+    <p>
+        How many points do you wish to transfer back to Participant A, if they make the following decisions:
+    </p>
+    <ul>
+        <li>
+            {% formfield group.b_transfer1 label="If Participant A transfers 1 point, giving you 3 points to allocate?" %}
+        </li>
+        <li>
+            {% formfield group.b_transfer2 label="If Participant A transfers 2 point, giving you 6 points to allocate?" %}
+        </li>
+        <li>
+            {% formfield group.b_transfer3 label="If Participant A transfers 3 point, giving you 9 points to allocate?" %}
+        </li>
+        <li>
+            {% formfield group.b_transfer4 label="If Participant A transfers 4 point, giving you 12 points to allocate?" %}
+        </li>
+    </ul>
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Thank you for coming. You have earned {{ session.config.participation_fee }} for showing up on time. The
+        following instructions explain how you can earn additional money during the experiment. It is therefore
+        important that you read these instructions carefully.
+    </p>
+
+    <p>
+        <strong>
+            Please do not communicate with the other participants during the experiment, except as instructed.
+        </strong>
+    </p>
+
+    <p>
+        If you have a question at any time, please raise your hand and the monitor will come to your desk to answer
+        it. When you ask a question, please make sure to speak softly so as not to disturb the other participants.
+    </p>
+
+    <p>
+        During the experiment, you can earn "points". At the end of the experiment these points will be converted to
+        cash at the following rate:
+    </p>
+
+    <p style="padding-left: 30px;">
+        <strong>
+            1 point = ${{ session.config.real_world_currency_per_point }}
+        </strong>
+    </p>
+
+    <p>
+        All the decisions will be anonymous. Each participant will be assigned a different <b>ID number</b> that
+        will be shown on his/her computer screen.
+    </p>
+
+    <p>
+        At the end of the experiment, you will be paid in private, so your behavior in the experiment will never be
+        revealed to any other participants.
+    </p>
+
+    <p>
+        You will be asked to take part in two tasks: Task 1 and Task 2. On the following pages are the instructions for Task
+        1. After Task 1 has finished, you will receive new instructions for Task 2. Your earnings in Task 1 will not
+        have an effect on your earnings in Task 2. That is, nothing you do in Task 2 can change your Task 1 earnings.
+    </p>
+
+    <p>
+        At the end of the experiment, we will randomly choose either Task 1 or Task 2. You will be paid your show up
+        payment of {{ session.config.participation_fee }}, plus your earnings from whichever one of these
+        tasks is chosen.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

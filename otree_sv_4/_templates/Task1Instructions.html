@@ -1,0 +1,139 @@
+{% load otree %}
+
+<div class="card bg-light instructions card-body">
+
+
+    <h2 style="margin-bottom: 20px;">
+        Task 1 - Instructions
+    </h2>
+
+    <p>
+        In this task, you will interact with one other person in the room, chosen at random.
+    </p>
+
+    <p>
+        Each participant is assigned to either Role A or Role B. 
+    </p>
+
+    <p>
+        Each participant has been allocated {{ Constants.initial_payoff }} points. At the end of 
+        the experiment, any points you earn will be converted to money, at the rate of 
+        ${{ session.config.real_world_currency_per_point }} per point. 
+    </p>
+
+    <p>
+        Participant A may choose to take {{ Constants.take_amount }} of Participant B’s points.
+    </p>
+
+    <p>
+        If A does choose to take some of B’s points, Participant B may choose to spend some points on 
+        retaliating against A. 
+    </p>
+
+    <p>
+        B may spend any amount between {{ Constants.deduction.min }} and {{ Constants.deduction.max }} 
+        points on retaliating. Each point that B spends in retaliation will reduce A’s earnings by 
+        {{ Constants.deduction.multiplier }} points.
+    </p>
+
+    <p>
+        So if A takes, and B spends zero on retaliation, the final earnings will be:
+    </p>
+
+    <ul>
+        <li>
+            A: 10 + 5 = 15 points
+        </li>
+        <li>
+            B: 10 - 5 = 5 points
+        </li>
+    </ul>
+
+    <p>
+        If A takes, and B spends 5 points on retaliation, the final earnings will be:
+    </p>
+
+    <ul>
+        <li>
+            A: 10 + 5 - (5 x 3) = 0 points
+        </li>
+        <li>
+            B: 10 - 5 - 5 = 0 points
+        </li>
+    </ul>
+
+    <p>
+        If A does not take at all, final earnings will be:
+    </p>
+
+    <ul>
+        <li>
+            A: 10 points
+        </li>
+        <li>
+            B: 10 points
+        </li>
+    </ul>
+
+    <p>
+        To calculate what final earnings will be at other levels of retaliation, enter an 
+        amount of retaliation in the box below.
+    </p>
+
+    <div class="card bg-light instructions card-body">
+        <span>
+            If A takes, and B spends 
+            <input 
+                type="number"
+                id="_points_retaliated" 
+                class="form-control" 
+                style="display: inline" 
+            >
+            points on retaliation, the final earnings for the task will be:
+        </span>
+        <ul>
+            <li>
+                A: <span id="_a_payoff"></span>
+            </li>
+            <li>
+                B: <span id="_b_payoff"></span>
+            </li>
+        </ul>
+        <span style="color: red" id="_error"></span>
+    </div>
+
+    <p>
+        <br />
+        Note: Participant B will be asked to enter his/her decision in advance -- indicating how 
+        much they wish to spend on retaliation, if A takes. If A decides not to take, this 
+        information will be ignored.
+    </p>
+    
+</div>
+
+<script>
+    function handleChange(e) {
+        const _points_retaliated = parseFloat(e.target.value);
+    
+        const min = {{ Constants.deduction.min }},
+            max = {{ Constants.deduction.max }},
+            multiplier = {{ Constants.deduction.multiplier }},
+            initial_payoff = {{ Constants.initial_payoff }},
+            take_amount = {{ Constants.take_amount }};
+    
+        if (_points_retaliated >= min && _points_retaliated <= max) {
+            const _a_payoff = initial_payoff + take_amount - (_points_retaliated * multiplier);
+            const _b_payoff = initial_payoff - take_amount - _points_retaliated;
+            document.getElementById('_a_payoff').innerHTML = `${_a_payoff} points`;
+            document.getElementById('_b_payoff').innerHTML = `${_b_payoff} points`;
+            document.getElementById('_error').innerHTML = '';
+        } else {
+            document.getElementById('_a_payoff').innerHTML = '';
+            document.getElementById('_b_payoff').innerHTML = '';
+            document.getElementById('_error').innerHTML 
+                = `Please enter a number between ${min} and ${max}`;
+        }
+    }
+
+    document.getElementById('_points_retaliated').addEventListener('input', handleChange);
+</script>

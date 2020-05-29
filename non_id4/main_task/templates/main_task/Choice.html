@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1 - Choice
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Which option will you choose?
+    </p>
+    <div>
+        <button name="option" value="1" class="btn btn-primary btn-large">Option 1</button>
+        <button name="option" value="2" class="btn btn-primary btn-large">Option 2</button>
+        <button name="option" value="3" class="btn btn-primary btn-large">Option 3</button>
+    </div>
+    <br/>
+    {% include "T1Instructions.html" %}
+
+{% endblock %}

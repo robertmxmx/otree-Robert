@@ -1,0 +1,71 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+        <h3>
+            Task 3 - Instructions
+        </h3>
+
+        <p>
+            In this task, you will interact with one other person in the room, chosen at random. The person you are
+            interacting with is definitely NOT the person you interacted with in the first task.
+        </p>
+        <p>
+            You will have the same interaction as in Task 1 (instructions below), and you will play the same role as
+            you had last time.
+        </p>
+
+        {% if participant_is_a %}
+            <p>
+                You are Participant A.
+            </p>
+        {% else %}
+            <p>
+                You are Participant B.
+            </p>
+        {% endif %}
+
+        <p>
+            Before the interaction occurs, there is one important difference: Participant A may first receive some
+            information about Participant Bʼs responses in Task 2
+        </p>
+
+        {% if participant_is_a %}
+            <p>
+                Participant B will first have the opportunity to request that some of their statements be concealed.
+                Below are the instructions that will be received by Participant B:
+            </p>
+        {% endif %}
+
+        <p>
+            <b>Instructions for Participant B:</b>
+        </p>
+        <p>
+            On the next page you will be shown eighteen of your originally chosen statements from Task 2, together with the prices you
+            named for switching those statements
+        </p>
+        <p>
+            We will use a random process to determine which of these answers will be revealed to your interaction
+            partner.
+        </p>
+        <p>
+            First indicate by selecting all answers that you would prefer to conceal from your interaction partner, if
+            you could select as many as you wish.
+        </p>
+        <p>
+            Rank the statements you wish to conceal in order from most wish to conceal to least wish to conceal.
+        </p>
+        <p>
+            You do not need to nominate any answers to be concealed. If you deﬁnitely want to reveal an answer, then do
+            not rank it at all.
+        </p>
+        <p>
+            Make sure that you enter a complete ranking such as (1, 2, 3, 4). If you leave any gaps (1, 2, 4, 5), or have
+            any duplicates (1, 2, 2, 3) your answer will be invalid and you won’t be able to proceed.
+        </p>
+        <p>
+            Note that there is a time limit on this task: you will have 3 minutes and 30 seconds to enter your ranking. If you do not
+            complete your ranking in this time, all your statements will be revealed.
+        </p>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3 Feedback
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        The round has been completed.
+    </p>
+    {% include "2R2GFeedback.html" %}
+    {% if num_red_pressed != 0 %}
+        <h4>Stage 3 Feedback</h4>
+        {% if red_d_pts == 0 and green_d_pts == 0 %}
+            <p>
+                The unaffected participant ({{ unaff_id }}) did not propose to assign any deduction points. Your earnings are
+                therefore: {{ player.stage3_ECU }} ECU.
+            </p>
+        {% else %}
+            <p>
+                The unaffected participant ({{ unaff_id }}) proposed to assign {{ red_d_pts }} deduction points to red button
+                pressers and {{ green_d_pts }} to any green button non-pressers. This proposal was
+                {{ accepted_deduction }} by the button-affected participant. Your earnings are therefore:
+                {{ player.stage3_ECU }} ECU.
+            </p>
+        {% endif %}
+    {% endif %}
+
+    <p>
+        Final endowments are:
+        <table class="simple_table">
+            <tr>
+                {% for p in final_payoffs %}
+                    <th>{{ p.id }}</th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for p in final_payoffs %}
+                    <td>{{ p.payoff }}</td>
+                {% endfor %}
+            </tr>
+        </table>
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

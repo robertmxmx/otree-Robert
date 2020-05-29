@@ -1,0 +1,80 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2 - Decision
+{% endblock %}
+
+{% block content %}
+    {% if player.role == 'A' %}
+        <p>
+            Do you wish to take {{ Constants.take_amount }} of {{ deducting_player }}'s ECU?
+            {% formfield player.chose_to_take label="" %}
+        </p>
+        {% next_button %}
+    {% else %}
+        <div  id="myModal" class="modal">
+            <div class="modal-content">
+                <br>
+                <div id="modalContent" class="w3-container"></div>
+            </div>
+        </div>
+        <p>
+            If {{ taking_player }} chooses to take from you, how much will you spend on deducting ECU
+            from {{ taking_player }}?
+
+            <input type="number" id="deduct_ecu" class="form-control" style="margin-top: 0.375rem"
+               onkeypress="return handle_enter(event);">
+            <input type="hidden" name="deduct_amount" />
+        </p>
+        <button type="button" class="otree-btn-next btn btn-primary" onclick="fill_modal();">Calculate</button>
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        // this handles when the enter button is pressed while inside the deduction field
+        function handle_enter(event) {
+            if (event.keyCode == 13 || event.which == 13) {
+                fill_modal();
+                return false;
+            }
+        }
+        function fill_modal() {
+            var deductECU = parseFloat(document.getElementById('deduct_ecu').value);
+            var modal_content = "";
+            if (deductECU >= {{ Constants.deduct.min }} && deductECU <= {{ Constants.deduct.max }}) {
+                var multDeductECU = {{ Constants.deduct.multiplier }}*deductECU;
+                modal_content = `
+                    <p>
+                        You have decided to spend ${deductECU} ECU on deductions. This will have net
+                        effect of reducing {{ taking_player }}’s endowment by
+                        ${multDeductECU} ECU, and your endowment by ${deductECU} ECU.
+                        Please confirm this is correct.
+                    </p>
+                    <br><br>
+                    <div align="right">
+                        <button class="otree-btn-next btn btn-primary"> Yes, proceed </button>
+                        <button type="button" class="otree-btn-next btn btn-primary"
+                            onclick="document.getElementById('myModal').style.display='none';"> Revise my decision </button>
+                    </div>
+                `;
+                document.getElementsByName('deduct_amount')[0].value = deductECU;
+            } else {
+                modal_content = `
+                    <p>Please enter a number between {{ Constants.deduct.min }} and {{ Constants.deduct.max }}.</p>
+                    <br><br>
+                    <div align="right">
+                        <button type="button" class="otree-btn-next btn btn-primary"
+                            onclick="document.getElementById('myModal').style.display='none';"> Close </button>
+                    </div>
+                `;
+            }
+            document.getElementById('modalContent').innerHTML = modal_content;
+            document.getElementById('myModal').style.display='block';
+        }
+    </script>
+{% endblock %}
+
+

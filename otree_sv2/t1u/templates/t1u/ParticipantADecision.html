@@ -1,0 +1,48 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 1 - Participant A Decision
+{% endblock %}
+
+{% block content %}
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 10px;
+        }
+        tr:nth-child(even) {
+            background-color: #eeeeee;
+        }
+    </style>
+
+    <p>
+        You have been assigned role A.
+    </p>
+    <p>
+        The initial allocation is
+    </p>
+    <table>
+        <tr>
+            <th>Participant A</th>
+            <th>Participant B</th>
+        </tr>
+        <tr>
+            <td>6 points</td>
+            <td>6 points</td>
+        </tr>
+    </table>
+    <p>
+        {% formfield group.a_decision label="How do you propose to allocate the 12 points between the two participants (Participant A, Participant B)?" %}
+    </p>
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

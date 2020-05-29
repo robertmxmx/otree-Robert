@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Final payment
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Tasks {{ chosen_task1 }} and {{ chosen_task2 }} will be paid. Your
+        earnings are therefore {{ payoff1 }} + {{ payoff2 }} + {{ part_fee }}
+        show-up fee = {{ total }}.
+    </p>
+
+    {% if chosen_task1 == 3 or chosen_task2 == 3 %}
+        <p>
+            In order to collect your payment for Task 3, you <b>must sign a print-out
+            of the relevant statement</b>. Please wait at your desk while we print out
+            each participant’s statement to be signed.
+        </p>
+        <p>
+            If you change your mind, and do not wish to sign the list of statements,
+            that is acceptable. Simply let us know when you are called up to be paid,
+            and your final payment will be {{ total_no3 }}
+        </p>
+        <p>
+            In the meantime, please collect all the items on your desk, and wait for
+            your desk number to be called. You may use your phone quietly while you wait.
+        </p>
+    {% else %}
+        <p>
+            Please fill out your receipt, sign it, and wait for your desk number
+            to be called.
+        </p>
+    {% endif %}
+
+    <p>
+        Thank you very much for your participation!
+    </p>
+
+{% endblock %}
+
+

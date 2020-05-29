@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 3 - Concealment Requests
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <b>Note</b>
+    </p>
+    <ol>
+        <li>
+            You have 3 minutes and 30 seconds to complete this task. If you do not complete the ranking in that time, then all of
+            your statements will be revealed.
+        </li>
+        <li>
+            If you give two statements the same rank, your ranking is invalid. Also if you have a gap in your
+            ranking, your ranking is invalid. Take care to only use each number once, and without gaps.
+        </li>
+    </ol>
+    <p>
+        List of statements to be ranked:
+    </p>
+     <ol>
+        {% for field in form %}
+            {% for s_info in s_subset %}
+                {% if forloop.counter == forloop.parentloop.counter %}
+                    <li>{{ s_info.item }} {% formfield field %}</li>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </ol>
+    <br/>
+
+    {% next_button %}
+
+{% endblock %}

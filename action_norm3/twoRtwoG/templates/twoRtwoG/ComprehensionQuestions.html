@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Comprehension questions
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To check you understand this task, please answer the following comprehension
+        questions.
+    </p>
+
+    <ol type="1">
+        {% for field in form %}
+            <li><label style="display: inline-table;">{{ field.label }}</label>{{ field }}</li>
+        {% endfor %}
+    </ol>
+
+    {% next_button %}
+
+    {% include "2R2GStage1Instructions.html" %}
+    {% include "2R2GStage2Instructions.html" %}
+    {% include "2R2GStage3Instructions.html" %}
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+        <h3>
+            Stage 1: The red button
+        </h3>
+
+        <p>
+            One of the {{ session.config.num_demo_participants }} members of your group will be randomly selected to have the opportunity
+            to press a red button.
+        </p>
+        <p>
+            If the red button is pressed, it will have two effects:
+        </p>
+        <ul>
+            <li>
+                Whoever presses the button will earn 40 ECU.
+            </li>
+            <li>
+                One other person in the group, chosen at random, will lose 120 ECU from their
+                endowment.
+            </li>
+        </ul>
+        <p>
+            To illustrate, suppose that person C is chosen at random to have the opportunity to
+            press the red button, and person A is the person who will be affected if the red button is
+            pressed.
+        </p>
+        <p>
+            If C does not press the button, everyone's earnings will be unchanged.
+        </p>
+        <p>
+            If C does press the button, the effects will become:
+        </p>
+        <table cellpadding="10" border="1">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+            </tr>
+            <tr>
+                <td>-120</td>
+                <td>0</td>
+                <td>+40</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+        </table>
+        </br>
+        <p>
+            If C does not press the button, the round is over and you will start a new round.
+        </p>
+        <p>
+            If C does press the button, you will enter the next stage.
+        </p>
+
+    </div>
+</div>

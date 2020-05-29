@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1 - Comprehension Questions
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To check that you understand the rules, please answer the following questions:
+    </p>
+
+    <ol>
+        <li>{% formfield player.c1 %}</li>
+        <li>{% formfield player.c2 %}</li>
+        <li>{% formfield player.c3 %}</li>
+        <li>{% formfield player.c4 %}</li>
+    </ol>
+    
+    {% next_button %}
+
+    {% include 'Task1Instructions.html' %}
+
+{% endblock %}

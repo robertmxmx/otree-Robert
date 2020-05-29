@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 3 - Comprehension Questions
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To check that you understand the rules, please answer the following questions:
+    </p>
+
+    <p>
+        <b>1.</b> In the next task, you will be matched with the same partner as you had in Task 1.
+        {% formfield player.c1 label="" %}
+    </p>
+
+    <p>
+        <b>2.</b> Before the interaction, Participant B will indicate which statements he/she prefers to conceal
+        from Participant A for the following task. If Participant B most wishes to conceal a particular
+        statement, he/she should
+        {% formfield player.c2 label="" %}
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

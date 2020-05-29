@@ -1,0 +1,123 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                text-align: center;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #eeeeee;
+            }
+        </style>
+
+        <h4>
+            Decision on which town to move into
+        </h4>
+
+        <p>
+            At the beginning of the task, Red individuals reside in Red Town and
+            Blue individuals reside in Blue Town.
+        </p>
+
+        <p>
+            For the first 3 periods,
+            you will be asked to confirm that you are living in your starting town,
+            and no other choice will be possible.
+        </p>
+
+        <p>
+            After period 3, at the beginning of each period each participant decides whether to stay in
+            their current town, or to move to the other town. You can move to either town, regardless of
+            whether you are a member of the Red group or the Blue group. The decision screen looks as
+            follows.
+        </p>
+
+        <img style="border: 1px solid black;" width="100%" src="{% static 'decision_screen.jpg' %}"/>
+
+        <br><br>
+
+        <p>
+            Red individuals earn an additional 50 points per period. Blue individuals earn an additional
+            150 points per period. After all participants have chosen their town, the combined earnings
+            of all the residents are divided equally among the inhabitants of the respective town.
+        </p>
+
+        <p>
+            In periods 1 to 3, then, the four residents of Red town will earn a total of 200 points per
+            period, which will be shared equally between the four of them: 50 points each per period.
+        </p>
+
+        <p>
+            In these same periods, the four residents of Blue town will earn a total of 600 points per
+            period, which will be shared equally: 150 points each per period.
+        </p>
+
+        <p>
+            To illustrate the effect of moving town, suppose that in period 4, one red individual decides
+            to move to Blue town, while everyone else stays in the same place. The table below shows
+            that the residents of Red Town will earn 50 points each, while the residents of Blue Town
+            will earn 130 points each.
+        </p>
+
+        <table border="1">
+            <tr>
+                <th></th>
+                <th>Red Town</th>
+                <th>Blue Town</th>
+            </tr>
+            <tr>
+                <th>Residents</th>
+                <td>3 x Red, 0 x Blue</td>
+                <td>1 x Red, 4 x Blue</td>
+            </tr>
+            <tr>
+                <th>Total Earnings</th>
+                <td>3 x 50 = 150</td>
+                <td>1 x 50 + 4 x 150 = 650</td>
+            </tr>
+            <tr>
+                <th>Earnings per resident</th>
+                <td>150 / 3 = 50</td>
+                <td>650 / 5 = 130</td>
+            </tr>
+        </table>
+
+        </br>
+
+        <h5>
+            Feedback
+        </h5>
+
+        <p>
+            After all participants have made their decisions, the following <b>Payoff</b> screen will show you who has moved
+            into the town you are in and how much each participant has earned.
+        </p>
+
+        <img style="border: 1px solid black;" width="100%" src="{% static 'moving_payoff_screen.jpg' %}"/>
+
+        <br><br>
+
+        <p>
+            After the first period, a "history" display will be made available on the screen for you to view the past
+            decisions of all the participants. You may consult this history display when making your subsequent decisions.
+        </p>
+
+        <h5>
+            Time to make decision
+        </h5>
+
+        <p>
+            Each period you will have a limited time to make your decision. If you do not complete your decision
+            within the time limit, the computer will make a random decision on your behalf.
+        </p>
+    </div>
+</div>

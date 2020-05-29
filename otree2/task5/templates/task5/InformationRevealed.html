@@ -1,0 +1,48 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 5 - Information Revealed
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <strong>
+            Below are some of the answers that your interaction partner gave to the Task 3 questions
+        </strong>
+    </p>
+
+    <ul>
+        {% if num_partner == 0 %}
+            [NONE]
+        {% else %}
+            {% for statement in partner_statements %}
+                <li>
+                    {{ statement }}
+                </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+
+    <p>
+        <strong>
+            Below are the answers of yours that were revealed to your interaction partner
+        </strong>
+    </p>
+
+    <ul>
+        {% if num_player == 0 %}
+            [NONE]
+        {% else %}
+            {% for statement in player_statements %}
+                <li>
+                    {{ statement }}
+                </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+
+    {% next_button %}
+
+{% endblock %}

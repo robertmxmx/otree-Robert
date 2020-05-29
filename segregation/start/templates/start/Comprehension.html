@@ -1,0 +1,129 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1 - Comprehension
+{% endblock %}
+
+{% block styles %}
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            text-align: center;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #eeeeee;
+        }
+
+        .form-control {
+            display: inline;
+        }
+
+    </style>
+{%  endblock %}
+
+{% block content %}
+
+    <ol>
+        <li>
+            {% formfield player.c1 label="How many points are earned by each Red Individual in each period?" %}
+        </li>
+        <li>
+            {% formfield player.c2 label="How many points are earned by each Blue Individual in each period?" %}
+        </li>
+    </ol>
+
+    <p>
+        The table below shows the number of points that will be earned by each resident of a town, based on the
+        number of blue and red residents in that town, for a single period.
+    </p>
+
+    <table border="1">
+        <tr>
+            <th colspan="2"></th>
+            <th colspan="5"> Number of Blue Residents</th>
+        </tr>
+        <tr>
+            <th colspan="2"></th>
+            <th>0</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+        </tr>
+        <tr>
+            <th rowspan="5" style="width: 150px">Number of Red Residents</th>
+            <th>0</th>
+            <td>n/a</td>
+            <td>150</td>
+            <td>150</td>
+            <td>150</td>
+            <td>150</td>
+        </tr>
+        <tr>
+            <th>1</th>
+            <td>50</td>
+            <td>100</td>
+            <td>117</td>
+            <td>125</td>
+            <td>130</td>
+        </tr>
+        <tr>
+            <th>2</th>
+            <td>50</td>
+            <td>83</td>
+            <td>100</td>
+            <td>110</td>
+            <td>117</td>
+        </tr>
+        <tr>
+            <th>3</th>
+            <td>50</td>
+            <td>75</td>
+            <td>90</td>
+            <td>100</td>
+            <td>107</td>
+        </tr>
+        <tr>
+            <th>4</th>
+            <td>50</td>
+            <td>70</td>
+            <td>83</td>
+            <td>93</td>
+            <td>100</td>
+        </tr>
+    </table>
+
+    <ol start="3">
+        <li>
+            {% formfield player.c3 label="Suppose one town has 1 Red resident and 3 Blue residents. How many points will residents of this town earn?" %}
+        </li>
+        <li>
+            {% formfield player.c4 label="In general, to maximise earnings (prior to deduction points), a Red individual should:" %}
+        </li>
+        <li>
+            {% formfield player.c5 label="In general, to maximise earnings (prior to deduction points), a Blue individual should:" %}
+        </li>
+
+        {% if session.config.treatment == 1 %}
+            <li>
+                If 5 deduction points are applied to an individual, that will reduce the individual’s
+                earnings by {{ form.c6a }} points. The participant who applies the deduction points will have their
+                earnings reduced by {{ form.c6b }} points.
+            </li>
+        {% endif %}
+    </ol>
+
+    {% next_button %}
+
+    {% include 'start/DInstructionsContent.html' %}
+    {% include 'start/DInstructions2Content.html' %}
+
+{% endblock %}

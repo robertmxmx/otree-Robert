@@ -1,0 +1,41 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1 - Comprehension Quiz
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .form-control {
+            display: inline;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        At this point, to make sure everyone understands the task, please answer the questions below.
+    </p>
+
+    <p>
+        <b>1.</b> If you choose Option 2 then you receive ${{ form.comp1a }}, Participant A receives ${{ form.comp1b }},
+        Participant B receives ${{ form.comp1c }}
+    </p>
+
+    <p>
+        <b>2.</b> If you choose Option 1 then you receive ${{ form.comp2a }}, Participant A receives ${{ form.comp2b }},
+        Participant B receives ${{ form.comp2c }}
+    </p>
+
+    <p>
+        <b>3. </b> If you choose Option 2, then will Participant A ever be informed about the experiment?
+        {% formfield player.comp3 label="" %}
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.instructions %}
+
+{% endblock %}

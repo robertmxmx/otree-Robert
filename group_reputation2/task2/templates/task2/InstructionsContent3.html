@@ -1,0 +1,242 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+        <h3>
+            Task 2 - Instructions (continued)
+        </h3>
+        <p>
+            This Task has two sub-tasks, 2a and 2b.
+        </p>
+        <p>
+             Please note that only one of these two tasks will be chosen for payment. The choice will be random.
+        </p>
+        <h4>
+            Task 2a Instructions
+        </h4>
+        <p>
+            Participants B and C will be given 110 ECU each. Participant A will be given 20 ECU.
+        </p>
+        <p>
+            The distribution of initial endowments is therefore:
+        </p>
+        <table class="simple-table">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>110</td>
+                <td>110</td>
+            </tr>
+        </table>
+        <p>
+            Participant A will have the opportunity to make a decision.
+        </p>
+        <p>
+            Participant A can take 100 of B’s ECU, or do nothing. If Participant A takes 100 of B’s ECU, then the
+            distribution of earnings for this task will be.
+        </p>
+        <table class="simple-table">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+            </tr>
+            <tr>
+                <td>120</td>
+                <td>10</td>
+                <td>110</td>
+            </tr>
+        </table>
+        <p>
+            If Participant A chooses to take B’s ECU, then B will be given the choice whether to react or not.
+        </p>
+        <p>
+            To react, B can choose how many ECU to spend on deducting ECU from A.
+        </p>
+        <p>
+            Each ECU that B spends on deductions will deduct 12 ECU from A. So, for example, if B chooses to spend
+            5 ECU, A will lose 5 x 12 = 60 ECU, and the overall distribution will be:
+        </p>
+        <table class="simple-table">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+            </tr>
+            <tr>
+                <td>120 - 60 = 60</td>
+                <td>10 - 5 = 5</td>
+                <td>110</td>
+            </tr>
+        </table>
+        <p>
+            Below is a calculator you can use to experiment with different levels of deduction, to see
+            what would happen.
+        </p>
+        <div id="insModal" class="modal">
+            <div class="modal-content">
+                <div class="w3-container">
+                    <div id="calc-result">
+                        <h3>Resulting payoffs</h3>
+                        <p>
+                            Assuming A decided to take 100 of B’s ECU, if B spent <span class="result1"></span>
+                            ECU on deduction, the final payoffs would be:
+                        </p>
+                        <table class="simple-table">
+                            <tr>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>C</th>
+                            </tr>
+                            <tr>
+                                <td>120 - <span class="result2"></span> = <span class="result3"></span></td>
+                                <td>10 - <span class="result1"></span> = <span class="result4"></span></td>
+                                <td>110</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="error-msg">
+                        <p>
+                            Please enter a number between {{ Constants.deduct.min }} and {{ Constants.deduct.max }}.
+                        </p>
+                    </div>
+                    <br><br>
+                    <div align="right">
+                        <button type="button" class="otree-btn-next btn btn-primary"
+                            onclick="document.getElementById('insModal').style.display='none';"> Close </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-light instructions">
+            <div class="card-body">
+                <input type="number" id="ins_num_field" class="form-control" style="display: inline"
+                   onkeypress="return handle_enter(event);">
+                <button type="button" class="otree-btn-next btn btn-primary" style="margin: -5px 0 0 0.25rem;"
+                    onclick="handle_ins_click();">Calculate</button>
+            </div>
+        </div>
+        {% if session.config.deterrence %}
+        <p>
+            After A and B have made their decisions, participant A will be informed of the outcome in Task 2a
+            before commencing Task 2b. Participants B and C will not learn the outcome until the end of the entire Task.
+        </p>
+        {% else %}
+        <p>
+            After A and B have made their decisions, participants will <b>not</b> be informed of the outcome.
+            Participants will proceed to Task 2b, and only learn the outcome of 2a after both sub-tasks are completed.
+        </p>
+        {% endif %}
+        <h4>Task 2b Instructions</h4>
+        <p>
+            Task 2b is very similar to Task 2a, except that B and C switch roles.
+        </p>
+        <p>
+            Participants B and C will be given 110 ECU each. Participant A will be given 20 ECU.
+        </p>
+        <p>
+            The distribution of initial endowments is therefore:
+        </p>
+        <table class="simple-table">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>110</td>
+                <td>110</td>
+            </tr>
+        </table>
+        <p>
+           Participant A will have the opportunity to make a decision.
+        </p>
+        <p>
+            Participant A can take 100 of C’s ECU, or do nothing. If Participant A takes 100 of C’s ECU, then
+            the distribution of earnings for this task will be.
+        </p>
+        <table class="simple-table">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+            </tr>
+            <tr>
+                <td>120</td>
+                <td>110</td>
+                <td>10</td>
+            </tr>
+        </table>
+        <p>
+            If Participant A chooses to take C’s ECU, then C will be given the choice whether to react or not.
+        </p>
+        <p>
+            To react, C can choose how many ECU to spend on deducting ECU from A.
+        </p>
+        <p>
+            Each ECU that C spends on deduction will deduct 12 ECU from A. So, for example, if C chooses to
+            spend 5 ECU, A will lose 5 x 12 = 60 ECU, and the overall distribution will be:
+        </p>
+        <table class="simple-table">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+            </tr>
+            <tr>
+                <td>120 - 60 = 60</td>
+                <td>110</td>
+                <td>10 - 5 = 5</td>
+            </tr>
+        </table>
+        <p>
+            After A and C have made their decisions, A and C will be informed of the outcome.
+        </p>
+        <p>
+            B will not learn what happens in Task 2b.
+        </p>
+        {% if session.config.rep_condition %}
+        <p>
+            C will then be informed about the membership of the group.
+        </p>
+        {% endif %}
+        <p>
+            The whole task will then be over, and one subtask will be chosen to be the one that is paid.
+        </p>
+    </div>
+</div>
+
+<script>
+    function handle_enter(event) {
+        if (event.keyCode == 13 || event.which == 13) {
+            handle_ins_click();
+            return false;
+        }
+    }
+    function handle_ins_click() {
+        var deductECU = parseFloat($('#ins_num_field').val());
+
+        if (deductECU >= {{ Constants.deduct.min }} && deductECU <= {{ Constants.deduct.max }}) {
+            var multDeductECU = {{ Constants.deduct.multiplier }}*deductECU;
+
+            $(".result1").text(deductECU);
+            $(".result2").text(multDeductECU);
+            $(".result3").text(120-multDeductECU);
+            $(".result4").text(10-deductECU);
+
+            $('#calc-result').css('display', 'block');
+            $('#error-msg').css('display', 'none');
+        } else {
+
+            $('#calc-result').css('display', 'none');
+            $('#error-msg').css('display', 'block');
+        }
+
+        $('#insModal').css('display', 'block');
+    }
+</script>

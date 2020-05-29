@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 4 - Ranking
+{% endblock %}
+
+{% block content %}
+
+    <ol>
+        {% for field in form %}
+            {% for statement in s_subset %}
+                {% if forloop.counter == forloop.parentloop.counter %}
+                    <li>{{ statement }} {% formfield field %}</li>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </ol>
+
+    <br/>
+
+    {% next_button %}
+    {% include Constants.instructions_content %}
+
+{% endblock %}

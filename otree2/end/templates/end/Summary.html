@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Summary of Tasks
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Below is a summary of the tasks and your earnings from each
+    </p>
+
+    <ul>
+        {% for title, payoff in summary_data %}
+            <li>
+                {{ title }}: {{ payoff }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p>
+        We will now randomly determine which <b>two tasks</b> will be paid, for all
+        participants.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

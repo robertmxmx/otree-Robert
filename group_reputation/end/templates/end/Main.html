@@ -1,0 +1,55 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    End of experiment
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .conceal-modal {
+            width: 60%;
+            text-align: center;
+            padding: 10rem 0;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div id="myModal" class="modal">
+        <div class="modal-content conceal-modal">
+            <br>
+            <div id="modalContent" class="w3-container">
+                <p>
+                    This is to conceal your payments from other participants
+                </p>
+                <button type="button" class="otree-btn-next btn btn-primary"
+                    onclick="document.getElementById('myModal').style.display='none';"> Close </button>
+            </div>
+        </div>
+    </div>
+    <p>
+        Thank you for your participation in today’s experiment.
+    </p>
+    <p>
+        Your total earnings are: {{ participation_fee }} show up fee + {{ task2_payoff }} for Task 2 =
+        {{ participant.payoff_plus_participation_fee }}
+    </p>
+    <p>
+        Your participant id is: <b>{{ participant.code }}</b>
+    </p>
+    <p>
+        Please write your participant id and your total payment on the receipt, and wait for the
+        experimenter to call you up for payment.
+    </p>
+    <p>
+        You may now take out your phone or a book and use it quietly, while waiting for other participants
+        to finish.
+    </p>
+    <button type="button" class="otree-btn-next btn btn-primary"
+            onclick="document.getElementById('myModal').style.display='block';">
+        Click here to conceal your payment information
+    </button>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 3 - Revelation
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Here are some of the statements Participant B accepted 
+        in the first part of Task 2, and the corresponding 
+        prices they named for accepting the opposite statement.
+    </p>
+
+    <ul>
+        {% for statement in statements %}
+            <li> 
+                {{ statement.label }} - {{ statement.bid }} 
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% next_button %}
+
+{% endblock %}

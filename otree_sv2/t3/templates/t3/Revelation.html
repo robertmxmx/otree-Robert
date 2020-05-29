@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 3 - Revelation
+{% endblock %}
+
+{% block content %}
+
+    {% if participant_is_a %}
+        <p>
+            Here are some of the statements Participant B accepted in the first part of Task 2, and the
+            corresponding prices they named for accepting the opposite statement.
+        </p>
+    {% else %}
+        <p>
+            Here are the statements you accepted (and your switching prices) which have been revealed
+            to Participant A
+        </p>
+    {% endif %}
+
+    <ul>
+        {% if num_player == 0 %}
+            [ERROR]
+        {% else %}
+            {% for statement in player_statements %}
+                <li>
+                    {{ statement }}
+                </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+
+    {% next_button %}
+
+{% endblock %}

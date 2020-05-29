@@ -1,0 +1,101 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2
+{% endblock %}
+
+{% block styles %}
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+            margin-top: 5px;
+        }
+        td {
+            border: 1px solid #cccccc;
+            text-align: center;
+        }
+        .table_fields {
+            background-color: #eeeeee;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div>
+        <ul>
+            <li>
+                Participant A who receives {{ player.payoffA }} will be grateful for my decision.
+                <table cellpadding="7">
+                    <tr>
+                        {% for choice in form.survey_q1 %}
+                            <td>&nbsp{{ choice.choice_label }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for choice in form.survey_q1 %}
+                            <td class="table_fields">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+                <br>
+            </li>
+            <li>
+                Participant B who receives {{ player.payoffB }} will be grateful for my decision.
+                <table cellpadding="7">
+                    <tr>
+                        {% for choice in form.survey_q2 %}
+                            <td>&nbsp{{ choice.choice_label }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for choice in form.survey_q2 %}
+                            <td class="table_fields">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+                <br>
+            </li>
+            <li>
+                Participant A who receives {{ player.payoffA }} will be angry about my decision.
+                <table cellpadding="7">
+                    <tr>
+                        {% for choice in form.survey_q3 %}
+                            <td>&nbsp{{ choice.choice_label }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for choice in form.survey_q3 %}
+                            <td class="table_fields">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+                <br>
+            </li>
+            <li>
+                Participant B who receives {{ player.payoffB }} will be angry about my decision.
+                <table cellpadding="7">
+                    <tr>
+                        {% for choice in form.survey_q4 %}
+                            <td>&nbsp{{ choice.choice_label }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for choice in form.survey_q4 %}
+                            <td class="table_fields">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+                <br>
+            </li>
+        </ul>
+    </div>
+
+    {% next_button %}
+
+    {% include Constants.instructions %}
+
+{% endblock %}

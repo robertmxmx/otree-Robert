@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3 Decision
+{% endblock %}
+
+{% block content %}
+
+    {% if red_d_pts == 0 and green_d_pts == 0 %}
+        <p>
+            The unaffected participant has not proposed to assign any deduction points.
+        </p>
+        {% next_button %}
+    {% else %}
+        <p>
+            The unaffected participant has proposed to assign {{ red_d_pts }} deduction points to red button
+            pressers and {{ green_d_pts }} to any green button non-pressers. This proposal, if accepted by you, will
+            cost each of you {{ deduction_cost }} ECU and will have the effect of reducing the red
+            button presserʼs earnings by {{ red_d_pts_multiplied }} ECU and the green button non-pressersʼ earnings by
+            {{ green_d_pts_multiplied }} ECU.
+        </p>
+        <p>
+            Do you accept this proposal?
+        </p>
+        <div>
+            <button name="accepted_deduction" value="True" class="btn btn-primary btn-large">Yes</button>
+            <button name="accepted_deduction" value="False" class="btn btn-primary btn-large">No</button>
+        </div>
+    {% endif %}
+
+{% endblock %}

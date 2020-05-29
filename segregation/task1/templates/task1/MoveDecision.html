@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+   Decision On Which Town To Move Into
+{% endblock %}
+
+{% block content %}
+
+    {% include "MainTasksHeader.html" %}
+
+    <p>
+        <strong>
+            The current period is {{ subsession.round_number }}
+        </strong>
+    </p>
+
+    <p>
+        You are one of the <font color="{{ player.color }}">{{ player.color }} players</font>.
+        You are <font color="{{ player.color }}">{{ player.get_id }}</font>
+    </p>
+
+    {% formfield player.chose_to_switch %}
+
+    {% next_button %}
+
+{% endblock %}

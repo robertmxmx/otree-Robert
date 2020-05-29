@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task {{ task_number }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You are in a group of five people. You will be in the same group for 20 rounds. Each
+        round, you will be randomly assigned a new identifier (A, B, C, D, E), so you wonʼt be able
+        to tell who is whom from round to round.
+    </p>
+    <p>
+        Each round, everyone is endowed with 200 ECU (economic currency units).
+    </p>
+    <p>
+        What you do during the round will affect your endowment on that round.
+    </p>
+    <p>
+        Your earnings for this task will be the outcome of one round, chosen at random. So every
+        round may be the one that determines your final earnings for this task.
+    </p>
+    <p>
+        Each Round has a number of stages.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

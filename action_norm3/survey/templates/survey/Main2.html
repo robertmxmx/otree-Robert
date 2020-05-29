@@ -1,0 +1,154 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    General Survey
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .form-control {
+            display: inline;
+        }
+        .form-group {
+            margin-bottom: 0rem;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please answer the following survey questions
+    </p>
+
+    <p>
+        Note that the following questions ask you for your opinion about
+        {% if task2 %}
+            <b>Task 2</b>
+        {% else %}
+            <b>Task 1</b>
+        {% endif %}
+        only.
+    </p>
+
+    <ul>
+        <li>
+            In general, to what extent do you think it would be fair to be punished for pushing the Red button?
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.q1 %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.q1 %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br>
+        <li>
+            In general, to what extent do you think it would be fair to be punished for not pushing the Green button?
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.q2 %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.q2 %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br>
+        {% if task2 %}
+        <li>
+            {% if task2 == "1R2G" %}
+                <p>
+                    Imagine that you had the opportunity to push the Red button and you did push it. Both
+                    participants who had the chance to press Green refused to push. The other two members of your
+                    group then assigned 10 deduction points to you, reducing your earnings by 30 ECU. They did not
+                    punish the green-refusers.
+                </p>
+                <p>
+                    Now suppose you were given the opportunity either to do nothing or to pay 10 ECU to have 30 ECUs
+                    deducted from the participants who applied the deduction points to you. How likely is it that you would
+                    pay 10 ECU to have 30 ECUs deducted from those participants?
+                </p>
+            {% elif task2 == "2R1G" %}
+                <p>
+                    Imagine that you had the opportunity to push the Red button and you did push it, as did the
+                    other participant with an opportunity to press Red. The participant who had a chance to press Green
+                    then refused to push. The other two members of your group then assigned 10 deduction points to each
+                    Red presser, reducing your earnings by 30 ECU. They did not punish the green-refuser.
+                </p>
+                <p>
+                    Now suppose you were given the opportunity either to do nothing or to pay 10 ECU to have 30 ECUs
+                    deducted from the participants who applied the deduction points to you. How likely is it that you would
+                    pay 10 ECU to have 30 ECUs deducted from those participants?
+                </p>
+            {% endif %}
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.q3 %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.q3 %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br>
+        <li>
+            {% if task2 == "1R2G" %}
+                <p>
+                    Imagine that after someone pressed the Red button, you and another participant had the
+                    opportunity to press the Green button. Neither of you pressed it. The other two members of your group
+                    then assigned 10 deduction points to each Green refuser, reducing your earnings by 30 ECU. They did
+                    not punish the Red presser.
+                </p>
+                <p>
+                    Now suppose you were given the opportunity either to do nothing or to pay 10 ECU to have 30 ECUs
+                    deducted from the participants who applied the deduction points to you. How likely is it that you would
+                    pay 10 ECU to have 30 ECUs deducted from those participants?
+                </p>
+            {% elif task2 == "2R1G" %}
+                <p>
+                    Imagine that after two participants each pressed the Red button, you had the opportunity to
+                    press the Green button. You refused to press it. The other two members of your group then assigned
+                    10 deduction points to you, reducing your earnings by 30 ECU. They did not punish the Red pressers.
+                </p>
+                <p>
+                    Now suppose you were given the opportunity either to do nothing or to pay 10 ECU to have 30 ECUs
+                    deducted from the participants who applied the deduction points to you. How likely is it that you would
+                    pay 10 ECU to have 30 ECUs deducted from those participants?
+                </p>
+            {% endif %}
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.q4 %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.q4 %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br>
+        {% endif %}
+    </ul>
+    {% next_button %}
+
+{% endblock %}
+
+

@@ -1,0 +1,281 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Survey
+{% endblock %}
+
+{% block styles %}
+    <style>
+        table.question {
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+            margin-top: 5px;
+        }
+        table.question td {
+            border: 1px solid #cccccc;
+            text-align: center;
+        }
+        td.choices {
+            background-color: #eeeeee;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <p> Please answer the following survey questions </p>
+    <ul>
+        <li>
+            It is important to me to think up new ideas and be creative, to do things in one's
+            own way
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.money_ques_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.money_q1 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            It is important to me to be rich; to have a lot of money and expensive things
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.money_ques_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.money_q2 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            Living in secure surroundings is important to me; to avoid anything that might be
+            dangerous
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.money_ques_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.money_q3 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            It is important to me to have a good time; to "spoil" oneself
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.money_ques_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.money_q4 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            It is important to me to do something for the good of society
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.money_ques_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.money_q5 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            It is important for me to help the people nearby; to care for their well-being
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.money_ques_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.money_q6 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            Being very successful is important to me; to have people recognize one's achievements
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.money_ques_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.money_q7 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            Adventure and taking risks are important to me; to have an exciting life
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.money_ques_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.money_q8 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            It is important to me to always behave properly; to avoid doing anything people
+            would say is wrong
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.money_ques_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.money_q9 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            Looking after the environment is important to me; to care for nature and save
+            life resources
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.money_ques_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.money_q10 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            Traditions are important to me; to follow the customs handed down by one's religion
+            or family
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.money_ques_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.money_q11 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+
+        <li>
+            Sex
+            <table>
+                <tr>
+                    {% for choice in form.sex %}
+                        <td style="padding-left: 40px;">{{ choice }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <li>
+            Age in years
+            {% formfield player.age label="" %}
+        </li>
+        <li>
+            Area of study
+            <table>
+                <tr>
+                    {% for choice in form.areaOfStudy %}
+                        <td style="padding-left: 40px;">{{ choice }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <li>
+            Number of experiments in MonLEE in the past
+            {% formfield player.numExperiments label="" %}
+        </li>
+        <li>
+            Religion
+            <table>
+                <tr>
+                    {% for choice in form.religion %}
+                        <td style="padding-left: 40px;">{{ choice }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <li>
+            Country of birth
+            {% formfield player.countryOfBirth label="" %}
+        </li>
+        <li>
+            Number of years living in Australia
+            {% formfield player.yearsInAus label="" %}
+        </li>
+
+        <br/>
+        <li>
+            If you were to do this experiment again, would you be likely to give different answers in Task 2B
+            (the task where you indicated your willingness to accept the opposing statement for money)?
+            <table cellpadding="7" class="question">
+                <tr>
+                    {% for label in Constants.exp_ques2_labels %}
+                        <td>{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.exp_ques1 %}
+                        <td class="choices">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+    </ul>
+
+
+    {% next_button %}
+
+{% endblock %}

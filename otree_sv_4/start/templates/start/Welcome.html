@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block content %}
+    
+    <p>
+        In this experiment you can earn money by participating in the following series of tasks. 
+        Each task will have some rules that clearly explain how your earnings are calculated. We 
+        will pay you at the end of the session your {{ session.config.participation_fee }} show 
+        up fee, plus the earnings from <b>one</b> of the tasks, which will be chosen at random.
+    </p>
+
+    <p>
+        Please note that all the decisions you make today will be anonymous. No one will be able 
+        to identify what choices you made. At the end of the experiment, we will pay you in 
+        private, so no one can observe from the amount you were paid 
+    </p>
+
+    <p>
+        If you do not understand the rules of a task or have any questions, please raise your 
+        hand and the experimenter will come to answer it.
+    </p>
+
+{% endblock %}

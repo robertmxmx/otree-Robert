@@ -1,0 +1,111 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3 Feedback
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You are participant {{ player.p_id }}, initial endowments were:
+        <table cellpadding="10" border="1" style="text-align:center;">
+            <tr>
+                {% for p in initial_payoffs %}
+                    <th>{{ p.id }}</th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for p in initial_payoffs %}
+                    <td>{{ p.payoff }}</td>
+                {% endfor %}
+            </tr>
+        </table>
+    </p>
+
+    <p>
+        The round has been completed.
+    </p>
+
+    <h4>Stage 1 Feedback</h4>
+    <p>
+        Your initial endowment was {{ player.initial_ECU }} ECU
+    </p>
+    <p>
+        Participants {{ red_presser1 }} and {{ red_presser2 }} were chosen to have the opportunity to press the
+        red button
+    </p>
+    {% if p_not_pressed_red != "" %}
+        <p>
+            {{ p_not_pressed_red }} declined to press the red button.
+        </p>
+    {% endif %}
+    {% if p_pressed_red != "" %}
+        <p>
+            {{ p_pressed_red }} chose to press the red button.
+        </p>
+    {% endif %}
+    <p>
+        Participant {{ affected }} was chosen to be the button affected individual.
+    </p>
+    <p>
+        Your earnings at the end of stage 1 are therefore: {{ player.stage1_ECU }} ECU
+    </p>
+
+    {% if num_red_pressed == 0 %}
+        <p>
+            The round is therefore over.
+        </p>
+    {% else %}
+        {% if num_red_pressed == 1 %}
+            <p>
+                You will now proceed directly to Stage 3
+            </p>
+        {% else %}
+            <h4>Stage 2 Feedback</h4>
+            <p>
+                Participant {{ green_presser }} was chosen to have the opportunity to press the green button.
+            </p>
+            <p>
+                Participant {{ green_presser }} {{ green_pressed }} to press.
+            </p>
+            <p>
+                Your earnings at the end of the stage are therefore {{ player.stage2_ECU }}  ECU
+            </p>
+        {% endif %}
+
+        <h4>Stage 3 Feedback</h4>
+        {% if red_d_pts == 0 and green_d_pts == 0 %}
+            <p>
+                The unaffected participant ({{ unaff_id }}) did not propose to assign any deduction points. Your earnings are
+                therefore: {{ player.stage3_ECU }} ECU.
+            </p>
+        {% else %}
+            <p>
+                The unaffected participant ({{ unaff_id }}) proposed to assign {{ red_d_pts }} deduction points to red button
+                pressers and {{ green_d_pts }} to any green button non-pressers. This proposal was
+                {{ accepted_deduction }} by the button-affected participant. Your earnings are therefore:
+                {{ player.stage3_ECU }} ECU.
+            </p>
+        {% endif %}
+    {% endif %}
+
+    <p>
+        Final endowments are:
+        <table cellpadding="10" border="1" style="text-align:center;">
+            <tr>
+                {% for p in final_payoffs %}
+                    <th>{{ p.id }}</th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for p in final_payoffs %}
+                    <td>{{ p.payoff }}</td>
+                {% endfor %}
+            </tr>
+        </table>
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

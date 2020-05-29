@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 1 decision
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You have been selected to have the opportunity to press a red button.
+    </p>
+    {% formfield group.r_pressed %}
+
+    {% next_button %}
+
+{% endblock %}

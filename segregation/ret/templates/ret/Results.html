@@ -1,0 +1,38 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+    <p>
+       Your score on this task: {{ total_payoff }}
+    </p>
+
+    <br>
+
+    <table class="table">
+        <tr>
+            <th><center>Round #</center></th>
+            <th><center>Correct Text</center></th>
+            <th><center>Submitted Text</center></th>
+            <th><center>Correct?</center></th>
+        </tr>
+
+        {% for row in table_rows %}
+            <tr>
+                <td align="center">{{ row.round_number }}</td>
+                <td align="center">{{ row.correct_text }}</td>
+                <td align="center">{{ row.user_text }}</td>
+                <td align="center">{{ row.is_correct }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br><br>
+
+    {% next_button %}
+
+{% endblock %}

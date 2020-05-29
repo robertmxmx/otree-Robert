@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2a - Comprehension Quiz
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To make sure that everyone understands the game, please answer the two questions
+        below. Remember that each of the two possible versions of the task shown below are
+        equally likely.
+    </p>
+    <ol type="1" >
+        <li>{% formfield player.a_comp1 %}</li>
+        <li>{% formfield player.a_comp2 %}</li>
+        <li>{% formfield player.a_comp3 %}</li>
+    </ol>
+    {% next_button %}
+    {% include "T2aInstructions.html" %}
+
+{% endblock %}

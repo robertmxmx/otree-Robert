@@ -1,0 +1,19 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+        <h3>
+            Task 2 - Instructions
+        </h3>
+        <p>
+            In this task, you will interact in a group of {{ Constants.players_per_group }} participants. Each participant will be identified using the
+            letters A, B, and C.
+        </p>
+        <p>
+           You are participant: {{ player.role }}
+        </p>
+        <p>
+            You may now receive some information about the membership of your group.
+        </p>
+    </div>
+</div>

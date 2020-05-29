@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You’ve earned {{ session.config.participation_fee }} for showing up on time. You can earn additional money through completing
+        the experiment. Your earnings depend on your choices, so pay attention.
+    </p>
+    <p>
+        No communication is allowed, except when it is part of the experiment. So please switch off your
+        mobile phones, do not talk to other participants in the lab, and do not look at other people’s
+        computer monitors.
+    </p>
+    <p>
+        Your decisions are all anonymous. At the end, we will pay you in private so that no one can infer
+        from your payment how you behaved in the experiment.
+    </p>
+    <p>
+        During the experiment, decisions affecting your earnings will be made using experimental currency units
+        (ECU). Each ECU is worth {{ aud_per_point }}
+    </p>
+
+{% endblock %}

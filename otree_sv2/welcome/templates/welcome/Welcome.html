@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block content %}
+    <p>
+        In this experiment you can earn money by participating in the following tasks. The experiment involves a
+        number of tasks. Each task will have some rules that clearly explain how your earnings are calculated.
+        We will pay you at the end of the session your $15 show up fee, plus the earnings from <b>one</b> of the tasks,
+        which will be chosen at random.
+    </p>
+    <p>
+        <strong>
+            If you do not understand the rules of a task or have any
+            questions, please raise your hand and the experimenter will
+            come to answer it.
+        </strong>
+    </p>
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Value Statements
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        For the statements you just accepted, you will now be asked if you would be willing to
+        accept the opposite statement in exchange for up to ${{ Constants.exchange_amount }} in cash.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

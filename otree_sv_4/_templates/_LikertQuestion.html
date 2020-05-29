@@ -1,0 +1,19 @@
+{% load otree %}
+
+<li>
+    {{ question.label }}
+
+    <table class="likert-table">
+        <tr>
+            {% for choice in question %}
+                <th>{{ choice.choice_label }}</th>
+            {% endfor %}
+        </tr>
+
+        <tr>
+            {% for choice in question %}
+                <td>&nbsp{{ choice.tag }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+</li>

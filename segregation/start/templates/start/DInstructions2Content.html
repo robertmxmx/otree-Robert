@@ -1,0 +1,122 @@
+{% load otree static %}
+
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+        <h4>
+            Decision on deduction points
+        </h4>
+
+        <p>
+            From period 4 onwards, you can decide
+            whether to <b>decrease the Payoff</b> of each other
+            inhabitant of the town you have chosen by assigning <b>deduction points</b>. The other
+            inhabitants in your town can also decrease your Payoff if they wish to. <i>Deductions can only
+            be applied within a town</i>, i.e. you cannot decrease the Payoff of an inhabitant of another
+            town, and inhabitants of the other town cannot decrease your Payoff.
+        </p>
+
+        <p>
+            The deduction decision screen looks as follows.
+        </p>
+
+        <img style="border: 1px solid black;" width="100%" src="{% static 'deduction_screen.jpg' %}"/>
+
+        <br><br>
+
+        <p>
+            Each deduction point that you assign to another inhabitant costs you 1 point and will reduce
+            his or her Payoff by 3 points. If you choose to decrease the Payoff of any inhabitant of your
+            town, you must enter the number of deduction points you wish to assign in the box
+            corresponding to that inhabitant. If you do not wish to change the Payoff of a specific
+            inhabitant then you must enter 0. <b>You can assign up to 10 points to each inhabitant</b>.
+        </p>
+
+        <p>
+            For example:
+        </p>
+
+        <ul>
+            <li>
+                If you assign <b>0</b> deduction points to a particular inhabitant, this
+                decision will not alter either his/her Payoff or your own Payoff;
+            </li>
+            <li>
+                If you assign <b>1</b> deduction point to an inhabitant, this decision will <b>decrease</b> the
+                Payoff of this inhabitant by <b>3</b> points and your own Payoff by <b>1</b> point;
+            </li>
+            <li>
+                If you assign <b>2</b> deduction points, this decision will <b>decrease</b> the
+                inhabitant's Payoff by <b>6</b> points and your own Payoff by <b>2</b> points;
+            </li>
+            <li>
+                and so on.
+            </li>
+        </ul>
+
+        <p>
+            Similarly, each decision point assigned to you by another inhabitant will reduce your Payoff by 3 points.
+            How much the Payoff is decreased depends on the sum of deduction points received.
+        </p>
+
+        <p>
+            For instance:
+        </p>
+
+        <ul>
+            <li>
+                If somebody receives <b>a total</b> of <b>3</b> deduction points
+                (from all other inhabitants of the town in this
+                period), his or her <b>Payoff</b> would be decreased by <b>9</b> points;
+            </li>
+            <li>
+                If somebody receives <b>a total</b> of <b>4</b>
+                deduction points, his or her <b>Payoff</b> is reduced by
+                <b>12</b> points.
+            </li>
+        </ul>
+
+        <p>
+            Your total payoff at the end of a period is therefore calculated as follows:
+        </p>
+
+        <p>
+            <strong>
+                Payoff - 3 x (sum of received deduction points) - sum of deduction points you have assigned
+            </strong>
+        </p>
+
+        <p>
+            It is possible that your total Payoff can be reduced below zero.
+            If this happens your losses will be deducted
+            from your 600 participation points,
+            but will not affect your {{ session.config.participation_fee }} show up
+            payment.
+        </p>
+
+        <p>
+            After you have assigned points to each of the other inhabitants you must click the button "<b>calculate</b>".
+            On the screen, you will then see the total costs of your assigned points. As long as you have not yet clicked
+            the <b>OK</b> button, you can still change your decision. To recalculate the costs after a change of your
+            assigned points, simply press the "calculate" button again.
+        </p>
+
+        <p>
+            You will have a limited time to make your decision. If you do not make a decision within the time limit, you will
+            assign zero deduction points to all other residents in your town.
+        </p>
+
+        <p>
+            After all participants have made their decision, your payoff from the period will displayed on the following
+            screen:
+        </p>
+
+        <img style="border: 1px solid black;" width="100%" src="{% static 'summary_screen.jpg' %}"/>
+
+        <br><br>
+
+        <p>
+            The next period will then commence.
+        </p>
+    </div>
+</div>

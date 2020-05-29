@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2 - Stage {{ session.round_number }} Commencement
+{% endblock %}
+
+{% block content %}
+    <p>
+        You will now begin Stage {{ session.round_number }}.
+    </p>
+    {% if session.round_number == 2 %}
+    <p>
+        You are in the same group as you were for Stage 1.
+    </p>
+    {% endif %}
+
+{% endblock %}
+
+

@@ -1,0 +1,34 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1 - Comprehension Quiz
+{% endblock %}
+
+{% block content %}
+
+    {% include "InlineFieldsStyle.html" %}
+    <p>
+        At this point, to make sure everyone understands the task, please answer the questions below.
+    </p>
+    <ol type="1" >
+        <li>
+            If you choose Option 2 then you receive ${{ form.comp1a }}, Participant A receives ${{ form.comp1b }},
+            Participant B receives ${{ form.comp1c }}
+        </li>
+        <li>
+            If you choose Option 1 then you receive ${{ form.comp2a }}, Participant A receives ${{ form.comp2b }},
+            Participant B receives ${{ form.comp2c }}
+        </li>
+        <li>
+            If you choose Option 3 then you receive ${{ form.comp3a }}, Participant A receives ${{ form.comp3b }},
+            Participant B receives ${{ form.comp3c }}
+        </li>
+        <li>{% formfield player.comp4 %}</li>
+        <li>{% formfield player.comp5 %}</li>
+        <li>{% formfield player.comp6 %}</li>
+    </ol>
+    {% next_button %}
+    {% include "T1Instructions.html" %}
+
+{% endblock %}

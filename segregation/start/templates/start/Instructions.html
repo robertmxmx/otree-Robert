@@ -1,0 +1,84 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        At the beginning of the experiment, the participants are divided into populations of eight. Each participant
+        interacts only with the participants within his/her own population.
+    </p>
+
+    <p>
+        Before starting this task, every participant is awarded 600 points for participating.
+    </p>
+
+    <p>
+        Each population of eight is divided into two groups: The Reds and the Blues. Each group consists of four
+        members.
+    </p>
+
+    <p>
+        This task consists of <b>15</b> periods. <b>You are in the same group with the same
+        people for all 15 periods.</b>
+    </p>
+
+    <p>
+        Each member in the Reds will be identified as <b>R</b>ID# and each in the Blues will be identified as
+        <b>B</b>ID#. For example, if a participant with ID #3 is assigned to the Reds (or the Blues), he/she will
+        be identified as <b>R</b>3 (or <b>B</b>3) during the experiment. All participants keep their identifiers
+        for all 15 periods.
+    </p>
+
+    <p>
+        There are two towns: Red town and Blue town.
+    </p>
+
+    <p>
+        For the first 3 periods, individuals reside in the town that matches their color. So all red
+        individuals will reside in Red town, and all blue individuals will reside in Blue town. After
+        these 3 periods are over, individuals can move between towns as often as they like.
+    </p>
+
+    <p>
+        For the remaining periods (starting from period 4):
+    </p>
+
+    <p>
+        First, you will decide whether to stay in the same town or to move to the other town. Which
+        town you reside in will affect your earnings, as follows.
+    </p>
+
+    <p>
+        Each period, each individual earns additional points, which are distributed to everyone who
+        resides in the same town. Red individuals earn an additional 50 points
+        every period. Blue
+        individuals earn an additional 150 points every period.
+    </p>
+
+    <p>
+        After all participants have chosen where to reside, the points that have been earned by all the
+        individuals in a town are equally split between all the residents of that town.
+    </p>
+
+    <p>
+        After each period, you will be shown the entire population of the town you have moved into,
+        and how much each person will earn as a result.
+    </p>
+
+    {% if session.config.treatment == 1 %}
+        <p>
+            Finally, you will decide whether or how much to reduce the earnings of other persons in your
+            current town, by distributing <b>deduction points</b>.
+        </p>
+    {% endif %}
+
+    <p>
+        The following pages describe Task 1 in detail.
+    </p>
+    {% next_button %}
+
+{% endblock %}

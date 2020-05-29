@@ -1,0 +1,56 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 3
+{% endblock %}
+
+{% block styles %}
+    <style type="text/css">
+        .form-control {
+            display: inline-block;
+            margin: 0px 5px 0px 5px
+        }
+        .form-check-label {
+            margin-right: 10px;
+        }
+        li {
+            margin-bottom: 30px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please answer the following questions:
+    </p>
+
+    <ul>
+        <li>
+            Biological Sex
+            {% formfield player.q1 label="" %}
+        </li>
+        <li>
+            Major
+            {% formfield player.q2 label="" %}
+        </li>
+        <li>
+            Country I was born in: {{ form.q3 }}
+        </li>
+        <li>
+            I have been living in Australia for {{ form.q4 }} year(s)
+        </li>
+        <li>
+            Religious Affiliation
+            {% formfield player.q5 label="" %}
+        </li>
+        <li>
+            How many experiments at MonLEE have you participated in the past?
+            {% formfield player.q6 label="" %}
+        </li>
+    </ul>
+    {% next_button %}
+{% endblock %}
+
+

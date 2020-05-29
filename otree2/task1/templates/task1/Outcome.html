@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 1 - Round {{ round_number }} Outcome
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Participant 1 chose to
+        {% if r1_action == "CHALLENGE" %}
+            <b>CHALLENGE</b>
+        {% elif r1_action == "DO NOTHING" %}
+            <b>NOT CHALLENGE</b>
+         {% else %}
+            ERROR: Invalid action for Role 1 player
+        {% endif %}
+    </p>
+
+    {% if r2_action != None %}
+        <p>
+        Participant 2 chose to
+        {% if r2_action == "RETALIATE" %}
+            <b>RETALIATE</b>
+        {% elif r2_action == "DEFER" %}
+            <b>DEFER</b>
+         {% else %}
+            ERROR: Invalid action for Role 2 player
+         {% endif %}
+        </p>
+    {% endif %}
+
+    <p>
+        Your earnings from this round are therefore: {{ payoff }}
+    </p>
+
+    <p>
+        Your new balance is: {{ final_payoff }}
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

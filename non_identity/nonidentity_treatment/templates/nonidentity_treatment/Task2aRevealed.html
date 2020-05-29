@@ -1,0 +1,49 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2 - Part A
+{% endblock %}
+
+{% block content %}
+
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th {
+            border: 1px solid #dddddd;
+            background-color: #dddddd;
+        }
+        td {
+            border: 1px solid #dddddd;
+        }
+    </style>
+
+    <p>
+        You have been assigned to Version {{ t2a_version }}. To make your choice, click the corresponding button
+        below.
+    </p>
+
+    <p>
+        {% formfield player.t2a_revealed_option label="" %}
+    </p>
+
+    {% next_button %}
+
+    {% if t2a_version == 1 %}
+        {{ Constants.t2a_v1_table|safe }}
+    {% elif t2a_version == 2 %}
+        {{ Constants.t2a_v2_table|safe }}
+    {% else %}
+        ERROR: Invalid version
+    {% endif %}
+
+    <br/>
+
+    {% include Constants.t2a_instructions_content %}
+
+{% endblock %}
+
+

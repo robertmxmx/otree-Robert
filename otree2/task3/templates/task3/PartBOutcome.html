@@ -1,0 +1,38 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 3 - Part B Outcome
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        The randomly chosen statement that we will pay you to accept is: <b>{{ chosen_statement }}</b>.
+    </p>
+
+    <p>
+        Your nominated price was: {{ nominated_price }}
+    </p>
+
+    <p>
+        Our randomly generated price was: {{ generated_price }}
+    </p>
+
+    {% if nominated_price == 'Opt out' %}
+        <p>
+            You therefore will not be paid for this task and you will not be asked to sign the statement.
+        </p>
+    {% elif generated_price >= nominated_price %}
+        <p>
+            This is the amount you have earned on this task.
+        </p>
+    {% else %}
+        <p>
+            You therefore will not be paid for this task.
+        </p>
+    {% endif %}
+
+    {% next_button %}
+
+{% endblock %}

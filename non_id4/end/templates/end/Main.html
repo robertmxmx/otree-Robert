@@ -1,0 +1,84 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    End of Experiment
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .modal {        /* The Modal (background) */
+          display: none; /* Hidden by default */
+          position: fixed;
+          z-index: 1; /* Sit on top */
+          padding-top: 100px; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,1); /* Black w/ opacity */
+        }
+        .modal-content {        /* Modal Content */
+          background-color: #fefefe;
+          margin: auto;
+          border: 1px solid #888;
+          width: 30%;
+        }
+        .w3-container {
+            padding: 2em;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div  id="myModal" class="modal">   <!-- The Modal -->
+        <div class="modal-content">
+            <div class="w3-container">
+                <p>
+                    This pop up is to conceal your payments from other participants
+                </p>
+                <div align="right">
+                    <button type="button" class="otree-btn-next btn btn-primary btn-block"
+                        onclick="document.getElementById('myModal').style.display='none';">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>
+        Thank you for participating in the experiment today.
+    </p>
+    <p>
+        In Task 1, you earned {{ t1_payoff }}
+    </p>
+    <p>
+        In Task 2, subtask {{ t2_chosen_task }} was chosen for payment. You earned {{ t2_payoff }} in that subtask.
+    </p>
+    <p>
+        Your total earnings are therefore: {{ participant.payoff }}
+    </p>
+    <p>
+        Your participant id is: {{ participant.code }}
+    </p>
+
+    <p>
+        Please fill out your receipt, sign it, and wait for the experimenter to call you for payment.
+    </p>
+    <p>
+        While you wait for other participants to complete the experiment, you can now take out
+        and use your phone as long as you do not disturb others.
+    </p>
+    <p>
+        Please click the "Conceal" button below to conceal your payments from other participants and keep your choices
+        anonymous.
+    </p>
+    <button type="button" class="otree-btn-next btn btn-primary"
+            onclick="document.getElementById('myModal').style.display='block';">Conceal
+    </button>
+
+
+{% endblock %}

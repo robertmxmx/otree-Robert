@@ -1,0 +1,75 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3 Feedback
+{% endblock %}
+
+{% block content %}
+
+    <p>The round has been completed.</p>
+
+    <h4>Stage 1 Feedback</h4>
+        <p>
+            Participant {{ r_presser }} was chosen to have the opportunity to press the red button.
+        </p>
+        {% if r_pressed %}
+            <p>
+                {{ r_presser }} chose to press the red button.
+            </p>
+        {% else %}
+            <p>
+                {{ r_presser }} declined to press the red button.
+            </p>
+        {% endif %}
+        <p>
+            Participant {{ r_affected }} was chosen to be the button affected individual.
+        </p>
+        <p>
+            Your earnings at the end of Stage 1 are therefore: {{ stage1_earnings }} ECU
+        </p>
+
+    {% if not r_pressed %}
+        The round is therefore over.
+    {% else %}
+        <h4>Stage 2 Feedback</h4>
+            <p>
+                Participants {{ g1_presser }} and {{ g2_presser }} were chosen to have the opportunity to press the green button.
+            </p>
+            {% if green_decliners != "" %}
+                <p>
+                    {{ green_decliners }} declined to press the green button.
+                </p>
+            {% endif %}
+            {% if green_pressers %}
+                <p>
+                    {{ green_pressers }} chose to press the green button.
+                </p>
+            {% endif %}
+            <p>
+                Your earnings at the end of Stage 2 are therefore: {{ stage2_earnings }} ECU
+            </p>
+        <h4>Stage 3 Feedback</h4>
+            {% if r_deduction_pts == 0 and g_deduction_pts == 0 %}
+                <p>
+                    The unaffected participant did not propose to assign any deduction points. Your
+                    earnings are therefore: {{ payoff }} ECU
+                </p>
+            {% elif deduction_accepted %}
+                <p>
+                    The unaffected participant proposed to assign {{ r_deduction_pts }} deduction points to red button
+                    pressers and {{ g_deduction_pts }} to any green button non-pressers. This proposal was accepted by the
+                    button-affected participant. Your earnings are therefore: {{ payoff }} ECU
+                </p>
+            {% else %}
+                <p>
+                    The unaffected participant proposed to assign {{ r_deduction_pts }} deduction points to red button
+                    pressers and {{ g_deduction_pts }} to any green button non-pressers. This proposal was rejected by the
+                    button-affected participant. Your earnings are therefore: {{ payoff }} ECU
+                </p>
+            {% endif %}
+    {% endif %}
+
+    {% next_button %}
+
+{% endblock %}

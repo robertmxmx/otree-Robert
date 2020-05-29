@@ -1,0 +1,72 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Survey
+{% endblock %}
+
+{% block content %}
+
+    <ol>
+        <li>
+            <ul>
+                {% with question=form.similar1 %}
+                    {% include '_LikertQuestion.html' %}
+                {% endwith %}
+                {% with question=form.similar2 %}
+                    {% include '_LikertQuestion.html' %}
+                {% endwith %}
+                {% with question=form.similar3 %}
+                    {% include '_LikertQuestion.html' %}
+                {% endwith %}
+                {% with question=form.similar4 %}
+                    {% include '_LikertQuestion.html' %}
+                {% endwith %}
+                {% with question=form.similar5 %}
+                    {% include '_LikertQuestion.html' %}
+                {% endwith %}
+                {% with question=form.similar6 %}
+                    {% include '_LikertQuestion.html' %}
+                {% endwith %}
+                {% with question=form.similar7 %}
+                    {% include '_LikertQuestion.html' %}
+                {% endwith %}
+                {% with question=form.similar8 %}
+                    {% include '_LikertQuestion.html' %}
+                {% endwith %}
+                {% with question=form.similar9 %}
+                    {% include '_LikertQuestion.html' %}
+                {% endwith %}
+                {% with question=form.similar10 %}
+                    {% include '_LikertQuestion.html' %}
+                {% endwith %}
+                {% with question=form.similar11 %}
+                    {% include '_LikertQuestion.html' %}
+                {% endwith %}
+            </ul>
+        </li>
+    
+        <li> {% formfield player.sex %} </li>
+        <li> {% formfield player.age %} </li>
+        <li> {% formfield player.area_of_study %} </li>
+        <li> {% formfield player.num_exps %} </li>
+        <li> {% formfield player.religion %} </li>
+        <li> 
+            {% formfield player.birth_country %}
+            <div style="margin-top: -15px; margin-left: 30px;">
+                {{ form.birth_country_other }}
+            </div>
+        </li> 
+        <li> {% formfield player.num_years_aus %} </li>
+    
+        {% with question=form.twoB_answer %}
+            {% include '_LikertQuestion.html' %}
+        {% endwith %}
+    
+        <li> {% formfield player.twoB_explain %} </li>
+        <li> {% formfield player.hypothesis %} </li>
+    </ol>
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% load otree static %}
+
+<div>
+    <p>
+        You are participant {{ player.p_id }}, initial endowments were:
+        {% include "InitialPayoffTable.html" %}
+    </p>
+
+    <h4>Stage 1 Feedback</h4>
+    <p>
+        Your initial endowment was {{ player.initial_ECU }} ECU
+    </p>
+    <p>
+        Participants {{ red_pressers }} were chosen to have the opportunity to press the
+        red button.
+    </p>
+    {% if p_not_pressed_red != "" %}
+        <p>
+            {{ p_not_pressed_red }} declined to press the red button.
+        </p>
+    {% endif %}
+    {% if p_pressed_red != "" %}
+        <p>
+            {{ p_pressed_red }} chose to press the red button.
+        </p>
+    {% endif %}
+    <p>
+        Participant {{ affected }} was chosen to be the button affected individual.
+    </p>
+    <p>
+        Your earnings at the end of stage 1 are therefore: {{ player.stage1_ECU }} ECU
+    </p>
+
+    {% if num_red_pressed == 0 %}
+        <p>
+            The round is therefore over.
+        </p>
+    {% elif num_red_pressed == 1 %}
+        <p>
+            You will now proceed directly to Stage 3
+        </p>
+    {% else %}
+        <h4>Stage 2 Feedback</h4>
+        <p>
+            Participants {{ green_pressers }} were chosen to have the opportunity to
+            press the green button.
+        </p>
+        {% if p_pressed_green != "" %}
+            <p>
+                {{ p_pressed_green }} pressed a green button.
+            </p>
+        {% endif %}
+        {% if p_not_pressed_green != "" %}
+            <p>
+                {{ p_not_pressed_green }} did not press their green button.
+            </p>
+        {% endif %}
+        <p>
+            Your earnings at the end of the stage are therefore {{ player.stage2_ECU }} ECU
+        </p>
+    {% endif %}
+
+</div>

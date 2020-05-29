@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 3 - Survey
+{% endblock %}
+
+{% block content %}
+
+
+    <ul>
+        {% if player.role == 'A' %}
+            {% with question=form.surveyq_part_A %}
+                {% include '_LikertQuestion.html' %}
+            {% endwith %}
+        {% else %}
+            {% with question=form.surveyq_part_B %}
+                {% include '_LikertQuestion.html' %}
+            {% endwith %}
+        {% endif%}
+    
+        <li>
+            {% formfield player.surveyq_why %}
+        </li>
+    </ul>
+    
+    {% next_button %}
+
+{% endblock %}

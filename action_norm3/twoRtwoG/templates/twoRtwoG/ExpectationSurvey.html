@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Expectation and Attitude Survey
+{% endblock %}
+
+{% block content %}
+    <p>
+        We now want to ask a number of questions about what you expect to happen on the next round.
+    </p>
+    <p>
+        For these questions, you can earn <i>an additional bonus payment</i>. If you give the answer
+        that at least three people in your group, including yourself, give, you will be eligible to
+        earn a bonus of {{ Constants.exp_bonus }} ECU. We will pick one of these questions at random, and if
+        there is a clear majority answer, pay the bonus to everyone who gave that answer.
+    </p>
+
+    <ol type="a">
+        <li>
+            How many people in your group would <b>choose to press the red button</b> on the next round, if they have
+            the opportunity? {% formfield player.exp1 %}
+        </li>
+        <li>
+            How many people in your group <b>would push the green button</b> on the next round, if they had the opportunity?
+            {% formfield player.exp2 %}
+        </li>
+        <li>
+            Which of the following three deduction policies is <b>most likely to be supported</b> on the next round,
+            assuming two red buttons are pressed and neither green button is pressed? {% formfield player.exp3 %}
+        </li>
+    </ol>
+
+    {% next_button %}
+
+{% endblock %}

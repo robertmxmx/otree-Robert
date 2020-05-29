@@ -1,0 +1,111 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 3 - Participant B Decision
+{% endblock %}
+
+{% block content %}
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 10px;
+        }
+        tr:nth-child(even) {
+            background-color: #eeeeee;
+        }
+    </style>
+
+    <p>
+        You have been assigned role B.
+    </p>
+    <p>
+        The initial allocation is
+    </p>
+    <table>
+        <tr>
+            <th>Participant A</th>
+            <th>Participant B</th>
+        </tr>
+        <tr>
+            <td>6 points</td>
+            <td>6 points</td>
+        </tr>
+    </table>
+    <p>
+        How do you propose to respond to the following allocations that might be proposed?
+    </p>
+    <table>
+        <tr>
+            <th>Participant A</th>
+            <th>Participant B</th>
+            <th>Accept/Reject</th>
+        </tr>
+        <tr>
+            <td>11 points</td>
+            <td>1 point</td>
+            <td>{% formfield group.b_decision1 label="" %}</td>
+        </tr>
+        <tr>
+            <td>10 points</td>
+            <td>2 point</td>
+            <td>{% formfield group.b_decision2 label="" %}</td>
+        </tr>
+        <tr>
+            <td>9 points</td>
+            <td>3 point</td>
+            <td>{% formfield group.b_decision3 label="" %}</td>
+        </tr>
+        <tr>
+            <td>8 points</td>
+            <td>4 point</td>
+            <td>{% formfield group.b_decision4 label="" %}</td>
+        </tr>
+        <tr>
+            <td>7 points</td>
+            <td>5 point</td>
+            <td>{% formfield group.b_decision5 label="" %}</td>
+        </tr>
+        <tr>
+            <td>6 points</td>
+            <td>6 point</td>
+            <td>{% formfield group.b_decision6 label="" %}</td>
+        </tr>
+        <tr>
+            <td>5 points</td>
+            <td>7 point</td>
+            <td>{% formfield group.b_decision7 label="" %}</td>
+        </tr>
+        <tr>
+            <td>4 points</td>
+            <td>8 point</td>
+            <td>{% formfield group.b_decision8 label="" %}</td>
+        </tr>
+        <tr>
+            <td>3 points</td>
+            <td>9 point</td>
+            <td>{% formfield group.b_decision9 label="" %}</td>
+        </tr>
+        <tr>
+            <td>2 points</td>
+            <td>10 point</td>
+            <td>{% formfield group.b_decision10 label="" %}</td>
+        </tr>
+        <tr>
+            <td>1 points</td>
+            <td>11 point</td>
+            <td>{% formfield group.b_decision11 label="" %}</td>
+        </tr>
+    </table>
+    <br/>
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

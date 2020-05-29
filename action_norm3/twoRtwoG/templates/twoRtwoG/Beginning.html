@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Beginning of round
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        {% if subsession.round_number == 1 %}
+            The experiment is now beginning.
+        {% endif %}
+        You are on Round {{ subsession.round_number }} (out of {{ Constants.num_rounds }} rounds). Your ID for
+        this round is {{ player.p_id }}
+    </p>
+
+    <p>Initial endowments are as follows:</p>
+    {% include "InitialPayoffTable.html" %}
+
+    <br><br>
+
+    {% next_button %}
+
+{% endblock %}

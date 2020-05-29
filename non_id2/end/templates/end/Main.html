@@ -1,0 +1,63 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    End of Experiment
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Your ID: {{ participant.id_in_session }}
+    </p>
+
+    <h4>Task 1</h4>
+    <ul>
+        {% if session.config.order == 1 %}
+            <li>Randomly selected option: <b>{{ session.vars.task1_selected_option }}</b> </li>
+            <li>You decided this option was: <b>{{ participant.vars.task1_option }}</b> </li>
+            <li>The most common choice(s) for this option:
+                {% for choice in session.vars.most_common_choice %}
+                    {% if forloop.first %}
+                        <b>{{ choice }}</b>
+                    {% elif forloop.last %}
+                        and <b>{{ choice }}</b>
+                    {% else %}
+                        , <b>{{ choice }}</b>
+                    {% endif %}
+                {% endfor %}
+            </li>
+            <li>Payoff = <b>{{ participant.vars.task1_payoff }}</b> </li>
+        {% else %}
+            <li>Payoff = <b>{{ participant.vars.task2_payoff }}</b></li>
+        {% endif %}
+    </ul>
+
+    <h4>Task 2</h4>
+    <ul>
+        {% if session.config.order == 1 %}
+            <li>Payoff = <b>{{ participant.vars.task2_payoff }}</b></li>
+        {% else %}
+            <li>Randomly selected option: <b>{{ session.vars.task1_selected_option }}</b> </li>
+            <li>You decided this option was: <b>{{ participant.vars.task1_option }}</b> </li>
+            <li>The most common choice(s) for this option:
+                {% for choice in session.vars.most_common_choice %}
+                    {% if forloop.first %}
+                        <b>{{ choice }}</b>
+                    {% elif forloop.last %}
+                        and <b>{{ choice }}</b>
+                    {% else %}
+                        , <b>{{ choice }}</b>
+                    {% endif %}
+                {% endfor %}
+            </li>
+            <li>Payoff = <b>{{ participant.vars.task1_payoff }}</b> </li>
+        {% endif %}
+    </ul>
+
+    <h4>Total</h4>
+    <ul>
+        <li>Total = <b>{{ participant.payoff_plus_participation_fee }}</b></li>
+    </ul>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Survey
+{% endblock %}
+
+{% block content %}
+    <p> Please answer the following survey questions </p>
+    <ul>
+        <li>
+            Sex
+            <table border="0" cellpadding="20">
+                <tr>
+                    {% for choice in form.sex %}
+                        <td>{{ choice }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <li>
+            Age in years
+            {% formfield player.age label="" %}
+        </li>
+        <li>
+            Area of study
+            <table border="0" cellpadding="20">
+                <tr>
+                    {% for choice in form.areaOfStudy %}
+                        <td>{{ choice }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <li>
+            Number of experiments in MonLEE in the past
+            {% formfield player.numExperiments label="" %}
+        </li>
+        <li>
+            Religion
+            <table border="0" cellpadding="20">
+                <tr>
+                    {% for choice in form.religion %}
+                        <td>{{ choice }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <li>
+            Country of origin
+            {% formfield player.country label="" %}
+        </li>
+        <br/>
+        <li>
+            If you were to do this experiment again, would you be likely to give different answers in Task 3B
+            (the task where you indicated your willingness to accept the opposing statement for money)?
+            <table border="0" cellpadding="2"  width="980px">
+                <tr>
+                    {% for label in Constants.labels %}
+                        <td  align="center" width="140px">{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.exp_ques1 %}
+                        <td  align="center" width="140px">{{ choice }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            Please explain your answer to the previous question.
+            {% formfield player.exp_ques2 label="" %}
+        </li>
+        <li>
+            What hypothesis do you think the researchers in this experiment are trying to investigate?
+            {% formfield player.exp_ques3 label="" %}
+        </li>
+    </ul>
+
+
+    {% next_button %}
+
+{% endblock %}

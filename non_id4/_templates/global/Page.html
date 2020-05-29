@@ -1,0 +1,39 @@
+{% extends "otree/Page.html" %}
+{% load otree static %}
+
+{% block global_styles  %}
+    <style>
+        .simple_table {
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+        }
+        .simple_table th, .simple_table td {
+            border: 1px solid #cccccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .simple_table th {
+            background-color: #e9ecef;
+        }
+
+        .likert_table {
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+            margin-top: 5px;
+        }
+        .likert_table td, .likert_table th{
+            font-weight: normal;
+            border: 1px solid #cccccc;
+            text-align: center;
+            padding: 7px;
+        }
+        .likert_table td {
+            background-color: #eeeeee;
+        }
+    </style>
+{% endblock %}
+
+{% block global_scripts  %}
+{% endblock %}

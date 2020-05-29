@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2 - Part C
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Which option will you choose?
+    </p>
+
+    <p>
+        {% formfield player.t2c_option label="" %}
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.t2c_instructions_content %}
+
+{% endblock %}
+
+

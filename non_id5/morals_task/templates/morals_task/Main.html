@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 3
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please read the following list of statements and indicate how much you agree
+        or disagree with each statement:
+    </p>
+
+    <ul>
+        {% for field in form %}
+        <li>
+            {{ field.label }}
+            <table class="likert_table">
+                <tr>
+                {% for choice in field %}
+                    <th>{{ choice.choice_label }}</th>
+                {% endfor %}
+                </tr>
+                <tr>
+                {% for choice in field %}
+                    <td>&nbsp{{ choice.tag }}</td>
+                {% endfor %}
+                </tr>
+            </table>
+            <br>
+        </li>
+        {% endfor %}
+    </ul>
+    {% next_button %}
+
+{% endblock %}
+
+

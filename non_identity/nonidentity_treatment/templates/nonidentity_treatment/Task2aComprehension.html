@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2 - Part A Comprehension Questions
+{% endblock %}
+
+{% block content %}
+
+    <style type="text/css">
+        .form-control {display: inline-block;}
+    </style>
+
+    <p>
+        At this point, to make sure that everyone understands the task, please answer the following questions
+    </p>
+
+    <ol>
+        <li>
+            Which option gives you the highest payoff in both versions?
+            <br/> {{ form.t2a_c1 }}
+        </li>
+        <li>
+            If you choose Option 2, then the other participant receives:
+            <br/> {{ form.t2a_c2 }}
+        </li>
+        <li>
+            If you click the button, will you know for sure what the other participant will receive?
+            <br/> {{ form.t2a_c3 }}
+        </li>
+    </ol>
+
+    {% next_button %}
+
+    {% include Constants.t2a_instructions_content %}
+
+{% endblock %}
+
+

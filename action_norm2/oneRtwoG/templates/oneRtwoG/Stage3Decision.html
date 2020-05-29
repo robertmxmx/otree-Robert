@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3 Decision
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You have been selected to nominate a deduction policy.
+    </p>
+    <ul>
+        {% for field in form %}
+        <li>{% formfield field %}</li>
+        {% endfor %}
+    </ul>
+
+    {% next_button %}
+
+{% endblock %}

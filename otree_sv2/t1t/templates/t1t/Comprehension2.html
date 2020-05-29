@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 1 - Comprehension Questions Continued
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        {% formfield player.c2 label="If Participant A sends 1 point, and Participant B therefore receives 3 points, how many points can Participant B send back to Participant A?" %}
+    </p>
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

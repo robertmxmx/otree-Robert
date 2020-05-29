@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+    {% include Constants.instructions_content %}
+
+    {% if session.config.name == 'ul' %}
+        {% include Constants.t1u_instructions %}
+    {% else %}
+        {% include Constants.t1t_instructions %}
+    {% endif %}
+
+{% endblock %}

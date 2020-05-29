@@ -1,0 +1,50 @@
+{% load otree static %}
+
+<div>
+    <p>
+        Earlier in this experiment, you participated in one task in which there were <b>two people</b>
+        who had the opportunity to press a <b>red button</b> and <b>two people</b> who had the opportunity
+        to press a <b>green button</b>.
+    </p>
+    <p>
+        Imagine a scenario in which both <b>red buttons were pressed</b> by participants C and B,
+        and <b>both green buttons were not pressed</b> by participants A and E. As a result,
+        participant D – the button-affected participant – lost 120 ECU.
+    </p>
+    <p>
+        Indicate agreement, with the following
+    </p>
+    <ul>
+        <li>
+            Participant C's pressing Red was one of the causes of the button-affected participant losing 120 ECU.
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.survey_cause_red3 %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.survey_cause_red3 %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            Participant A's not pressing Green was one of the causes of the button-affected participant losing 120 ECU.
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.survey_cause_green3 %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.survey_cause_green3 %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+    </ul>
+</div>

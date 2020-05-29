@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 1 - Comprehension Question 2
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To check that you understand the rules, please answer the
+        following question:
+    </p>
+
+    <p>
+        {% formfield player.comp2 label="What is the way that a player in role 2 can maximize earnings for a given round, if the first player plays CHALLENGE?" %}
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 3
+{% endblock %}
+
+{% block content %}
+
+    <p>
+       How many of the following statements do you agree with?
+    </p>
+
+    <ul>
+        {% for s in statements %}
+            <li>{{ s }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>
+        {% formfield player.num_agree label="" %}
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
+
+

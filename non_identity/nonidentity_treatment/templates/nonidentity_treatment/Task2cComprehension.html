@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2 - Part C Comprehension Questions
+{% endblock %}
+
+{% block content %}
+
+    <style type="text/css">
+        .form-control {display: inline-block;}
+    </style>
+
+    <p>
+        At this point, to make sure that everyone understands the task, please answer the following questions
+    </p>
+
+    <ol>
+        <li>
+            If you choose Option 2 then you receive ${{ form.t2c_c1_1 }}, and the other participant receives
+            ${{ form.t2c_c1_2 }}
+        </li>
+        <br/>
+        <li>
+            If you choose Option 1 then you receive ${{ form.t2c_c2_1 }}, and the other participant receives
+            ${{ form.t2c_c2_2 }}
+        </li>
+    </ol>
+
+    {% next_button %}
+
+    {% include Constants.t2c_instructions_content %}
+
+{% endblock %}
+
+

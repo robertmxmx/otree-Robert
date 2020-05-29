@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 5 - Round {{ round_number }} Outcome
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Participant 1 chose to send {{ p1_sent }}
+    </p>
+
+    <p>
+        Participant 2 therefore received {{ p2_payoff }}
+    </p>
+
+    <p>
+        Participant 2 sent {{ p2_sent }} back to Participant 1
+    </p>
+
+    <p>
+        Your earnings from this round are therefore: {{ payoff }}
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

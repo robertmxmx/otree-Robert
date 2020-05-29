@@ -1,0 +1,24 @@
+{% load otree %}
+
+<div>
+
+    {% if points_taken %}
+        <p>
+            Participant A decided to take.
+        </p>
+        <p>
+            Participant B decided to spend {{ points_retaliated }} on retaliation
+        </p>
+    {% else %}
+        <p>
+            Participant A decided to not take.
+        </p>
+    {% endif%}
+
+    <p>
+        Final earnings are therefore:
+    </p>
+
+    {% include '_PayoffTable.html' %}
+    
+</div>

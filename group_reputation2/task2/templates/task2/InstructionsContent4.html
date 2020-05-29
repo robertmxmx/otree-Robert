@@ -1,0 +1,23 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+        <h3>
+            Task 2 - Instructions (continued)
+        </h3>
+        <p>
+            In both subtasks, participant B and C will be required to make their decisions whether to react before knowing whether
+            or not A has decided to take any of their ECU.
+        </p>
+        <p>
+            We will ask: “If A chooses to take some of your ECU, how much will you spend on deducting ECU from A?”
+        </p>
+        <p>
+            B/C will provide an answer between {{ Constants.deduct.min }} and {{ Constants.deduct.max }}.
+        </p>
+        <p>
+            After entering an answer, we will double check that this is the intended decision, and once it is
+            confirmed, we will then combine this information with A’s decision, and use this information to determine the outcome.
+        </p>
+    </div>
+</div>

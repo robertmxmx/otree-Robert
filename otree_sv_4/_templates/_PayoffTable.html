@@ -1,0 +1,14 @@
+{% load otree %}
+
+<table class="simple-table">
+    <tr>
+        {% for player in payoffs %}
+            <th> Participant {{ player.role }} </th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for player in payoffs %}
+            <td> {{ player.payoff }} </td>
+        {% endfor %}
+    </tr>
+</table>

@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 4 - Conceal Decision
+{% endblock %}
+
+{% block content %}
+
+    {% if treatment == 1 %}
+        <p>
+            It has been randomly determined that you may conceal up to
+            {{ num_random_conceal }} of your answers from the other player,
+            and that {{ num_to_reveal }} of the remaining answers will be revealed.
+        </p>
+        <p>
+            You entered {{ num_chosen }} items that you wished to conceal.
+        </p>
+        {% if num_chosen == 0 %}
+            <p>
+                Therefore all your answers will be revealed
+            </p>
+        {% else %}
+            <p>
+                We will conceal the first {{ num_to_conceal }} items from your list
+                entered on the previous screen.
+            </p>
+        {% endif %}
+    {% elif treatment == 2 %}
+        <p>
+            It has been randomly determined that none of your answers will be
+            revealed. Your partner’s answers will not be revealed either.
+        </p>
+    {% else %}
+        ERROR: incorrect treatment
+    {% endif %}
+
+    {% next_button %}
+
+{% endblock %}

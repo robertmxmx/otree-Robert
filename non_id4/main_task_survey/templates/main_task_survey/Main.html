@@ -1,0 +1,142 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1b - Survey
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        In this survey, we want to ask you about your decision in Task 1, where there were three
+        options to choose from. To remind you, below is a summary of the options.
+    </p>
+    {% include "T1Table.html" %}
+    <br/>
+    <p>
+        In this task, you chose option {{ option }}, so participant A will receive {{ payoffA }}, and participant
+        B will receive {{ payoffB }}
+    </p>
+
+    <ul>
+        <li>
+            <p>
+                If you had chosen option 1, Participant A would have received $10.
+            </p>
+            <p>
+                Please indicate how grateful you believe Participant A would feel if you made this
+                decision.
+            </p>
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.q1a %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.q1a %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+            <br>
+            <p>
+                Please indicate how angry you believe Participant A would feel if you made this
+                decision.
+            </p>
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.q1b %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.q1b %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+            <br>
+        </li>
+        <li>
+            <p>
+                If you had chosen option 2, Participant B would have received $2.
+            </p>
+            <p>
+                Please indicate how grateful you believe Participant B would feel if you made this
+                decision.
+            </p>
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.q2a %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.q2a %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+            <br>
+            <p>
+                Please indicate how angry you believe Participant B would feel if you made this
+                decision.
+            </p>
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.q2b %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.q2b %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+            <br>
+        </li>
+        <li>
+            <p>
+                If you had chosen option 3, Participant A would have received $3.
+            </p>
+            <p>
+                Please indicate how grateful you believe Participant A would feel if you made this
+                decision.
+            </p>
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.q3a %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.q3a %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+            <br>
+            <p>
+                Please indicate how angry you believe Participant A would feel if you made this
+                decision.
+            </p>
+            <table class="likert_table">
+                <tr>
+                    {% for choice in form.q3b %}
+                        <th>&nbsp{{ choice.choice_label }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.q3b %}
+                        <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ choice.tag }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+            <br>
+        </li>
+    </ul>
+    {% next_button %}
+
+{% endblock %}

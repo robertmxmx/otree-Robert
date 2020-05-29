@@ -1,0 +1,84 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3 Decision
+{% endblock %}
+
+{% block styles %}
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        /* The Modal (background) */
+        .modal {
+          display: none; /* Hidden by default */
+          position: fixed;
+          z-index: 1; /* Sit on top */
+          padding-top: 100px; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        /* Modal Content */
+        .modal-content {
+          background-color: #fefefe;
+          margin: auto;
+          border: 1px solid #888;
+          width: 30%;
+        }
+        .w3-container {
+            padding: 1em 2em;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div  id="myModal" class="modal">   <!-- The Modal -->
+        <div class="modal-content">
+            <br>
+            <div id="modalContent" class="w3-container"></div>
+        </div>
+    </div>
+
+    <p>
+        You have been selected to nominate a deduction policy.
+    </p>
+
+    {% formfield player.red_d_pts label="How many deduction points do you wish to assign to each red button presser?" %}
+    {% formfield player.green_d_pts label="How many deduction points do you wish to assign to the green button non-presser (if there was one)?" %}
+
+    <script>
+        function fill_modal() {
+            var red_d_pts = parseFloat(document.getElementById('id_red_d_pts').value);
+            var green_d_pts = parseFloat(document.getElementById('id_green_d_pts').value);
+            var cost_of_deduction = parseFloat(({{ group.num_red_pressed }}*red_d_pts + green_d_pts)/2);
+            var modal_content = `
+                <p>
+                    You are proposing to assign ${red_d_pts} deduction points to red button pressers and
+                    ${green_d_pts} to any green button non-pressers. This proposal, if accepted by the
+                    affected participant, will cost each of you ${cost_of_deduction} ECU and will have the
+                    effect of reducing the red button pressersʼ earnings by ${3*red_d_pts} ECU and the
+                    green button non-presserʼs earnings by ${3*green_d_pts} ECU. Are you sure you wish to
+                    proceed?
+                </p>
+                <br><br>
+                <div align="right">
+                    <button class="otree-btn-next btn btn-primary"> Yes </button>
+                    <button type="button" class="otree-btn-next btn btn-primary"
+                        onclick="document.getElementById('myModal').style.display='none';"> Revise </button>
+                </div>
+            `;
+
+            document.getElementById('modalContent').innerHTML = modal_content;
+            document.getElementById('myModal').style.display='block';
+            return;
+        }
+    </script>
+    <button type="button" class="otree-btn-next btn btn-primary" onclick="fill_modal();">Next</button>
+
+{% endblock %}

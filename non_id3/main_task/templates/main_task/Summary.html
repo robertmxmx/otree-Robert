@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1 - Summary
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You chose option {{ player.option }}, so you will receive {{ player.payoff }}, participant A will receive
+        {{ player.payoffA }}, and participant B will receive {{ player.payoffB }}.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% load otree %}
+
+<div>
+    <p>
+        You have been assigned role {{ player.role }}.
+    </p>
+
+    <p>
+        The initial allocation is:
+    </p>
+
+    {% include '_PayoffTable.html' %}
+
+    {% formfield group.points_taken %}
+
+    {% next_button %}
+
+    {% include 'Task1Instructions.html' %}
+</div>

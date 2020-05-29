@@ -1,0 +1,88 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2
+{% endblock %}
+
+{% block content %}
+
+    {% if session.config.treatment == 1 %}
+        <p>
+            In Task 2, each participant retains his/her identifier and remains in the same population of eight as Task 1.
+            Again, each participant interacts with only the participants within his/her own population.
+        </p>
+        <p>
+            <strong>
+                Task 2 is the same as Task 1 except that each participant only has to decide which town
+                to move to and will NOT have the opportunity of assigning deduction points to each
+                other.
+            </strong>
+        </p>
+        <p>
+            At the beginning of the experiment, the participants are divided into populations of eight.
+            Each participant interacts only with the participants within his/her own population.
+        </p>
+        <p>
+            Before starting this task, every participant is awarded {{ Constants.starting_points }} points for participating.
+        </p>
+        <p>
+            Each population of eight is divided into two groups: The Reds and the Blues. Each group
+            consists of four members. You will be divided into groups based on your performance in a
+            preliminary typing task.
+        </p>
+        <p>
+            This task consists of <b>{{ Constants.num_rounds }}</b> periods. <b>You are in the same group with the
+            same people for all {{ Constants.num_rounds }} periods.</b>
+        </p>
+        <p>
+            Each member in the Reds will be identified as <b>R</b>ID# and each one in the Blues will be identified as
+            <b>B</b>ID#. For example, if a participant with ID #3 is assigned to the Reds (or the Blues), he/she will be
+            identified as <b>R</b>3 (or <b>B</b>3) during the experiment. All participants keep their identifiers for all
+            {{ Constants.num_rounds }} periods.
+        </p>
+        <p>
+            There are two towns: Red town and Blue town.
+        </p>
+        <p>
+            First, you will decide whether to stay in the same town or to move to the other town. Which
+            town you reside in will affect your earnings, as follows.
+        </p>
+        <p>
+            Each period, each individual earns additional points, which are distributed to everyone who
+            resides in the same town. Red individuals earn an additional {{ Constants.red_pts_each_period }} points
+            every period. Blue
+            individuals earn an additional {{ Constants.blue_pts_each_period }} points every period.
+        </p>
+        <p>
+            After all participants have chosen where to reside, the points that have been earned by all the
+            individuals in a town are <b>equally split</b> between all the residents of that town.
+        </p>
+        <p>
+            After each period, you will be shown the entire population of the town you have moved into,
+            and how much each person will earn as a result.
+        </p>
+        <p>
+            The following pages describe Task 2 in detail.
+        </p>
+
+    {% else %}
+        <p>
+           In Task 2, each participant remains in the same population of eight as Task 1. Again, each participant
+            interacts with only the participants withing his/her own population.
+        </p>
+        <p>
+            <strong>
+                Task 2 is otherwise the same as Task 1.
+            </strong>
+        </p>
+        <p>
+            On the following pages, you can review the detailed instructions again, to refresh your
+            memory.
+        </p>
+
+    {% endif %}
+
+    {% next_button %}
+
+{% endblock %}

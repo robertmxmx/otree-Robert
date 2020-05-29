@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task {{ subsession.round_number }} - Scenario
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        The scenario we will describe involves a decision made by a participant (Individual X) in an experiment run in
+        this laboratory. To understand the decision they faced, we need you to read and understand the instructions
+        for that experiment. Below are the actual instructions that were presented to Individual X
+    </p>
+
+    {% if session.config.treatment == 1 %}
+        {% include Constants.treatment_instructions %}
+    {% else %}
+        {% include Constants.control_instructions %}
+    {% endif %}
+
+{% endblock %}

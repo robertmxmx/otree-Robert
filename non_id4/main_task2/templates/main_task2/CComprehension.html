@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2c - Comprehension Quiz
+{% endblock %}
+
+{% block content %}
+
+    {% include "InlineFieldsStyle.html" %}
+    <p>
+        At this point, to make sure that everyone understands the task, please answer the questions below
+    </p>
+    <ol type="1" >
+        <li>
+            If you choose Option 2, then you receive ${{ form.c_comp1a }} and the other participant
+            receives ${{ form.c_comp1b }}
+        </li>
+        <li>
+            If you choose Option 1, then you receive ${{ form.c_comp2a }} and the other participant
+            receives ${{ form.c_comp2b }}
+        </li>
+    </ol>
+    {% next_button %}
+    {% include "T2cInstructions.html" %}
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task {{ subsession.round_number }} - Scenario Comprehension
+{% endblock %}
+
+{% block styles %}
+    <style type="text/css">
+        .form-control {
+            display: inline-block;
+            padding: 5;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        At this point, to make sure that everyone understands the scenario faced by Individual X, please answer
+        the three questions below:
+    </p>
+
+    {% if session.config.treatment == 1 %}
+        <p>
+            <b>1.</b> If Individual X chooses Option 2 then Individual X receives ${{ form.t_comp1a }} ,
+            Participant A receives ${{ form.t_comp1b }} , Participant B receives ${{ form.t_comp1c }}
+        </p>
+
+        <p>
+            <b>2.</b> If Individual X Chooses Option 1 then Individual X receives ${{ form.t_comp2a }} , Participant A
+            receives ${{ form.t_comp2b }} , Participant B receives ${{ form.t_comp2c }}
+        </p>
+
+        <p>
+            <b>3.</b> If Individual X chooses Option 2, then will Participant A ever be informed about this experiment?
+            {% formfield player.t_comp3 label="" %}
+        </p>
+
+        {% next_button %}
+        {% include Constants.treatment_instructions %}
+
+    {% else %}
+        <p>
+            <b>1.</b> If Individual X chooses Option 1 then Individual X receives ${{ form.c_comp1a }} ,
+            The other participant receives ${{ form.c_comp1b }}
+        </p>
+
+        <p>
+            <b>2.</b> If Individual X Chooses Option 2 then Individual X receives ${{ form.c_comp2a }} , The other
+            Participant receives ${{ form.c_comp2b }}
+        </p>
+
+        {% next_button %}
+        {% include Constants.control_instructions %}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Decision On Deduction Points
+{% endblock %}
+
+{% block content %}
+
+    {% include "MainTasksHeader.html" %}
+
+    {% if empty_town %}
+        <p>
+            There are no other inhabitants in your town, therefore you cannot allocate deduction points.
+        </p>
+
+        <button class="otree-btn-next btn btn-primary">Next</button>
+
+    {% else %}
+        <script>
+            function calculate_total_assigned(fields) {
+                var total = 0;
+                var i;
+
+                for (i = 0; i < fields.length; i++) {
+                    total += parseInt(document.getElementById("id_" + fields[i]).value);
+                }
+
+                if (isNaN(total)) {
+                    total = `
+                        <font color="red">
+                            <br>You must put a number in every cell before proceeding.
+                            <br>If you wish to assign no deduction points to an individual, enter zero.
+                        </font>
+                    `;
+                } else {
+                    if (total == 1) {
+                        total += " point";
+                    } else {
+                        total += " points";
+                    }
+
+                    document.getElementById("next_btn").disabled = false;
+                    document.getElementById("next_btn").innerHTML = "Next";
+                }
+
+                document.getElementById("calculated_pts").innerHTML = total;
+            }
+        </script>
+
+        <p>
+            How many deduction points do you wish to assign?
+        </p>
+
+        <table width="100%">
+            {% for field in form %}
+                {% for p in town_pop %}
+                    {% if forloop.counter0 == forloop.parentloop.counter0 %}
+                        <tr>
+                            <td>
+                                Deduct from <font color="{{ p.color }}">{{ p.id }}:</font>
+                                {% formfield field label="" %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </table>
+
+        <p>
+            <button type="button" class="otree-btn-next btn btn-primary"
+                    onclick="calculate_total_assigned({{ deduction_fields }})">
+                Calculate
+            </button>
+        </p>
+
+        <p>
+            Total cost of assigned deduction points: <b><text id="calculated_pts"></text></b>
+        </p>
+
+        <button class="otree-btn-next btn btn-primary" id="next_btn" disabled>Click 'Calculate' button to continue
+        </button>
+
+        <script>
+            var deduction_fields = {{ deduction_fields|json }};
+            var i;
+
+            for (i = 0; i < deduction_fields.length; i++) {
+                document.getElementById("id_" + deduction_fields[i]).addEventListener('change', function (evt) {
+                    document.getElementById("next_btn").disabled = true;
+                    document.getElementById("next_btn").innerHTML = "Click 'Calculate' button to continue";
+                });
+            }
+        </script>
+
+    {% endif %}
+
+{% endblock %}

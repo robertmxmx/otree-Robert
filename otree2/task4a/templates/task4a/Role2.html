@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 4 - Round {{ round_number }} (Role 2)
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <strong>
+            This is round {{ round_number }} out of {{ Constants.num_rounds }} rounds in total.
+        </strong>
+    </p>
+
+    <p>
+        You have been given 1 point for this round, and you have
+        been assigned Role 2.
+    </p>
+
+    {% if r1_action == "CHALLENGE" %}
+        <p>
+            The other participant has challenged
+        </p>
+        <p>
+            {% formfields %}
+        </p>
+    {% elif r1_action == "DO NOTHING" %}
+        <p>
+            Participant 1 did not challenge, your earnings are therefore unchanged.
+        </p>
+    {% else %}
+        ERROR: Invalid action for Role 1 player
+    {% endif %}
+
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+        <h3>
+            Stage 2: The green buttons
+        </h3>
+
+        <p>
+            This stage arises when, on the previous stage, both red button participants pressed the
+            red button. If both buttons were pressed, a third participant would have had their
+            endowment reduced. If only one red button was pressed, this stage will be skipped, and
+            you will proceed directly to stage 3.
+        </p>
+        <p>
+            In this stage, two of the <b>other three participants</b> will be chosen at random to have the opportunity
+            to press a green button.
+        </p>
+        <p>
+            The green buttons do the "reverse" of the red button. If one of the green buttons is
+            pressed, it will:
+        </p>
+        <ul>
+            <li>
+                reduce the endowment of whoever presses it by {{ Constants.one_green_btn_loss }} ECU, and
+            </li>
+            <li>
+                increase the endowment of whoever lost ECU in the previous stage by {{ Constants.one_green_btn_gain }} ECU,
+                returning them to their original endowment.
+            </li>
+        </ul>
+        <p>
+            If both of the green buttons are pressed, it will:
+        </p>
+        <ul>
+            <li>
+                reduce the endowment of each person who presses by {{ Constants.two_green_btn_loss }} ECU, and
+            </li>
+            <li>
+                increase the endowment of whoever lost ECU in the previous stage by {{ Constants.two_green_btn_gain }} ECU,
+                returning them to their original endowment.
+            </li>
+        </ul>
+        <p>
+            To illustrate, suppose that persons D and F are the ones chosen to have the opportunity
+            to press the green button.
+        </p>
+        <p>
+            If both D and F do not press the button, then everyone's earnings from the earlier stage
+            will be unchanged. So the changes from initial endowments will be:
+        </p>
+        <table class="simple_table">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>F</th>
+            </tr>
+            <tr>
+                <td>-120</td>
+                <td>0</td>
+                <td>+20</td>
+                <td>0</td>
+                <td>+20</td>
+                <td>0</td>
+            </tr>
+        </table>
+        </br>
+        <p>
+            If D does press the button, but F does not, the overall effect will be:
+        </p>
+        <table class="simple_table">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>F</th>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>+20</td>
+                <td>-40</td>
+                <td>+20</td>
+                <td>0</td>
+            </tr>
+        </table>
+        </br>
+        <p>
+            If both D and F press their green buttons, the overall effect will be:
+        </p>
+        <table class="simple_table">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>F</th>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>+20</td>
+                <td>-20</td>
+                <td>+20</td>
+                <td>-20</td>
+            </tr>
+        </table>
+        </br>
+        <p>
+            After the decision has been made whether or not to press the green button, participants
+            enter the final stage of the round, Stage 3.
+        </p>
+    </div>
+</div>

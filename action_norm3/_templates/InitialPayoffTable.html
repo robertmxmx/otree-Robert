@@ -1,0 +1,14 @@
+{% load otree static %}
+
+<table class="simple_table">
+    <tr>
+        {% for p in initial_payoffs %}
+            <th>{{ p.id }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for p in initial_payoffs %}
+            <td>{{ p.payoff }}</td>
+        {% endfor %}
+    </tr>
+</table>

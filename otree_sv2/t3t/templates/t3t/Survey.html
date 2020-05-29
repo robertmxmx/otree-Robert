@@ -1,0 +1,50 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 3 - Survey
+{% endblock %}
+
+{% block content %}
+
+    <ul>
+        {% if check_participant_a %}
+            <li>
+                Did you think that your partner in this task was more or less likely to return money than your
+                partner in task 1?
+                <table border="0" cellpadding="2"  width="910px">
+                    <tr>
+                        {% for label in Constants.labels %}
+                            <td  align="center" width="130px">{{ label }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for choice in form.survey_qa1 %}
+                            <td  align="center" width="130px">{{ choice }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </li>
+        {% else %}
+            <li>
+                Did you think that your partner in this task was more or less likely to send money than your partner
+                in task 1?
+                <table border="0" cellpadding="2"  width="910px">
+                    <tr>
+                        {% for label in Constants.labels %}
+                            <td  align="center" width="130px">{{ label }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for choice in form.survey_qb1 %}
+                            <td  align="center" width="130px">{{ choice }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </li>
+        {% endif %}
+        </ul>
+    <br/>
+    {% next_button %}
+
+{% endblock %}

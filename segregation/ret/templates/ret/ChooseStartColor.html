@@ -1,0 +1,15 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+   Choose Starting Color
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.start_color %}
+
+    {% next_button %}
+
+
+{% endblock %}

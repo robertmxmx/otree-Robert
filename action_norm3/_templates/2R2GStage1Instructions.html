@@ -1,0 +1,88 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+        <h3>
+            Stage 1: The red button
+        </h3>
+
+        <p>
+            Two of the {{ Constants.players_per_group }} members of your group will be randomly selected to have the opportunity
+            to press a red button.
+        </p>
+        <p>
+            If <b>only one</b> person presses their red button, this person will earn an additional {{ Constants.one_red_btn_gain }} ECU. No one
+            else will be affected.
+        </p>
+        <p>
+            If <b>both</b> participants choose to press their red buttons, it will have two effects:
+        </p>
+        <ul>
+            <li>
+                The participants who press the red buttons will earn an additional {{ Constants.two_red_btn_gain }} ECU each.
+            </li>
+            <li>
+                One other person in the group, chosen at random, will lose {{ Constants.two_red_btn_loss }} ECU from their endowment.
+            </li>
+        </ul>
+        <p>
+            If <b>no one</b> presses their red button, nothing happens, and the round is over.
+        </p>
+        <p>
+            To illustrate, suppose that persons C and E are chosen at random to have the
+            opportunity to press the red button, and person A is the person who will be affected if
+            the red button is pressed.
+        </p>
+        <p>
+            If both C and E press the button, the effects will be:
+        </p>
+        <table class="simple_table">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>F</th>
+            </tr>
+            <tr>
+                <td>-120</td>
+                <td>0</td>
+                <td>+20</td>
+                <td>0</td>
+                <td>+20</td>
+                <td>0</td>
+            </tr>
+        </table>
+        </br>
+        <p>
+            If only C presses the red button, the effects will be:
+        </p>
+        <table class="simple_table">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>F</th>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>+40</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+        </table>
+        </br>
+        <p>
+            If neither C nor E presses their red button, the round is over and you will start a new round.
+        </p>
+        <p>
+            If either C or E presses the button, the round enters an additional stage (either Stage 2 or Stage 3).
+        </p>
+    </div>
+</div>

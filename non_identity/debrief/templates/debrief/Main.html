@@ -1,0 +1,67 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Debrief
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <strong>
+            End of experiment
+        </strong>
+    </p>
+
+    {% if treatment == 1 %}
+        <p>
+            Total Earnings = Task 1 = {{ total_payoff }}
+        </p>
+    {% elif treatment == 2 %}
+        <p>
+            In Task 2, the sub-task chosen for payment was Part {{ t2_chosen_task }}. For this task, you chose Option
+            {{ t2_chosen_task_option }}
+        </p>
+        <p>
+            Total Earnings = Task 1 + Task 2 = {{ t1_payoff }} + {{ t2_payoff }} = {{ total_payoff }}
+        </p>
+    {% else %}
+        ERROR: Invalid treatment
+    {% endif %}
+
+    <p>
+        Thank you for participating in the experiment
+    </p>
+
+    {% if treatment == 1 %}
+        <p>
+            The participant you were matched with will be invited to receive their payment at:
+            <b>{{ venue_location }}</b> on <b>{{ venue_date }}, {{ venue_time }}</b>.
+        </p>
+    {% elif treatment == 2 %}
+        <p>
+            For Task 1, Participant {{ t1_payed_partner }} was the participant chosen to receive a payment. They will
+            be invited to receive their payment at: <b>{{ venue_location1 }}</b> on <b>{{ venue_date1 }},
+            {{ venue_time1 }}</b>.
+        </p>
+        <p>
+            For Task 2, the participant you were matched with will be invited to receive their payment at:
+            <b>{{ venue_location2 }}</b> on <b>{{ venue_date2 }}, {{ venue_time2 }}</b>.
+        </p>
+    {% else %}
+        ERROR: Invalid treatment
+    {% endif %}
+
+    <p>
+        You are welcome to attend to observe and confirm that we have made the payment. (You will not be able to
+        identify the specific individual you were matched with, because there will be at least ten recipients
+        present at each venue.)
+    </p>
+
+    <p>
+        If you wish to attend, please record the venue information now.
+    </p>
+
+{% endblock %}
+
+

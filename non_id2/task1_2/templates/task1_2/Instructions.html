@@ -1,0 +1,14 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task {{ subsession.round_number }} - Instructions
+{% endblock %}
+
+{% block content %}
+
+    {% include Constants.main_instructions %}
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1 - Choice
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        What option will you choose?
+    </p>
+
+    {% formfield player.option label="" %}
+
+    {% next_button %}
+
+    {% include Constants.instructions %}
+
+{% endblock %}

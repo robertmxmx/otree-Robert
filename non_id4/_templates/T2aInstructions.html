@@ -1,0 +1,75 @@
+{% load otree %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+        <h3>Task 2a - Instructions</h3>
+        <p>
+            In this section there are three sub-tasks (2a, 2b, 2c). Each sub-task is independent of the
+            others, meaning your decisions in each subtask will not affect your earnings in previous
+            subtasks, or future subtasks. At the end of the experiment <b>only one of these three subtasks</b>
+            will be randomly chosen for payment. All tasks are equally likely to be chosen.
+        </p>
+        <p>
+            Note that each subtask could be the selected one that will be implemented for payment. So,
+            it is in your interest to treat each subtask as if it could be the one that determines your
+            payment.
+        </p>
+        <p>
+            Your earnings from the experiment will be your earnings from task 1 + the earnings from the
+            randomly selected subtask in this section of the experiment.
+        </p>
+        <p>
+            In this task you have been randomly matched with a <b>different</b> unique individual. In other
+            words, this is not the same individual you were matched with in Task 1. You will be matched
+            with this same individual for these next three decision subtasks.
+        </p>
+        <p>
+            Once again, the participant you have been randomly matched with is not present at the
+            moment. We will invite them to a venue on campus next week to be paid. We will explain to
+            these participants the procedure for the relevant subtask, so they understand
+            the choices you made, and how their payment was determined.
+        </p>
+        <p>
+            (The participant you have been matched with will not know about your decisions in the
+            other two subtasks, that are not selected for payment.)
+        </p>
+        <p>
+            This first subtask involves an element of chance (see the picture below). With a 50% probability
+            you will be assigned to version 1. With a 50% probability you will be assigned to version 2.
+            Notice that both possible versions of this subtask are the same, except that two of the other
+            participant’s payments have been switched. Note that in both versions, you get your highest
+            payment of $12 by choosing option 2. in the version on the left, this gives the other
+            participant his or her lowest payment of $2. In the version on the right this gives the other
+            participant his or her highest payment of $10. In both versions, if you choose option 1, you
+            will receive the lower payment of $10. In the version on the left, this gives the other
+            participant his or her highest payment of $10. In the version on the right, this gives the
+            other participant his or her lowest payment of $2.
+        </p>
+        <p>
+            Note that you will not know which of the versions you have been assigned, but your own
+            payment will be identical. The only thing that differs are the payments for the other
+            participant.
+        </p>
+        <p>
+            Which of these versions will you actually be assigned? That was determined randomly by
+            the computer at the beginning of the experiment, with each version being equally likely.
+        </p>
+        <p>
+            We will never reveal publicly which version you are actually assigned, however, you can
+            choose to find out by clicking a "Reveal" button. This choice will be private. The other
+            participant will not know if you have clicked the Reveal button. However, you are not
+            required to find out and may choose not to click the Reveal button.
+        </p>
+        <table>
+            <tr>
+                <td>
+                    {% include "V1Table.html" %}
+                </td>
+                <td>&nbsp&nbsp&nbsp</td>
+                <td>
+                    {% include "V2Table.html" %}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

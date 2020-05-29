@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 5 - End
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <strong>
+            Task 5 has now ended.
+        </strong>
+    </p>
+
+    <p>
+        Your total earnings on this task were: {{ total_earnings }}
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

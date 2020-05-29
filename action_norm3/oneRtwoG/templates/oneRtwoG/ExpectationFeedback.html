@@ -1,0 +1,35 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Expectation and Attitude Survey Feedback
+{% endblock %}
+
+{% block content %}
+
+    {% if not tie %}
+        <p>
+            The randomly chosen question on the expectation survey was {{ question_picked }}.
+        </p>
+        <p>
+            The clear majority answer was {{ majority_answer }}.
+        </p>
+        {% if exp_ECU != 0 %}
+            <p>
+                You gave the same answer as the clear majority, so have been awarded a {{ exp_ECU }} ECU bonus.
+            </p>
+        {% else %}
+            <p>
+                You did not give the same answer as the clear majority, so have not earned a bonus.
+            </p>
+        {% endif %}
+    {% else %}
+        <p>
+            The randomly chosen question was {{ question_picked }}. There was no clear majority answer,
+            so no bonus will be paid.
+        </p>
+    {% endif %}
+
+    {% next_button %}
+
+{% endblock %}

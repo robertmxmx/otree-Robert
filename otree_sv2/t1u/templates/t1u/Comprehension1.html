@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 1 - Comprehension Questions
+{% endblock %}
+
+{% block styles %}
+
+<style>
+    .form-control {
+        display: inline;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To check that you understand the rules, please answer the following questions:
+    </p>
+    <p>
+        If Participant A chooses to allocate the points as follows:
+    </p>
+    <ul>
+        <li>Participant A: 3 points</li>
+        <li>Participant B: 9 points</li>
+    </ul>
+    <p>
+        and Participant B rejects this allocation,
+    </p>
+    <p>
+        <b>1.</b> How much will Participant A earn on this task?
+        <br>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ form.c1a }} points
+    </p>
+    <p>
+        <b>2.</b> How much will Participant B earn on this task?
+        <br>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ form.c1b }} points
+    </p>
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

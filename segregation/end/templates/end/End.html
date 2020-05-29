@@ -1,0 +1,38 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    End of Experiment
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Your task 1 earnings are: {{ player.task1_payoff }}
+    </p>
+    <p>
+        Your task 2 earnings are: {{ player.task2_payoff }}
+    </p>
+
+    <p>
+        Chosen task for payment: {{ subsession.chosen_task }}
+    </p>
+
+    <p>
+        Final payoff: {{ participant.payoff }}
+    </p>
+    <p>
+        Participation fee: {{ participation_fee }}
+    </p>
+    <p>
+        Total: {{ final_payoff }} = {{ participant.payoff_plus_participation_fee }}
+    </p>
+    <p>
+        For payment purposes, your id is: <b>{{ participant.code }}</b>. Please write this on your receipt.
+    </p>
+    <p>
+        Please fill out your receipt and wait for the other participants to complete the experiment. You may now
+        use your phone provided it is in silent mode and you do not disturb other participants.
+    </p>
+
+{% endblock %}

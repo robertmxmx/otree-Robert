@@ -1,0 +1,75 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task {{ subsession.round_number }} - Comprehension Quiz
+{% endblock %}
+
+{% block styles %}
+    <style>
+        td {
+            padding-right: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <b>Scenario:</b> Individual X can either buy a banana or refuse to buy a banana at a local fruit shop. Individual X
+        chooses to purchase the banana.
+    </p>
+
+    <p>
+        We will first ask you to evaluate this choice as socially inappropriate on the following scale:
+    </p>
+
+    <ul>
+        <li>Very socially inappropriate</li>
+        <li>Somewhat inappropriate</li>
+        <li>Somewhat appropriate</li>
+        <li>Very socially appropriate</li>
+    </ul>
+
+    <p>
+        Now suppose the distribution of responses to the above question was:
+    </p>
+
+    <table>
+        <tr>
+            <td>Very socially inappropriate</td>
+            <td>2 people</td>
+        </tr>
+        <tr>
+            <td>Somewhat socially inappropriate</td>
+            <td>9 people</td>
+        </tr>
+        <tr>
+            <td>Somewhat socially appropriate</td>
+            <td>8 people</td>
+        </tr>
+        <tr>
+            <td>Very socially appropriate</td>
+            <td>2 people</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <p>
+        <b>1.</b> If you had selected “Very socially appropriate” as your response, how much money would
+        you be paid for this task?
+    </p>
+    {% formfield player.comp1 label="" %}
+
+    <p>
+        <b>2.</b> If you had selected “Somewhat socially inappropriate” as your response, how much money
+        would you be paid for this task?
+    </p>
+    {% formfield player.comp2 label="" %}
+
+    {% next_button %}
+
+    {% include Constants.main_instructions %}
+
+{% endblock %}

@@ -1,0 +1,171 @@
+{% load otree static %}
+
+<script src="{% static 'functions.js' %}" type="text/javascript"></script>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+        top: 50%;
+        font-size: 50px;
+        font-weight: bold;
+        position: relative;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .modal-header {
+        background-color: #f8f9fa;
+        position: relative;
+    }
+
+    .w3-container {
+        padding: 1em 2em;
+    }
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Header bar with History button and Period, ID info -->
+<table width="100%">
+    <tr>
+        <td width="33%">
+            Period: {{ subsession.round_number }}
+        </td>
+        <td width="33%" style="text-align:center;">
+            {% if subsession.round_number == 1 %}
+            {% else %}
+                <button class="otree-btn-next btn btn-primary" type="button"
+                        onclick="document.getElementById('myModal').style.display='block';">
+                    Show History
+                </button>      <!-- Trigger/Open The Modal -->
+            {% endif %}
+        </td>
+        <td width="33%" style="text-align:right;">
+            ID: <font color="{{ player.color }}">{{ player.get_id }}</font>
+        </td>
+    </tr>
+</table>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+
+        <header class="modal-header w3-container">
+            <h1>History</h1>
+            <span class="close" onclick="document.getElementById('myModal').style.display='none';">&times;</span>
+        </header>
+
+        <div class="w3-container">
+            {% for period in town_history %}
+                <div class="card bg-light instructions">
+                    <div class="card-body">
+                        <table width="100%">
+                            <tr>
+                                <td colspan="3" width="100%" align="center">
+                                    <h4>
+                                        Period {{ forloop.counter }}
+                                    </h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="48%" align="center" style="color:red;">Red Town</td>
+                                <td width="4%"></td>
+                                <td width="48%" align="center" style="color:blue;">Blue Town</td>
+                            </tr>
+
+                            <tr>
+                                <td style="border: 1px solid #c1c1c1;">
+                                    {% for p in period.red_town %}
+                                        <script>
+                                            document.scripts[document.scripts.length - 1].parentNode.innerHTML += create_player(
+                                                {{p|json}}, "{{ player.get_id }}");
+                                        </script>
+                                    {% endfor %}
+                                </td>
+                                <td></td>
+                                <td style="border: 1px solid #c1c1c1;">
+                                    {% for p in period.blue_town %}
+                                        <script>
+                                            document.scripts[document.scripts.length - 1].parentNode.innerHTML += create_player(
+                                                {{p|json}}, "{{ player.get_id }}");
+                                        </script>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+<br>
+
+<!-- Current allocation of towns-->
+<div class="card bg-light instructions">
+    <div class="card-body">
+        <table width="100%">
+            <tr>
+                <td width="48%" align="center" style="color:red;">Red Town</td>
+                <td width="4%"></td>
+                <td width="48%" align="center" style="color:blue;">Blue Town</td>
+            </tr>
+
+            <tr>
+                <td style="border: 1px solid #c1c1c1;">
+                    {% for p in current_period.red_town %}
+                        <script>
+                            document.scripts[document.scripts.length - 1].parentNode.innerHTML += create_player(
+                                {{p|json}}, "{{ player.get_id }}");
+                        </script>
+                    {% endfor %}
+                </td>
+                <td></td>
+                <td style="border: 1px solid #c1c1c1;">
+                    {% for p in current_period.blue_town %}
+                        <script>
+                            document.scripts[document.scripts.length - 1].parentNode.innerHTML += create_player(
+                                {{p|json}}, "{{ player.get_id }}");
+                        </script>
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

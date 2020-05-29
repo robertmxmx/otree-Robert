@@ -1,0 +1,41 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 4 - Survey
+{% endblock %}
+
+{% block content %}
+
+    <p> Please answer the following questions </p>
+    <ul>
+        <li>
+            Did you think that your partner in this task was more or less likely to
+            {% if id == 1 %}
+                retaliate
+            {% else %}
+                challenge
+            {% endif %}
+            than your partner in Task 1?
+            <table border="0" cellpadding="2"  width="910px">
+                <tr>
+                    {% for label in Constants.labels %}
+                        <td  align="center" width="130px">{{ label }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for choice in form.survey_q1 %}
+                        <td  align="center" width="130px">{{ choice }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </li>
+        <br/>
+        <li>
+            {% formfield player.survey_q2 label="Why?" %}
+        </li>
+    </ul>
+
+    {% next_button %}
+
+{% endblock %}

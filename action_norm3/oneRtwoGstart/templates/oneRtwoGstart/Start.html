@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task {{ task_number }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You are in a group of {{ Constants.players_per_group }} people. You will be in the same group for 12 rounds. Each
+        round, you will be randomly assigned a new identifier (A, B, C, D, E), so you wonʼt be able
+        to tell who is whom from round to round.
+    </p>
+    <p>
+        Each round, everyone is endowed with either 180, 200, or 220 ECU (economic currency units). It is randomly
+       decided which of these three allocations you are endowed with.
+    </p>
+    <p>
+        What you do during the round will affect your endowment on that round.
+    </p>
+    <p>
+        Your earnings for this task will be the outcome of <i>one round</i>, chosen at random. So every
+        round may be the one that determines your final earnings for this task.
+    </p>
+    <p>
+        Each Round has a number of stages.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

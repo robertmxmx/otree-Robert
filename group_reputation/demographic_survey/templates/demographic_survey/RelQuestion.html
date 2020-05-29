@@ -1,0 +1,23 @@
+{% load otree static %}
+<p>
+    In the following figure we ask you to consider which of these pairs of circles best describes
+    your relationship with {{ role }} in all questions that follow. In the figure "Other" serves as a
+    placeholder for {{ role }}, that is, you should think of "Other" being {{ role }}. By
+    selecting the appropriate number please indicate to what extent you and {{ role }} are
+    connected.
+</p>
+<p>
+    With regard to Participant {{ role }}, please enter which picture best describes your relationship
+</p>
+<table class="rel-table">
+    <tr>
+        {% for path in img_paths %}
+            <th><img src="{% static path %}" width="100%"/></th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for choice in field %}
+            <td>&nbsp{{ choice.tag }}</td>
+        {% endfor %}
+    </tr>
+</table>

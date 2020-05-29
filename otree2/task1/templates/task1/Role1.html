@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 1 - Round {{ round_number }} (Role 1)
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <strong>
+            This is round {{ round_number }} out of {{ Constants.num_rounds }} rounds in total.
+        </strong>
+    </p>
+
+    <p>
+        You have been given 1 point for this round, and you have
+        been assigned Role 1.
+    </p>
+    <p>
+        {% formfield group.r1_action label="Please select your action:" %}
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

@@ -1,0 +1,105 @@
+{% load otree %}
+
+<div>
+    <div id="before-calculate">
+        <p>
+            You have been assigned role {{ player.role }}.
+        </p>
+    
+        <p>
+            The initial allocation is:
+        </p>
+    
+        {% include '_PayoffTable.html' %}
+
+        <p>
+            How do you propose to respond <b>if</b> Participant A 
+            takes {{ Constants.take_amount }} of your points?
+        </p>
+    
+        {% formfield group.points_retaliated %}
+
+        <p style="color: red" id="error">
+        </p>
+    
+        <p>
+            <button 
+                type="button" 
+                onclick="handleCalculate()"
+                class="otree-btn-next btn btn-primary" 
+            >
+                Calculate
+            </button>
+        </p>
+    
+        {% include 'Task1Instructions.html' %}
+    </div>
+    
+    <div id="after-calculate" style="display: none">
+        <p>
+            If you choose to spend <span id="points_retaliated"></span> 
+            points on retaliation, and A takes, final earnings for 
+            this task will be:
+        </p>
+
+        <ul>
+            <li>
+                A: <span id="a_payoff"></span> points
+            </li>
+            <li>
+                B: <span id='b_payoff'></span> points
+            </li>
+        </ul>
+
+        <p>
+            Please confirm that this is your intended decision. 
+        </p>
+
+        <button class="otree-btn-next btn btn-primary">
+            Confirm
+        </button>
+        
+        <button 
+            type="button" 
+            onclick="handleRevise()" 
+            class="otree-btn-next btn btn-primary" 
+        >
+            Revise
+        </button>
+    </div>
+
+    <script>
+        function handleCalculate() {
+            const points_retaliated = parseFloat(
+                document.getElementById('id_points_retaliated').value
+            );
+            const min = {{ Constants.deduction.min }},
+                max = {{ Constants.deduction.max }};
+
+            if (isNaN(points_retaliated) || points_retaliated < min || 
+                points_retaliated > max) {
+                document.getElementById('error').innerHTML 
+                    = `Please enter a number between ${min} and ${max}`;
+                return;
+            }
+            
+            const a_payoff = {{ Constants.initial_payoff }} + {{ Constants.take_amount }}
+                - (3 * points_retaliated);
+            const b_payoff = {{ Constants.initial_payoff }} - {{ Constants.take_amount }} 
+                - points_retaliated;
+
+            document.getElementById('error').innerHTML = '';
+            document.getElementById('points_retaliated').innerHTML = points_retaliated;
+            document.getElementById('a_payoff').innerHTML = a_payoff;
+            document.getElementById('b_payoff').innerHTML = b_payoff;
+
+            document.getElementById('before-calculate').style.display = 'none';
+            document.getElementById('after-calculate').style.display = ''; 
+        }
+
+        function handleRevise() {
+            document.getElementById('before-calculate').style.display = '';
+            document.getElementById('after-calculate').style.display = 'none'; 
+        }
+    </script>
+</div>

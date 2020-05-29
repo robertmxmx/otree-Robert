@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1 - Comprehension Questions
+{% endblock %}
+
+{% block content %}
+
+    <style type="text/css">
+        .form-control {display: inline-block;}
+    </style>
+
+    <p>
+        At this point, to make sure that everyone understands the task, please answer the following questions
+    </p>
+
+    <ol>
+        <li>
+            If you choose Option 2 then you receive ${{ form.t1_c1_1 }}, Participant A receives ${{ form.t1_c1_2 }},
+            <br/> and Participant B receives ${{ form.t1_c1_3 }}
+        </li>
+        <br/>
+        <li>
+            If you choose Option 1 then you receive ${{ form.t1_c2_1 }}, Participant A receives ${{ form.t1_c2_2 }},
+            <br/> and Participant B receives ${{ form.t1_c2_3 }}
+        </li>
+        <br/>
+        <li>
+            If you choose Option 2, then will Participant A ever be informed about this experiment? <br/>
+            {{ form.t1_c3 }}
+        </li>
+        <br/>
+    </ol>
+
+    {% next_button %}
+
+    {% include Constants.t1_instructions_content %}
+
+{% endblock %}
+
+

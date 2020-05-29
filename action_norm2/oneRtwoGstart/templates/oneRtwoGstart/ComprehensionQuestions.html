@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Comprehension questions
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To check you understand this task, please answer the following comprehension
+        questions.
+    </p>
+    {% for field in form %}
+        {% formfield field %}
+    {% endfor %}
+
+    {% next_button %}
+
+    {% include Constants.stage1_instructions %}
+    {% include Constants.stage2_instructions %}
+    {% include Constants.stage3_instructions %}
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    {% if treatment == 1 %}
+        Task 2
+    {% elif treatment == 2 %}
+        Task 3
+    {% else %}
+        ERROR: Invalid treatment
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        From 0-{{ num_statements }}, how many of the following statements do you agree with?
+    </p>
+
+    <ul>
+        {% for statement in statements %}
+            <li>{{ statement }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>
+        {% formfield player.num_agree label="" %}
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
+
+

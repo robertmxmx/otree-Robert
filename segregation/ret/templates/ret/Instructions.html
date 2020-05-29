@@ -1,0 +1,54 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Group Assignment Task
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Prior to starting Task 1, you have the opportunity to complete a task to influence which color you will
+        be assigned.
+    </p>
+
+    <p>
+        In this part of the experiment you will be presented with a series of randomly selected letters and numbers.
+        You will have {{ session.config.ret_time }} seconds to type as many sequences as possible. Note that each
+        character has to be correct.
+    </p>
+    <p>
+        Once you have entered your summation, click the <b>Next</b> button or press the <b>Enter</b> key.
+    </p>
+    <p>
+        You will get <b>1 point for each correct answer</b>. Your score will not decrease if you provide an
+        incorrect answer.
+    </p>
+    <p>
+        After {{ session.config.ret_time }} seconds, the task will stop and you will receive a summary of the results.
+    </p>
+    <p>
+        Please raise your hand and alert an experimenter if you have any questions.
+    </p>
+    <p>
+        Otherwise, if you are ready, please click "Next" below to start.<br>
+    </p>
+
+    <p>
+        The four individuals in each population who get the best scores on this task will be permitted to choose
+        which colour they are assigned.
+    </p>
+
+    <p>
+        Remember that in Period 1 you start out located in the same town as your colour, so this assignment will also
+        determine in which town you start the task.
+    </p>
+
+    <p>
+        The remainder of the population will be allocated randomly to a colour (and to the corresponding initial town),
+        while ensuring that there are four people of each type
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

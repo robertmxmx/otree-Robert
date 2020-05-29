@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        In the previous part of this task, you accepted the statement:
+        <b>{{ accepted_statement }}</b>
+    </p>
+
+    <p>
+        Please select a dollar amount, between {{ Constants.min_bid }} and 
+        {{ Constants.max_bid }}, that you would be willing to accept to change your 
+        answer to: <b>{{ opposite_statement }}</b>
+    </p>
+
+    {% formfields %}
+
+    <p>
+        (If you choose to opt out, please type "{{ Constants.opt_out_text }}")
+    </p>
+
+    {% next_button %}
+
+    {% include 'task2/_PartBInstructionsContent.html' %}
+
+{% endblock %}

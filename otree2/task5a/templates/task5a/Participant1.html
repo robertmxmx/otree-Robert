@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 5 - Round {{ round_number }} (Participant 1)
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <strong>
+            This is round {{ round_number }} out of {{ Constants.num_rounds }} rounds in total.
+        </strong>
+    </p>
+
+    <p>
+        You are Participant 1. You have 2 points.
+    </p>
+    <p>
+        {% formfield group.p1_sent label="How many points do you wish to transfer to Participant 2?" %}
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

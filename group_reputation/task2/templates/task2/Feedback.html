@@ -1,0 +1,56 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2 - Feedback
+{% endblock %}
+
+{% block content %}
+    <p>
+        {% if points_were_taken %}
+        {{ taking_player }} decided to take {{ Constants.take_amount }} ECU from {{ deducting_player }}.
+        {% else %}
+        {{ taking_player }} decided not to take {{ Constants.take_amount }} ECU from {{ deducting_player }}.
+        {% endif %}
+    </p>
+    <p>
+        This led to the following distribution of endowments:
+    </p>
+    <table class="simple-table">
+        <tr>
+            {% for key, value in payoffs_after_take.items %}
+            <th>{{ key }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for key, value in payoffs_after_take.items %}
+            <td>{{ value }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+    {% if points_were_taken %}
+    <p>
+        {{ deducting_player }} chose to spend {{ deduct_amount }} ECU on deductions. This had the effect of
+        reducing {{ taking_player }}'s endowment by {{ multiplied_deduct_amount }} ECU, and reducing
+        {{ deducting_player }}'s endowment by {{ deduct_amount }} ECU
+    </p>
+    {% endif %}
+    <p>
+        Overall earnings are now:
+    </p>
+    <table class="simple-table">
+        <tr>
+            {% for key, value in final_payoffs.items %}
+            <th>{{ key }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for key, value in final_payoffs.items %}
+            <td>{{ value }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+    {% next_button %}
+{% endblock %}
+
+

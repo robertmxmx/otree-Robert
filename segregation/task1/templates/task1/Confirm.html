@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+   Moving Decision, Period {{ subsession.round_number }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You are <font color="{{ player.color }}">{{ player.color }}</font>,
+        your id is <font color="{{ player.color }}">{{ player.get_id }}</font>.
+    </p>
+
+    <p>
+        Confirm that you are residing in <font color="{{ player.town }}">{{ player.town }} town</font>.
+    </p>
+
+    <button class="btn btn-primary btn-large">Yes</button>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+        <h3>
+            Stage 2: The green button
+        </h3>
+
+        <p>
+            This stage arises when, on the previous stage, one participant pressed the red button,
+            and another participant had their endowment reduced.
+        </p>
+        <p>
+            In this stage, two of the <b>other three participants</b> will be chosen at random to have the
+            opportunity to press a green button.
+        </p>
+        <p>
+            The green button does the “reverse” of the red button. If at least one of the two
+            individuals presses the button, it will:
+        </p>
+        <ul>
+            <li>
+                reduce the endowment of both green button individuals by 40 ECU, and
+            </li>
+            <li>
+                increase the endowment of whoever lost ECU in the previous stage by 120 ECU,
+                returning them to their original endowment.
+            </li>
+        </ul>
+        <p>
+            If both people press the green button, it will still increase the endowment of the person
+            who lost 120 ECU, but the cost of pressing will now be shared equally (20 ECU each)
+            between the two people who press.
+        </p>
+        <p>
+            If no one presses the green button, endowments will be unchanged.
+        </p>
+        <p>
+            To illustrate, suppose that persons B and D are one chosen to have the opportunity to
+            press the green button.
+        </p>
+        <p>
+            If neither B nor D presses the button, then everyoneʼs earnings from the earlier stage will
+            be unchanged.
+        </p>
+        <table cellpadding="10" border="1">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+            </tr>
+            <tr>
+                <td>-120</td>
+                <td>0</td>
+                <td>+40</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+        </table>
+        </br>
+        <p>
+            If only B chooses to press the button, the effect on earnings will be:
+        </p>
+        <table cellpadding="10" border="1">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+            </tr>
+            <tr>
+                <td>-120+120=0</td>
+                <td>-40</td>
+                <td>+40</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+        </table>
+        </br>
+        <p>
+            If both B and D press the button, the effect will be:
+        </p>
+        <table cellpadding="10" border="1">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+            </tr>
+            <tr>
+                <td>-120+120=0</td>
+                <td>-20</td>
+                <td>+40</td>
+                <td>-20</td>
+                <td>0</td>
+            </tr>
+        </table>
+        </br>
+        <p>
+            After the decision has been made whether or not to press the green button, participants
+            enter the final stage of the round, Stage 3.
+        </p>
+
+    </div>
+</div>

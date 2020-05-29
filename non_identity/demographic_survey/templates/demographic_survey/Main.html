@@ -1,0 +1,51 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    {% if treatment == 1 %}
+        Task 4
+    {% elif treatment == 2 %}
+        Task 5
+    {% else %}
+        ERROR: Invalid treatment
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+    <style type="text/css">
+        .form-control {display: inline-block;}
+    </style>
+
+    <p>
+        Please answer the following questions
+    </p>
+
+    <ul>
+        <li>
+            {% formfield player.q1 %}
+        </li>
+        <li>
+            {% formfield player.q2 %}
+        </li>
+        <li>
+            {% formfield player.q3 %}
+        </li>
+        <li>
+            I have been living in Australia for {{ form.q4 }} years
+        </li>
+        <li>
+            {% formfield player.q5 %}
+        </li>
+        <li>
+            {% formfield player.q6 %}
+        </li>
+
+    </ul>
+
+    {% next_button %}
+
+{% endblock %}
+
+

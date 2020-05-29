@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+   Payoff After Moving
+{% endblock %}
+
+{% block content %}
+
+    {% include "MainTasksHeader.html" %}
+
+    <p>
+        There
+        {% if group.num_red == 1 %}
+            is {{ group.num_red }} person
+        {% else %}
+            are {{ group.num_red }} people
+        {% endif %}
+        in <font color="red">Red Town</font>, and
+        {% if group.num_blue == 1 %}
+            {{ group.num_blue }} person
+        {% else %}
+            {{ group.num_blue }} people
+        {% endif %}
+        in <font color="blue">Blue Town</font>.
+    </p>
+
+    {% if group.at_starting_periods %}
+        <p>
+            You are in <font color="{{ player.town }}">{{ player.town }} town</font>.
+        </p>
+    {% else %}
+        <p>
+            You chose to {{ move_choice }} <font color="{{ player.town }}">{{ player.town }} town</font>.
+        </p>
+    {% endif %}
+
+    <p>
+        Above are the inhabitants in each town and their payoff after <b>moving decisions</b>.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

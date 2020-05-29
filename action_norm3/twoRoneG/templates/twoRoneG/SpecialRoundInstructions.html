@@ -1,0 +1,77 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Special instructions for this round
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <strong>
+            On this round, we will ask all of you to enter your hypothetical decision for stages 1,
+            2, and 3, before you know whether or not you have been chosen to have the
+            opportunity to press the red button, the green button, or to apply deduction points.
+            We will take everyoneʼs hypothetical decisions, and then randomly determine who
+            has those roles, and use the information you have given us.
+        </strong>
+    </p>
+    <p>
+        So on this round you will receive the following questions:
+    </p>
+
+    <ul>
+        <li>{{ Constants.sp_questions.sp_pressed_red }}</li>
+        <li>{{ Constants.sp_questions.sp_pressed_green }}</li>
+    </ul>
+
+    <p>
+        Stage 3 might occur in three different ways:
+    </p>
+    <ul>
+        <li>
+            (One red) Only one red button might have been pressed. In this scenario, you may
+            only assign deduction points to the individual who pressed the red button.
+        </li>
+        <li>
+            (Two red, one green) Both red buttons may have been pressed, and the green
+            button may have been pressed. In this scenario, you can assign deduction points to
+            both the red button pressers, but not the green button presser.
+        </li>
+        <li>
+            (Two red, no green) Both red buttons may have been pressed, and the green button
+            individual may have refused to press. In this scenario, you may assign deduction
+            points to all three button-pressing individuals.
+        </li>
+    </ul>
+    <p>
+        We will ask you which deduction policy you would support, as the unaffected participant,
+        for each of these three scenarios.
+    </p>
+
+    <ul>
+        <li>{{ Constants.sp_questions.sp_unaff_1r }}</li>
+        <li>{{ Constants.sp_questions.sp_unaff_2r1g }}</li>
+        <li>{{ Constants.sp_questions.sp_unaff_2r0g }}</li>
+    </ul>
+
+    <p>
+        We now ask you which policies you would agree to in these three scenarios, if you were
+        the button-affected participant in earlier stages. For these questions, select every policy
+        that you would agree to. You may choose more than one policy.
+    </p>
+
+    <ul>
+        <li>{{ Constants.sp_questions.sp_aff_1r }}</li>
+        <li>{{ Constants.sp_questions.sp_aff_2r1g }}</li>
+        <li>{{ Constants.sp_questions.sp_aff_2r0g }}</li>
+    </ul>
+
+    <p>
+        After you have answered these questions, we will randomly choose participants to have
+        the opportunity to press the red and green buttons, and who will be the button-affected
+        individual. We will then use your answers to determine the outcome of the round. You will
+        then receive feedback on the outcome.
+    </p>
+
+{% endblock %}

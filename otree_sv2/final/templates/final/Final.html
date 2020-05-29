@@ -1,0 +1,169 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Final Payment
+{% endblock %}
+
+{% block styles %}
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+
+        /* The Modal (background) */
+        .modal {
+          display: none; /* Hidden by default */
+          position: fixed;
+          z-index: 1; /* Sit on top */
+          padding-top: 100px; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+          background-color: #fefefe;
+          margin: auto;
+          border: 1px solid #888;
+          width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+          color: #ffffff;
+          top: 50%;
+          font-size: 50px;
+          font-weight: bold;
+          position: relative;
+        }
+
+        .close:hover,
+        .close:focus {
+          color: #000;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        .modal-header {
+            color: #ffffff;
+            background-color: #c1c1c1;
+            position: relative;
+            text-align: right;
+        }
+
+        .w3-container {
+            padding: 1em 2em;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for item in participant.vars.task_outcomes %}
+            <li>{{ item |safe }}</li>
+        {% endfor %}
+    </ul>
+
+    <br>
+
+    <p>
+        <b>It has randomly been determined that Task {{ session.vars.chosen_task }} will be paid.</b> Your earnings are
+        therefore {{ payoff }} plus your $15 show up fee = {{ participant.payoff_plus_participation_fee }}
+    </p>
+
+    {% if session.vars.chosen_task == 2 %}
+        <p>
+            In order to collect your payment for Task 2, you must sign a printout of the statement you accepted.
+            Please wait at your desk while we generate printouts of the relevant statements.
+        </p>
+        <p>
+            If you change your mind, and do not wish to sign the statement, please mark a large cross against the
+            print out when we bring it to you, and your final payment will be $15.
+        </p>
+    {% endif %}
+    <p>
+        Please fill out your receipt, sign it, and wait for your desk number to be called.
+    </p>
+    <p>
+        Thank you very much for your participation. While you wait for others to finish, you may now use your
+        phone, provided it is in silent mode and you continue not to distract other people in the room.
+    </p>
+
+    <div>   <!-- Modal Elements -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <button class="otree-btn-next btn btn-primary" type="button"
+                onclick="document.getElementById('myModal').style.display = 'block';">    <!-- Trigger/Open The Modal -->
+            To read more about why we are conducting this research, please click here
+        </button>
+
+        <div  id="myModal" class="modal">   <!-- The Modal -->
+            <div class="modal-content">
+
+                <header class="modal-header w3-container">
+                    <span class="close" onclick="document.getElementById('myModal').style.display='none';">&times;</span>
+                </header></br>
+
+                <div class="w3-container">
+                    <p>
+                        Thank you for participating in our research study.
+                    </p>
+                    <p>
+                        You will no doubt have noticed that several of the items in this research asked you to
+                        respond to hypothetical questions about behavior which many people would regard as morally
+                        objectionable. We realise that you may have felt confronted and distressed by these questions,
+                        and we therefore wish to take this opportunity to explain why we find it necessary to use
+                        these materials.
+                    </p>
+                    <p>
+                        This study is not intended to measure how common or uncommon particular moral attitudes are. We
+                        are not especially interested in whether or not you gave one answer or the other on a particular
+                        item.
+                    </p>
+                    <p>
+                        Rather, we are interested how strong value commitments affect cooperative or bargaining
+                        interactions. The key hypothesis is that individuals with strong moral commitments are
+                        likely to be treated differently -- usually more favorably -- than people who lack strong
+                        moral commitments.
+                    </p>
+                    <p>
+                        To test this hypothesis, we need to find a plausible way in the laboratory to distinguish
+                        between people who do and do not have strong moral commitments. By giving participants the
+                        opportunity to obtain significant amounts of money in exchange for signing a distasteful
+                        statement, we get some measure of how strongly the moral commitment is held. People with a
+                        very strong commitment to a statement will not accept any amount of money to accept the
+                        opposite.
+                    </p>
+                    <p>
+                        In the primary population of individuals we are studying, strong commitments are relatively
+                        rare: for most value statements we have tried, most participants will sign the opposite
+                        statement, even for a small amount of money. To adequately test our hypothesis, therefore,
+                        we need to ask about relatively extreme value commitments. That is why some of the statements
+                        were so confronting -- because we were trying to make sure that every participant revealed
+                        at least some strong moral commitments.
+                    </p>
+                    <p>
+                        We hope you understand our reasons, therefore, for using such confronting questions. We
+                        certainly would not have done so if we thought we could address our hypothesis in a less
+                        disturbing fashion.
+                    </p>
+                    <p>
+                        If you have any further questions or concerns about this research, we strongly encourage
+                        you to get in touch with the lead researcher, Professor Toby Handfield.
+                    </p>
+                    <p>
+                        Toby Handfield & William Ridge
+                    </p>
+                    <p>
+                        Contact: toby.handfield@monash.edu <br>
+                        Phone: 03 9905 3202
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% load otree %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+    <style>
+        td {
+            padding-right: 20px;
+        }
+    </style>
+
+    {% if subsession.round_number == 2 %}
+        <p>
+            In this task, we will invite you to answer the exact same question we asked you in the previous task,
+            but this time we will pay you for answering in a different fashion, which
+            {% if this_task1 %}
+                depends
+            {% else %}
+                <b>does not</b> depend
+            {% endif %}
+            on the answers given by other participants.
+        </p>
+        <p>
+            On the following screen, you will read a description of the <b>same situation</b> as in Task 1, in which one
+            person, "Individual X", must make a decision. You will be given an opportunity to reread the description
+            of the decision faced by Individual X.
+        </p>
+    {% else %}
+        <p>
+            On the following screen, you will read a description of a situation. This description corresponds to a
+            situation in which one person, "Individual X", must make a decision. You will be given a description
+            of the decision faced by Individual X.
+        </p>
+    {% endif %}
+
+    <p>
+        After you read the description of the decision, you will be asked to decide, for each of the two possible
+        actions X may take, whether taking that action would be "socially appropriate" and "consistent with
+        moral or proper social behaviour" or "socially inappropriate" and "inconsistent with moral or proper
+        social behaviour." By socially appropriate, we mean behaviour that most people agree is the
+        "correct" or "ethical" thing to do. Another way to think about what we mean is that if Individual X
+        were to select a socially inappropriate choice, then someone else not personally affected by the decision
+        might nonetheless be angry at individual X for doing so.
+    </p>
+
+    {% if this_task1 %}
+        <p>
+            After you have entered your answers, we will randomly select one of the two possible choices that
+            Individual X could make. <b>For the choice selected, we will determine which evaluation was selected
+            by the most people here in the present lab session.</b> If you give the same response as that most
+            frequently given by other people, then you will receive an additional $10. This amount will be paid to
+            you, in cash, at the conclusion of the experiment.
+        </p>
+        <p>
+            For example, if this was the distribution of responses:
+        </p>
+        <table>
+            <tr>
+                <td>Very socially inappropriate</td>
+                <td>3 people</td>
+            </tr>
+            <tr>
+                <td>Somewhat socially inappropriate</td>
+                <td>5 people</td>
+            </tr>
+            <tr>
+                <td>Somewhat socially appropriate</td>
+                <td>6 people</td>
+            </tr>
+            <tr>
+                <td>Very socially appropriate</td>
+                <td>3 people</td>
+            </tr>
+        </table>
+        <br>
+        <p>
+            If your response had been "somewhat socially appropriate," you would receive $10, as this was the
+            response selected by the most people. If you chose any other response, you would not receive
+            anything.
+        </p>
+    {% else %}
+        <p>
+            In each of your responses, we would like you to answer as truthfully as possible, <b>based on your
+            opinion of what constitutes socially and morally appropriate or socially and morally inappropriate
+            behaviour.</b>
+        </p>
+        <p>
+            After you have entered your answers, we will pay you $10. This amount will be paid to you, in cash, at
+            the conclusion of the experiment.
+        </p>
+    {% endif %}
+
+    </div>
+</div>

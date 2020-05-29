@@ -1,0 +1,82 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+
+        <h3>
+            Stage 2: The green button
+        </h3>
+
+        <p>
+            This stage arises when, on the previous stage, both red button participants pressed the
+            red button. If both buttons were pressed, a third participant would have had their
+            endowment reduced. If only one red button was pressed, this stage will be skipped, and
+            you will proceed directly to stage 3.
+        </p>
+        <p>
+            In this stage, one of the <b>other two participants</b> will be chosen at random to have the opportunity
+            to press a green button.
+        </p>
+        <p>
+            The green button does the “reverse” of the red button. If pressed, it will:
+        </p>
+        <ul>
+            <li>
+                reduce the endowment of whoever presses it by 40 ECU, and
+            </li>
+            <li>
+                increase the endowment of whoever lost ECU in the previous stage by 120 ECU,
+                returning them to their original endowment.
+            </li>
+        </ul>
+        <p>
+            To illustrate, suppose that person D is the one chosen to have the opportunity to press
+            the green button.
+        </p>
+        <p>
+            If D does not press the button, then everyoneʼs earnings from the earlier stage will be
+            unchanged. So the changes from initial endowments will be:
+        </p>
+        <table cellpadding="10" border="1" style="text-align:center;">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+            </tr>
+            <tr>
+                <td>-120</td>
+                <td>0</td>
+                <td>+20</td>
+                <td>0</td>
+                <td>+20</td>
+            </tr>
+        </table>
+        </br>
+        <p>
+            If D does press the button, the overall effect will be:
+        </p>
+        <table cellpadding="10" border="1" style="text-align:center;">
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>+20</td>
+                <td>-40</td>
+                <td>+20</td>
+            </tr>
+        </table>
+        </br>
+        <p>
+            After the decision has been made whether or not to press the green button, participants
+            enter the final stage of the round, Stage 3.
+        </p>
+    </div>
+</div>

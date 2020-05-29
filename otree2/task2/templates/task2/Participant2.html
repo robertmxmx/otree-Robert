@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 2 - Round {{ round_number }} (Participant 2)
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <strong>
+            This is round {{ round_number }} out of {{ Constants.num_rounds }} rounds in total.
+        </strong>
+    </p>
+
+    <p>
+        You are Participant 2. Participant 1 sent {{group.p1_sent}}. These have been multiplied by 3,
+        giving you {{ p2_payoff }}
+    </p>
+    <p>
+        {% formfield group.p2_sent label="How many points do you wish to send back to Participant 1? (multiples of 0.5 acceptable)" %}
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

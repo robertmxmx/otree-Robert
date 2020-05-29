@@ -1,0 +1,78 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    End of experiment
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .conceal-modal {
+            width: 60%;
+            text-align: center;
+            padding: 10rem 0;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div id="myModal" class="modal">
+        <div class="modal-content conceal-modal">
+            <br>
+            <div id="modalContent" class="w3-container">
+                <p>
+                    This is to conceal your payments from other participants
+                </p>
+                <button type="button" class="otree-btn-next btn btn-primary"
+                    onclick="document.getElementById('myModal').style.display='none';"> Close </button>
+            </div>
+        </div>
+    </div>
+
+    <p>
+        Thank you for your participation in the experiment. The computer has randomly selected
+        Task {{ session.vars.paid_task }}, round {{ session.vars.paid_round }} to be paid.
+        On that round, your earnings were {{ participant.vars.main_exp_earnings }} ECU. Your total
+        earnings for today are therefore:
+    </p>
+
+    <p>
+        Show up fee: {{ session.config.participation_fee }} <br>
+        Main experiment: {{ participant.vars.main_exp_earnings }} ECU <br>
+        Bonuses for Expectations surveys: {{ participant.vars.expectations_survey_earnings }} ECU
+    </p>
+
+    <p>
+        {{ participant.vars.main_exp_earnings }}
+        + {{ participant.vars.expectations_survey_earnings }} ECU = {{ payoff_without_show_up_fee }}
+    </p>
+
+    <p>
+        Total: {{ participant.payoff_plus_participation_fee }}
+    </p>
+
+    <p>
+    	In today's session, earnings will be rounded up to the next full
+        dollar amount. So please write the amount ${{ rounded_total }} on your
+        receipt.
+    </p>
+
+    <p>
+        Please fill out the receipt for the correct amount, sign your name, and wait for your id number
+        to be called to receive your payment.
+    </p>
+
+    <p>
+        Once you have filled out your receipt, you may take out your phone and use it quietly while
+        waiting for other participants to finish the experiment.
+    </p>
+
+    <button type="button" class="otree-btn-next btn btn-primary"
+            onclick="document.getElementById('myModal').style.display='block';">
+        Click here to conceal your payment information
+    </button>
+
+{% endblock %}
+
+

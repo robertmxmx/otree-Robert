@@ -1,0 +1,88 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    {% if subsession.round_number == 1 %}
+    Task 2a Feedback
+    {% else %}
+    Task 2b Feedback
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% include 'task2/Header.html' %}
+
+    {% if subsession.round_number == 1 %}
+        {% if player.role == subsession.taking_player and session.config.deterrence %}
+            {{ task2a_feedback|safe }}
+        {% else %}
+            <p>
+                You will receive feedback on the outcome of Task 2a at the end of the entire task
+            </p>
+        {% endif %}
+    {% else %}
+        <h4>Task 2a</h4>
+        {{ task2a_feedback|safe }}
+        <h4>Task 2b</h4>
+        {% if receiving_info %}
+            <p>
+                {% if points_were_taken %}
+                {{ taking_player }} decided to take {{ Constants.take_amount }} ECU from {{ deducting_player }}
+                {% else %}
+                {{ taking_player }} decided not to take {{ Constants.take_amount }} ECU from {{ deducting_player }}
+                {% endif %}
+            </p>
+            <p>
+                This led to the following distribution of endowments:
+            </p>
+            <table class="simple-table">
+                <tr>
+                    {% for key, value in payoffs_after_take.items %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for key, value in payoffs_after_take.items %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+            {% if points_were_taken %}
+                <p>
+                    {{ deducting_player }} chose to spend {{ deduct_amount }} ECU on deductions. This had the effect of
+                    reducing {{ taking_player }}'s endowment by {{ multiplied_deduct_amount }} ECU, and reducing
+                    {{ deducting_player }}'s endowment by {{ deduct_amount }} ECU
+                </p>
+            {% endif %}
+            <p>
+                Final earnings for this subtask are:
+            </p>
+            <table class="simple-table">
+                <tr>
+                    {% for key, value in final_payoffs.items %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for key, value in final_payoffs.items %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% else %}
+            <p>
+                Your earnings from Task 2b are {{ participant.payoff|json }} ECU.
+            </p>
+        {% endif %}
+        <h4>
+            Payment
+        </h4>
+        <p>
+            Only one of these two tasks will be chosen randomly for payment. You will be informed which one is
+            chosen at the end of the experiment.
+        </p>
+    {% endif %}
+    {% next_button %}
+{% endblock %}
+
+

@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 2 - Part A
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To make your choice, click the corresponding button below. If you wish to reveal which of the two versions
+        has been assigned, click "Reveal". The other participant will not find out whether or not you learned the
+        actual version of the task.
+    </p>
+
+    <p>
+        {% formfield player.t2a_option label="" %}
+    </p>
+
+    {% next_button %}
+
+    {{ Constants.t2a_table|safe }}
+
+    <br/>
+
+    {% include Constants.t2a_instructions_content %}
+
+{% endblock %}

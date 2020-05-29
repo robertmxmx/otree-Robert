@@ -1,0 +1,43 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 1 - Comprehension Questions Continued
+{% endblock %}
+
+{% block styles %}
+
+<style>
+    .form-control {
+        display: inline;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+    <p>
+        If Participant A chooses to allocate the points as follows:
+    </p>
+    <ul>
+        <li>Participant A: 8 points</li>
+        <li>Participant B: 4 points</li>
+    </ul>
+    <p>
+        and Participant B accepts this allocation,
+    </p>
+    <p>
+        <b>1.</b> How much will Participant A earn on this task?
+        <br>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ form.c2a }} points
+    </p>
+    <p>
+        <b>2.</b> How much will Participant B earn on this task?
+        <br>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ form.c2b }} points
+    </p>
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    General Survey
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please answer the following survey questions
+    </p>
+
+    <ul>
+        <li>
+            Sex: {% formfield player.sex label="" %}
+        </li>
+        <br>
+        <li>
+            Age in years: {% formfield player.age label="" %}
+        </li>
+        <br>
+        <li>
+            Area of study: {% formfield player.area_of_study label="" %} {{ form.area_of_study_other }}
+        </li>
+        <br>
+        <li>
+            Number of experiments completed in MonLEE in the past: {% formfield player.num_exps label="" %}
+        </li>
+        <li>
+            Religion: {% formfield player.religion label="" %} {{ form.religion_other }}
+        </li>
+        <br>
+        <li>
+            Country of birth: {% formfield player.birth_country label="" %} {{ form.birth_country_other }}
+        </li>
+        <br>
+        <li>
+            Number of years living in Australia: {{ form.num_years_aus }}
+        </li>
+    </ul>
+
+    {% next_button %}
+
+{% endblock %}
+
+

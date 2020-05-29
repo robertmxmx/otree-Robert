@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 2 decision
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        The red button has been pressed by participant {{ r_presser }}.
+    </p>
+    <p>
+        You have been selected to have the opportunity to press a green button.
+    </p>
+    {% if g_presser == 1 %}
+        {% formfield group.g1_pressed %}
+    {% else %}
+        {% formfield group.g2_pressed %}
+    {% endif %}
+
+    {% next_button %}
+
+{% endblock %}

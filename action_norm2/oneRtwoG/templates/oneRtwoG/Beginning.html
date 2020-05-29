@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Beginning of experiment
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        The experiment is now beginning. You are on Round {{ round_number }} (out of {{ total_rounds }} rounds). Your ID for
+        this round is {{ player_id }}
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

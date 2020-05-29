@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task 1 - Comprehension Question
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        To check that you understand the rules, please answer the
+        following question:
+    </p>
+
+    <p>
+        {% formfield player.comp1 label="If the first player chooses CHALLENGE and the second chooses RETALIATE, how much will the first player earn?" %}
+    </p>
+
+    {% next_button %}
+
+    {% include Constants.instructions_content %}
+
+{% endblock %}
