@@ -1,18 +1,10 @@
 FROM python:3
 
-ARG app=group_reputation2
-
-WORKDIR /usr/src/app
-
 RUN pip install -U otree
 
-COPY ./$app .
-RUN yes | otree resetdb
-RUN otree collectstatic
+WORKDIR /usr/src/app
+ARG APP
+COPY ./$APP .
 
-ENV REDIS_URL 'redis://redis:6379'
-ENV OTREE_PRODUCTION 1
-CMD [ "otree", "prodserver" ]
-
-# RUN rm db.sqlite3
-# CMD [ "otree", "devserver" ]
+RUN yes | otree resetdb && rm db.sqlite3
+CMD [ "otree", "devserver", "0.0.0.0:8000"]

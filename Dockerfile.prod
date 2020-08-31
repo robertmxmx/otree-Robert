@@ -1,0 +1,15 @@
+FROM python:3
+
+RUN pip install -U otree psycopg2-binary
+    
+ENV REDIS_URL 'redis://redis:6379'
+ENV DATABASE_URL 'postgres://postgres:otreee@db:5432/django_db'
+ENV OTREE_ADMIN_PASSWORD otreee
+ENV OTREE_PRODUCTION 1
+ENV OTREE_AUTH_LEVEL STUDY
+
+WORKDIR /usr/src/app
+ARG APP
+COPY ./$APP .
+
+CMD [ "sh", "-c", "yes | otree resetdb && otree prodserver"]

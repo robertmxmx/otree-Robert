@@ -1,8 +1,9 @@
 version: '3'
 services:
     web:
-        build: .
+        build: 
+            context: .
+            args:
+                - APP=segregation
         ports:
-            - "8000:8000"
-    redis:
-        image: "redis:alpine"
+            - 8000:8000

@@ -1,0 +1,22 @@
+version: '3'
+services:
+    web:
+        build: 
+            context: .
+            dockerfile: Dockerfile.prod
+            args:
+                - APP=segregation
+        ports:
+            - 8000:8000
+        depends_on: 
+            - redis
+            - db
+        restart: always
+    redis:
+        image: "redis:alpine"
+    db:
+        image: "postgres:alpine"
+        restart: always
+        environment:
+            POSTGRES_DB: django_db
+            POSTGRES_PASSWORD: otreee
