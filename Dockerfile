@@ -11,5 +11,5 @@ RUN yes | otree resetdb && rm db.sqlite3
 CMD sh -c ' \
     if [ "$ENV" = "development" ]; then     otree devserver 0.0.0.0:8000; \
     elif [ "$ENV" = "staging" ]; then       otree test $TEST_NAME $TEST_USERS; \
-    else                                    otree prodserver; \
+    else                                    yes | otree resetdb && otree prodserver; \
     fi'
