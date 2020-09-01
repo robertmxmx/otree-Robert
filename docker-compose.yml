@@ -4,6 +4,6 @@ services:
         build: 
             context: .
             args:
-                - APP=segregation
+                - APP=group_reputation2
         ports:
             - 8000:8000

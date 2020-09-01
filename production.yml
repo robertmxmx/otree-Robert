@@ -5,7 +5,7 @@ services:
             context: .
             dockerfile: Dockerfile.prod
             args:
-                - APP=segregation
+                - APP=group_reputation2
         ports:
             - 8000:8000
         depends_on: 
