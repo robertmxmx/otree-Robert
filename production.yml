@@ -3,9 +3,15 @@ services:
     web:
         build: 
             context: .
-            dockerfile: Dockerfile.prod
             args:
-                - APP=group_reputation2
+                - APP=${APP}
+        environment:
+            - ENV=production
+            - REDIS_URL=redis://redis:6379
+            - DATABASE_URL=postgres://postgres:otreee@db:5432/django_db
+            - OTREE_ADMIN_PASSWORD=otreee
+            - OTREE_PRODUCTION=1
+            - OTREE_AUTH_LEVEL=STUDY
         ports:
             - 8000:8000
         depends_on: 

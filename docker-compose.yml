@@ -4,6 +4,11 @@ services:
         build: 
             context: .
             args:
-                - APP=group_reputation2
+                - APP=${APP}
+        environment: 
+            - ENV=development
+            # - ENV=staging
+            # - TEST_NAME=gr
+            # - TEST_USERS=6
         ports:
             - 8000:8000

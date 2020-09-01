@@ -9,7 +9,7 @@ class PlayerBot(Bot):
 
     def play_round(self):
         yield (pages.Main, {
-            'birth_region': 1 if self.participant.id_in_session == 3 else 2,
+            'birth_region': 4 if self.participant.id_in_session % 3 == 0 else 1,
             'other_br': 'some region',
             'pi_q1': random.randint(1, 7),
             'pi_q2': random.randint(1, 7),
