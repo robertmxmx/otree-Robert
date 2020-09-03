@@ -1,95 +1,66 @@
 {% load otree static %}
 
-{% if session.config.rep_condition and sorted_by %}
-    {% if player.role == 'A' or player.role == 'B' %}
+{% if sorted_by %}
+    {% if player.role == 'A' or player.role == 'B' or revealed %}
+        {% if show_init_msg %}
+            <p>
+                You and participant {{ other_knowledge_player }} will now receive a message
+                about 
+                {% if sorted_by == 'birth_region' %}
+                    your regions of birth.
+                {% elif sorted_by == 'pol_ideology' %}
+                    the political values of your group members.
+                {% endif %}
+            </p>
+        {% endif %}
         {% if sorted_by == 'birth_region' %}
-            {% if show_init_msg %}
             <p>
-                You and participant {{ other_knowledge_player }} will now receive a message
-                about your regions of birth.
+                <strong>
+                    Participant B and Participant C were born in {{ same_region }}. Participant A
+                    was born in some other region.
+                </strong>
             </p>
-            {% endif %}
-        <p>
-            <strong>
-                Participant B and Participant C were born in {{ same_region }}. Participant A
-                was born in some other region.
-            </strong>
-        </p>
-        <p>
-            Participant C has not received the above message.
-        </p>
-        <p>
-           At the end of the session, Participant C will be given this message about
-           regions of birth.
-        </p>
         {% elif sorted_by == 'pol_ideology' %}
-            {% if show_init_msg %}
             <p>
-                You and participant {{ other_knowledge_player }} will now receive a message
-                about the political values of your group members.
+                <strong>
+                    Participant B and Participant C have similar political values: they both
+                    identified as relatively {{ same_ideology }}. Participant A has different
+                    political values.
+                </strong>
             </p>
-            {% endif %}
-        <p>
-            <strong>
-                Participant B and Participant C have similar political values: they both
-                identified as relatively {{ same_ideology }}. Participant A has different
-                political values.
-            </strong>
-        </p>
-        <p>
-            Participant C has not received the above message.
-        </p>
-        <p>
-            At the end of the session, Participant C will be given this message
-            about political values.
-        </p>
+        {% endif %}
+        {% if session.config.rep_condition %}
+            <p>
+                Participant C has not received the above message.
+            </p>
+            <p>
+                At the end of the session, Participant C will be given this message about
+                {% if sorted_by == 'birth_region' %}
+                    regions of birth.
+                {% elif sorted_by == 'pol_ideology' %}
+                    political values.
+                {% endif %}
+            </p>
+        {% else %}
+            <p>
+                Participant C has not received the above message, and will never be informed about
+                the membership of the group.
+            </p>
         {% endif %}
     {% else %}
-    <p>
-        You will not receive information about the members of your group at this time.
-    </p>
-    {% endif %}
-{% elif not session.config.rep_condition and sorted_by %}
-    {% if player.role == 'A' or player.role == 'B' %}
-        {% if sorted_by == 'birth_region' %}
-            {% if show_init_msg %}
-            <p>
-                You and participant {{ other_knowledge_player }} will now receive a message
-                about your regions of birth.
-            </p>
+        <p>
+            You will not receive information about the members of your group
+            {% if session.config.rep_condition %}
+                at this time
             {% endif %}
-        <p>
-            <strong>
-                Participant B and Participant C were born in the same region. Participant A was not.
-            </strong>
+            .
         </p>
-        {% elif sorted_by == 'pol_ideology' %}
-            {% if show_init_msg %}
-            <p>
-                You and participant {{ other_knowledge_player }} will now receive a message
-                about the political values of your group members.
-            </p>
-            {% endif %}
-        <p>
-            <strong>
-                Participant B and Participant C have similar political values. Participant A does not.
-            </strong>
-        </p>
-        {% endif %}
-        <p>
-            Participant C has not received the above message, and will never be informed about
-            the membership of the group.
-        </p>
-    {% else %}
-    <p>
-        You will not receive information about the members of your group.
-    </p>
     {% endif %}
 {% else %}
-<p>
-    You will not receive any information about the members of your group.
-</p>
-<p>
-    All members of your group have received this message.
-</p>
+    <p>
+        You will not receive any information about the members of your group.
+    </p>
+    <p>
+        All members of your group have received this message.
+    </p>
 {% endif %}

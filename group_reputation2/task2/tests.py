@@ -24,4 +24,7 @@ class PlayerBot(Bot):
             yield Submission(pages.Decision, {'chose_to_take': True}, check_html=False)
         elif self.player.role() == self.subsession.deducting_player:
             yield Submission(pages.Decision, {'deduct_amount': 0}, check_html=False)
-        yield (pages.Feedback)
+        yield pages.Feedback
+
+        if self.session.config['rep_condition']:
+            yield pages.CMessage

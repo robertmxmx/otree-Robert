@@ -15,7 +15,7 @@ SESSION_CONFIGS = [
     {
         'name': 'gr',
         'display_name': "Group Reputation",
-        'num_demo_participants': 3,
+        'num_demo_participants': 6,
         'app_sequence': [
             'start',
             'task1',
@@ -24,7 +24,8 @@ SESSION_CONFIGS = [
             'end'
         ],
         'rep_condition': True,
-        'deterrence': True
+        'deterrence': True,
+        'use_browser_bots': True
     },
 ]
 

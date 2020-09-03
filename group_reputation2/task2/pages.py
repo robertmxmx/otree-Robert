@@ -53,6 +53,7 @@ class Instructions2(Page):
     def vars_for_template(self):
         r_dict = self.player.get_instruction_vars()
         r_dict['show_init_msg'] = True
+        r_dict['revealed'] = False
         return r_dict
 
 
@@ -77,6 +78,7 @@ class Comprehension(Page):
     def vars_for_template(self):
         r_dict = self.player.get_instruction_vars()
         r_dict['show_init_msg'] = True
+        r_dict['revealed'] = False
         return r_dict
 
     def get_form_fields(self):
@@ -134,6 +136,7 @@ class Decision(Page):
             'chose_to_take_label': "Do you wish to take %d of %s's ECU?" % (Constants.take_amount,
                                                                             self.subsession.deducting_player),
             'taking_player': self.subsession.taking_player,
+            'revealed': False
         })
         return r_dict
 
@@ -191,6 +194,17 @@ class Feedback(Page):
             p.vars['task2_payoffs'] = []
         p.vars['task2_payoffs'].append(p.payoff)
 
+class CMessage(Page):
+
+    def is_displayed(self):
+        return self.session.config['rep_condition']
+    
+    def vars_for_template(self):
+        r_dict = self.player.get_instruction_vars()
+        r_dict['show_init_msg'] = True
+        r_dict['revealed'] = True
+        return r_dict
+    
 
 page_sequence = [
     Setup,
@@ -202,5 +216,6 @@ page_sequence = [
     Commencement,
     Decision,
     CalculatePayoffs,
-    Feedback
+    Feedback,
+    CMessage
 ]
