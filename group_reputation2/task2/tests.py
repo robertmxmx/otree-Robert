@@ -26,5 +26,5 @@ class PlayerBot(Bot):
             yield Submission(pages.Decision, {'deduct_amount': 0}, check_html=False)
         yield pages.Feedback
 
-        if self.session.config['rep_condition']:
+        if self.session.config['rep_condition'] and self.round_number == 2:
             yield pages.CMessage

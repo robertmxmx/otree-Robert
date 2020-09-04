@@ -197,7 +197,7 @@ class Feedback(Page):
 class CMessage(Page):
 
     def is_displayed(self):
-        return self.session.config['rep_condition']
+        return self.session.config['rep_condition'] and self.round_number == 2
     
     def vars_for_template(self):
         r_dict = self.player.get_instruction_vars()

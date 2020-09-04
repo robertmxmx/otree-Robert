@@ -24,7 +24,8 @@ SESSION_CONFIGS = [
             'end'
         ],
         'rep_condition': True,
-        'deterrence': True
+        'deterrence': True,
+        # 'use_browser_bots': True
     },
 ]
 
