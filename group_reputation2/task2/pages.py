@@ -62,6 +62,11 @@ class Instructions3(Page):
     def is_displayed(self):
         return self.round_number == 1
 
+class Instructions3a(Page):
+
+    def is_displayed(self):
+        return self.round_number == 1
+
 
 class Instructions4(Page):
 
@@ -201,7 +206,7 @@ class CMessage(Page):
     
     def vars_for_template(self):
         r_dict = self.player.get_instruction_vars()
-        r_dict['show_init_msg'] = True
+        r_dict['show_init_msg'] = False
         r_dict['revealed'] = True
         return r_dict
     
@@ -211,6 +216,7 @@ page_sequence = [
     Instructions,
     Instructions2,
     Instructions3,
+    Instructions3a,
     Instructions4,
     Comprehension,
     Commencement,

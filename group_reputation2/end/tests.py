@@ -8,6 +8,5 @@ from otree.api import Submission
 class PlayerBot(Bot):
 
     def play_round(self):
-        # i = self.html.index('Your total earnings are')
-        # print(self.html[i:i+200])
-        yield Submission(pages.Main, check_html=False)
+        yield (pages.WithoutID, { 'pay_id': 'testinput' })
+        yield Submission(pages.WithID, check_html=False)

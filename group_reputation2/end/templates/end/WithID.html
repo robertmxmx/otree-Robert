@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    End of experiment
+{% endblock %}
+
+{% block content %}
+    {% include 'end/Shared.html'%}
+    <p>
+        Your participant id is: <b>{{ participant.code }}</b>
+    </p>
+    <p>
+        Please send a private chat message to the experimenter with your participant id, and 
+        we will arrange payment.
+    </p>
+    <p>
+        Remember to have your camera on and your photo id ready.
+    </p>
+{% endblock %}

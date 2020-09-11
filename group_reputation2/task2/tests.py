@@ -13,6 +13,7 @@ class PlayerBot(Bot):
             yield Submission(pages.Instructions, check_html=False)
             yield Submission(pages.Instructions2)
             yield Submission(pages.Instructions3, check_html=False)
+            yield Submission(pages.Instructions3a, check_html=False)
             yield Submission(pages.Instructions4, check_html=False)
             comp_answers = {'comp1': 1, 'comp2': True, 'comp3': self.session.config['deterrence'], 'comp5': 36, }
             if self.session.config['rep_condition']:

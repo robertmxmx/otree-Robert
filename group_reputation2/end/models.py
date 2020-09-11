@@ -22,4 +22,5 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    pay_id = models.StringField(
+        label="Please enter your PayID here and click Submit")

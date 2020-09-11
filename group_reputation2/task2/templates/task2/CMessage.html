@@ -6,12 +6,17 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'task2/Header.html' %}<br><br>
+    {% include 'task2/Header.html' %}
+    <br><br>
 
     {% if player.role == 'A' or player.role == 'B' %}
-        <p>
-            C is now receiving the message below:
-        </p>
+    <p>
+        C is now receiving the message below:
+    </p>
+    {% else %}
+    <p>
+        This information was given to A and B at the beginning of the experiment
+    </p>
     {% endif %}
 
     <div class="card bg-light instructions">
@@ -19,15 +24,6 @@
             {% include 'task2/BrPiInfo.html' %}
         </div>
     </div>
-
-    <br />
-
-    {% if player.role == 'C' %}
-        <p>
-            This information was given to A and B at the beginning of the experiment
-        </p>
-    {% endif %}
-
     {% next_button %}
 {% endblock %}
 
