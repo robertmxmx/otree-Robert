@@ -15,16 +15,20 @@ class PlayerBot(Bot):
             yield Submission(pages.Instructions3, check_html=False)
             yield Submission(pages.Instructions3a, check_html=False)
             yield Submission(pages.Instructions4, check_html=False)
+
             comp_answers = {'comp1': 1, 'comp2': True, 'comp3': self.session.config['deterrence'], 'comp5': 36, }
             if self.session.config['rep_condition']:
                 comp_answers['comp4'] = 2
+
             yield (pages.Comprehension, comp_answers)
 
         yield Submission(pages.Commencement, check_html=False)
+
         if self.player.role() == self.subsession.taking_player:
             yield Submission(pages.Decision, {'chose_to_take': True}, check_html=False)
         elif self.player.role() == self.subsession.deducting_player:
             yield Submission(pages.Decision, {'deduct_amount': 0}, check_html=False)
+
         yield pages.Feedback
 
         if self.session.config['rep_condition'] and self.round_number == 2:

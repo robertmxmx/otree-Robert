@@ -120,12 +120,7 @@
                     onclick="handle_ins_click();">Calculate</button>
             </div>
         </div>
-        {% if session.config.deterrence %}
-        <p>
-            After A and B have made their decisions, participant A will be informed of the outcome in Task 2a
-            before commencing Task 2b. Participants B and C will not learn the outcome until the end of the entire Task.
-        </p>
-        {% else %}
+        {% if not session.config.deterrence %}
         <p>
             After A and B have made their decisions, participants will <b>not</b> be informed of the outcome.
             Participants will proceed to Task 2b, and only learn the outcome of 2a after both sub-tasks are completed.
