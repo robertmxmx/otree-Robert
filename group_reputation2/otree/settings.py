@@ -25,6 +25,7 @@ SESSION_CONFIGS = [
         ],
         'rep_condition': True,
         'deterrence': True,
+        'online_exp': False,
         # 'use_browser_bots': True
     },
 ]

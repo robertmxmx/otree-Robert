@@ -1,0 +1,51 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+        <h3>
+            Task 1 - Instructions (continued)
+        </h3>
+        <h4>
+            Task 1a
+        </h4>
+        <p>
+            <b>A's decision:</b> A can decide whether to take 100 ECU from B.
+        </p>
+        <p>
+            <b>B's decision:</b> If A takes, B can choose to deduct 100 ECU from A.
+            <ul>
+                <li>
+                    To deduct 12 ECU from A, B must pay 1 ECU.
+                </li>
+            </ul>
+        </p>
+        <p>
+            <b>C's decision:</b> C makes no decision.
+        </p>
+        <h4>
+            Task 1b
+        </h4>
+        <ul>
+            <li>
+                You will be in the same group as in 2a.
+            </li>
+            <li>
+                This task is the same as 2a, except B and C swap roles.
+            </li>
+            {% if session.config.rep_condition %}
+            <li>
+                C will learn about the composition of the group after this task is completed.
+            </li>
+            {% endif %}
+            {% if session.config.deterrence %}
+            <li>
+                A will learn the outcome of Task 2a before beginning 2b.
+            </li>
+            {% else %}
+            <li>
+                A will not learn the outcome of Task 2a until the experiment is over.
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

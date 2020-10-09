@@ -6,7 +6,11 @@
 
 {% block content %}
     {% include 'task2/Header.html' %}<br><br>
-    {% include 'task2/InstructionsContent/3.html' %}
+    {% if session.config.online_exp %}
+        {% include 'task2/InstructionsContent/3shortened.html' %}
+    {% else %}
+        {% include 'task2/InstructionsContent/3.html' %}
+    {% endif %}
 {% endblock %}
 
 
