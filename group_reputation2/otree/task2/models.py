@@ -45,21 +45,21 @@ class Player(BasePlayer):
     br = models.IntegerField()
     pi = models.IntegerField()
     comp1 = models.IntegerField(
-        label='In Task 2a, who will A have the opportunity to take ECU from?',
+        label='In Task 1a, who will A have the opportunity to take ECU from?',
         choices=[[1, 'B'], [2, 'C'], [3, 'both B and C']],
         widget=widgets.RadioSelect
     )
     comp2 = models.BooleanField(
-        label='In Task 2b, will A have the opportunity to take ECU from C?',
+        label='In Task 1b, will A have the opportunity to take ECU from C?',
         widget=widgets.RadioSelectHorizontal
     )
     comp3 = models.BooleanField(
-        label='In Task 2b, before making a decision, will A learn how B reacted to A’s decision in Task 2a?',
+        label='In Task 1b, before making a decision, will A learn how B reacted to A’s decision in Task 1a?',
         widget=widgets.RadioSelectHorizontal
     )
     comp4 = models.IntegerField(
         label='When will C learn about the membership of the group?',
-        choices=[[1, 'at the end of task 2a'], [2, 'at the end of task 2b'], [3, 'never']],
+        choices=[[1, 'at the end of task 1a'], [2, 'at the end of task 1b'], [3, 'never']],
         widget=widgets.RadioSelect
     )
     comp5 = models.IntegerField(
