@@ -3,6 +3,7 @@ from otree.api import (
     Currency as c, currency_range
 )
 
+from _myshared.uploader import get_userdata
 
 class Constants(BaseConstants):
     name_in_url = 'start'
@@ -11,7 +12,9 @@ class Constants(BaseConstants):
     
 
 class Subsession(BaseSubsession):
-    pass
+    def creating_session(self):
+        userdata = get_userdata()
+        print(userdata)
 
 
 class Group(BaseGroup):
