@@ -11,9 +11,17 @@ services:
         ports:
             - 8000:8000
         depends_on: 
+            - uploader
             - redis
             - db
         restart: always
+    uploader:
+        build: ./uploader
+        ports:
+            - 3000:3000
+        volumes: 
+            - ./uploader:/usr/src/app
+            - /usr/src/app/node_modules
     redis:
         image: "redis:alpine"
     db:
