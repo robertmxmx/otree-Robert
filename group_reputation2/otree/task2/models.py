@@ -4,6 +4,7 @@ from otree.api import (
 )
 import shared
 
+from _myshared.constants import REGIONS
 
 class Constants(BaseConstants):
     name_in_url = 'task2'
@@ -90,7 +91,7 @@ class Player(BasePlayer):
                 'other_knowledge_player': self.subsession.deducting_player if self.role() == self.subsession.taking_player else self.subsession.taking_player
             })
             if sorted_by == 'birth_region':
-                return_dict.update({'same_region': shared.regions[deducting_player.br-1]})
+                return_dict.update({'same_region': REGIONS[deducting_player.br-1]})
             elif sorted_by == 'pol_ideology':
                 return_dict.update({'same_ideology': 'progressive' if deducting_player.pi == 1 else 'conservative'})
 

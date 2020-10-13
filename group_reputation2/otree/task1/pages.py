@@ -4,6 +4,8 @@ from .models import Constants
 import shared
 import random, math
 
+from _myshared.constants import LOW_PERC, HIGH_PERC
+
 
 class Main(Page):
     form_model = 'player'
@@ -33,8 +35,8 @@ class FormGroups(WaitPage):
         # will not be formed based on shared neutral ideology. For example
         # if there are two 2's and one 1 then they will be in the no group
         # condition
-        low_per = scores[math.ceil(shared.low_perc * len(scores)) - 1]
-        high_per = scores[math.ceil(shared.high_perc * len(scores)) - 1]
+        low_per = scores[math.ceil(LOW_PERC * len(scores)) - 1]
+        high_per = scores[math.ceil(HIGH_PERC * len(scores)) - 1]
         for p in self.subsession.get_players():
             if p.pi_score >= high_per:
                 p.pol_ideology = 1

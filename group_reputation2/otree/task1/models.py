@@ -4,6 +4,8 @@ from otree.api import (
 )
 import shared
 
+from _myshared.constants import REGIONS
+
 
 class Constants(BaseConstants):
     name_in_url = 'task1'
@@ -28,7 +30,7 @@ class Constants(BaseConstants):
         [2, "Disagree"],
         [1, "Strongly Disagree"]
     ]
-    regions = shared.regions.copy()
+    regions = REGIONS.copy()
     br_info = {
         'key_val': 'birth_region',
         'num_same_allowed': 2,
