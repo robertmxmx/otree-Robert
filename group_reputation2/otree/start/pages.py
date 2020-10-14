@@ -32,7 +32,7 @@ def get_player_data():
             players.append(p_info)
     return players
 
-class Main(Page):
+class Welcome(Page):
 
     def vars_for_template(self):
         return {
@@ -54,6 +54,6 @@ class FormGroups(WaitPage):
 
 
 page_sequence = [
-    Main,
+    Welcome,
     FormGroups
 ]

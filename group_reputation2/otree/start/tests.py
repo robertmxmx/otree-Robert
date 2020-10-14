@@ -8,4 +8,4 @@ from otree.api import Submission
 class PlayerBot(Bot):
 
     def play_round(self):
-        yield Submission(pages.Main, check_html=False)
+        yield Submission(pages.Welcome, check_html=False)
