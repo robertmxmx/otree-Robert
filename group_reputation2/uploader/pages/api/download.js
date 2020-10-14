@@ -7,6 +7,8 @@ export const config = {
     },
 };
 
+// TODO: protect with cookie/token
+
 export default async (req, res) => {
     const readStream = fs.createReadStream('userdata.csv');
 

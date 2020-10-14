@@ -8,6 +8,8 @@ export const config = {
   },
 };
 
+// TODO: protect with cookie/token
+
 export default async (req, res) => {
   if (fs.existsSync('userdata.csv')) {
     try {

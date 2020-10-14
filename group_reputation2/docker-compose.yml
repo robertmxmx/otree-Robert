@@ -16,7 +16,12 @@ services:
             - db
         restart: always
     uploader:
-        build: ./uploader
+        build: 
+            context: ./uploader
+            args: 
+                - UPLOADER_SECRET=6bqVEaFhJ5YTXbJh8jiwzQkvExUbsRFtczdIJqrmLQyltbDEq6HQ8IEfbKYdTOSs
+        environment:
+            - UPLOADER_SECRET=6bqVEaFhJ5YTXbJh8jiwzQkvExUbsRFtczdIJqrmLQyltbDEq6HQ8IEfbKYdTOSs
         ports:
             - 3000:3000
         volumes: 

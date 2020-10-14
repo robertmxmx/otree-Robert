@@ -13,7 +13,7 @@ export default function UserDataTable() {
         setLoading(true);
         setError(null);
 
-        axios.get('http://localhost:3000/api/download')
+        axios.get('/api/download')
             .then(res => {
                 setData(res.data);
                 setLoading(false);
