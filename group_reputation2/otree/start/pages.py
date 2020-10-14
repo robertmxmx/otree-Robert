@@ -33,11 +33,13 @@ def get_player_data():
     return players
 
 class Welcome(Page):
-
     def vars_for_template(self):
         return {
             'aud_per_point': c(1).to_real_world_currency(self.session)
         }
+
+class InternetRequirement(Page):
+    pass
 
 # Move this to models.Subsession.creating_session()
 class FormGroups(WaitPage):
@@ -55,5 +57,6 @@ class FormGroups(WaitPage):
 
 page_sequence = [
     Welcome,
+    InternetRequirement,
     FormGroups
 ]

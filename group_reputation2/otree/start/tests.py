@@ -9,3 +9,4 @@ class PlayerBot(Bot):
 
     def play_round(self):
         yield Submission(pages.Welcome, check_html=False)
+        yield Submission(pages.InternetRequirement, check_html=False)
