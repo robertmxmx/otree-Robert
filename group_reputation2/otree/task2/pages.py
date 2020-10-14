@@ -14,7 +14,7 @@ def create_html_table(d):
 
     return content
 
-
+# Remove wait for all groups
 class Setup(WaitPage):
     wait_for_all_groups = True
 

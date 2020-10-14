@@ -39,6 +39,7 @@ class Main(Page):
             'aud_per_point': c(1).to_real_world_currency(self.session)
         }
 
+# Move this to models.Subsession.creating_session()
 class FormGroups(WaitPage):
     wait_for_all_groups = True
 
