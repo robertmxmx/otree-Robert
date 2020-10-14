@@ -3,7 +3,7 @@
 
 {% block title %}
     {% if subsession.round_number == 1 %}
-    Task 1a Feedback
+    Task 1 Feedback
     {% else %}
     Feedback for both tasks
     {% endif %}
@@ -17,13 +17,13 @@
             {{ task2a_feedback|safe }}
         {% else %}
             <p>
-                You will receive feedback on the outcome of Task 1a at the end of the entire task
+                You will receive feedback on the outcome of Task 1 at the end of the experiment
             </p>
         {% endif %}
     {% else %}
-        <h4>Task 1a</h4>
+        <h4>Task 1</h4>
         {{ task2a_feedback|safe }}
-        <h4>Task 1b</h4>
+        <h4>Task 2</h4>
         {% if receiving_info %}
             <p>
                 {% if points_were_taken %}
@@ -55,7 +55,7 @@
                 </p>
             {% endif %}
             <p>
-                Final earnings for this subtask are:
+                Final earnings for this task are:
             </p>
             <table class="simple-table">
                 <tr>
@@ -71,7 +71,7 @@
             </table>
         {% else %}
             <p>
-                Your earnings from Task 1b are {{ participant.payoff|json }} ECU.
+                Your earnings from Task 2 are {{ participant.payoff|json }} ECU.
             </p>
         {% endif %}
         <h4>

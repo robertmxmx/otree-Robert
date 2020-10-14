@@ -3,11 +3,25 @@
         Thank you for your participation in today’s experiment.
     </p>
     <p>
-        Task 2{{ chosen_task }} was randomly chosen for payment.
+        Task {{ chosen_task }} was randomly chosen for payment.
     </p>
     <p>
-        Your total earnings are: {{ participation_fee }} show up fee + {{ task1_payoff }} 
-        for Task 1 + {{ task2_payoff }} for Task 2 =
+        Your total earnings are: 
+        
+        <ul>
+            <li>
+                Show up fee: {{ participation_fee }}
+            </li>
+            <li>
+                Task {{ chosen_task }}: {{ task2_payoff }}
+            </li>
+            {% if participant.vars.role == 'B' or participant.vars.role == 'C' %}
+            <li>
+                Bonus for B/C: 
+            </li>
+            {% endif %}
+        </ul>
+
         {{ participant.payoff_plus_participation_fee }}
     </p>
 </div>

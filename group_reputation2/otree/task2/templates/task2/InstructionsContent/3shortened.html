@@ -3,10 +3,10 @@
 <div class="card bg-light instructions">
     <div class="card-body">
         <h3>
-            Task 1 - Instructions (continued)
+            Instructions (continued)
         </h3>
         <h4>
-            Task 1a
+            Task 1
         </h4>
         <p>
             <b>A's decision:</b> A can decide whether to take 100 ECU from B.
@@ -23,14 +23,14 @@
             <b>C's decision:</b> C makes no decision.
         </p>
         <h4>
-            Task 1b
+            Task 2
         </h4>
         <ul>
             <li>
-                You will be in the same group as in 2a.
+                You will be in the same group as in Task 1.
             </li>
             <li>
-                This task is the same as 2a, except B and C swap roles.
+                This task is the same as Task 1, except B and C swap roles.
             </li>
             {% if session.config.rep_condition %}
             <li>
@@ -39,11 +39,11 @@
             {% endif %}
             {% if session.config.deterrence %}
             <li>
-                A will learn the outcome of Task 2a before beginning 2b.
+                A will learn the outcome of Task 1 before beginning 2.
             </li>
             {% else %}
             <li>
-                A will not learn the outcome of Task 2a until the experiment is over.
+                A will not learn the outcome of Task 2 until the experiment is over.
             </li>
             {% endif %}
         </ul>

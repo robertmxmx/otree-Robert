@@ -2,11 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    {% if subsession.round_number == 1 %}
-    Task 1a Decision
-    {% else %}
-    Task 1b Decision
-    {% endif %}
+    Task {{ subsession.round_number }} Decision
 {% endblock %}
 
 {% block content %}
@@ -64,13 +60,13 @@
         {% if subsession.round_number == 1 %}   
             {% if session.config.deterrence %}
             <p>
-                After this subtask is completed, A will recieve feedback on the outcome before 
-                beginning subtask 1b.
+                After this task is completed, A will recieve feedback on the outcome before 
+                beginning Task 2.
             </p>
             {% else %}
             <p>
-                After this subtask is completed, no feedback will be received. You will proceed 
-                straight to subtask 1b. Feedback will be provided on both subtasks at the end.
+                After this task is completed, no feedback will be received. You will proceed 
+                straight to Task 2. Feedback will be provided on both tasks at the end.
             </p>
             {% endif %}
         {% endif %}

@@ -3,16 +3,16 @@
 <div class="card bg-light instructions">
     <div class="card-body">
         <h3>
-            Task 1 - Instructions (continued)
+            Instructions (continued)
         </h3>
         <p>
-            This Task has two sub-tasks, 1a and 1b.
+            This experiment has two tasks, 1 and 2.
         </p>
         <p>
              Please note that only one of these two tasks will be chosen for payment. The choice will be random.
         </p>
         <h4>
-            Task 1a Instructions
+            Task 1 Instructions
         </h4>
         <p>
             Participants B and C will be given 110 ECU each. Participant A will be given 20 ECU.
@@ -123,12 +123,12 @@
         {% if not session.config.deterrence %}
         <p>
             After A and B have made their decisions, participants will <b>not</b> be informed of the outcome.
-            Participants will proceed to Task 1b, and only learn the outcome of 1a after both sub-tasks are completed.
+            Participants will proceed to Task 2, and only learn the outcome of 1 after both tasks are completed.
         </p>
         {% endif %}
-        <h4>Task 1b Instructions</h4>
+        <h4>Task 2 Instructions</h4>
         <p>
-            Task 1b is very similar to Task 1a, except that B and C switch roles.
+            Task 2 is very similar to Task 1, except that B and C switch roles.
         </p>
         <p>
             Participants B and C will be given 110 ECU each. Participant A will be given 20 ECU.
@@ -193,7 +193,7 @@
             After A and C have made their decisions, A and C will be informed of the outcome.
         </p>
         <p>
-            B will not learn what happens in Task 2b.
+            B will not learn what happens in Task 2.
         </p>
         {% if session.config.rep_condition %}
         <p>

@@ -2,11 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    {% if subsession.round_number == 1 %}
-    Task 1a Commencement
-    {% else %}
-    Task 1b Commencement
-    {% endif %}
+    Task {{ subsession.round_number }} Commencement
 {% endblock %}
 
 {% block content %}
@@ -14,11 +10,11 @@
 
     {% if subsession.round_number == 1 %}
     <p>
-        You will now begin Task 1a.
+        You will now begin Task 1.
     </p>
     {% else %}
     <p>
-        You will now begin Task 1b. You are in the same group as you were for Task 1a.
+        You will now begin Task 2. You are in the same group as you were for Task 1.
     </p>
     {% endif %}
 

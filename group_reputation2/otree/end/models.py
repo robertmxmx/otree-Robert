@@ -10,8 +10,6 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
 
-    task1_payoff_AUD = 3
-
 
 class Subsession(BaseSubsession):
     chosen_task = models.IntegerField(initial=random.randint(1, 2))
