@@ -7,7 +7,7 @@ RUN pip install -r /requirements.txt && \
 WORKDIR /usr/src/app
 COPY . .
 
-RUN yes | otree resetdb && rm db.sqlite3
+# RUN yes | otree resetdb && rm db.sqlite3
 
 CMD sh -c 'yes | otree resetdb && otree prodserver'
 # CMD [ "otree", "test", "gr" ]

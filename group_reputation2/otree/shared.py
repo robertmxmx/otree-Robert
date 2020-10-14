@@ -1,26 +1,8 @@
 import random
 import datetime
 import os
-low_perc = 0.3
-high_perc = 0.7
-regions = [
-    "Australia",
-    "Bangladesh",
-    "China (mainland)",
-    "Hong Kong",
-    "Indonesia",
-    "India",
-    "Pakistan",
-    "Malaysia",
-    "Russia",
-    "Singapore",
-    "Sri Lanka",
-    "Taiwan",
-    "USA",
-    "Vietnam",
-    "Other"
-]
 
+from _myshared.helpers import find_occurrences, most_common_val, find_based_on_val
 
 def set_roles(groups, key_val, players_per_group):
     if len(groups) == 0:
@@ -47,24 +29,7 @@ def set_roles(groups, key_val, players_per_group):
                     p['role'] = roles_left.pop()
                 p['sorted_by'] = key_val
     return groups
-
-
-def find_occurrences(players, key_val):
-    if len(players) == 0:  # precondition (not really necessary)
-        return None
-
-    # store the occurrences. looks like { 'value': 'number_of_times_value_occurred' }
-    # for example, if 3 occurred 4 times and 4 occurred 2 times: { 3: 4, 4: 2 }
-    occs = {}
-
-    # find occurrences
-    for p in players:
-        val = p[key_val]
-        occs[val] = occs[val] + 1 if val in occs else 1
-
-    # create list of occurrences sorted by most to least occurring
-    return occs
-
+    
 
 def set_reduced_br(players, min_br, other_br):
     occs = find_occurrences(players, 'birth_region')
@@ -74,38 +39,6 @@ def set_reduced_br(players, min_br, other_br):
             p['birth_region'] = other_br
 
     return players
-
-
-def most_common_val(players, key_val, other_val):
-    # create list of occurrences sorted by most to least occurring
-    occs = find_occurrences(players, key_val)
-    occs_list = sorted(occs, key=occs.get, reverse=True)
-
-    # try and prioritise occurrences of values that are not equal to the other_val (either 10 or 3)
-    if occs_list[0] == other_val and len(occs_list) > 1:
-        most_occ_val = occs_list[1]
-    else:
-        most_occ_val = occs_list[0]
-
-    # find player that shares most occurring value
-    return most_occ_val
-
-
-def find_based_on_val(players, key_val, val_to_find, excluding, find_equal):
-    if len(players) == 0:  # precondition (not really necessary)
-        return None
-
-    # find player that has their key_val value equal to val_to_find
-    for p in players:
-        if p in excluding:
-            continue
-        if find_equal and p[key_val] == val_to_find:
-            return p
-        elif not find_equal and p[key_val] != val_to_find:
-            return p
-
-    # if val_to_find was not found
-    return None
 
 
 def add_to_group(players, key_val, other_val, excluding, limit, find_equal):
@@ -165,41 +98,3 @@ def create_groups(players, key_info, players_per_group):
             new_players = players.copy()
 
     return new_groups, new_players
-
-
-def print_to_console(groups):
-    # check that that an empty list isn't being printed
-    if len(groups) == 0:
-        print("none\n")
-
-    # print to console and file
-    print("group,player_id,role,birth region,political ideology,sorted by")
-    for i in range(len(groups)):
-        for p in groups[i]:
-            print("%d,%s,%s,%s,%s,%s" % (
-                i+1, 
-                p['id'], 
-                p['role'], 
-                p['birth_region'], 
-                p['pol_ideology'], 
-                p['sorted_by']
-            ))
-
-
-def create_random_groups(players, players_per_group):
-    # this stores players that haven't been sorted above and so will be put into random groups
-    new_groups = []
-
-    # sort leftover players into random groups
-    while len(players) != 0:
-        current_group = []
-
-        # create groups with num players = players_per_group
-        for _ in range(players_per_group):
-            current_group.append(players.pop())
-
-        # check if valid final group
-        if len(current_group) == players_per_group:
-            new_groups.append(current_group)
-
-    return new_groups

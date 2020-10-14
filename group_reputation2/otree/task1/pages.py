@@ -1,10 +1,12 @@
 from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
-import shared
 import random, math
 
 from _myshared.constants import LOW_PERC, HIGH_PERC
+from _myshared.output import print_groups
+from _myshared.grouping import create_random_groups
+from shared import set_reduced_br, create_groups, set_roles
 
 
 class Main(Page):
@@ -55,22 +57,22 @@ class FormGroups(WaitPage):
             })
 
         # for the regions that have players with less than Constants.min_br set them to the other type
-        players = shared.set_reduced_br(players.copy(), 3, br_info['other_val'])
+        players = set_reduced_br(players.copy(), 3, br_info['other_val'])
         random.shuffle(players)
 
         # sort based on birth region
-        new_groups, players = shared.create_groups(players.copy(), br_info, num_per_group)
-        final_groups = shared.set_roles(new_groups.copy(), 'birth_region', num_per_group)
+        new_groups, players = create_groups(players.copy(), br_info, num_per_group)
+        final_groups = set_roles(new_groups.copy(), 'birth_region', num_per_group)
         random.shuffle(players)
 
         # sort based on political ideology
-        new_groups, players = shared.create_groups(players.copy(), pi_info, num_per_group)
-        final_groups = final_groups + shared.set_roles(new_groups.copy(), 'pol_ideology', num_per_group)
+        new_groups, players = create_groups(players.copy(), pi_info, num_per_group)
+        final_groups = final_groups + set_roles(new_groups.copy(), 'pol_ideology', num_per_group)
         random.shuffle(players)
 
         # randomly group the rest
-        new_groups = shared.create_random_groups(players.copy(), num_per_group)
-        final_groups = final_groups + shared.set_roles(new_groups.copy(), None, num_per_group)
+        new_groups = create_random_groups(players.copy(), num_per_group)
+        final_groups = final_groups + set_roles(new_groups.copy(), None, num_per_group)
 
         # set participant data so this shared across apps (tasks)
         for i in range(len(final_groups)):
@@ -85,7 +87,7 @@ class FormGroups(WaitPage):
                         player.participant.vars['birth_region'] = p['birth_region']
                         player.participant.vars['pol_ideology'] = p['pol_ideology']
 
-        shared.print_to_console(final_groups)
+        print_groups(final_groups)
 
 
 page_sequence = [
