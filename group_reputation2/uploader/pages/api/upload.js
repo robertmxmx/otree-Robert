@@ -1,6 +1,8 @@
 import fs from 'fs';
 import formidable from 'formidable';
 
+import withSession from '../../lib/session';
+
 export const config = {
   api: {
     bodyParser: false,
@@ -8,14 +10,16 @@ export const config = {
   },
 };
 
-// TODO: protect with cookie/token
+export default withSession(async (req, res) => {
+  const user = req.session.get('user');
 
-export default async (req, res) => {
+  if (!user) return res.status(401).end();
+
   if (fs.existsSync('userdata.csv')) {
     try {
       fs.unlinkSync('userdata.csv');
     } catch (err) {
-      res.status(500).send(err.message);
+      return res.status(500).send(err.message);
     }
   }
 
@@ -26,10 +30,12 @@ export default async (req, res) => {
   form.parse(req, (err, fields, files) => {
     if (err) return res.status(500).send(err.message);
 
-    fs.rename(files.file.path, 'userdata.csv', err2 => {
+    const { file } = files;
+    if (!file) return res.status(400).send('File was not provided');
+
+    fs.rename(file.path, 'userdata.csv', err2 => {
       if (err2) return res.status(500).send(err2.message);
       res.status(200).end();
     });
   });
-  
-}
+});

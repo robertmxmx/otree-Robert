@@ -1,29 +1,18 @@
 import Head from 'next/head';
-import { withIronSession } from "next-iron-session";
 
+import withSession from '../lib/session';
 import styles from '../styles/Home.module.css';
 import UserDataTable from '../components/UserDataTable';
 import FileUploader from '../components/FileUploader';
 import LoginForm from '../components/LoginForm';
 
-export const getServerSideProps = withIronSession(
-  async ({ req, res }) => {
-    const user = req.session.get('user');
+export const getServerSideProps = withSession(async ({ req, res }) => {
+  const user = req.session.get('user');
 
-    if (!user) {
-      // res.statusCode = 401;
-      // res.end();
-      return { props: {} };
-    }
+  if (!user) return { props: {} };
 
-    return { props: { user }};
-  },
-  {
-      cookieName: 'UPLOADER_COOKIE',
-      cookieOptions: { secure: true },
-      password: process.env.UPLOADER_SECRET
-  }
-);
+  return { props: { user }};
+});
 
 export default function Home({ user }) {
   if (!user) {

@@ -24,6 +24,7 @@ services:
             - UPLOADER_SECRET=6bqVEaFhJ5YTXbJh8jiwzQkvExUbsRFtczdIJqrmLQyltbDEq6HQ8IEfbKYdTOSs
         ports:
             - 3000:3000
+        restart: always
         volumes: 
             - ./uploader:/usr/src/app
             - /usr/src/app/node_modules
