@@ -1,4 +1,5 @@
 version: '3'
+
 services:
     otree:
         build: ./otree
@@ -8,6 +9,7 @@ services:
             - OTREE_ADMIN_PASSWORD=otreee
             - OTREE_PRODUCTION=1
             - OTREE_AUTH_LEVEL=STUDY
+            - API_KEY=cdH1Oi0D1AzuYEKCkKxnsYJuzhr3yvGMkJVfZi0DbaFgiurUWRPVqDL4eqBuNRNc
         ports:
             - 8000:8000
         depends_on: 
@@ -16,11 +18,9 @@ services:
             - db
         restart: always
     uploader:
-        build: 
-            context: ./uploader
-            args: 
-                - UPLOADER_SECRET=6bqVEaFhJ5YTXbJh8jiwzQkvExUbsRFtczdIJqrmLQyltbDEq6HQ8IEfbKYdTOSs
+        build: ./uploader
         environment:
+            - API_KEY=cdH1Oi0D1AzuYEKCkKxnsYJuzhr3yvGMkJVfZi0DbaFgiurUWRPVqDL4eqBuNRNc
             - UPLOADER_SECRET=6bqVEaFhJ5YTXbJh8jiwzQkvExUbsRFtczdIJqrmLQyltbDEq6HQ8IEfbKYdTOSs
         ports:
             - 3000:3000

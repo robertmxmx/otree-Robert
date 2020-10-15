@@ -28,7 +28,7 @@ export default function UserDataTable() {
 
     if (error) {
         return (
-            <p>{error}</p>
+            <p className={styles.error}>{error}</p> 
         );
     }
 

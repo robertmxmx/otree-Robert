@@ -36,8 +36,8 @@ export default function LoginForm() {
             <div>
                 <button type="submit">Log in</button>
             </div>
-            { error &&
-                <div>{ error }</div>
+            { error && 
+                <p className={styles.error}>{error}</p> 
             }
         </form>
     )

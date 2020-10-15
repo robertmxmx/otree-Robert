@@ -34,7 +34,7 @@ export default function FileUploader() {
             <form action="#">
                 <input type="file" onChange={handleFileChange} />
             </form>
-            { error && <p>{error}</p> }
+            { error && <p className={styles.error}>{error}</p> }
             <button 
                 onClick={handleSubmit} 
                 disabled={file === null || file === undefined}
