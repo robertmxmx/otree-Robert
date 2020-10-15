@@ -18,7 +18,7 @@ SESSION_CONFIGS = [
         'num_demo_participants': 6,
         'app_sequence': [
             'start',
-            # 'task1',
+            'task1',
             'task2',
             'ds',
             'end'

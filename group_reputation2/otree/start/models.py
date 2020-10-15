@@ -12,9 +12,7 @@ class Constants(BaseConstants):
     
 
 class Subsession(BaseSubsession):
-    def creating_session(self):
-        userdata = get_userdata()
-        print(userdata)
+    pass
 
 
 class Group(BaseGroup):

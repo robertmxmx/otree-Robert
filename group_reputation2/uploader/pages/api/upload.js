@@ -11,21 +11,22 @@ export const config = {
   },
 };
 
+// TODO: Validation for null values
 function stripContents(data) {
   var result = data;
   
   result.splice(0, 2);
   result = result.map(elem => ({
-    birth_region: elem['Q4'],
-    other_br: elem['Q4_15_TEXT'],
-    pi_q1: elem['Q6'],
-    pi_q2: elem['Q8'],
-    pi_q3: elem['Q9'],
-    pi_q4: elem['Q10'],
-    pi_q5: elem['Q11'],
-    pi_q6: elem['Q12'],
-    pi_q7: elem['Q13'],
-    payId: elem['Q14']
+    birth_region:   parseInt(elem['Q4']),
+    other_br:       elem['Q4_15_TEXT'],
+    pi_q1:          parseInt(elem['Q6']),
+    pi_q2:          parseInt(elem['Q8']),
+    pi_q3:          parseInt(elem['Q9']),
+    pi_q4:          parseInt(elem['Q10']),
+    pi_q5:          parseInt(elem['Q11']),
+    pi_q6:          parseInt(elem['Q12']),
+    pi_q7:          parseInt(elem['Q13']),
+    pay_id:          elem['Q14']
   }));
   
   return {
@@ -45,7 +46,15 @@ function validateFile(filepath) {
       readStream.pipe(csv.parse({ headers: true }))
         .on('error', reject)
         .on('data', data => userdata.push(data))
-        .on('end', () => resolve(stripContents(userdata)));
+        .on('end', () => {
+          var data;
+          try {
+            data = stripContents(userdata);
+          } catch (err) {
+            reject(err);
+          }
+          resolve(data)
+        });
     });
   });
 }

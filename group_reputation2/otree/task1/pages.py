@@ -6,6 +6,7 @@ import random, math
 from _myshared.constants import LOW_PERC, HIGH_PERC
 from _myshared.output import print_groups
 from _myshared.grouping import create_random_groups
+from _myshared.uploader import get_userdata
 from shared import set_reduced_br, create_groups, set_roles
 
 
@@ -22,6 +23,21 @@ class FormGroups(WaitPage):
     wait_for_all_groups = True
 
     def after_all_players_arrive(self):
+        userdata = get_userdata()['rows']
+
+        for idx, p in enumerate(self.subsession.get_players()):
+            p_data = userdata[idx]
+            p.birth_region = p_data['birth_region']
+            p.other_br = p_data['other_br']
+            p.pi_q1 = p_data['pi_q1']
+            p.pi_q2 = p_data['pi_q2']
+            p.pi_q3 = p_data['pi_q3']
+            p.pi_q4 = p_data['pi_q4']
+            p.pi_q5 = p_data['pi_q5']
+            p.pi_q6 = p_data['pi_q6']
+            p.pi_q7 = p_data['pi_q7']
+            p.pay_id = p_data['pay_id']
+
         br_info = Constants.br_info
         pi_info = Constants.pi_info
         num_per_group = Constants.players_per_group
@@ -91,6 +107,6 @@ class FormGroups(WaitPage):
 
 
 page_sequence = [
-    Main,
+    # Main,
     FormGroups
 ]

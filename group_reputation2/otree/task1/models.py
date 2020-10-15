@@ -53,11 +53,14 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    pay_id = models.StringField()
+    
     birth_region = models.IntegerField(
         label='In what region were you born?',
         choices=[[i+1, Constants.regions[i]] for i in range(len(Constants.regions))],
         widget=widgets.RadioSelect)
     other_br = models.StringField(label='Other region', blank=True)
+
     pi_q1 = models.IntegerField(label='''
         I don’t like change. There is too great a chance for things to go wrong when things
         change. I prefer it when the same people continue doing what they have always done
@@ -93,6 +96,7 @@ class Player(BasePlayer):
         an abortion. The government should not be able to tell anyone how to behave in their
         private lives.
     ''', choices=Constants.choices_reversed, widget=widgets.RadioSelect)
+
     pol_ideology = models.IntegerField()
     pi_score = models.IntegerField()
     rl = models.StringField()
