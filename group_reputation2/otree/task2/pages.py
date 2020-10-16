@@ -62,6 +62,7 @@ class Instructions3(Page):
     def is_displayed(self):
         return self.round_number == 1
 
+
 class Instructions3a(Page):
 
     def is_displayed(self):
@@ -144,6 +145,10 @@ class Decision(Page):
             'revealed': False
         })
         return r_dict
+
+
+# TODO: Another page for C only in first round
+# TODO: Another page for B only in second round
 
 
 class CalculatePayoffs(WaitPage):
