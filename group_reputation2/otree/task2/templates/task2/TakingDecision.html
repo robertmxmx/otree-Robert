@@ -1,0 +1,35 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task {{ subsession.round_number }} Decision
+{% endblock %}
+
+{% block content %}
+    {% include 'task2/Header.html' %}
+
+    {% formfield player.chose_to_take label=chose_to_take_label %}
+    {% next_button %}
+
+    <div class="card bg-light instructions">
+    <div class="card-body">
+        {% include 'task2/BrPiInfo.html' %}     
+        {% if subsession.round_number == 1 %}   
+            {% if session.config.deterrence %}
+            <p>
+                After this task is completed, A will recieve feedback on the outcome before 
+                beginning Task 2.
+            </p>
+            {% else %}
+            <p>
+                After this task is completed, no feedback will be received. You will proceed 
+                straight to Task 2. Feedback will be provided on both tasks at the end.
+            </p>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+

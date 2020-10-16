@@ -26,7 +26,7 @@ function stripContents(data) {
     pi_q5:          parseInt(elem['Q11']),
     pi_q6:          parseInt(elem['Q12']),
     pi_q7:          parseInt(elem['Q13']),
-    pay_id:          elem['Q14']
+    pay_id:         elem['Q14']
   }));
   
   return {
