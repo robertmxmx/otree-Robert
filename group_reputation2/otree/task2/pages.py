@@ -161,7 +161,25 @@ class DeductingDecision(Page):
 # TODO: Another page for C only in first round
 # TODO: Another page for B only in second round
 class WaitingDecision(Page):
-    pass
+    form_model = 'player'
+    
+    def is_displayed(self):
+        return self.player.role() not in [self.subsession.taking_player, self.subsession.deducting_player]
+
+    def get_form_fields(self):
+        if self.round_number == 1:
+            return ['will_spend', 'should_spend']
+        else:
+            return ['will_spend_guess', 'should_spend_guess']
+
+    def vars_for_template(self):
+        if self.round_number == 2:
+            return { 
+                'question_label': "What’s your guess of " + 
+                    self.subsession.deducting_player + "'s answer in this question?" 
+            }
+        else:
+            return {}
 
 
 class CalculatePayoffs(WaitPage):
@@ -244,7 +262,7 @@ page_sequence = [
 
     TakingDecision,
     DeductingDecision,
-    # WaitingDecision,
+    WaitingDecision,
 
     CalculatePayoffs,
     Feedback,

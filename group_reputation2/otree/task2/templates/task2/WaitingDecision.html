@@ -1,0 +1,153 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task {{ subsession.round_number }} Intermission
+{% endblock %}
+
+{% block content %}
+    {% include 'task2/Header.html' %}
+
+    {% include 'task2/CalculateModal.html' %}
+
+    {% if subsession.round_number == 1 %}
+    <p>
+        While you are waiting for {{ subsession.taking_player }} and 
+        {{ subsession.deducting_player }} to finish their decisions in Task 1, please 
+        answer the following questions:
+    </p>
+    <ul>
+        <li>
+            <p>
+                Please tell us whether you think B will deduct some ECU from 
+                {{ subsession.taking_player }} if {{ subsession.taking_player }} 
+                chooses to take {{ subsession.deducting_player }}’s 100 ECU. If so, 
+                how many ECU? 
+            </p>
+            <p>
+                (We will compare your answer with the actual decision 
+                {{ subsession.deducting_player }} makes and you will earn an additional 
+                10 ECU if your guess is correct)
+            </p>
+            <p>
+                I guess {{ subsession.deducting_player }} will spend 
+                <input type="number" id="will_spend_field" class="form-control" 
+                    style="display: inline"
+                    onkeypress="return false;"> 
+                <input type="hidden" name="will_spend" />
+                ECU on deductions from A.
+            </p>
+            <button type="button" class="otree-btn-next btn btn-primary" 
+                style="margin: -5px 0 0 0.25rem;" 
+                onclick="handleCalculate('will_spend_field');">
+                Calculate
+            </button>
+        </li>
+        <li>      
+            <p>
+                Please tell us whether you think {{ subsession.deducting_player }} 
+                should deduct some ECU from {{ subsession.taking_player }} if 
+                {{ subsession.taking_player }} chooses to take 
+                {{ subsession.deducting_player }}’s 100 ECU. In other words, is it 
+                socially appropriate for {{ subsession.deducting_player }} to deduct 
+                ECU from {{ subsession.taking_player }}? If so, how many ECU?
+            </p>
+            <p>
+                If you think it is not appropriate to deduct from 
+                {{ subsession.taking_player }}, then please enter zero.
+            </p>
+            <p>
+                I think {{ subsession.deducting_player }} should spend 
+                <input type="number" id="should_spend_field" class="form-control" 
+                    style="display: inline"
+                    onkeypress="return false;"> 
+                <input type="hidden" name="should_spend" />
+                ECU on deductions from {{ subsession.taking_player }}. 
+            </p>
+            <button type="button" class="otree-btn-next btn btn-primary" 
+                style="margin: -5px 0 0 0.25rem;"
+                onclick="handleCalculate('should_spend_field');">
+                Calculate
+            </button>
+        </li>       
+    </ul>
+    {% else %}
+    <p>
+        While you are waiting for {{ subsession.taking_player }} and 
+        {{ subsession.deducting_player }} to finish their decisions in Task 2, please 
+        answer the following questions:
+    </p>
+    <p>
+        While you and {{ subsession.taking_player }} were participating in Task 1, we 
+        asked {{ subsession.deducting_player }} the following two questions. Please tell 
+        us your guess of what {{ subsession.deducting_player }}’s answer is in each of 
+        the questions. 
+    </p>
+    <p>
+        (We will compare your answer with the actual guess 
+        {{ subsession.deducting_player }} made and you will earn an additional 10 ECU 
+        if your guess is correct.)
+    </p>
+
+    <ul>
+        <li>
+            <p>
+                Question 1: <i>"Please tell us whether you think {{ player.role }} 
+                will deduct some ECU from {{ subsession.taking_player }} if 
+                {{ subsession.taking_player }} chooses to take {{ player.role }}’s 100 
+                ECU. If so, how many ECU? I guess {{ player.role }} will spend _____ ECU 
+                on deductions from {{ subsession.taking_player }}. "</i>
+            </p>
+            <p>
+                {% formfield player.will_spend_guess label=question_label %}
+            </p>
+        </li>
+    
+        <li>
+            <p>
+                Question 2: <i>"Please tell us whether you think {{ player.role }} 
+                should deduct some ECU from {{ subsession.taking_player }} if 
+                {{ subsession.taking_player }} chooses to take {{ player.role }}’s 100 
+                ECU. In other words, is it socially appropriate for {{ player.role }} 
+                to deduct ECU from {{ subsession.taking_player }}? If so, how many ECU? 
+                If you think it is not appropriate to deduct from 
+                {{ subsession.taking_player }}, then please enter zero. I think B should 
+                spend _____ ECU on deductions from {{ subsession.taking_player }}."</i>
+            </p>
+            <p>
+                (We will compare your answer with the actual guess 
+                {{ subsession.deducting_player }} made and you will earn an additional 
+                10 ECU if your guess is correct.)
+            </p>
+            <p>
+                {% formfield player.should_spend_guess label=question_label %}
+            </p>
+        </li>
+    </ul>
+
+    {% endif %}
+    
+    {% next_button %}
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function handle_enter(event) {
+            if (event.keyCode == 13 || event.which == 13) {
+                handleCalculate();
+                return false;
+            }
+        }
+        function handleCalculate(field) {
+            var deductECU = parseFloat($(field).val());
+            
+            const validInput = setModalContents(deductECU);
+            
+            if (validInput) {
+                $('input[name ="'+field+'"]').val(deductECU);
+            }
+        }
+    </script>
+{% endblock %}
+
+

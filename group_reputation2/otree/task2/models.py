@@ -76,6 +76,12 @@ class Player(BasePlayer):
     payoff_after_take = models.CurrencyField()
     deduct_amount = models.CurrencyField(min=Constants.deduct['min'], max=Constants.deduct['max'])
 
+    will_spend = models.CurrencyField(min=Constants.deduct['min'], max=Constants.deduct['max'])
+    should_spend = models.CurrencyField(min=Constants.deduct['min'], max=Constants.deduct['max'])
+
+    will_spend_guess = models.CurrencyField(min=Constants.deduct['min'], max=Constants.deduct['max'])
+    should_spend_guess = models.CurrencyField(min=Constants.deduct['min'], max=Constants.deduct['max'])
+
     def role(self):
         return self.participant.vars['role']
 

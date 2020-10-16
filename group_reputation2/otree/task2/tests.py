@@ -28,6 +28,11 @@ class PlayerBot(Bot):
             yield Submission(pages.TakingDecision, {'chose_to_take': True}, check_html=False)
         elif self.player.role() == self.subsession.deducting_player:
             yield Submission(pages.DeductingDecision, {'deduct_amount': 0}, check_html=False)
+        else:
+            if self.round_number == 1:
+                yield Submission(pages.WaitingDecision, {'will_spend': 0, 'should_spend': 2}, check_html=False)
+            else:
+                yield (pages.WaitingDecision, {'will_spend_guess': 0, 'should_spend_guess': 10})
 
         yield pages.Feedback
 

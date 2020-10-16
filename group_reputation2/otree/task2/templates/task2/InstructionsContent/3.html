@@ -1,5 +1,7 @@
 {% load otree static %}
 
+{% include 'task2/CalculateModal.html' %}
+
 <div class="card bg-light instructions">
     <div class="card-body">
         <h3>
@@ -77,47 +79,12 @@
             Below is a calculator you can use to experiment with different levels of deduction, to see
             what would happen.
         </p>
-        <div id="insModal" class="modal">
-            <div class="modal-content">
-                <div class="w3-container">
-                    <div id="calc-result">
-                        <h3>Resulting payoffs</h3>
-                        <p>
-                            Assuming A decided to take 100 of B’s ECU, if B spent <span class="result1"></span>
-                            ECU on deduction, the final payoffs would be:
-                        </p>
-                        <table class="simple-table">
-                            <tr>
-                                <th>A</th>
-                                <th>B</th>
-                                <th>C</th>
-                            </tr>
-                            <tr>
-                                <td>120 - <span class="result2"></span> = <span class="result3"></span></td>
-                                <td>10 - <span class="result1"></span> = <span class="result4"></span></td>
-                                <td>110</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div id="error-msg">
-                        <p>
-                            Please enter a number between {{ Constants.deduct.min }} and {{ Constants.deduct.max }}.
-                        </p>
-                    </div>
-                    <br><br>
-                    <div align="right">
-                        <button type="button" class="otree-btn-next btn btn-primary"
-                            onclick="document.getElementById('insModal').style.display='none';"> Close </button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card bg-light instructions">
             <div class="card-body">
                 <input type="number" id="ins_num_field" class="form-control" style="display: inline"
                    onkeypress="return handle_enter(event);">
                 <button type="button" class="otree-btn-next btn btn-primary" style="margin: -5px 0 0 0.25rem;"
-                    onclick="handle_ins_click();">Calculate</button>
+                    onclick="handleCalculate();">Calculate</button>
             </div>
         </div>
         {% if not session.config.deterrence %}
@@ -209,29 +176,12 @@
 <script>
     function handle_enter(event) {
         if (event.keyCode == 13 || event.which == 13) {
-            handle_ins_click();
+            handleCalculate();
             return false;
         }
     }
-    function handle_ins_click() {
+    function handleCalculate() {
         var deductECU = parseFloat($('#ins_num_field').val());
-
-        if (deductECU >= {{ Constants.deduct.min }} && deductECU <= {{ Constants.deduct.max }}) {
-            var multDeductECU = {{ Constants.deduct.multiplier }}*deductECU;
-
-            $(".result1").text(deductECU);
-            $(".result2").text(multDeductECU);
-            $(".result3").text(120-multDeductECU);
-            $(".result4").text(10-deductECU);
-
-            $('#calc-result').css('display', 'block');
-            $('#error-msg').css('display', 'none');
-        } else {
-
-            $('#calc-result').css('display', 'none');
-            $('#error-msg').css('display', 'block');
-        }
-
-        $('#insModal').css('display', 'block');
+        setModalContents(deductECU);
     }
 </script>
