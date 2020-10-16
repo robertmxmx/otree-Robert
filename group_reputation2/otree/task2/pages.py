@@ -122,8 +122,30 @@ class Comprehension(Page):
 class Commencement(Page):
     pass
 
+class ADecision(Page):
+    form_model = 'player'
 
-class Decision(Page):
+    def is_displayed(self):
+        return self.player.role() in [self.subsession.taking_player, self.subsession.deducting_player]
+
+    def get_form_fields(self):
+        if self.player.role() == self.subsession.taking_player:
+            return ['chose_to_take']
+        elif self.player.role() == self.subsession.deducting_player:
+            return ['deduct_amount']
+
+    def vars_for_template(self):
+        r_dict = self.player.get_instruction_vars()
+        r_dict.update({
+            'show_init_msg': False,
+            'chose_to_take_label': "Do you wish to take %d of %s's ECU?" % (Constants.take_amount,
+                                                                            self.subsession.deducting_player),
+            'taking_player': self.subsession.taking_player,
+            'revealed': False
+        })
+        return r_dict
+
+class BDecision(Page):
     form_model = 'player'
 
     def is_displayed(self):
@@ -225,7 +247,8 @@ page_sequence = [
     Instructions4,
     Comprehension,
     Commencement,
-    Decision,
+    ADecision,
+    BDecision,
     CalculatePayoffs,
     Feedback,
     CMessage
