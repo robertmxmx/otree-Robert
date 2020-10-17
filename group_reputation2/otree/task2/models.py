@@ -20,8 +20,31 @@ class Subsession(BaseSubsession):
     taking_player = models.StringField()
     deducting_player = models.StringField()
 
+    def creating_session(self):
+        # set player role for the round
+        self.taking_player = 'A'
+        self.deducting_player = 'B' if self.round_number == 1 else 'C'
+
+        if self.round_number != 1:
+            self.group_like_round(1)
+
 
 class Group(BaseGroup):
+
+    def group_by_arrival_time_method(self, waiting_players):
+        group_num = waiting_players[0].participant.vars['group']
+        potential_group = [p for p in waiting_players if p.participant.vars['group'] == group_num]
+
+        if len(potential_group) == Constants.players_per_group:
+            return potential_group
+
+    def init_round(self):
+        for p in self.get_players():
+            p.participant.payoff = 0
+            p.payoff = Constants.initial_payoffs[p.role()]
+            p.br = p.participant.vars['birth_region']
+            p.pi = p.participant.vars['pol_ideology']
+
 
     def set_payoffs(self):
         taking_player = self.get_player_by_role(self.subsession.taking_player)

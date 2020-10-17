@@ -11,7 +11,7 @@ export const config = {
   },
 };
 
-// TODO: Validation for null values
+// TODO: Validation
 function stripContents(data) {
   var result = data;
   

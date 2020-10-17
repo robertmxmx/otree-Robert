@@ -14,30 +14,11 @@ def create_html_table(d):
 
     return content
 
-# Remove wait for all groups
-# TODO: Group like previous round and move some to creating_session
 class Setup(WaitPage):
-    wait_for_all_groups = True
-
+    group_by_arrival_time = True
+    
     def after_all_players_arrive(self):
-        # set player role for the round
-        self.subsession.taking_player = 'A'
-        if self.round_number == 1:
-            self.subsession.deducting_player = 'B'
-        elif self.round_number == 2:
-            self.subsession.deducting_player = 'C'
-        # reset payoffs
-        for p in self.subsession.get_players():
-            p.participant.payoff = 0
-            p.payoff = Constants.initial_payoffs[p.role()]
-        # set individual variables for players
-        groups = [[] for i in range(int(len(self.session.get_participants()) / Constants.players_per_group))]
-        for p in self.subsession.get_players():
-            p.br = p.participant.vars['birth_region']
-            p.pi = p.participant.vars['pol_ideology']
-            groups[p.participant.vars['group']].append(p)
-        # set group structure
-        self.subsession.set_group_matrix(groups)
+        self.group.init_round()
 
 
 class Instructions(Page):
@@ -159,7 +140,6 @@ class DeductingDecision(Page):
         return r_dict
 
 
-# TODO: CHeck inputs are not empty
 class WaitingDecision(Page):
     form_model = 'player'
     
