@@ -15,6 +15,7 @@ def create_html_table(d):
     return content
 
 # Remove wait for all groups
+# TODO: Group like previous round and move some to creating_session
 class Setup(WaitPage):
     wait_for_all_groups = True
 

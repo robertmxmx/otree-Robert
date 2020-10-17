@@ -18,7 +18,7 @@ class Main(Page):
         if values['birth_region'] == Constants.br_info['other_val'] and values['other_br'] is None:
             return 'Other birth region was selected but not specified'
 
-
+# TODO: move to creating_session?
 class FormGroups(WaitPage):
     wait_for_all_groups = True
 

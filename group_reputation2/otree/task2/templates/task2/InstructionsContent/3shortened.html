@@ -1,4 +1,5 @@
 {% load otree static %}
+{% include 'task2/CalculateModal.html' %}
 
 <div class="card bg-light instructions">
     <div class="card-body">
@@ -22,6 +23,18 @@
         <p>
             <b>C's decision:</b> C makes no decision.
         </p>
+        <p>
+            Below is a calculator you can use to experiment with different levels of deduction, to see
+            what would happen.
+        </p>
+        <div class="card bg-light instructions">
+            <div class="card-body">
+                <input type="number" id="ins_num_field" class="form-control" style="display: inline"
+                   onkeypress="return handle_enter(event);">
+                <button type="button" class="otree-btn-next btn btn-primary" style="margin: -5px 0 0 0.25rem;"
+                    onclick="handleCalculate();">Calculate</button>
+            </div>
+        </div>
         <h4>
             Task 2
         </h4>
@@ -49,3 +62,16 @@
         </ul>
     </div>
 </div>
+
+<script>
+    function handle_enter(event) {
+        if (event.keyCode == 13 || event.which == 13) {
+            handleCalculate();
+            return false;
+        }
+    }
+    function handleCalculate() {
+        var deductECU = parseFloat($('#ins_num_field').val());
+        setModalContents(deductECU);
+    }
+</script>

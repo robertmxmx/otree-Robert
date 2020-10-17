@@ -13,6 +13,7 @@ class Constants(BaseConstants):
     initial_payoffs = {'A': 20, 'B': 110, 'C': 110}
     take_amount = 100
     deduct = {'min': 0, 'max': 10, 'multiplier': 12}
+    additional_amount = 10
 
 
 class Subsession(BaseSubsession):
@@ -25,6 +26,11 @@ class Group(BaseGroup):
     def set_payoffs(self):
         taking_player = self.get_player_by_role(self.subsession.taking_player)
         deducting_player = self.get_player_by_role(self.subsession.deducting_player)
+        other_player = None
+
+        for p in self.get_players():
+            if p not in [taking_player, deducting_player]:
+                other_player = p
 
         # set if ECU was taken
         if taking_player.chose_to_take:
@@ -39,6 +45,25 @@ class Group(BaseGroup):
         if taking_player.chose_to_take:
             deducting_player.payoff -= deducting_player.deduct_amount
             taking_player.payoff -= Constants.deduct['multiplier']*deducting_player.deduct_amount
+
+        # Set payoffs for B/C guess
+        if self.round_number == 1:
+            if taking_player.chose_to_take:
+                if other_player.will_spend == deducting_player.deduct_amount:
+                    other_player.payoff += Constants.additional_amount
+                    other_player.participant.vars['bonus'] = Constants.additional_amount
+        else:
+            previous_other_player = deducting_player.in_round(self.round_number - 1)
+            bonus_multiplier = 0
+            
+            if other_player.will_spend_guess == previous_other_player.will_spend:
+                bonus_multiplier += 1
+
+            if other_player.should_spend_guess == previous_other_player.should_spend:
+                bonus_multiplier += 1
+                
+            other_player.payoff += bonus_multiplier * Constants.additional_amount
+            other_player.participant.vars['bonus'] = bonus_multiplier * Constants.additional_amount
 
 
 class Player(BasePlayer):

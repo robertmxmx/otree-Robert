@@ -15,9 +15,9 @@
             <li>
                 Task {{ chosen_task }}: {{ task2_payoff }}
             </li>
-            {% if participant.vars.role == 'B' or participant.vars.role == 'C' %}
+            {% if bonus %}
             <li>
-                Bonus for B/C: 
+                Task 1 bonus: {{ bonus }}
             </li>
             {% endif %}
         </ul>
