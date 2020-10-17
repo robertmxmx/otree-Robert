@@ -4,10 +4,16 @@ def print_groups(groups):
         print("none\n")
 
     # print to console and file
-    print("group,player_id,role,birth region,political ideology,sorted by")
+    headers = ['group', 'player_id', 'role', 'br', 'pi', 'sorted_by']
+
+    for h in headers:
+        print('%-15s' % h, end='')
+
+    print('\n' + '-'*90)
+
     for i in range(len(groups)):
         for p in groups[i]:
-            print("%d,%s,%s,%s,%s,%s" % (
+            print("%-15d%-15s%-15s%-15s%-15s%-15s" % (
                 i+1, 
                 p['id'], 
                 p['role'], 
