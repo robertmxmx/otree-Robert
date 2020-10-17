@@ -159,8 +159,7 @@ class DeductingDecision(Page):
         return r_dict
 
 
-# TODO: Another page for C only in first round
-# TODO: Another page for B only in second round
+# TODO: CHeck inputs are not empty
 class WaitingDecision(Page):
     form_model = 'player'
     
@@ -172,15 +171,23 @@ class WaitingDecision(Page):
             return ['will_spend', 'should_spend']
         else:
             return ['will_spend_guess', 'should_spend_guess']
+            
+    def error_message(self, values):
+        error_message = 'Please enter numbers between %d and %d' % \
+            (Constants.deduct['min'], Constants.deduct['max'])
 
-    def vars_for_template(self):
-        if self.round_number == 2:
-            return { 
-                'question_label': "What’s your guess of " + 
-                    self.subsession.deducting_player + "'s answer in this question?" 
-            }
-        else:
-            return {}
+        if self.round_number == 1:
+            if values['will_spend'] < Constants.deduct['min'] or \
+               values['will_spend'] > Constants.deduct['max'] or \
+               values['should_spend'] < Constants.deduct['min'] or \
+               values['should_spend'] > Constants.deduct['max']:
+               return error_message
+        else: 
+            if values['will_spend_guess'] < Constants.deduct['min'] or \
+               values['will_spend_guess'] > Constants.deduct['max'] or \
+               values['should_spend_guess'] < Constants.deduct['min'] or \
+               values['should_spend_guess'] > Constants.deduct['max']:
+               return error_message
 
 
 class CalculatePayoffs(WaitPage):

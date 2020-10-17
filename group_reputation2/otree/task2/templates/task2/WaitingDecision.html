@@ -99,8 +99,18 @@
                 on deductions from {{ subsession.taking_player }}. "</i>
             </p>
             <p>
-                {% formfield player.will_spend_guess label=question_label %}
+                What is your guess of {{ subsession.deducting_player }}'s answer in thiw question?
+                <input type="number" id="should_spend_guess_field" class="form-control" 
+                    style="display: inline"
+                    onkeypress="return false;"> 
+                <input type="hidden" name="should_spend_guess" />
+                ECU 
             </p>
+            <button type="button" class="otree-btn-next btn btn-primary" 
+                style="margin: -5px 0 0 0.25rem;"
+                onclick="handleCalculate('should_spend_guess_field');">
+                Calculate
+            </button>
         </li>
     
         <li>
@@ -115,13 +125,18 @@
                 spend _____ ECU on deductions from {{ subsession.taking_player }}."</i>
             </p>
             <p>
-                (We will compare your answer with the actual guess 
-                {{ subsession.deducting_player }} made and you will earn an additional 
-                10 ECU if your guess is correct.)
+                What is your guess of {{ subsession.deducting_player }}'s answer in thiw question?
+                <input type="number" id="should_spend_guess_field" class="form-control" 
+                    style="display: inline"
+                    onkeypress="return false;"> 
+                <input type="hidden" name="should_spend_guess" />
+                ECU 
             </p>
-            <p>
-                {% formfield player.should_spend_guess label=question_label %}
-            </p>
+            <button type="button" class="otree-btn-next btn btn-primary" 
+                style="margin: -5px 0 0 0.25rem;"
+                onclick="handleCalculate('should_spend_guess_field');">
+                Calculate
+            </button>
         </li>
     </ul>
 
