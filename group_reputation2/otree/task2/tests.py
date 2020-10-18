@@ -22,17 +22,17 @@ class PlayerBot(Bot):
 
             yield (pages.Comprehension, comp_answers)
 
-        yield Submission(pages.Commencement, check_html=False)
+        yield pages.Commencement
 
         if self.player.role() == self.subsession.taking_player:
-            yield Submission(pages.TakingDecision, {'chose_to_take': True}, check_html=False)
+            yield (pages.TakingDecision, {'chose_to_take': True})
         elif self.player.role() == self.subsession.deducting_player:
             yield Submission(pages.DeductingDecision, {'deduct_amount': 0}, check_html=False)
         else:
             if self.round_number == 1:
-                yield Submission(pages.WaitingDecision, {'will_spend': 0, 'should_spend': 10}, check_html=False)
+                yield (pages.WaitingDecision, {'will_spend': 0, 'should_spend': 10})
             else:
-                yield Submission(pages.WaitingDecision, {'will_spend_guess': 3, 'should_spend_guess': 2}, check_html=False)
+                yield (pages.WaitingDecision, {'will_spend_guess': 3, 'should_spend_guess': 2})
 
         yield pages.Feedback
 
