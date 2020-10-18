@@ -152,16 +152,14 @@
                 $('#gender_female').prop('checked', false);
                 $('#gender_pnts').prop('checked', false);
                 $('#gender_eb_value').prop('disabled', false);
+            } else {
+                $('#gender_eb_value').prop('disabled', true);
             }
             $('input[name="gender"]').val(getGender());
         });
         $('#gender_eb_value').on('input', function(e) {
             $('input[name="gender"]').val(e.target.value);
         })
-
-        window. setInterval(() => {
-            console.log($('input[name="gender"]').val());
-        }, 1000);
 
         $('.self_other_img').hover(function(e) {
             $(this).find('.lrg_img').css({'display':'fixed', 'bottom': '1%', 'right': '1%'}).toggle();
