@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'task2/Header.html' %}
+    {% include 'task2/components/Header.html' %}
     <br><br>
 
     {% if player.role == 'A' or player.role == 'B' %}
@@ -21,7 +21,7 @@
 
     <div class="card bg-light instructions">
         <div class="card-body">
-            {% include 'task2/BrPiInfo.html' %}
+            {% include 'task2/components/BrPiInfo.html' %}
         </div>
     </div>
     {% next_button %}

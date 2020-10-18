@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'task2/Header.html' %}
+    {% include 'task2/components/Header.html' %}
     <p>
         Please answer the following questions to check you understand the procedure.
     </p>
@@ -16,10 +16,10 @@
         {% endfor %}
     </ol>
     {% next_button %}
-    {% include 'task2/InstructionsContent/1.html' %}
-    {% include 'task2/InstructionsContent/2.html' %}
-    {% include 'task2/InstructionsContent/3shortened.html' %}
-    {% include 'task2/InstructionsContent/4.html' %}
+    {% include 'task2/components/instructions/1.html' %}
+    {% include 'task2/components/instructions/2.html' %}
+    {% include 'task2/components/instructions/3shortened.html' %}
+    {% include 'task2/components/instructions/4.html' %}
 {% endblock %}
 
 

@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'task2/Header.html' %}
+    {% include 'task2/components/Header.html' %}
 
     {% if subsession.round_number == 1 %}
         {% if player.role == subsession.taking_player and session.config.deterrence %}

@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'task2/Header.html' %}
+    {% include 'task2/components/Header.html' %}
 
     <div  id="myModal" class="modal">
         <div class="modal-content">
@@ -51,7 +51,7 @@
 
     <div class="card bg-light instructions">
     <div class="card-body">
-        {% include 'task2/BrPiInfo.html' %}     
+        {% include 'task2/components/BrPiInfo.html' %}     
         {% if subsession.round_number == 1 %}   
             {% if session.config.deterrence %}
             <p>
