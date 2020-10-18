@@ -14,7 +14,19 @@
             {% formfield player.supporting_team %}
         </li>
         <li>{% formfield player.num_experiments %}</li>
-        <li>{% formfield player.gender %}</li>
+        <li>
+            {% comment %} {% formfield player.gender %} {% endcomment %}
+            <div>Gender</div>
+            <input type="hidden" name="gender" />
+
+            <label><input type="checkbox" id="gender_male" /> Male</label><br />
+            <label><input type="checkbox" id="gender_female" /> Female</label><br />
+            <label><input type="checkbox" id="gender_pnts" /> Prefer not to say</label><br />
+            <label><input type="checkbox" id="gender_eb" /> [Enter below]</label>
+            <input type="text" id="gender_eb_value" class="form-control" disabled/> 
+            
+            <div style="color:red">{{ form.gender.errors }}</div>
+        </li>
 
         {% if player.pi_class %}
         <li>
@@ -99,7 +111,59 @@
 
 {% block scripts %}
     <script>
-        $('.self_other_img').hover(function (e) {
+        function getGender() {
+            if ($('#gender_pnts').prop('checked')) return 'Prefer not to say';
+            if ($('#gender_eb').prop('checked')) return $('#gender_eb_value').val();
+
+            var genders = [];
+            if ($('#gender_male').prop('checked')) genders.push('Male');
+            if ($('#gender_female').prop('checked')) genders.push('Female');
+            return genders.length ? genders.join(', ') : null;
+        }
+
+        $('#gender_male').change(function() {
+            if (this.checked) {
+                $('#gender_pnts').prop('checked', false);
+                $('#gender_eb').prop('checked', false);
+                $('#gender_eb_value').prop('disabled', true);
+            }
+            $('input[name="gender"]').val(getGender());
+        });
+        $('#gender_female').change(function() {
+            if (this.checked) {
+                $('#gender_pnts').prop('checked', false);
+                $('#gender_eb').prop('checked', false);
+                $('#gender_eb_value').prop('disabled', true);
+            }
+            $('input[name="gender"]').val(getGender());
+        });
+        $('#gender_pnts').change(function() {
+            if (this.checked) {
+                $('#gender_male').prop('checked', false);
+                $('#gender_female').prop('checked', false);
+                $('#gender_eb').prop('checked', false);
+                $('#gender_eb_value').prop('disabled', true);
+            }
+            $('input[name="gender"]').val(getGender());
+        });
+        $('#gender_eb').change(function() {
+            if (this.checked) {
+                $('#gender_male').prop('checked', false);
+                $('#gender_female').prop('checked', false);
+                $('#gender_pnts').prop('checked', false);
+                $('#gender_eb_value').prop('disabled', false);
+            }
+            $('input[name="gender"]').val(getGender());
+        });
+        $('#gender_eb_value').on('input', function(e) {
+            $('input[name="gender"]').val(e.target.value);
+        })
+
+        window. setInterval(() => {
+            console.log($('input[name="gender"]').val());
+        }, 1000);
+
+        $('.self_other_img').hover(function(e) {
             $(this).find('.lrg_img').css({'display':'fixed', 'bottom': '1%', 'right': '1%'}).toggle();
         });
     </script>

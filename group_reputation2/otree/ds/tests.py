@@ -43,7 +43,5 @@ class PlayerBot(Bot):
                 'A_from_India': random.randint(1, 6),
                 'A_from_Hong_Kong': random.randint(1, 6)
             })
-        # if 'In Task 1' in self.html:
-        #     i = self.html.index('In Task 1')
-        #     print(self.html[i:i+150])
+            
         yield (pages.Main, answers)

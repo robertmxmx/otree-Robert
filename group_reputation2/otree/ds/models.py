@@ -48,11 +48,7 @@ class Player(BasePlayer):
     )
     supporting_team = models.StringField(blank=True, label="If yes, who:")
     num_experiments = models.IntegerField(label="How many experiments have you done in MonLEE in the past?")
-    gender = models.StringField(
-        label="Gender",
-        choices=['Male', 'Female', 'Other'],
-        widget=widgets.RadioSelectHorizontal
-    )
+    gender = models.StringField(label="Gender")
     pi_classification = models.IntegerField(
         label='',
         choices=[[1, "Strongly Agree"], [2, "Agree"], [3, "Somewhat Agree"], [4, "Neither Agree Nor Disagree"],
