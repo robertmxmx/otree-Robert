@@ -7,14 +7,15 @@
 
 {% block content %}
     {% include 'task2/components/Header.html' %}
-
     {% include 'task2/components/CalculateModal.html' %}
+    <br />
 
     {% if subsession.round_number == 1 %}
     <p>
         While you are waiting for {{ subsession.taking_player }} and 
         {{ subsession.deducting_player }} to finish their decisions in Task 1, please 
-        answer the following questions:
+        answer the following questions. (You will need to press 'Calculate' for each input
+        in order to progress to the next page):
     </p>
     <ul>
         <li>
@@ -33,10 +34,12 @@
                 I guess {{ subsession.deducting_player }} will spend 
                 <input type="number" id="will_spend_field" class="form-control" 
                     style="display: inline"
-                    onkeypress="return false;"> 
+                    onkeypress="handle_enter"> 
                 <input type="hidden" name="will_spend" />
                 ECU on deductions from A.
             </p>
+            <div style="color:red">{{ form.will_spend.errors }}</div>
+            <br />
             <button type="button" class="otree-btn-next btn btn-primary" 
                 style="margin: -5px 0 0 0.25rem;" 
                 onclick="handleCalculate('will_spend_field');">
@@ -60,10 +63,12 @@
                 I think {{ subsession.deducting_player }} should spend 
                 <input type="number" id="should_spend_field" class="form-control" 
                     style="display: inline"
-                    onkeypress="return false;"> 
+                    onkeypress="handle_enter"> 
                 <input type="hidden" name="should_spend" />
                 ECU on deductions from {{ subsession.taking_player }}. 
             </p>
+            <div style="color:red">{{ form.should_spend.errors }}</div>
+            <br />
             <button type="button" class="otree-btn-next btn btn-primary" 
                 style="margin: -5px 0 0 0.25rem;"
                 onclick="handleCalculate('should_spend_field');">
@@ -100,15 +105,17 @@
             </p>
             <p>
                 What is your guess of {{ subsession.deducting_player }}'s answer in thiw question?
-                <input type="number" id="should_spend_guess_field" class="form-control" 
+                <input type="number" id="will_spend_guess_field" class="form-control" 
                     style="display: inline"
-                    onkeypress="return false;"> 
-                <input type="hidden" name="should_spend_guess" />
+                    onkeypress="handle_enter"> 
+                <input type="hidden" name="will_spend_guess" />
                 ECU 
             </p>
+            <div style="color:red">{{ form.will_spend_guess.errors }}</div>
+            <br />
             <button type="button" class="otree-btn-next btn btn-primary" 
                 style="margin: -5px 0 0 0.25rem;"
-                onclick="handleCalculate('should_spend_guess_field');">
+                onclick="handleCalculate('will_spend_guess_field');">
                 Calculate
             </button>
         </li>
@@ -128,10 +135,12 @@
                 What is your guess of {{ subsession.deducting_player }}'s answer in thiw question?
                 <input type="number" id="should_spend_guess_field" class="form-control" 
                     style="display: inline"
-                    onkeypress="return false;"> 
+                    onkeypress="handle_enter"> 
                 <input type="hidden" name="should_spend_guess" />
                 ECU 
             </p>
+            <div style="color:red">{{ form.should_spend_guess.errors }}</div>
+            <br />
             <button type="button" class="otree-btn-next btn btn-primary" 
                 style="margin: -5px 0 0 0.25rem;"
                 onclick="handleCalculate('should_spend_guess_field');">
@@ -139,7 +148,6 @@
             </button>
         </li>
     </ul>
-
     {% endif %}
     
     {% next_button %}
@@ -149,17 +157,17 @@
     <script>
         function handle_enter(event) {
             if (event.keyCode == 13 || event.which == 13) {
-                handleCalculate();
                 return false;
             }
         }
         function handleCalculate(field) {
-            var deductECU = parseFloat($(field).val());
+            var deductECU = parseFloat($('#'+field).val());
             
             const validInput = setModalContents(deductECU);
             
             if (validInput) {
-                $('input[name ="'+field+'"]').val(deductECU);
+                const name = field.replace('_field', '');
+                $('input[name ="'+name+'"]').val(deductECU);
             }
         }
     </script>

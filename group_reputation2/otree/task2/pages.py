@@ -151,23 +151,6 @@ class WaitingDecision(Page):
             return ['will_spend', 'should_spend']
         else:
             return ['will_spend_guess', 'should_spend_guess']
-            
-    def error_message(self, values):
-        error_message = 'Please enter numbers between %d and %d' % \
-            (Constants.deduct['min'], Constants.deduct['max'])
-
-        if self.round_number == 1:
-            if values['will_spend'] < Constants.deduct['min'] or \
-               values['will_spend'] > Constants.deduct['max'] or \
-               values['should_spend'] < Constants.deduct['min'] or \
-               values['should_spend'] > Constants.deduct['max']:
-               return error_message
-        else: 
-            if values['will_spend_guess'] < Constants.deduct['min'] or \
-               values['will_spend_guess'] > Constants.deduct['max'] or \
-               values['should_spend_guess'] < Constants.deduct['min'] or \
-               values['should_spend_guess'] > Constants.deduct['max']:
-               return error_message
 
 
 class CalculatePayoffs(WaitPage):

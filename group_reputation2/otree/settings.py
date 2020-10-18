@@ -15,7 +15,7 @@ SESSION_CONFIGS = [
     {
         'name': 'gr',
         'display_name': "Group Reputation",
-        'num_demo_participants': 6,
+        'num_demo_participants': 3,
         'app_sequence': [
             'start',
             'task1',
