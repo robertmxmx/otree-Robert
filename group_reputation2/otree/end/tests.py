@@ -8,5 +8,4 @@ from otree.api import Submission
 class PlayerBot(Bot):
 
     def play_round(self):
-        yield (pages.WithoutID, { 'pay_id': 'testinput' })
-        yield Submission(pages.WithID, check_html=False)
+        yield Submission(pages.End, check_html=False)
