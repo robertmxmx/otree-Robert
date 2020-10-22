@@ -6,7 +6,7 @@ import random, math
 from _myshared.constants import LOW_PERC, HIGH_PERC
 from _myshared.output import print_groups
 from _myshared.grouping import create_random_groups
-from _myshared.uploader import get_userdata
+from _myshared import uploader
 from shared import set_reduced_br, create_groups, set_roles
 
 
@@ -18,24 +18,55 @@ class Main(Page):
         if values['birth_region'] == Constants.br_info['other_val'] and values['other_br'] is None:
             return 'Other birth region was selected but not specified'
 
+
+class PayID(Page):
+    form_model = 'player'
+    form_fields = ['pay_id']
+
+    def error_message(self, values):
+        if self.player.pay_id_attempts > Constants.pay_id_allowed_attempts:
+            return """
+            You have failed to enter a correct PayID too many times.
+            """
+
+        for p in uploader.USERDATA:
+            if values['pay_id'] == p['pay_id']:
+                self.player.birth_region =  p['birth_region']
+                self.player.other_br =      p['other_br']
+                self.player.pi_q1 =         p['pi_q1']
+                self.player.pi_q2 =         p['pi_q2']
+                self.player.pi_q3 =         p['pi_q3']
+                self.player.pi_q4 =         p['pi_q4']
+                self.player.pi_q5 =         p['pi_q5']
+                self.player.pi_q6 =         p['pi_q6']
+                self.player.pi_q7 =         p['pi_q7']
+                return
+
+        self.player.pay_id_attempts += 1
+        return """
+        You have entered a PayID we do not recognize. Please try again. 
+        If you are unable to complete this stage, please send a chat message to 
+        the experimenter.
+        """
+
+
 class FormGroups(WaitPage):
     wait_for_all_groups = True
 
     def after_all_players_arrive(self):
-        userdata = get_userdata()['rows']
-
-        for idx, p in enumerate(self.subsession.get_players()):
-            p_data = userdata[idx]
-            p.birth_region = p_data['birth_region']
-            p.other_br = p_data['other_br']
-            p.pi_q1 = p_data['pi_q1']
-            p.pi_q2 = p_data['pi_q2']
-            p.pi_q3 = p_data['pi_q3']
-            p.pi_q4 = p_data['pi_q4']
-            p.pi_q5 = p_data['pi_q5']
-            p.pi_q6 = p_data['pi_q6']
-            p.pi_q7 = p_data['pi_q7']
-            p.pay_id = p_data['pay_id']
+        # userdata = get_userdata()['rows']
+        # for idx, p in enumerate(self.subsession.get_players()):
+        #     p_data = userdata[idx]
+        #     p.birth_region = p_data['birth_region']
+        #     p.other_br = p_data['other_br']
+        #     p.pi_q1 = p_data['pi_q1']
+        #     p.pi_q2 = p_data['pi_q2']
+        #     p.pi_q3 = p_data['pi_q3']
+        #     p.pi_q4 = p_data['pi_q4']
+        #     p.pi_q5 = p_data['pi_q5']
+        #     p.pi_q6 = p_data['pi_q6']
+        #     p.pi_q7 = p_data['pi_q7']
+        #     p.pay_id = p_data['pay_id']
 
         br_info = Constants.br_info
         pi_info = Constants.pi_info
@@ -107,5 +138,6 @@ class FormGroups(WaitPage):
 
 page_sequence = [
     # Main,
-    # FormGroups
+    PayID,
+    FormGroups
 ]

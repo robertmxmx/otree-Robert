@@ -4,11 +4,14 @@ from ._builtin import Bot
 from .models import Constants
 import random
 
+from _myshared import uploader
 
 class PlayerBot(Bot):
-    pass
 
-    # def play_round(self):
+    def play_round(self):
+        yield (pages.PayID, {
+            'pay_id': uploader.USERDATA[self.player.participant.id_in_session]['pay_id']
+        })
     #     yield (pages.Main, {
     #         'birth_region': 4 if self.participant.id_in_session % 3 == 0 else 1,
     #         'other_br': 'some region',
