@@ -38,27 +38,27 @@ function stripContents(data) {
     }
   });
 
-  // Ensure values are correct
-  result.forEach((e, index) => {
+  // Filter incorrect values
+  result = result.filter(e => {
     // Make sure birth region is between 1 and 15
-    if ((e.birth_region < 1) || (e.birth_region > 15)) {
-      throw new RangeError(`Error at row ${index+1}: Birth region out of range`);
+    if (isNaN(e.birth_region) ||
+      ((e.birth_region < 1) || (e.birth_region > 15)) ||
+      (e.birth_region == 15 && !e.other_br)) {
+      return false;
     }
 
     // Make sure each pi question is between 1 and 7
     const pi_labels = ['pi_q1', 'pi_q2', 'pi_q3', 'pi_q4', 
       'pi_q5', 'pi_q6', 'pi_q7'];
 
-    pi_labels.forEach(p => {
-      if ((e[p] <  1) || (e[p] > 7)) {
-        throw new RangeError(`Error at row ${index+1}: ${p} is out of range`);
-      }
-    });
+    for (const p of pi_labels) {
+      if (isNaN(e[p]) || (e[p] <  1) || (e[p] > 7)) return false;
+    }
 
     // Make sure pay_id is given
-    if (!e.pay_id) {
-      throw new ReferenceError(`Error at row ${index+1}: pay_id not given`);
-    }
+    if (!e.pay_id) return false;
+
+    return true;
   });
   
   return {
