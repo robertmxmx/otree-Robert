@@ -39,6 +39,12 @@ class Instructions2(Page):
         return r_dict
 
 
+class VideoInstructions(Page):
+
+    def is_displayed(self):
+        return self.round_number == 1
+
+
 class Instructions3(Page):
 
     def is_displayed(self):
@@ -223,6 +229,7 @@ page_sequence = [
 
     Instructions,
     Instructions2,
+    VideoInstructions,
     Instructions3,
     Instructions3a,
     Instructions4,

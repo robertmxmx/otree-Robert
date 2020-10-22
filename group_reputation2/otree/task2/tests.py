@@ -12,6 +12,7 @@ class PlayerBot(Bot):
         if self.round_number == 1:
             yield Submission(pages.Instructions, check_html=False)
             yield Submission(pages.Instructions2)
+            yield Submission(pages.VideoInstructions, check_html=False)
             yield Submission(pages.Instructions3, check_html=False)
             yield Submission(pages.Instructions3a, check_html=False)
             yield Submission(pages.Instructions4, check_html=False)
