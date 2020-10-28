@@ -29,6 +29,13 @@ class PayID(Page):
             You have failed to enter a correct PayID too many times.
             """
 
+        for p in self.subsession.get_players():
+            if p.participant.id_in_session == self.participant.id_in_session:
+                continue
+            if p.pay_id == values['pay_id']:
+                self.player.invalid_pay_id = True
+                return
+
         for p in uploader.USERDATA:
             if values['pay_id'] == p['pay_id']:
                 self.player.birth_region =  p['birth_region']
@@ -50,32 +57,35 @@ class PayID(Page):
         """
 
 
+class InvalidPayID(Page):
+
+    def is_displayed(self):
+        return self.player.invalid_pay_id
+
+    def app_after_this_page(self, upcoming_apps):
+        if 'group' not in self.participant.vars:
+            return 'end'
+
+
 class FormGroups(WaitPage):
     wait_for_all_groups = True
 
     def after_all_players_arrive(self):
-        # userdata = get_userdata()['rows']
-        # for idx, p in enumerate(self.subsession.get_players()):
-        #     p_data = userdata[idx]
-        #     p.birth_region = p_data['birth_region']
-        #     p.other_br = p_data['other_br']
-        #     p.pi_q1 = p_data['pi_q1']
-        #     p.pi_q2 = p_data['pi_q2']
-        #     p.pi_q3 = p_data['pi_q3']
-        #     p.pi_q4 = p_data['pi_q4']
-        #     p.pi_q5 = p_data['pi_q5']
-        #     p.pi_q6 = p_data['pi_q6']
-        #     p.pi_q7 = p_data['pi_q7']
-        #     p.pay_id = p_data['pay_id']
-
         br_info = Constants.br_info
         pi_info = Constants.pi_info
         num_per_group = Constants.players_per_group
 
         # find the political ideology of players
+        scores = []
+        valid_players = []
         for p in self.subsession.get_players():
+            if None in (p.pi_q1, p.pi_q2, p.pi_q3, p.pi_q4, \
+                p.pi_q5, p.pi_q6, p.pi_q7):
+                continue
             p.set_pi_score()
-        scores = [p.pi_score for p in self.subsession.get_players()]
+            scores.append(p.pi_score)
+            valid_players.append(p)
+
         scores.sort()
         # subjects are categorised by political ideology. those with highest scores
         # are coded 1 and those with lowest scores 3, with neutrals as 2.
@@ -85,7 +95,7 @@ class FormGroups(WaitPage):
         # condition
         low_per = scores[math.ceil(LOW_PERC * len(scores)) - 1]
         high_per = scores[math.ceil(HIGH_PERC * len(scores)) - 1]
-        for p in self.subsession.get_players():
+        for p in valid_players:
             if p.pi_score >= high_per:
                 p.pol_ideology = 1
             elif p.pi_score <= low_per:
@@ -95,7 +105,7 @@ class FormGroups(WaitPage):
 
         # setup array
         players = []  # holds players that are still left to sort
-        for p in self.subsession.get_players():
+        for p in valid_players:
             players.append({
                 'id': p.participant.id_in_session,
                 'birth_region': p.birth_region,
@@ -123,7 +133,7 @@ class FormGroups(WaitPage):
         # set participant data so this shared across apps (tasks)
         for i in range(len(final_groups)):
             for p in final_groups[i]:
-                for player in self.subsession.get_players():
+                for player in valid_players:
                     if player.participant.id_in_session == p['id']:
                         player.rl = p['role']
                         player.sorted_by = p['sorted_by']
@@ -135,9 +145,14 @@ class FormGroups(WaitPage):
 
         print_groups(final_groups)
 
+    def app_after_this_page(self, upcoming_apps):
+        if 'group' not in self.participant.vars:
+            return 'end'
+
 
 page_sequence = [
     # Main,
     PayID,
-    FormGroups
+    InvalidPayID,
+    FormGroups,
 ]

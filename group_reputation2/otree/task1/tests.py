@@ -3,15 +3,21 @@ from . import pages
 from ._builtin import Bot
 from .models import Constants
 import random
+from otree.api import Submission
 
 from _myshared import uploader
 
 class PlayerBot(Bot):
 
     def play_round(self):
-        yield (pages.PayID, {
-            'pay_id': uploader.USERDATA[self.player.participant.id_in_session]['pay_id']
-        })
+        if self.participant.id_in_session == 2:
+            yield (pages.PayID, { 'pay_id': 'player1' })
+            yield Submission(pages.InvalidPayID, check_html=False)
+        else:
+            yield (pages.PayID, {
+                'pay_id': uploader.USERDATA[self.participant.id_in_session-1]['pay_id']
+            })
+
     #     yield (pages.Main, {
     #         'birth_region': 4 if self.participant.id_in_session % 3 == 0 else 1,
     #         'other_br': 'some region',

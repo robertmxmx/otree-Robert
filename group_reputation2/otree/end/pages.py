@@ -4,6 +4,9 @@ from .models import Constants
 
 class End(Page):
 
+    def is_displayed(self):
+        return 'group' in self.participant.vars
+
     def vars_for_template(self):
         chosen_task = self.subsession.chosen_task
         task2_payoff = c(self.participant.vars['task2_payoffs'][chosen_task-1])
@@ -16,7 +19,15 @@ class End(Page):
             'task2_payoff': task2_payoff.to_real_world_currency(self.session),
             'bonus': bonus.to_real_world_currency(self.session) if bonus is not None else None
         }
+        
+
+class UngroupedEnd(Page):
+
+    def is_displayed(self):
+        return 'group' not in self.participant.vars
+
 
 page_sequence = [
-    End
+    End,
+    UngroupedEnd
 ]

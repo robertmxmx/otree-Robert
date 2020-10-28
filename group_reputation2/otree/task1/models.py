@@ -63,6 +63,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     pay_id = models.StringField(label='PayID')
     pay_id_attempts = models.IntegerField(initial=0)
+    invalid_pay_id = models.BooleanField(initial=False)
     
     birth_region = models.IntegerField(
         label='In what region were you born?',

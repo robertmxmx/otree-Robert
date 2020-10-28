@@ -9,6 +9,9 @@ import random
 class PlayerBot(Bot):
 
     def play_round(self):
+        if 'group' not in self.participant.vars:
+            return
+            
         if self.round_number == 1:
             yield Submission(pages.Instructions, check_html=False)
             yield Submission(pages.Instructions2)

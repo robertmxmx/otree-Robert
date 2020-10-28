@@ -8,6 +8,9 @@ import random
 class PlayerBot(Bot):
 
     def play_round(self):
+        if 'group' not in self.participant.vars:
+            return
+            
         answers = {
             'area_of_study': 'Physics',
             'supporting_competition': 2,
