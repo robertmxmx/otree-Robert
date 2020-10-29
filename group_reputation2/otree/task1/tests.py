@@ -11,7 +11,7 @@ class PlayerBot(Bot):
 
     def play_round(self):
         if self.participant.id_in_session == 2:
-            yield (pages.PayID, { 'pay_id': 'player1' })
+            yield (pages.PayID, { 'pay_id': 'p1' })
             yield Submission(pages.InvalidPayID, check_html=False)
         else:
             yield (pages.PayID, {

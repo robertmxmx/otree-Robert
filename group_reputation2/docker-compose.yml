@@ -17,6 +17,20 @@ services:
             - redis
             - db
         restart: always
+    otree_consent:
+        build: ./otree_consent
+        environment:
+            - REDIS_URL=redis://redis:6379
+            - DATABASE_URL=postgres://postgres:otreee@db2:5432/django_db
+            - OTREE_ADMIN_PASSWORD=otreee
+            - OTREE_PRODUCTION=1
+            - OTREE_AUTH_LEVEL=STUDY
+        ports:
+            - 8001:8001
+        depends_on: 
+            - redis
+            - db2
+        restart: always
     uploader:
         build: ./uploader
         environment:
@@ -28,6 +42,12 @@ services:
     redis:
         image: "redis:alpine"
     db:
+        image: "postgres:alpine"
+        restart: always
+        environment:
+            - POSTGRES_DB=django_db
+            - POSTGRES_PASSWORD=otreee
+    db2:
         image: "postgres:alpine"
         restart: always
         environment:
