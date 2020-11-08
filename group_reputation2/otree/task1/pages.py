@@ -112,8 +112,10 @@ class FormGroups(WaitPage):
                 'pol_ideology': p.pol_ideology
             })
 
-        # for the regions that have players with less than Constants.min_br set them to the other type
-        players = set_reduced_br(players.copy(), 3, br_info['other_val'])
+        # For the regions that have number of players that are less than BR_THRESHOLD, 
+        # set them to the other type
+        BR_THRESHOLD = 3
+        players = set_reduced_br(players.copy(), BR_THRESHOLD, br_info['other_val'])
         random.shuffle(players)
 
         # sort based on birth region
