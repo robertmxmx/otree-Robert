@@ -71,10 +71,11 @@ class Group(BaseGroup):
 
         # Set payoffs for B/C guess
         if self.round_number == 1:
-            if taking_player.chose_to_take:
-                if other_player.will_spend == deducting_player.deduct_amount:
-                    other_player.payoff += Constants.additional_amount
-                    other_player.participant.vars['bonus'] = Constants.additional_amount
+            if other_player.will_spend == deducting_player.deduct_amount:
+                other_player.payoff += Constants.additional_amount
+                other_player.participant.vars['bonus'] = Constants.additional_amount
+            else:
+                other_player.participant.vars['bonus'] = 0
         else:
             previous_other_player = deducting_player.in_round(self.round_number - 1)
             bonus_multiplier = 0
@@ -122,7 +123,7 @@ class Player(BasePlayer):
     comp5_wrong = models.IntegerField(initial=0)
     chose_to_take = models.BooleanField()
     payoff_after_take = models.CurrencyField()
-    deduct_amount = models.CurrencyField(min=Constants.deduct['min'], max=Constants.deduct['max'])
+    deduct_amount = models.CurrencyField(initial=0, min=Constants.deduct['min'], max=Constants.deduct['max'])
 
     will_spend = models.CurrencyField(min=Constants.deduct['min'], max=Constants.deduct['max'])
     should_spend = models.CurrencyField(min=Constants.deduct['min'], max=Constants.deduct['max'])

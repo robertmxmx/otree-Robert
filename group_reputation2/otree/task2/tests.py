@@ -34,9 +34,9 @@ class PlayerBot(Bot):
             yield Submission(pages.DeductingDecision, {'deduct_amount': 0}, check_html=False)
         else:
             if self.round_number == 1:
-                yield (pages.WaitingDecision, {'will_spend': 0, 'should_spend': 10})
+                yield (pages.WaitingDecision, {'will_spend': 1, 'should_spend': 10})
             else:
-                yield (pages.WaitingDecision, {'will_spend_guess': 3, 'should_spend_guess': 2})
+                yield (pages.WaitingDecision, {'will_spend_guess': 1, 'should_spend_guess': 10})
 
         yield pages.Feedback
 

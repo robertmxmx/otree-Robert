@@ -22,9 +22,9 @@
             <li>
                 Task {{ chosen_task }}: {{ task2_payoff }}
             </li>
-            {% if bonus %}
+            {% if bonus != None %}
             <li>
-                Task 1 bonus: {{ bonus }}
+                Task {{ chosen_task }} bonus: {{ bonus }}
             </li>
             {% endif %}
         </ul>

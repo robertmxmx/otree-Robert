@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+{% if player.accept %}
+    <p>
+        Thank you. Please send a message to the experimenter in Zoom, with the words 
+        "consent given".
+    </p>
+    <p>
+        You can now close this window, and the experimenter will shortly give 
+        instructions for the experiment.
+    </p>
+{% else %}
+    <p>
+        Thank you for your response. Since you do not consent to participate, you 
+        may now close this window leave the Zoom call whenever you are ready.
+    </p>
+{% endif %}
+{% endblock %}

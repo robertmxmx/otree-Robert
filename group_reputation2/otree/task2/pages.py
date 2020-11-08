@@ -190,7 +190,7 @@ class Feedback(Page):
             if ecu_taken:
                 content += '''<p>%s chose to spend %d ECU on deductions. This had the effect of reducing %s's 
                     endowment by %d ECU, and reducing %s's endowment by %d ECU''' % (dp, da, tp, mult_da, dp, da)
-            content += '<p>Final earnings for this subtask are:</p>'
+            content += '<p>Final earnings for this task are:</p>'
             content += create_html_table(fp)
 
             self.participant.vars['task2a_feedback'] = content
