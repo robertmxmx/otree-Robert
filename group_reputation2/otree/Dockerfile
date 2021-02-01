@@ -12,4 +12,4 @@ COPY . .
 
 # CMD [ "otree", "devserver", "0.0.0.0:8000" ]
 
-CMD sh -c 'yes | otree resetdb && otree prodserver'
+CMD sh -c 'yes | otree resetdb && otree prodserver 0.0.0.0:8000'
