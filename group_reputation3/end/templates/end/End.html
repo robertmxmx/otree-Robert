@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    End of experiment
+{% endblock %}
+
+{% block content %}<div>
+    <p>
+        Thank you for your participation in today’s experiment.
+    </p>
+    <p>
+        Task {{ chosen_task }} was randomly chosen for payment.
+    </p>
+    <p>
+        Your total earnings are: 
+        
+        <ul>
+            <li>
+                Show up fee: {{ participation_fee }}
+            </li>
+            <li>
+                Task {{ chosen_task }}: {{ task2_payoff }}
+            </li>
+            {% if bonus != None %}
+            <li>
+                Task {{ chosen_task }} bonus: {{ bonus }}
+            </li>
+            {% endif %}
+        </ul>
+
+        Total: {{ participant.payoff_plus_participation_fee }}
+    </p>
+    <p>
+        Your participant id is: <b>{{ participant.code }}</b>
+    </p>
+    <p>
+        Please send a private chat message to the experimenter with your participant id, and 
+        we will arrange payment.
+    </p>
+    <p>
+        Remember to have your camera on and your photo id ready.
+    </p>
+{% endblock %}

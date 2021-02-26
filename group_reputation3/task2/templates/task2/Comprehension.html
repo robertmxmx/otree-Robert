@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task 1 - Comprehension Questions
+{% endblock %}
+
+{% block content %}
+    {% include 'task2/components/Header.html' %}
+    <br />
+    <p>
+        Please answer the following questions to check you understand the 
+        procedure. N.B. below the questions, we repeat the main instructions 
+        for your reference.
+    </p>
+    <ol>
+        {% for field in form %}
+        <li>{% formfield field %}</li>
+        {% endfor %}
+    </ol>
+    {% next_button %}
+    {% include 'task2/components/instructions/3shortened.html' %}
+{% endblock %}
+
+

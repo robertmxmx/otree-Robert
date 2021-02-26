@@ -1,0 +1,79 @@
+{% load otree static %}
+{% include 'task2/components/CalculateModal.html' %}
+
+<div class="card bg-light instructions">
+    <div class="card-body">
+        <h3>
+            Instructions (continued)
+        </h3>
+        <h4>
+            Task 1
+        </h4>
+        <p>
+            <b>A's decision:</b> A can decide whether to take 100 ECU from B.
+        </p>
+        <p>
+            <b>B's decision:</b> If A takes, B can choose to deduct ECU from A.
+            <ul>
+                <li>
+                    To deduct 12 ECU from A, B must pay 1 ECU.
+                </li>
+            </ul>
+        </p>
+        <p>
+            <b>C's decision:</b> C makes no decision.
+        </p>
+        <p>
+            Below is a calculator you can use to experiment with different levels of deduction, to see
+            what would happen.
+        </p>
+        <div class="card bg-light instructions">
+            <div class="card-body">
+                If a participant spends 
+                <input type="number" id="ins_num_field" class="form-control" style="display: inline"
+                   onkeypress="return handle_enter(event);">
+                ECU on deductions, what will happen? 
+                <button type="button" class="otree-btn-next btn btn-primary" style="margin: -5px 0 0 0.25rem;"
+                    onclick="handleCalculate();">Calculate</button>
+            </div>
+        </div><br />
+        <h4>
+            Task 2
+        </h4>
+        <ul>
+            <li>
+                You will be in the same group as in Task 1.
+            </li>
+            <li>
+                This task is the same as Task 1, except B and C swap roles.
+            </li>
+            {% if session.config.rep_condition %}
+            <li>
+                C will learn about the composition of the group after this task is completed.
+            </li>
+            {% endif %}
+            {% if session.config.deterrence %}
+            <li>
+                A will learn the outcome of Task 1 before beginning Task 2.
+            </li>
+            {% else %}
+            <li>
+                A will not learn the outcome of Task 2 until the experiment is over.
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<script>
+    function handle_enter(event) {
+        if (event.keyCode == 13 || event.which == 13) {
+            handleCalculate();
+            return false;
+        }
+    }
+    function handleCalculate() {
+        var deductECU = parseFloat($('#ins_num_field').val());
+        setModalContents(deductECU);
+    }
+</script>

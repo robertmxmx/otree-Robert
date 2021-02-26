@@ -1,0 +1,101 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Task {{ subsession.round_number }} Decision
+{% endblock %}
+
+{% block content %}
+    {% include 'task2/components/Header.html' %}
+
+    <div  id="myModal" class="modal">
+        <div class="modal-content">
+            <div id="modalContent" class="w3-container">
+                <div id="confirm-prompt">
+                    <p>
+                        You have decided to spend <span class="result1"></span> ECU on deductions in the scenario
+                        where {{ taking_player }} takes ECU from you. This will have net effect of
+                        reducing {{ taking_player }}’s endowment by <span class="result2"></span> ECU, and your
+                        endowment by <span class="result1"></span> ECU. Please confirm this is correct.
+                    </p>
+                    <br><br>
+                    <div align="right">
+                        <button class="otree-btn-next btn btn-primary">Yes, proceed</button>
+                        <button type="button" class="otree-btn-next btn btn-primary"
+                            onclick="document.getElementById('myModal').style.display='none';">Revise my decision</button>
+                    </div>
+                </div>
+                <div id="error-msg">
+                    <p>
+                        Please enter a number between {{ Constants.deduct.min }} and {{ Constants.deduct.max }}.
+                    </p>
+                    <br><br>
+                    <div align="right">
+                        <button type="button" class="otree-btn-next btn btn-primary"
+                            onclick="document.getElementById('myModal').style.display='none';">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p>
+        If {{ taking_player }} chooses to take from you, how much will you spend on deducting ECU
+        from {{ taking_player }}?
+    </p>
+    <input type="number" id="deduct_ecu" class="form-control" style="margin-top: 0.375rem;display: inline"
+        onkeypress="return handle_enter(event);">
+    <input type="hidden" name="deduct_amount" />
+    <button type="button" style="margin-bottom: 0.3rem;" class="otree-btn-next btn btn-primary"
+        onclick="fill_modal();">Calculate</button>
+    <br><br>
+
+    <div class="card bg-light instructions">
+    <div class="card-body">
+        {% include 'task2/components/BrPiInfo.html' %}     
+        {% if subsession.round_number == 1 %}   
+            {% if session.config.deterrence %}
+            <p>
+                After this task is completed, A will receive feedback on the outcome before 
+                beginning Task 2.
+            </p>
+            {% else %}
+            <p>
+                After this task is completed, no feedback will be received. You will proceed 
+                straight to Task 2. Feedback will be provided on both tasks at the end.
+            </p>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        // this handles when the enter button is pressed while inside the deduction field
+        function handle_enter(event) {
+            if (event.keyCode == 13 || event.which == 13) {
+                fill_modal();
+                return false;
+            }
+        }
+        function fill_modal() {
+            var deductECU = parseFloat($('#deduct_ecu').val());
+
+            if (deductECU >= {{ Constants.deduct.min }} && deductECU <= {{ Constants.deduct.max }}) {
+                $('input[name ="deduct_amount"]').val(deductECU);
+                $(".result1").text(deductECU);
+                $(".result2").text({{ Constants.deduct.multiplier }}*deductECU);
+                $('#confirm-prompt').css('display', 'block');
+                $('#error-msg').css('display', 'none');
+            } else {
+                $('#confirm-prompt').css('display', 'none');
+                $('#error-msg').css('display', 'block');
+            }
+
+            $('#myModal').css('display', 'block');
+        }
+    </script>
+{% endblock %}
+
+

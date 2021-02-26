@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    PayID
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please enter your PayID to continue. Note, this must be the same 
+        PayID you used when you completed the initial screening survey, 
+        otherwise you will be ineligible to participate.
+    </p>
+    {% formfield player.pay_id %}
+
+    {% next_button %}
+
+{% endblock %}
