@@ -22,24 +22,6 @@ class PayID(Page):
     form_model = 'player'
     form_fields = ['pay_id']
 
-    def error_message(self, values):
-        for p in self.subsession.get_players():
-            if p.participant.id_in_session == self.participant.id_in_session:
-                continue
-            if p.pay_id == values['pay_id']:
-                self.player.invalid_pay_id = True
-                return
-
-class InvalidPayID(Page):
-
-    def is_displayed(self):
-        return self.player.invalid_pay_id
-
-    def app_after_this_page(self, upcoming_apps):
-        if 'group' not in self.participant.vars:
-            return 'end'
-
-
 class FormGroups(WaitPage):
     wait_for_all_groups = True
 
@@ -128,6 +110,5 @@ class FormGroups(WaitPage):
 page_sequence = [
     Main,
     PayID,
-    InvalidPayID,
     FormGroups,
 ]
