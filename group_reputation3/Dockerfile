@@ -4,6 +4,8 @@ COPY requirements*.txt /
 RUN pip install -r /requirements.txt && \
     rm /requirements*.txt
 
+ENV OTREE_PRODUCTION 1
+
 WORKDIR /usr/src/app
 COPY . .
 
