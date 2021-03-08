@@ -100,11 +100,13 @@ class Player(BasePlayer):
     )
     comp2 = models.BooleanField(
         label='In Task 2, will A have the opportunity to take ECU from C?',
-        widget=widgets.RadioSelectHorizontal
+        widget=widgets.RadioSelectHorizontal,
+        choices=[[True, 'True'], [False, 'False']]
     )
     comp3 = models.BooleanField(
         label='In Task 2, before making a decision, will A learn how B reacted to A’s decision in Task 1?',
-        widget=widgets.RadioSelectHorizontal
+        widget=widgets.RadioSelectHorizontal,
+        choices=[[True, 'True'], [False, 'False']]
     )
     comp4 = models.IntegerField(
         label='When will C learn about the membership of the group?',

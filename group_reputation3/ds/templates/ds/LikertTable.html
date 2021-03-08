@@ -2,12 +2,12 @@
 <table class="likert-table">
     <tr>
     {% for choice in field %}
-        <th>{{ choice.choice_label }}</th>
+        <th>{{ choice.label }}</th>
     {% endfor %}
     </tr>
     <tr>
     {% for choice in field %}
-        <td>&nbsp{{ choice.tag }}</td>
+        <td>&nbsp{{ choice }}</td>
     {% endfor %}
     </tr>
 </table>

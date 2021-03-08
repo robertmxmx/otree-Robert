@@ -31,7 +31,7 @@
         {% if player.pi_class %}
         <li>
             In Task 1, you were classified as relatively {{ player.pi_class }}. Do you agree with this classification?
-            {% with form.pi_classification as field %}
+            {% with field=form.pi_classification %}
             {% include 'ds/LikertTable.html' %}
             {% endwith %}
         </li>
@@ -39,13 +39,17 @@
         <br>
 
         <li>
-            {% with field=form.similarity1 role=rel_ques_roles.0 %}
+            {% with field=form.similarity1 %}
+            {% with role=rel_ques_roles.0 %}
             {% include 'ds/RelQuestion.html' %}
+            {% endwith %}
             {% endwith %}
         </li>
         <li>
-            {% with field=form.similarity2 role=rel_ques_roles.1 %}
+            {% with field=form.similarity2 %}
+            {% with role=rel_ques_roles.1 %}
             {% include 'ds/RelQuestion.html' %}
+            {% endwith %}
             {% endwith %}
         </li>
 
@@ -54,22 +58,22 @@
             Participants B and C were from the same group. Please indicate below how likely you think it is that
             they came from each of the regions listed below.
             <ul>
-                {% with form.BC_from_China as field %}
+                {% with field=form.BC_from_China %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
-                {% with form.BC_from_Malaysia as field %}
+                {% with field=form.BC_from_Malaysia %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
-                {% with form.BC_from_Australia as field %}
+                {% with field=form.BC_from_Australia %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
-                {% with form.BC_from_Singapore as field %}
+                {% with field=form.BC_from_Singapore %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
-                {% with form.BC_from_India as field %}
+                {% with field=form.BC_from_India %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
-                {% with form.BC_from_Hong_Kong as field %}
+                {% with field=form.BC_from_Hong_Kong %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
             </ul>
@@ -80,22 +84,22 @@
         <li>
             Please indicate how likely you think it is that Participant A came from each of the regions listed below:
             <ul>
-                {% with form.A_from_China as field %}
+                {% with field=form.A_from_China %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
-                {% with form.A_from_Malaysia as field %}
+                {% with field=form.A_from_Malaysia %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
-                {% with form.A_from_Australia as field %}
+                {% with field=form.A_from_Australia %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
-                {% with form.A_from_Singapore as field %}
+                {% with field=form.A_from_Singapore %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
-                {% with form.A_from_India as field %}
+                {% with field=form.A_from_India %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
-                {% with form.A_from_Hong_Kong as field %}
+                {% with field=form.A_from_Hong_Kong %}
                 <li>{% include 'ds/LikertTable.html' %}</li>
                 {% endwith %}
             </ul>

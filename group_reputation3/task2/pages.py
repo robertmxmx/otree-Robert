@@ -82,29 +82,30 @@ class Comprehension(Page):
             return ['comp1', 'comp2', 'comp3', 'comp5']
 
     def error_message(self, values):
-        errs = []
-        # question 1
+        incorrectqnums = []
+
         if values['comp1'] != 1:
-            errs.append('Question 1 is incorrect')
+            incorrectqnums.append('1')
             self.player.comp1_wrong += 1
-        # question 2
+
         if values['comp2'] is not True:
-            errs.append('Question 2 is incorrect')
+            incorrectqnums.append('2')
             self.player.comp2_wrong += 1
-        # question 3
+
         if self.session.config['deterrence'] != values['comp3']:
-            errs.append('Question 3 is incorrect')
+            incorrectqnums.append('3')
             self.player.comp3_wrong += 1
-        # question 4
+
         if self.session.config['rep_condition'] and values['comp4'] != 2:
-            errs.append('Question 4 is incorrect')
+            incorrectqnums.append('4')
             self.player.comp4_wrong += 1
-        # question 5
+
         if values['comp5'] != 36:
-            errs.append('Question 5 is incorrect')
+            incorrectqnums.append('5')
             self.player.comp5_wrong += 1
 
-        return errs
+        if len(incorrectqnums) != 0:
+            return 'The following questions are incorrect: ' + ', '.join(incorrectqnums)
 
 
 class Commencement(Page):
