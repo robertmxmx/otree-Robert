@@ -41,13 +41,11 @@
                 <input type="hidden" name="will_spend" />
                 ECU on deductions from A.
             </p>
-            <div style="color:red">{{ form.will_spend.errors }}</div>
-            <br />
-            <button type="button" class="otree-btn-next btn btn-primary" 
-                style="margin: -5px 0 0 0.25rem;" 
-                onclick="handleCalculate('will_spend_field');">
-                Calculate
-            </button>
+            {% with field_control=form.will_spend %}
+            {% with field_name='will_spend_field' %}
+                {% include 'task2/components/ECUField.html' %}
+            {% endwith %}
+            {% endwith %}
         </li>
         <li>      
             <p>
@@ -73,13 +71,11 @@
                 <input type="hidden" name="should_spend" />
                 ECU on deductions from {{ subsession.taking_player }}. 
             </p>
-            <div style="color:red">{{ form.should_spend.errors }}</div>
-            <br />
-            <button type="button" class="otree-btn-next btn btn-primary" 
-                style="margin: -5px 0 0 0.25rem;"
-                onclick="handleCalculate('should_spend_field');">
-                Calculate
-            </button>
+            {% with field_control=form.should_spend %}
+            {% with field_name='should_spend_field' %}
+                {% include 'task2/components/ECUField.html' %}
+            {% endwith %}
+            {% endwith %}
         </li>       
     </ul>
     {% else %}
@@ -121,13 +117,11 @@
                 <input type="hidden" name="will_spend_guess" />
                 ECU 
             </p>
-            <div style="color:red">{{ form.will_spend_guess.errors }}</div>
-            <br />
-            <button type="button" class="otree-btn-next btn btn-primary" 
-                style="margin: -5px 0 0 0.25rem;"
-                onclick="handleCalculate('will_spend_guess_field');">
-                Calculate
-            </button>
+            {% with field_control=form.will_spend_guess %}
+            {% with field_name='will_spend_guess_field' %}
+                {% include 'task2/components/ECUField.html' %}
+            {% endwith %}
+            {% endwith %}
         </li>
     
         <li>
@@ -152,13 +146,11 @@
                 <input type="hidden" name="should_spend_guess" />
                 ECU 
             </p>
-            <div style="color:red">{{ form.should_spend_guess.errors }}</div>
-            <br />
-            <button type="button" class="otree-btn-next btn btn-primary" 
-                style="margin: -5px 0 0 0.25rem;"
-                onclick="handleCalculate('should_spend_guess_field');">
-                Calculate
-            </button>
+            {% with field_control=form.should_spend_guess %}
+            {% with field_name='should_spend_guess_field' %}
+                {% include 'task2/components/ECUField.html' %}
+            {% endwith %}
+            {% endwith %}
         </li>
     </ul>
     {% endif %}

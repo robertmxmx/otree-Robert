@@ -30,7 +30,8 @@ class Main(Page):
         }
 
     def error_message(self, values):
-        if values['supporting_competition'] != 4 and values['supporting_team'] is None:
+        if values['supporting_competition'] != 4 and \
+            (values['supporting_team'] is None or values['supporting_team'] == ''):
             return 'A competition was selected but a team was not specified'
 
 

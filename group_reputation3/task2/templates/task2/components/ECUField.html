@@ -1,0 +1,14 @@
+{% comment %} 
+    TODO: Possibly change to inline?
+{% endcomment %}
+<div>
+    {% if field_control.errors %}
+        <div style="color:red">{{ field_control.errors.0 }}</div>
+    {% endif %}
+    <br />
+    <button type="button" class="otree-btn-next btn btn-primary" 
+        style="margin: -5px 0 0 0.25rem;" 
+        onclick="handleCalculate('{{ field_name }}');">
+        Calculate
+    </button>
+</div>
