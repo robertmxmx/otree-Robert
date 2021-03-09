@@ -32,9 +32,12 @@
             </p>
             <p>
                 I guess {{ subsession.deducting_player }} <b>will spend</b> 
-                <input type="number" id="will_spend_field" class="form-control" 
-                    style="display: inline"
-                    onkeypress="handle_enter"> 
+                <input 
+                    type="number" 
+                    id="will_spend_field" 
+                    class="form-control inline-number-field" 
+                    onkeypress="handle_enter"
+                > 
                 <input type="hidden" name="will_spend" />
                 ECU on deductions from A.
             </p>
@@ -61,9 +64,12 @@
             </p>
             <p>
                 I think {{ subsession.deducting_player }} <b>should spend</b> 
-                <input type="number" id="should_spend_field" class="form-control" 
-                    style="display: inline"
-                    onkeypress="handle_enter"> 
+                <input 
+                    type="number" 
+                    id="should_spend_field" 
+                    class="form-control inline-number-field" 
+                    onkeypress="handle_enter"
+                > 
                 <input type="hidden" name="should_spend" />
                 ECU on deductions from {{ subsession.taking_player }}. 
             </p>
@@ -106,9 +112,12 @@
             </p>
             <p>
                 What is your guess of {{ subsession.deducting_player }}'s answer in this question?
-                <input type="number" id="will_spend_guess_field" class="form-control" 
-                    style="display: inline"
-                    onkeypress="handle_enter"> 
+                <input 
+                    type="number" 
+                    id="will_spend_guess_field" 
+                    class="form-control inline-number-field" 
+                    onkeypress="handle_enter"
+                > 
                 <input type="hidden" name="will_spend_guess" />
                 ECU 
             </p>
@@ -134,9 +143,12 @@
             </p>
             <p>
                 What is your guess of {{ subsession.deducting_player }}'s answer in this question?
-                <input type="number" id="should_spend_guess_field" class="form-control" 
-                    style="display: inline"
-                    onkeypress="handle_enter"> 
+                <input 
+                    type="number" 
+                    id="should_spend_guess_field" 
+                    class="form-control inline-number-field" 
+                    onkeypress="handle_enter"
+                > 
                 <input type="hidden" name="should_spend_guess" />
                 ECU 
             </p>

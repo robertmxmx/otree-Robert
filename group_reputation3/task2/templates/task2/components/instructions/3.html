@@ -81,8 +81,12 @@
         </p>
         <div class="card bg-light instructions">
             <div class="card-body">
-                <input type="number" id="ins_num_field" class="form-control" style="display: inline"
-                   onkeypress="return handle_enter(event);">
+                <input 
+                    type="number" 
+                    id="ins_num_field" 
+                    class="form-control inline-number-field" 
+                   onkeypress="return handle_enter(event);"
+                >
                 <button type="button" class="otree-btn-next btn btn-primary" style="margin: -5px 0 0 0.25rem;"
                     onclick="handleCalculate();">Calculate</button>
             </div>

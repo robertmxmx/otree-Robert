@@ -14,7 +14,8 @@ class Main(Page):
     form_fields = ['birth_region', 'other_br', 'pi_q1', 'pi_q2', 'pi_q3', 'pi_q4', 'pi_q5', 'pi_q6', 'pi_q7']
 
     def error_message(self, values):
-        if values['birth_region'] == Constants.br_info['other_val'] and values['other_br'] is None:
+        if values['birth_region'] == Constants.br_info['other_val'] \
+            and (values['other_br'] is None or values['other_br'] == ''):
             return 'Other birth region was selected but not specified'
 
 
