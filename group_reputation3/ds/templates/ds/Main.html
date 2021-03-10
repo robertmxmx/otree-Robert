@@ -15,7 +15,6 @@
         </li>
         <li>{% formfield player.num_experiments %}</li>
         <li>
-            {% comment %} {% formfield player.gender %} {% endcomment %}
             <div>Gender</div>
             <input type="hidden" name="gender" />
 
@@ -23,7 +22,13 @@
             <label><input type="checkbox" id="gender_female" /> Female</label><br />
             <label><input type="checkbox" id="gender_pnts" /> Prefer not to say</label><br />
             <label><input type="checkbox" id="gender_eb" /> [Enter below]</label>
-            <input type="text" id="gender_eb_value" class="form-control" disabled/> 
+            <input 
+                disabled
+                type="text" 
+                id="gender_eb_value" 
+                class="form-control" 
+                style="margin-top: .6rem"
+            /> 
             {% if form.gender.errors %}
                 <div style="color:red">{{ form.gender.errors.0 }}</div>
             {% endif %}
