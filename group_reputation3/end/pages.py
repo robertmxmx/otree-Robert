@@ -5,7 +5,8 @@ from .models import Constants
 class End(Page):
 
     def is_displayed(self):
-        return 'group' in self.participant.vars
+        return not self.participant.vars['droppedout'] and \
+            'group' in self.participant.vars
 
     def vars_for_template(self):
         chosen_task = self.subsession.chosen_task
@@ -24,7 +25,8 @@ class End(Page):
 class UngroupedEnd(Page):
 
     def is_displayed(self):
-        return 'group' not in self.participant.vars
+        return not self.participant.vars['droppedout'] and \
+            'group' not in self.participant.vars
 
 
 page_sequence = [

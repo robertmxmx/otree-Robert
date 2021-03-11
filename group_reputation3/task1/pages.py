@@ -35,8 +35,9 @@ class FormGroups(WaitPage):
         scores = []
         valid_players = []
         for p in self.subsession.get_players():
-            if None in (p.pi_q1, p.pi_q2, p.pi_q3, p.pi_q4, \
-                p.pi_q5, p.pi_q6, p.pi_q7):
+            print(p.participant.vars)
+            if p.participant.vars['droppedout'] or \
+                None in (p.pi_q1, p.pi_q2, p.pi_q3, p.pi_q4, p.pi_q5, p.pi_q6, p.pi_q7):
                 continue
             p.set_pi_score()
             scores.append(p.pi_score)

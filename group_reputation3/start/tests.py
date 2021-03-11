@@ -8,5 +8,6 @@ from otree.api import Submission
 class PlayerBot(Bot):
 
     def play_round(self):
+        yield (pages.Consent, { 'accept': True })
         yield Submission(pages.Welcome, check_html=False)
         yield Submission(pages.InternetRequirement, check_html=False)

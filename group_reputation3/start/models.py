@@ -18,4 +18,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    accept = models.BooleanField(
+        doc="""Whether subject accepts the consent form""",
+        widget=widgets.RadioSelect,
+        choices=[[True, 'Accept'], [False, 'Reject']]
+    )
