@@ -10,7 +10,7 @@ from _myshared import uploader
 class PlayerBot(Bot):
 
     def play_round(self):
-        yield (pages.Main, {
+        yield (pages.InitialSurvey, {
             'birth_region': 3,
             'pi_q1': 1,
             'pi_q2': 1,

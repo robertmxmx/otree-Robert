@@ -19,6 +19,11 @@
             <li>
                 Show up fee: {{ participation_fee }}
             </li>
+            {% if survey_bonus != None %}
+            <li>
+                Survey Task: {{ survey_bonus }}
+            </li>
+            {% endif %}
             <li>
                 Task {{ chosen_task }}: {{ task2_payoff }}
             </li>

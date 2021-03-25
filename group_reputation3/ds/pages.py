@@ -3,7 +3,7 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class Main(Page):
+class ExitSurvey(Page):
     form_model = 'player'
 
     def get_form_fields(self):
@@ -36,5 +36,5 @@ class Main(Page):
 
 
 page_sequence = [
-    Main
+    ExitSurvey
 ]

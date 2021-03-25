@@ -20,4 +20,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    final_payoff = models.FloatField()

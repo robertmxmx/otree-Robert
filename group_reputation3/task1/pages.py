@@ -9,14 +9,24 @@ from _myshared.grouping import create_random_groups
 from shared import set_reduced_br, create_groups, set_roles
 
 
-class Main(Page):
+class InitialSurvey(Page):
     form_model = 'player'
     form_fields = ['birth_region', 'other_br', 'pi_q1', 'pi_q2', 'pi_q3', 'pi_q4', 'pi_q5', 'pi_q6', 'pi_q7']
+
+    def vars_for_template(self):
+        return {
+            'survey_bonus': c(Constants.survey_bonus/self.session.config['real_world_currency_per_point']) \
+                .to_real_world_currency(self.session)
+        }
 
     def error_message(self, values):
         if values['birth_region'] == Constants.br_info['other_val'] \
             and (values['other_br'] is None or values['other_br'] == ''):
             return 'Other birth region was selected but not specified'
+    
+    def before_next_page(self):
+        self.player.participant.vars['survey_bonus'] = \
+            Constants.survey_bonus / self.session.config['real_world_currency_per_point']
 
 
 class PayID(Page):
@@ -35,7 +45,6 @@ class FormGroups(WaitPage):
         scores = []
         valid_players = []
         for p in self.subsession.get_players():
-            print(p.participant.vars)
             if p.participant.vars['droppedout'] or \
                 None in (p.pi_q1, p.pi_q2, p.pi_q3, p.pi_q4, p.pi_q5, p.pi_q6, p.pi_q7):
                 continue
@@ -110,7 +119,7 @@ class FormGroups(WaitPage):
 
 
 page_sequence = [
-    Main,
+    InitialSurvey,
     PayID,
     FormGroups,
 ]

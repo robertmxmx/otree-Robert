@@ -47,4 +47,4 @@ class PlayerBot(Bot):
                 'A_from_Hong_Kong': random.randint(1, 6)
             })
             
-        yield (pages.Main, answers)
+        yield (pages.ExitSurvey, answers)

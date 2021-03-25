@@ -15,6 +15,7 @@ class Constants(BaseConstants):
     players_per_group = 3
     num_rounds = 1
 
+    survey_bonus = 3.00
     pay_id_allowed_attempts = 5
 
     choices = [
