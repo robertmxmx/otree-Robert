@@ -16,7 +16,6 @@ class Constants(BaseConstants):
     num_rounds = 1
 
     survey_bonus = 3.00
-    pay_id_allowed_attempts = 5
 
     choices = [
         [1, "Strongly Agree"],
@@ -60,9 +59,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pay_id = models.StringField(label='PayID')
-    pay_id_attempts = models.IntegerField(initial=0)
-    invalid_pay_id = models.BooleanField(initial=False)
+    # pay_id = models.StringField(label='PayID')
     
     birth_region = models.IntegerField(
         label='In what region were you born?',

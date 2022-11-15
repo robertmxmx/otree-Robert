@@ -29,9 +29,10 @@ class InitialSurvey(Page):
             Constants.survey_bonus / self.session.config['real_world_currency_per_point']
 
 
-class PayID(Page):
-    form_model = 'player'
-    form_fields = ['pay_id']
+# Not used
+# class PayID(Page):
+#     form_model = 'player'
+#     form_fields = ['pay_id']
 
 class FormGroups(WaitPage):
     wait_for_all_groups = True
@@ -120,6 +121,5 @@ class FormGroups(WaitPage):
 
 page_sequence = [
     InitialSurvey,
-    PayID,
     FormGroups,
 ]

@@ -20,6 +20,3 @@ class PlayerBot(Bot):
             'pi_q6': 1,
             'pi_q7': 1
         })
-        yield (pages.PayID, {
-            'pay_id': 'player%d' % self.participant.id_in_session
-        })
