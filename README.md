@@ -5,10 +5,11 @@
 ```
 APP=non_id5
 ```
-- Run depending on environment: (add `-d` flag to run in background)
-    - Development: `docker-compose -f development.yml up --build`
-    - Staging: `docker-compose -f staging.yml up --build`
-    - Production: `docker-compose -f production.yml up --build`
+- Run:
+```
+docker compose -f <environment>.yml up --build
+```
+where `<environment>` is either "development", "staging" or "production"
 
 ## Running the app
 
