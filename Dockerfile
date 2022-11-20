@@ -1,6 +1,6 @@
 FROM python:3.7
 
-RUN pip install -U otree psycopg2-binary
+RUN pip install -U otree psycopg2-binary requests
 
 WORKDIR /usr/src/app
 ARG APP
