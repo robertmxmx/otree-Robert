@@ -168,9 +168,25 @@ class CalculatePayoffs(WaitPage):
 
 class Feedback(Page):
 
+    def _get_payoffs(self, final=False):
+        other_player_role = 'C' if self.round_number == 1 else 'B'
+        payoffs = {}
+
+        for p in self.group.get_players():
+            role = p.role()
+            payoffs[role] = int(p.participant.payoff) if final else int(p.payoff_after_take)
+
+            # Show inital payoff of other player. This prevents adding in any
+            # bonus amounts the player earned (for correctly guessing how much
+            # ECU the other players spent)
+            if role == other_player_role:
+                payoffs[role] = Constants.initial_payoffs[role]
+
+        return payoffs
+
     def vars_for_template(self):
-        pat = {p.role(): int(p.payoff_after_take) for p in self.group.get_players()}
-        fp = {p.role(): int(p.participant.payoff) for p in self.group.get_players()}
+        pat = self._get_payoffs()
+        fp = self._get_payoffs(True)
         tp = self.subsession.taking_player
         dp = self.subsession.deducting_player
         ecu_taken = self.group.get_player_by_role(tp).chose_to_take

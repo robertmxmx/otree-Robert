@@ -5,7 +5,7 @@ from .models import Constants
 import random
 from otree.api import Submission
 
-from _myshared import uploader
+# from _myshared import uploader
 
 class PlayerBot(Bot):
 
