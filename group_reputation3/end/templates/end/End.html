@@ -12,8 +12,19 @@
     <p>
         Task {{ chosen_task }} was randomly chosen for payment.
     </p>
-		<strong>If B & chosen_task is 2, then "You [did/did not] correctly guess C's reaction in the chosen task."</strong>
-		<strong>If C & chosen_task is 1, then "You [did/did not] correctly guess B's reaction in the chosen task."</strong>
+    {% if show_guess_feedback %}
+    <p>
+        <strong>
+            {% if correctly_guessed %}
+            You correctly guessed {{deducting_player}}'s reaction in the chosen
+            task.
+            {% else %}
+            You did not correctly guess {{deducting_player}}'s reaction in the
+            chosen task.
+            {% endif %}
+        </strong>
+    </p>
+    {% endif %}
     <p>
         Your total earnings are: 
         
@@ -38,20 +49,17 @@
 
         Total: {{ participant.payoff_plus_participation_fee }}
     </p>
-      <p>
-          The experimenter will distribute a receipt for you to
-          sign. Please fill in your <strong>total earnings</strong> and <em>sign</em> your
-          receipt. Then quietly pack up your things and leave, dropping
-          your receipt with the experimenter on the way out.
-      </p>
-		<p>
-			If you wish to keep a copy of your receipt, please feel free to 
-			take a photograph of it before you leave.
-		</p>
-      <p>
-          Your participant ID is: <strong>{{ participant.code }}</strong>
-        </p>
-	<p>
-<strong>		Click here to hide your payment info
-</strong>	</p>
+    <p>
+        The experimenter will distribute a receipt for you to
+        sign. Please fill in your <strong>total earnings</strong> and <em>sign</em> your
+        receipt. Then quietly pack up your things and leave, dropping
+        your receipt with the experimenter on the way out.
+    </p>
+    <p>
+        If you wish to keep a copy of your receipt, please feel free to 
+        take a photograph of it before you leave.
+    </p>
+    <p>
+        Your participant ID is: <strong>{{ participant.code }}</strong>
+    </p>
 {% endblock %}

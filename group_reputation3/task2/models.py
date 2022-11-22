@@ -28,6 +28,9 @@ class Subsession(BaseSubsession):
             return potential_group
 
     def creating_session(self):
+        for p in self.get_players():
+            p.participant.vars["bonuses"] = {"task1": 0, "task2": 0}
+
         # set player role for the round
         self.taking_player = 'A'
         self.deducting_player = 'B' if self.round_number == 1 else 'C'
@@ -73,9 +76,7 @@ class Group(BaseGroup):
         if self.round_number == 1:
             if other_player.will_spend == deducting_player.deduct_amount:
                 other_player.payoff += Constants.additional_amount
-                other_player.participant.vars['bonus'] = Constants.additional_amount
-            else:
-                other_player.participant.vars['bonus'] = 0
+                other_player.participant.vars["bonuses"]["task1"] = Constants.additional_amount
         else:
             previous_other_player = deducting_player.in_round(self.round_number - 1)
             bonus_multiplier = 0
@@ -87,7 +88,7 @@ class Group(BaseGroup):
                 bonus_multiplier += 1
                 
             other_player.payoff += bonus_multiplier * Constants.additional_amount
-            other_player.participant.vars['bonus'] = bonus_multiplier * Constants.additional_amount
+            other_player.participant.vars["bonuses"]["task2"] = bonus_multiplier * Constants.additional_amount
 
 
 class Player(BasePlayer):

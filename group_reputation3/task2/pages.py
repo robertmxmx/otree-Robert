@@ -225,9 +225,17 @@ class Feedback(Page):
 
     def before_next_page(self):
         p = self.participant
-        if 'task2_payoffs' not in p.vars:
-            p.vars['task2_payoffs'] = []
-        p.vars['task2_payoffs'].append(p.payoff)
+
+        if "task2_payoffs" not in p.vars:
+            p.vars["task2_payoffs"] = []
+
+        p.vars["task2_payoffs"].append(p.payoff)
+
+        if "deducting_players" not in p.vars:
+            p.vars["deducting_players"] = {"task1": None, "task2": None}
+
+        current_task = "task1" if self.round_number == 1 else "task2"
+        p.vars["deducting_players"][current_task] = self.subsession.deducting_player
 
 class CMessage(Page):
 

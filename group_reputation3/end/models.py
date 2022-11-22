@@ -12,8 +12,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    chosen_task = models.IntegerField(initial=random.randint(1, 2))
-
+    pass
 
 class Group(BaseGroup):
     pass
