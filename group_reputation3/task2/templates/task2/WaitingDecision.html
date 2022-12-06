@@ -14,8 +14,7 @@
     <p>
         While you are waiting for {{ subsession.taking_player }} and 
         {{ subsession.deducting_player }} to finish their decisions in Task 1, please 
-        answer the following questions. (You will <strong>need to press 'Calculate'</strong> for each input
-        in order to progress to the next page):
+        answer the following questions.
     </p>
     <ul>
         <li>
@@ -27,9 +26,8 @@
             </p>
             <p>
                 (We will compare your answer with the actual decision 
-                {{ subsession.deducting_player }} makes and, if this task is chosen for payment, 
-				  you will earn an additional 
-                10 ECU if your guess is correct)
+                {{ subsession.deducting_player }} makes and, if your guess is correct 
+				  you will earn an additional 10 ECU for this task.)
             </p>
             <p>
                 I guess {{ subsession.deducting_player }} <b>will spend</b> 
@@ -51,10 +49,10 @@
         <li>      
             <p>
                 Please tell us whether you think {{ subsession.deducting_player }} 
-                should deduct some ECU from {{ subsession.taking_player }} if 
+                <strong>should</strong> deduct some ECU from {{ subsession.taking_player }} if 
                 {{ subsession.taking_player }} chooses to take 
                 {{ subsession.deducting_player }}’s 100 ECU. In other words, is it 
-                socially appropriate for {{ subsession.deducting_player }} to deduct 
+                <strong>socially appropriate</strong> for {{ subsession.deducting_player }} to deduct 
                 ECU from {{ subsession.taking_player }}? If so, how many ECU?
             </p>
             <p>
@@ -77,68 +75,96 @@
                 {% endwith %}
                 {% endwith %}
             </p>
-        </li>       
-    </ul>
-    {% else %}
+        </li>    
+		<li>
+<!--Note that the following question should not be displayed if participant is in a group without any identity criterion. -->
+			<p>
+				Finally, note that in today's lab session, there is at least
+				one other group where Participants B and C are **INSERT GROUP ID CRITERION,
+				e.g. "from Australia"**. Considering the other groups that are "from
+				Australia" (excluding your own answer) what do you think is the most
+				common answer given to the last question?
+			</p>
+            <p>
+                (We will compare your answer with the actual answers given and,
+                if your guess is correct you will earn an additional 10 ECU for
+                this task.)
+            </p>
+			<p>
+				BUTTON/INPUT NEEDED
+			</p>
+		</li>
+	</ul>
+	<p>		
+		You will <strong>need to press 'Calculate'</strong> for each input
+		        in order to progress to the next page:   
+	</p>    
+{% else %}
+<!--Again, questions that relate to group identity should only be shown if
+participant is in a group with an identity criterion. -->
     <p>
         While you are waiting for {{ subsession.taking_player }} and 
         {{ subsession.deducting_player }} to finish their decisions in Task 2, please 
-        answer the following questions. (You will <strong>need to press 'Calculate'</strong> for each input
-        in order to progress to the next page):
+        answer the following questions.
     </p>
-    <p>
-        While you and {{ subsession.taking_player }} were participating in Task 1, we 
-        asked {{ subsession.deducting_player }} the following two questions. Please tell 
-        us your guess of what {{ subsession.deducting_player }}’s answer is in each of 
-        the questions. 
-    </p>
-    <p>
-        (We will compare your answer with the actual guess 
-        {{ subsession.deducting_player }} made and, if this task is chosen for payment, 
-		 you will earn an additional 10 ECU 
-        if your guess is correct.)
-    </p>
+	<ol>	
+		<li>
+			<p>
+				In today's lab session, what do you think was the most commonly chosen
+				level of deduction by Participant B?
+			<p>
+				(We will compare your answer with the actual answers given and,
+				if your guess is correct you will earn an additional 10 ECU for this task.)
+    		</p>
+			<p>
+				BUTTON
+			</p>
+		</li>
+		<li>
+			<p>
+				In today's session, there is at least one other group where
+				Participants B and C are **INSERT GROUP ID CRITERION, e.g. "from
+				Australia/politically conservative"**.
+			</p>
+			<p>
+				Now we want to ask you the same question as before, but considering
+				<strong>only groups **from Australia/that are politically
+				conservative**</strong>, (excluding your own group). What do you think was
+				the most commonly chosen level of deduction by Participant B?
+			</p>
+			<p>
+				(We will compare your answer with the actual answers given and,
+				if your guess is correct you will earn an additional 10 ECU for this task.)
+    		</p>
+			<p>BUTTON</p>
+		</li>	
+		<li>	
+			<p>
+				While you and {{ subsession.taking_player }} were participating
+				in Task 1, we asked {{ subsession.deducting_player }} the following
+				question. Please tell us your guess of the most common answer by {{ subsession.deducting_player
+				}}’s **from Australia/who are politically conservative**.
+			</p>
+			<p>
+				(We will compare your answer with the actual answers given and,
+				if your guess is correct you will earn an additional 10 ECU for this task.)
+    		</p>
 
-    <ul>
-        <li>
-            <p>
-                Question 1: <i>"Please tell us whether you think {{ player.role }} 
-                will deduct some ECU from {{ subsession.taking_player }} if 
-                {{ subsession.taking_player }} chooses to take {{ player.role }}’s 100 
-                ECU. If so, how many ECU? I guess {{ player.role }} will spend _____ ECU 
-                on deductions from {{ subsession.taking_player }}. "</i>
-            </p>
-            <p>
-                What is your guess of {{ subsession.deducting_player }}'s answer in this question?
-                <input 
-                    type="number" 
-                    id="will_spend_guess_field" 
-                    class="form-control inline-number-field" 
-                    onkeypress="handle_enter"
-                > 
-                <input type="hidden" name="will_spend_guess" />
-                ECU 
-                {% with field_control=form.will_spend_guess %}
-                {% with field_name='will_spend_guess_field' %}
-                    {% include 'task2/components/ECUField.html' %}
-                {% endwith %}
-                {% endwith %}
-            </p>
-        </li>
-    
-        <li>
-            <p>
-                Question 2: <i>"Please tell us whether you think {{ player.role }} 
-                should deduct some ECU from {{ subsession.taking_player }} if 
-                {{ subsession.taking_player }} chooses to take {{ player.role }}’s 100 
-                ECU. In other words, is it socially appropriate for {{ player.role }} 
-                to deduct ECU from {{ subsession.taking_player }}? If so, how many ECU? 
-                If you think it is not appropriate to deduct from 
-                {{ subsession.taking_player }}, then please enter zero. I think B should 
-                spend _____ ECU on deductions from {{ subsession.taking_player }}."</i>
-            </p>
-            <p>
-                What is your guess of {{ subsession.deducting_player }}'s answer in this question?
+		            <p>
+		                <i>"Please tell us whether you think {{
+		                subsession.deducting_player }} <strong>should</strong> deduct
+		                some ECU from {{ subsession.taking_player }} if {{
+		                subsession.taking_player }} chooses to take {{
+		                subsession.deducting_player }}’s 100 ECU. In other words, is
+		                it <strong>socially appropriate</strong> for {{ player.role
+		                }} to deduct ECU from {{ subsession.taking_player }}? If so,
+		                how many ECU? If you think it is not appropriate to deduct
+		                from {{ subsession.taking_player }}, then please enter zero.
+		                I think B should spend _____ ECU on deductions from {{
+		                subsession.taking_player }}."</i>
+		            </p>
+					<p>
+						What is your guess of {{ subsession.deducting_player }}'s answer in this question?
                 <input 
                     type="number" 
                     id="should_spend_guess_field" 
@@ -153,11 +179,15 @@
                 {% endwith %}
                 {% endwith %}
             </p>
-        </li>
-    </ul>
-    {% endif %}
-    
-    {% next_button %}
+</li>
+</ol>
+	<p>	
+		(You will <strong>need to press 'Calculate'</strong> for each input in
+		order to progress to the next page):
+		</p>
+{% endif %}
+
+{% next_button %}
 {% endblock %}
 
 {% block scripts %}
