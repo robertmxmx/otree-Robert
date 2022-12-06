@@ -24,6 +24,10 @@ Also remember that the app runs at http://localhost:8000 and if you need to logi
 - Participant C earned no bonus, but on C's payment info page it reports "Task 1 bonus: $0.00" (see pic) -- this information should only appear on a participant's page if they earned a bonus.
     - Simon: Done. While making this change I noticed that "Click here to hide your payment info" was added to the payment info page. I assume this isn't needed/used so I removed it.
     	- Hide your payment info *is* required. Please add it back.
+- Please document in a specific readme for the group reputation 3 app):
+	- how to tell whether a given group has a political/birth/no identity criterion
+	- explain all variables that relate to payoff
+
 
 ## Toby to review
 
