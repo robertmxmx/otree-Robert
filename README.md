@@ -27,6 +27,22 @@ Also remember that the app runs at http://localhost:8000 and if you need to logi
 - Please document in a specific readme for the group reputation 3 app):
 	- how to tell whether a given group has a political/birth/no identity criterion
 	- explain all variables that relate to payoff
+- The waiting task questions need to be revised. Basic idea is as follows
+
+	Ask C:
+
+	- How much *will* B punish? (incentivized)
+	- How much is *appropriate* to punish? (not incentivized) 
+	- What do you predict is the most common answer to this question among people with same group identity?
+
+	
+	Ask B: 
+	
+	- How much did B's in general punish? (most common, incentivized)
+	- How much did other B's from your birth region/political orientation punish? (most common, incentivized)
+	- What is most common answer by C's from your birth region to question "how much is appropriate for B to punish?" (incentivized)
+	
+
 
 
 ## Toby to review
