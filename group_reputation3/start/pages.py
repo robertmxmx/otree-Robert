@@ -26,7 +26,8 @@ class Welcome(Page):
         }
 
 class InternetRequirement(Page):
-    pass
+    def is_displayed(self):
+        return self.session.config["online_exp"]
 
 
 page_sequence = [

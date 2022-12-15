@@ -38,7 +38,6 @@
 
 ## To do
 
-- "Internet requirements to participate" page: remove this page, unless "online option" is chosen in config.
 - Participant C earned no bonus, but on C's payment info page it reports "Task 1 bonus: $0.00" (see pic) -- this information should only appear on a participant's page if they earned a bonus.
     - Simon: Done. While making this change I noticed that "Click here to hide your payment info" was added to the payment info page. I assume this isn't needed/used so I removed it.
     	- Hide your payment info *is* required. Please add it back.
@@ -65,6 +64,8 @@
 
 ## Toby to review
 
+- "Internet requirements to participate" page: remove this page, unless "online option" is chosen in config.
+	- Simon: Done
 - Identify bug in Task 2 feedback page. In TH's test, B's endowment went up by 20, but B's endowment cannot change in Task 2. I suspect the feedback page is reflecting that B earned a bonus in Task 1. But bonus payments should NEVER be shown on the feedback page at end of each round. They are only shown to individual players at end of experiment.
     - Simon: Done. Please test to make sure.
 - TH: I can't see why Player B earned a bonus in my test run (see data provided). In Task 2, Player B guessed C woud spend 4, and said C **should spend** 3. C actually spend 7. Bonus should only be paid if what C spends what B says C *will* spend.
