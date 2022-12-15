@@ -36,14 +36,12 @@
 
 # Group Reputation 3
 
-## To do
+## Toby to review
 
 - Please document in a specific readme for the group reputation 3 app):
 	- how to tell whether a given group has a political/birth/no identity criterion
 	- explain all variables that relate to payoff
-
-## Toby to review
-
+	- Simon: Done. Please review
 - The waiting task questions need to be revised. Basic idea is as follows
 
 	Ask C:
