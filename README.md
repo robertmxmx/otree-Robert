@@ -1,24 +1,42 @@
 # Instructions
 
-- Install Docker: https://www.docker.com/products/docker-desktop
-- In **.env** edit the *APP* variable to the name of the app you want to run. For example, if you want to run **non_id5** do:
-```
-APP=non_id5
-```
-- Run:
-```
-docker compose -f <environment>.yml up --build
-```
-where `<environment>` is either "development", "staging" or "production"
+1. Install Docker: https://www.docker.com/products/docker-desktop
+1. In **.env** edit the *APP* variable to the name of the app you want to run.
+   For example, if you want to run **non_id5** do:
+   ```
+   APP=non_id5
+   ```
+1. In this folder, run the below in a terminal
+   ```
+   chmod +x ./run.sh
+   ./run.sh prod
+   ```
+1. The app runs at http://localhost:8000 and the login credentials are:
+	- Username: **admin**
+	- Password: **otreee**
 
-## Running the app
+## Deploying
 
-Also remember that the app runs at http://localhost:8000 and if you need to login the credentials are:
+1. Change `APP` argument in `Dockerfile` to app that is to be deployed
+1. For:
+   - New deployment
+     ```
+     eb init -i
+     eb create
+     eb open
+     ```
+   - Current deployment
+     ```
+     eb deploy
+     ```
+1. **IMPORTANT** - Remember to update the environment variables through the AWS
+   configuration options (go to environment page > Configuration > Edit
+   'Software' > Environment properties). The variables for production can be
+   found in `.prod.env`
 
-- Username: admin
-- Password: otreee
+# Group Reputation 3
 
-## ToDo - Group reputation 3
+## To do
 
 - "Internet requirements to participate" page: remove this page, unless "online option" is chosen in config.
 - Participant C earned no bonus, but on C's payment info page it reports "Task 1 bonus: $0.00" (see pic) -- this information should only appear on a participant's page if they earned a bonus.
