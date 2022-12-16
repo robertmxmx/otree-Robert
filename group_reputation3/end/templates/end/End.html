@@ -5,61 +5,76 @@
     End of experiment
 {% endblock %}
 
-{% block content %}<div>
-    <p>
-        Thank you for your participation in today’s experiment.
-    </p>
-    <p>
-        Task {{ chosen_task }} was randomly chosen for payment.
-    </p>
-    {% if show_guess_feedback %}
-    <p>
-        <strong>
-            {% if correctly_guessed %}
-            You correctly guessed {{deducting_player}}'s reaction in the chosen
-            task.
-            {% else %}
-            You did not correctly guess {{deducting_player}}'s reaction in the
-            chosen task.
-            {% endif %}
-        </strong>
-    </p>
-    {% endif %}
-    <p>
-        Your total earnings are: 
-        
-        <ul>
-            <li>
-                Show up fee: {{ participation_fee }}
-            </li>
-            {% if survey_bonus != None %}
-            <li>
-                Survey Task: {{ survey_bonus }}
-            </li>
-            {% endif %}
-            <li>
-                Task {{ chosen_task }}: {{ task2_payoff }}
-            </li>
-            {% if bonus != None %}
-            <li>
-                Task {{ chosen_task }} bonus: {{ bonus }}
-            </li>
-            {% endif %}
-        </ul>
+{% block content %}
+    <div id="payment-info" style="display: block;">
+        <p>Thank you for your participation in today's experiment.</p>
+        <p>Task {{ chosen_task }} was randomly chosen for payment.</p>
 
-        Total: {{ participant.payoff_plus_participation_fee }}
-    </p>
-    <p>
-        The experimenter will distribute a receipt for you to
-        sign. Please fill in your <strong>total earnings</strong> and <em>sign</em> your
-        receipt. Then quietly pack up your things and leave, dropping
-        your receipt with the experimenter on the way out.
-    </p>
-    <p>
-        If you wish to keep a copy of your receipt, please feel free to 
-        take a photograph of it before you leave.
-    </p>
-    <p>
-        Your participant ID is: <strong>{{ participant.code }}</strong>
-    </p>
+        {% if show_guess_feedback %}
+        <p>
+            <strong>
+                {% if correctly_guessed %}
+                You correctly guessed {{deducting_player}}'s reaction in the
+                chosen task.
+                {% else %}
+                You did not correctly guess {{deducting_player}}'s reaction in
+                the chosen task.
+                {% endif %}
+            </strong>
+        </p>
+        {% endif %}
+        <p>
+            Your total earnings are: 
+            
+            <ul>
+                <li>Show up fee: {{ participation_fee }}</li>
+
+                {% if survey_bonus != None %}
+                <li>Survey Task: {{ survey_bonus }}</li>
+                {% endif %}
+
+                <li>Task {{ chosen_task }}: {{ task2_payoff }}</li>
+
+                {% if bonus != None %}
+                <li>Task {{ chosen_task }} bonus: {{ bonus }}</li>
+                {% endif %}
+            </ul>
+
+            Total: {{ participant.payoff_plus_participation_fee }}
+        </p>
+        <p>
+            The experimenter will distribute a receipt for you to
+            sign. Please fill in your <strong>total earnings</strong> and
+            <em>sign</em> your receipt. Then quietly pack up your things and
+            leave, dropping your receipt with the experimenter on the way out.
+        </p>
+        <p>
+            If you wish to keep a copy of your receipt, please feel free to 
+            take a photograph of it before you leave.
+        </p>
+        <p>
+            Your participant ID is: <strong>{{ participant.code }}</strong>
+        </p>
+    </div>
+
+    <button
+        type="button"
+        class="otree-btn-next btn btn-primary"
+        onclick="toggleInfo();"
+    >
+        Click here to <span id="toggle-action">hide</span> your payment info
+    </button>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function toggleInfo() {
+            var infoObj = document.getElementById("payment-info");
+            var actionObj = document.getElementById("toggle-action");
+            const visible = infoObj.style.display === "block";
+
+            infoObj.style.display = visible ? "none" : "block";
+            actionObj.innerHTML = visible ? "show" : "hide";
+        }
+    </script>
 {% endblock %}

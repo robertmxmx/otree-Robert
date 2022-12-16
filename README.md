@@ -38,9 +38,6 @@
 
 ## To do
 
-- Participant C earned no bonus, but on C's payment info page it reports "Task 1 bonus: $0.00" (see pic) -- this information should only appear on a participant's page if they earned a bonus.
-    - Simon: Done. While making this change I noticed that "Click here to hide your payment info" was added to the payment info page. I assume this isn't needed/used so I removed it.
-    	- Hide your payment info *is* required. Please add it back.
 - Please document in a specific readme for the group reputation 3 app):
 	- how to tell whether a given group has a political/birth/no identity criterion
 	- explain all variables that relate to payoff
@@ -64,6 +61,10 @@
 
 ## Toby to review
 
+- Participant C earned no bonus, but on C's payment info page it reports "Task 1 bonus: $0.00" (see pic) -- this information should only appear on a participant's page if they earned a bonus.
+    - Simon: Done. While making this change I noticed that "Click here to hide your payment info" was added to the payment info page. I assume this isn't needed/used so I removed it.
+    	- Hide your payment info *is* required. Please add it back.
+		- Simon: Done
 - "Internet requirements to participate" page: remove this page, unless "online option" is chosen in config.
 	- Simon: Done
 - Identify bug in Task 2 feedback page. In TH's test, B's endowment went up by 20, but B's endowment cannot change in Task 2. I suspect the feedback page is reflecting that B earned a bonus in Task 1. But bonus payments should NEVER be shown on the feedback page at end of each round. They are only shown to individual players at end of experiment.
