@@ -1,3 +1,6 @@
+from enum import Enum
+
+
 LOW_PERC = 0.3
 HIGH_PERC = 0.7
 REGIONS = [
@@ -17,3 +20,8 @@ REGIONS = [
     "Vietnam",
     "Other"
 ]
+
+class SortTypes(Enum):
+    NONE = None
+    BIRTH_REGION = "birth_region"
+    POLITICAL_IDEOLOGY = "pol_ideology"
