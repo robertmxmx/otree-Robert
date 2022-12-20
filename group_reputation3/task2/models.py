@@ -92,9 +92,6 @@ class Group(BaseGroup):
                 deducting_player.in_round(self.round_number - 1)
             )
             
-            if other_player.will_spend_guess == prev_other_player.will_spend:
-                bonus_multiplier += 1
-
             if other_player.should_spend_guess == prev_other_player.should_spend:
                 bonus_multiplier += 1
                 
@@ -161,9 +158,6 @@ class Player(BasePlayer):
         min=Constants.deduct["min"], max=Constants.deduct["max"]
     )
 
-    will_spend_guess = models.CurrencyField(
-        min=Constants.deduct["min"], max=Constants.deduct["max"]
-    )
     should_spend_guess = models.CurrencyField(
         min=Constants.deduct["min"], max=Constants.deduct["max"]
     )

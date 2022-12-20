@@ -175,7 +175,7 @@ class WaitingDecision(Page):
         if self.round_number == 1:
             return ["will_spend", "should_spend"]
         else:
-            return ["will_spend_guess", "should_spend_guess"]
+            return ["should_spend_guess"]
 
 
 class CalculatePayoffs(WaitPage):

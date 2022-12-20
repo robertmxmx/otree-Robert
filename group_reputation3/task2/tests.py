@@ -36,7 +36,7 @@ class PlayerBot(Bot):
             if self.round_number == 1:
                 yield (pages.WaitingDecision, {'will_spend': 5, 'should_spend': 5})
             else:
-                yield (pages.WaitingDecision, {'will_spend_guess': 5, 'should_spend_guess': 5})
+                yield (pages.WaitingDecision, {'should_spend_guess': 5})
 
         yield pages.Feedback
 
