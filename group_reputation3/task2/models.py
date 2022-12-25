@@ -2,8 +2,9 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
+from statistics import mode, StatisticsError
 
-from _myshared.constants import REGIONS
+from _myshared.constants import REGIONS, SortTypes
 
 class Constants(BaseConstants):
     name_in_url = "task2"
@@ -52,55 +53,175 @@ class Group(BaseGroup):
             p.br = p.participant.vars["birth_region"]
             p.pi = p.participant.vars["pol_ideology"]
 
+    def get_similar_groups(self):
+        """
+        Returns a list of groups (other that the current one) that have been
+        sorted the same as the current group
+        """
+        current_players = self.get_players()
+        current_sort = current_players[0].participant.vars["sorted_by"]
+
+        if not current_sort:
+            return []
+
+        similar_groups = []
+
+        for group in self.subsession.get_groups():
+            players = group.get_players()
+            same_sort_type = any(
+                p.participant.vars["sorted_by"] == current_sort for p in players
+            )
+
+            if (group.id == self.id) or not same_sort_type:
+                continue
+
+            # Check if grouped by birth region and has same
+            # birth regions as current group
+            current_brs = [p.br for p in current_players]
+            other_brs = [p.br for p in players]
+            same_birth_region = (
+                (current_sort == SortTypes.BIRTH_REGION.value) and
+                (sorted(current_brs) == sorted(other_brs))
+            )
+
+            # Check if grouped by politicial ideology ans has same ideology as
+            # current group
+            current_pis = [p.pi for p in current_players]
+            other_pis = [p.pi for p in players]
+            same_political_ideology = (
+                (current_sort == SortTypes.POLITICAL_IDEOLOGY.value) and
+                (sorted(current_pis) == sorted(other_pis))
+            )
+            
+            if same_birth_region or same_political_ideology:
+                similar_groups.append(group)
+        
+        return similar_groups
+
+    def set_round1_other_payoffs(self, similar_groups):
+        """Sets the payoff for the "other" player in round 1"""
+        playerC = self.get_player_by_role("C")
+        bonus = 0
+
+        if playerC.will_spend == self.get_player_by_role("B").deduct_amount:
+            bonus += Constants.additional_amount
+
+        if len(similar_groups) > 0:
+            answers = [
+                g.get_player_by_role("C").should_spend for g in similar_groups
+            ]
+
+            try:
+                most_common_answer = mode(answers)
+            except StatisticsError:
+                most_common_answer = None
+
+            if (
+                most_common_answer and
+                (playerC.same_grouping_should_spend == most_common_answer)
+            ):
+                bonus += Constants.additional_amount
+
+        playerC.payoff += bonus
+        playerC.participant.vars["bonuses"]["task1"] = bonus
+
+    def set_round2_other_payoffs(self, similar_groups):
+        """Sets the payoff for the "other" player in round 1"""
+        bonus = 0
+        playerB = self.get_player_by_role("B")
+
+        other_groups = [
+            g for g in self.subsession.get_groups() if g.id != self.id
+        ]
+        deductions = []
+
+        for group in other_groups:
+            # Player B in round 2 was the deducting player in round 1
+            deductions.append(
+                group.get_player_by_role("B").in_round(1).deduct_amount
+            )
+
+        try:
+            most_common_deduction = mode(deductions)
+        except StatisticsError:
+            most_common_deduction = None
+
+        if (
+            most_common_deduction and
+            (playerB.general_deduction == most_common_deduction)
+        ):
+            bonus += Constants.additional_amount
+
+        if len(similar_groups) > 0:
+            similar_groups = self.get_similar_groups()
+
+            deductions = []
+            for group in similar_groups:
+                # Player B in round 2 was the deducting player in round 1
+                deductions.append(
+                    group.get_player_by_role("B").in_round(1).deduct_amount
+                )
+
+            try:
+                most_common_deduction = mode(deductions)
+            except StatisticsError:
+                most_common_deduction = None
+
+            if (
+                most_common_deduction and
+                (playerB.same_grouping_deduction == most_common_deduction)
+            ):
+                bonus += Constants.additional_amount
+
+            should_spend_answers = []
+            for group in similar_groups:
+                should_spend_answers.append(
+                    group.get_player_by_role("C").in_round(1).should_spend
+                )
+
+            try:
+                most_common_answer = mode(should_spend_answers)
+            except StatisticsError:
+                most_common_answer = None
+
+            if (
+                most_common_answer and
+                (playerB.should_spend_guess == most_common_answer)
+            ):
+                bonus += Constants.additional_amount
+
+        playerB.payoff += bonus
+        playerB.participant.vars["bonuses"]["task2"] = bonus
+
     def set_payoffs(self):
-        taking_player = self.get_player_by_role(self.subsession.taking_player)
+        playerA = self.get_player_by_role("A")
         deducting_player = (
             self.get_player_by_role(self.subsession.deducting_player)
         )
-        other_player = None
-
-        for p in self.get_players():
-            if p not in [taking_player, deducting_player]:
-                other_player = p
 
         # Set if ECU was taken
-        if taking_player.chose_to_take:
+        if playerA.chose_to_take:
             deducting_player.payoff -= Constants.take_amount
-            taking_player.payoff += Constants.take_amount
+            playerA.payoff += Constants.take_amount
 
         # Set all players payoff after the choice of whether to take
         for p in self.get_players():
             p.payoff_after_take = p.participant.payoff
 
         # Set deduction amount
-        if taking_player.chose_to_take:
+        if playerA.chose_to_take:
             deducting_player.payoff -= deducting_player.deduct_amount
-            taking_player.payoff -= (
+            playerA.payoff -= (
                 Constants.deduct["multiplier"] * deducting_player.deduct_amount
             )
 
+        similar_groups = self.get_similar_groups()
+
         # Set payoffs for B/C guess
         if self.round_number == 1:
-            if other_player.will_spend == deducting_player.deduct_amount:
-                other_player.payoff += Constants.additional_amount
-                other_player.participant.vars["bonuses"]["task1"] = (
-                    Constants.additional_amount
-                )
+            self.set_round1_other_payoffs(similar_groups)
         else:
-            bonus_multiplier = 0
-            prev_other_player = (
-                deducting_player.in_round(self.round_number - 1)
-            )
-            
-            if other_player.should_spend_guess == prev_other_player.should_spend:
-                bonus_multiplier += 1
-                
-            other_player.payoff += (
-                bonus_multiplier * Constants.additional_amount
-            )
-            other_player.participant.vars["bonuses"]["task2"] = (
-                bonus_multiplier * Constants.additional_amount
-            )
+            self.set_round2_other_payoffs(similar_groups)
 
 
 class Player(BasePlayer):
@@ -157,7 +278,16 @@ class Player(BasePlayer):
     should_spend = models.CurrencyField(
         min=Constants.deduct["min"], max=Constants.deduct["max"]
     )
+    same_grouping_should_spend = models.CurrencyField(
+        min=Constants.deduct["min"], max=Constants.deduct["max"]
+    )
 
+    general_deduction = models.CurrencyField(
+        min=Constants.deduct["min"], max=Constants.deduct["max"]
+    )
+    same_grouping_deduction = models.CurrencyField(
+        min=Constants.deduct["min"], max=Constants.deduct["max"]
+    )
     should_spend_guess = models.CurrencyField(
         min=Constants.deduct["min"], max=Constants.deduct["max"]
     )

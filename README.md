@@ -41,6 +41,9 @@
 - Please document in a specific readme for the group reputation 3 app):
 	- how to tell whether a given group has a political/birth/no identity criterion
 	- explain all variables that relate to payoff
+
+## Toby to review
+
 - The waiting task questions need to be revised. Basic idea is as follows
 
 	Ask C:
@@ -55,12 +58,11 @@
 	- How much did B's in general punish? (most common, incentivized)
 	- How much did other B's from your birth region/political orientation punish? (most common, incentivized)
 	- What is most common answer by C's from your birth region to question "how much is appropriate for B to punish?" (incentivized)
-	
 
-
-
-## Toby to review
-
+	- Simon: Done. A few things to note: 
+		- I've made the wording "politically conservative/progressive" where players that are in the high percentile are considered progressive and those in the low percentile are conservative. Is this correct? 
+		- As part of this change, I've removed the "will_spend_guess" variable since it's no longer being used.
+		- The last question for C and the last 2 questions for B should only appear if there are other groups that are sorted the same, is that right?
 - Participant C earned no bonus, but on C's payment info page it reports "Task 1 bonus: $0.00" (see pic) -- this information should only appear on a participant's page if they earned a bonus.
     - Simon: Done. While making this change I noticed that "Click here to hide your payment info" was added to the payment info page. I assume this isn't needed/used so I removed it.
     	- Hide your payment info *is* required. Please add it back.

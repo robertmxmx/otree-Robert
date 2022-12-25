@@ -1,121 +1,102 @@
-{% extends "global/Page.html" %}
-{% load otree static %}
+{{ extends "global/Page.html" }}
+{{ load otree static }}
 
-{% block title %}
+{{ block title }}
     Task {{ subsession.round_number }} Intermission
-{% endblock %}
+{{ endblock }}
 
-{% block content %}
-    {% include 'task2/components/Header.html' %}
-    {% include 'task2/components/CalculateModal.html' %}
+{{ block content }}
+    {{ include 'task2/components/Header.html' }}
+    {{ include 'task2/components/CalculateModal.html' }}
     <br />
 
-    {% if subsession.round_number == 1 %}
+    {{ if subsession.round_number == 1 }}
     <p>
-        While you are waiting for {{ subsession.taking_player }} and 
-        {{ subsession.deducting_player }} to finish their decisions in Task 1,
+        While you are waiting for A and B to finish their decisions in Task 1,
         please answer the following questions.
     </p>
 
     <ul>
         <li>
             <p>
-                Please tell us whether you think B will deduct some ECU from 
-                {{ subsession.taking_player }} if {{ subsession.taking_player }} 
-                chooses to take {{ subsession.deducting_player }}'s 100 ECU. If
+                Please tell us whether you think A will deduct some ECU from 
+                B if A chooses to take B's {{ Constants.take_amount}} ECU. If
                 so, how many ECU? 
             </p>
             <p>
-                (We will compare your answer with the actual decision 
-                {{ subsession.deducting_player }} makes and, if your guess is
-                correct you will earn an additional 10 ECU for this task.)
+                (We will compare your answer with the actual decision B makes
+                and, if your guess is correct you will earn an additional
+                {{ Constants.additional_amount }} ECU for this task.)
             </p>
+            {{ with field_control=form.will_spend }}
+            {{ with field_name='will_spend' }}
             <p>
-                I guess {{ subsession.deducting_player }} <b>will spend</b> 
-                <input 
-                    type="number" 
-                    id="will_spend_field" 
-                    class="form-control inline-number-field" 
-                    onkeypress="handle_enter"
-                > 
-                <input type="hidden" name="will_spend" />
+                I guess B <b>will spend</b> 
+                {{ include 'task2/components/ECUFieldInput.html' }}
                 ECU on deductions from A.
-                {% with field_control=form.will_spend %}
-                {% with field_name='will_spend_field' %}
-                    {% include 'task2/components/ECUField.html' %}
-                {% endwith %}
-                {% endwith %}
+                {{ include 'task2/components/ECUField.html' }}
             </p>
+            {{ endwith }}
+            {{ endwith }}
         </li>
 
         <li>      
             <p>
-                Please tell us whether you think
-                {{ subsession.deducting_player }} <strong>should</strong> deduct
-                some ECU from {{ subsession.taking_player }} if
-                {{ subsession.taking_player }} chooses to take
-                {{ subsession.deducting_player }}'s 100 ECU. In other words, is
-                it <strong>socially appropriate</strong> for
-                {{ subsession.deducting_player }} to deduct ECU from
-                {{ subsession.taking_player }}? If so, how many ECU?
+                Please tell us whether you think B <strong>should</strong>
+                deduct some ECU from A if A chooses to take B's
+                {{ Constants.take_amount }} ECU. In other words, is it
+                <strong>socially appropriate</strong> for B to deduct ECU from
+                A? If so, how many ECU?
             </p>
             <p>
-                If you think it is not appropriate to deduct from 
-                {{ subsession.taking_player }}, then please enter zero.
+                If you think it is not appropriate to deduct from A, then
+                please enter zero.
             </p>
+            {{ with field_control=form.should_spend }}
+            {{ with field_name='should_spend' }}
             <p>
-                I think {{ subsession.deducting_player }} <b>should spend</b> 
-                <input 
-                    type="number" 
-                    id="should_spend_field" 
-                    class="form-control inline-number-field" 
-                    onkeypress="handle_enter"
-                > 
-                <input type="hidden" name="should_spend" />
-                ECU on deductions from {{ subsession.taking_player }}. 
-                {% with field_control=form.should_spend %}
-                {% with field_name='should_spend_field' %}
-                    {% include 'task2/components/ECUField.html' %}
-                {% endwith %}
-                {% endwith %}
+                I think B <b>should spend</b> 
+                {{ include 'task2/components/ECUFieldInput.html' }}
+                ECU on deductions from A. 
+                {{ include 'task2/components/ECUField.html' }}
             </p>
+            {{ endwith }}
+            {{ endwith }}
         </li>
 
+        {{ if same_group_sort }}
 		<li>
-            <!--
-                Note that the following question should not be displayed if
-                participant is in a group without any identity criterion.
-            -->
 			<p>
 				Finally, note that in today's lab session, there is at least
-				one other group where Participants B and C are **INSERT GROUP ID CRITERION,
-				e.g. "from Australia"**. Considering the other groups that are "from
-				Australia" (excluding your own answer) what do you think is the most
-				common answer given to the last question?
+				one other group where Participants B and C are
+                {{ same_group_sort }}. Considering the other groups that are
+                {{ same_group_sort }} (excluding your own answer) what do you
+                think is the most common answer given to the last question?
 			</p>
             <p>
                 (We will compare your answer with the actual answers given and,
-                if your guess is correct you will earn an additional 10 ECU for
-                this task.)
+                if your guess is correct you will earn an additional
+                {{ Constants.additional_amount }} ECU for this task.)
             </p>
+            {{ with field_control=form.same_grouping_should_spend }}
+            {{ with field_name='same_grouping_should_spend' }}
 			<p>
-				BUTTON/INPUT NEEDED
+                {{ include 'task2/components/ECUFieldInput.html' }} ECU
+                {{ include 'task2/components/ECUField.html' }}
 			</p>
+            {{ endwith }}
+            {{ endwith }}
 		</li>
+        {{ endif }}
 	</ul>
 
 	<p>		
 		You will <strong>need to press 'Calculate'</strong> for each input in
         order to progress to the next page:   
 	</p>    
-    {% else %}
-    <!--
-        Again, questions that relate to group identity should only be shown if
-        participant is in a group with an identity criterion.
-    -->
+    {{ else }}
     <p>
-        While you are waiting for {{ subsession.taking_player }} and 
-        {{ subsession.deducting_player }} to finish their decisions in Task 2,
+        While you are waiting for A and C to finish their decisions in Task 2,
         please answer the following questions.
     </p>
 
@@ -126,40 +107,51 @@
                 commonly chosen level of deduction by Participant B?
 			<p>
 				(We will compare your answer with the actual answers given and,
-                if your guess is correct you will earn an additional 10 ECU for
-                this task.)
+                if your guess is correct you will earn an additional
+                {{ Constants.additional_amount }} ECU for this task.)
     		</p>
-			<p>
-				BUTTON
-			</p>
+            {{ with field_control=form.general_deduction }}
+            {{ with field_name='general_deduction' }}
+            <p>
+                {{ include 'task2/components/ECUFieldInput.html' }} ECU 
+                {{ include 'task2/components/ECUField.html' }}
+            </p>
+            {{ endwith }}
+            {{ endwith }}
 		</li>
+
+        {{ if same_group_sort }}
 		<li>
 			<p>
 				In today's session, there is at least one other group where
-				Participants B and C are **INSERT GROUP ID CRITERION, e.g. "from
-				Australia/politically conservative"**.
+				Participants B and C are {{ same_group_sort }}.
 			</p>
 			<p>
 				Now we want to ask you the same question as before, but
-                considering <strong>only groups **from Australia/that are
-                politically conservative**</strong>, (excluding your own group).
-                What do you think was the most commonly chosen level of
-                deduction by Participant B?
+                considering <strong>only groups that are
+                {{ same_group_sort }}</strong>, (excluding your own group). What
+                do you think was the most commonly chosen level of deduction by
+                Participant B?
 			</p>
 			<p>
 				(We will compare your answer with the actual answers given and,
-                if your guess is correct you will earn an additional 10 ECU for
-                this task.)
+                if your guess is correct you will earn an additional
+                {{ Constants.additional_amount }} ECU for this task.)
     		</p>
-			<p>BUTTON</p>
+            {{ with field_control=form.same_grouping_deduction }}
+            {{ with field_name='same_grouping_deduction' }}
+            <p>
+                {{ include 'task2/components/ECUFieldInput.html' }} ECU 
+                {{ include 'task2/components/ECUField.html' }}
+            </p>
+            {{ endwith }}
+            {{ endwith }}
 		</li>	
 		<li>	
 			<p>
-				While you and {{ subsession.taking_player }} were participating
-                in Task 1, we asked {{ subsession.deducting_player }} the
+				While you and A were participating in Task 1, we asked C the
                 following question. Please tell us your guess of the most common
-                answer by {{ subsession.deducting_player }}'s **from
-                Australia/who are politically conservative**.
+                answer by C's that are {{ same_group_sort }}.
 			</p>
 			<p>
 				(We will compare your answer with the actual answers given and,
@@ -168,49 +160,37 @@
     		</p>
             <p>
                 <i>
-                    "Please tell us whether you think
-                    {{ subsession.deducting_player }} <strong>should</strong>
-                    deduct some ECU from {{ subsession.taking_player }} if
-                    {{ subsession.taking_player }} chooses to take
-                    {{ subsession.deducting_player }}'s 100 ECU. In other words,
-                    is it <strong>socially appropriate</strong> for
-                    {{ player.role }} to deduct ECU from
-                    {{ subsession.taking_player }}? If so, how many ECU? If you
-                    think it is not appropriate to deduct from
-                    {{ subsession.taking_player }}, then please enter zero. I
-                    think B should spend _____ ECU on deductions from
-                    {{ subsession.taking_player }}."
+                    "Please tell us whether you think B <strong>should</strong>
+                    deduct some ECU from A if A chooses to take B's 100 ECU. In
+                    other words, is it <strong>socially appropriate</strong> for
+                    {{ player.role }} to deduct ECU from A If so, how many ECU?
+                    If you think it is not appropriate to deduct from A then
+                    please enter zero. I think B should spend _____ ECU on
+                    deductions from A
                 </i>
             </p>
+            {{ with field_control=form.should_spend_guess }}
+            {{ with field_name='should_spend_guess' }}
             <p>
-                What is your guess of {{ subsession.deducting_player }}'s answer
-                in this question?
-                <input 
-                    type="number" 
-                    id="should_spend_guess_field" 
-                    class="form-control inline-number-field" 
-                    onkeypress="handle_enter"
-                > 
-                <input type="hidden" name="should_spend_guess" />
-                ECU 
-                {% with field_control=form.should_spend_guess %}
-                {% with field_name='should_spend_guess_field' %}
-                    {% include 'task2/components/ECUField.html' %}
-                {% endwith %}
-                {% endwith %}
+                What is your guess of C's answer in this question?
+                {{ include 'task2/components/ECUFieldInput.html' }} ECU 
+                {{ include 'task2/components/ECUField.html' }}
             </p>
+            {{ endwith }}
+            {{ endwith }}
         </li>
+        {{ endif }}
     </ol>
 	<p>	
 		(You will <strong>need to press 'Calculate'</strong> for each input in
 		order to progress to the next page)
     </p>
-{% endif %}
+{{ endif }}
 
-{% next_button %}
-{% endblock %}
+{{ next_button }}
+{{ endblock }}
 
-{% block scripts %}
+{{ block scripts }}
     <script>
         function handle_enter(event) {
             if (event.keyCode == 13 || event.which == 13) {
@@ -229,4 +209,4 @@
             }
         }
     </script>
-{% endblock %}
+{{ endblock }}

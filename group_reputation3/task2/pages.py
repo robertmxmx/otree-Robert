@@ -2,6 +2,8 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
+from _myshared.constants import REGIONS, SortTypes
+
 
 def create_html_table(d):
     content = "<table class='simple-table'><tr>"
@@ -172,16 +174,53 @@ class WaitingDecision(Page):
         return self.player.role() not in active_players
 
     def get_form_fields(self):
+        similar_groups = self.group.get_similar_groups()
+
         if self.round_number == 1:
-            return ["will_spend", "should_spend"]
+            form_fields = ["will_spend", "should_spend"]
+
+            if len(similar_groups) > 0:
+                form_fields.append("same_grouping_should_spend")
         else:
-            return ["should_spend_guess"]
+            form_fields = ["general_deduction"]
+
+            if len(similar_groups) > 0:
+                form_fields.append("same_grouping_deduction")
+                form_fields.append("should_spend_guess")
+        
+        return form_fields
+
+    def vars_for_template(self):
+        similar_groups = self.group.get_similar_groups()
+
+        if len(similar_groups) == 0:
+            return {"same_group_sort": None}
+        
+        sorted_by = self.player.participant.vars["sorted_by"]
+
+        # Could also use "other" player as they have the same
+        # birth region/ideology
+        deducting_role = self.subsession.deducting_player
+        deducting_player = self.group.get_player_by_role(deducting_role)
+
+        if sorted_by == SortTypes.BIRTH_REGION.value:
+            group_sort = f"from {REGIONS[deducting_player.br - 1]}"
+        elif sorted_by == SortTypes.POLITICAL_IDEOLOGY.value:
+            group_sort = (
+                "politically progressive"
+                if deducting_player.pi == 1
+                else "politically conservative"
+            )
+
+        return { "same_group_sort": group_sort }
 
 
 class CalculatePayoffs(WaitPage):
+    wait_for_all_groups = True
 
     def after_all_players_arrive(self):
-        self.group.set_payoffs()
+        for group in self.subsession.get_groups():
+            group.set_payoffs()
 
 
 class Feedback(Page):
