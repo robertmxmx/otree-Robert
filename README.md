@@ -29,10 +29,15 @@
      ```
      eb deploy
      ```
-1. **IMPORTANT** - Remember to update the environment variables through the AWS
-   configuration options (go to environment page > Configuration > Edit
-   'Software' > Environment properties). The variables for production can be
-   found in `.prod.env`
+1. **IMPORTANT**
+   - Remember to update the environment variables through the AWS
+     configuration options (go to environment page > Configuration > Edit
+     'Software' > Environment properties). The variables for production can be
+     found in `.prod.env`
+   - To reduce costs, first go to environment page > Configuration > Edit
+     'Rolling updates and deployments' > Set deployment policy to 'Immutable'.
+     Next go back to Configuration > Edit 'Capacity' > Set 'Environment type'
+     to 'Single Instance'
 
 # Group Reputation 3
 
