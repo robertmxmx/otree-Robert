@@ -1,5 +1,6 @@
 import random
 
+
 def create_random_groups(players, players_per_group):
     # this stores players that haven't been sorted above and so will be put into random groups
     new_groups = []

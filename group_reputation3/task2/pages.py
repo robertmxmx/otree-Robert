@@ -1,4 +1,3 @@
-from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
@@ -15,26 +14,25 @@ def create_html_table(d):
 
     for key, value in dict(sorted(d.items())).items():
         content += f"<td>{value}</td>"
-        
+
     content += "</tr></table>"
 
     return content
 
+
 class Setup(WaitPage):
     group_by_arrival_time = True
-    
+
     def after_all_players_arrive(self):
         self.group.init_round()
 
 
 class Instructions(Page):
-
     def is_displayed(self):
         return self.round_number == 1
 
 
 class Instructions2(Page):
-
     def is_displayed(self):
         return self.round_number == 1
 
@@ -47,25 +45,21 @@ class Instructions2(Page):
 
 
 class VideoInstructions(Page):
-
     def is_displayed(self):
         return self.round_number == 1
 
 
 class Instructions3(Page):
-
     def is_displayed(self):
         return self.round_number == 1
 
 
 class Instructions3a(Page):
-
     def is_displayed(self):
         return self.round_number == 1
 
 
 class Instructions4(Page):
-
     def is_displayed(self):
         return self.round_number == 1
 
@@ -115,10 +109,7 @@ class Comprehension(Page):
         if len(incorrectqnums) == 0:
             return
 
-        return (
-            "The following questions are incorrect: " +
-            ", ".join(incorrectqnums)
-        )
+        return "The following questions are incorrect: " + ", ".join(incorrectqnums)
 
 
 class Commencement(Page):
@@ -142,7 +133,7 @@ class TakingDecision(Page):
             **self.player.get_instruction_vars(),
             "show_init_msg": False,
             "chose_to_take_label": chose_to_take_label,
-            "revealed": False
+            "revealed": False,
         }
 
 
@@ -158,17 +149,17 @@ class DeductingDecision(Page):
             **self.player.get_instruction_vars(),
             "show_init_msg": False,
             "taking_player": self.subsession.taking_player,
-            "revealed": False
+            "revealed": False,
         }
 
 
 class WaitingDecision(Page):
     form_model = "player"
-    
+
     def is_displayed(self):
         active_players = [
             self.subsession.taking_player,
-            self.subsession.deducting_player
+            self.subsession.deducting_player,
         ]
 
         return self.player.role() not in active_players
@@ -187,7 +178,7 @@ class WaitingDecision(Page):
             if len(similar_groups) > 0:
                 form_fields.append("same_grouping_deduction")
                 form_fields.append("should_spend_guess")
-        
+
         return form_fields
 
     def vars_for_template(self):
@@ -195,7 +186,7 @@ class WaitingDecision(Page):
 
         if len(similar_groups) == 0:
             return {"same_group_sort": None}
-        
+
         sorted_by = self.player.participant.vars["sorted_by"]
 
         # Could also use "other" player as they have the same
@@ -212,7 +203,7 @@ class WaitingDecision(Page):
                 else "politically conservative"
             )
 
-        return { "same_group_sort": group_sort }
+        return {"same_group_sort": group_sort}
 
 
 class CalculatePayoffs(WaitPage):
@@ -224,7 +215,6 @@ class CalculatePayoffs(WaitPage):
 
 
 class Feedback(Page):
-
     def _get_payoffs(self, final=False):
         other_player_role = "C" if self.round_number == 1 else "B"
         payoffs = {}
@@ -232,9 +222,7 @@ class Feedback(Page):
         for p in self.group.get_players():
             role = p.role()
             payoffs[role] = (
-                int(p.participant.payoff)
-                if final
-                else int(p.payoff_after_take)
+                int(p.participant.payoff) if final else int(p.payoff_after_take)
             )
 
             # Show inital payoff of other player. This prevents adding in any
@@ -265,9 +253,7 @@ class Feedback(Page):
             else:
                 content += f"<p>{tp} decided not to take {ta} ECU from {dp}</p>"
 
-            content += (
-                "<p>This led to the following distribution of endowments:</p>"
-            )
+            content += "<p>This led to the following distribution of endowments:</p>"
 
             content += create_html_table(pat)
 
@@ -294,7 +280,7 @@ class Feedback(Page):
             "payoffs_after_take": dict(sorted(pat.items())),
             "deduct_amount": da,
             "multiplied_deduct_amount": mult_da,
-            "final_payoffs": dict(sorted(fp.items()))
+            "final_payoffs": dict(sorted(fp.items())),
         }
 
     def before_next_page(self):
@@ -313,39 +299,33 @@ class Feedback(Page):
 
         p.vars["deducting_players"][current_task] = deducting_player
 
-class CMessage(Page):
 
+class CMessage(Page):
     def is_displayed(self):
         return self.session.config["rep_condition"] and self.round_number == 2
-    
+
     def vars_for_template(self):
         return {
             **self.player.get_instruction_vars(),
             "show_init_msg": False,
-            "revealed": True
+            "revealed": True,
         }
-    
+
 
 page_sequence = [
     Setup,
-
     Instructions,
     Instructions2,
     VideoInstructions,
     Instructions3,
     Instructions3a,
     Instructions4,
-
     Comprehension,
-
     Commencement,
-
     TakingDecision,
     DeductingDecision,
     WaitingDecision,
-
     CalculatePayoffs,
     Feedback,
-
-    CMessage
+    CMessage,
 ]

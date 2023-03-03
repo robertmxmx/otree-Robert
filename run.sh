@@ -26,6 +26,9 @@ case $1 in
     tests)
         build_run "-v $VOLUME_PATH" "otree test $TEST_NAME $TEST_USERS"
         ;;
+    format)
+        docker run --rm --volume "$VOLUME_PATH" --workdir //app pyfound/black:latest_release black .
+        ;;
     prod)
         # Does not require a command as it is already defined in Dockerfile
         build_run "-p 8000:8000 --env-file .prod.env"

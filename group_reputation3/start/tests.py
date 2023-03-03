@@ -1,14 +1,11 @@
-from otree.api import Currency as c, currency_range
 from . import pages
 from ._builtin import Bot
-from .models import Constants
 from otree.api import Submission
 
 
 class PlayerBot(Bot):
-
     def play_round(self):
-        yield (pages.Consent, { 'accept': True })
+        yield (pages.Consent, {"accept": True})
         yield Submission(pages.Welcome, check_html=False)
 
         if self.session.config["online_exp"]:

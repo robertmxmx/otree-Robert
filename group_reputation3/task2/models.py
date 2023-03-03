@@ -1,10 +1,15 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models,
+    widgets,
+    BaseConstants,
+    BaseSubsession,
+    BaseGroup,
+    BasePlayer,
 )
 from statistics import mode, StatisticsError
 
 from _myshared.constants import REGIONS, SortTypes
+
 
 class Constants(BaseConstants):
     name_in_url = "task2"
@@ -45,7 +50,6 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-
     def init_round(self):
         for p in self.get_players():
             p.participant.payoff = 0
@@ -79,9 +83,8 @@ class Group(BaseGroup):
             # birth regions as current group
             current_brs = [p.br for p in current_players]
             other_brs = [p.br for p in players]
-            same_birth_region = (
-                (current_sort == SortTypes.BIRTH_REGION.value) and
-                (sorted(current_brs) == sorted(other_brs))
+            same_birth_region = (current_sort == SortTypes.BIRTH_REGION.value) and (
+                sorted(current_brs) == sorted(other_brs)
             )
 
             # Check if grouped by politicial ideology ans has same ideology as
@@ -89,13 +92,12 @@ class Group(BaseGroup):
             current_pis = [p.pi for p in current_players]
             other_pis = [p.pi for p in players]
             same_political_ideology = (
-                (current_sort == SortTypes.POLITICAL_IDEOLOGY.value) and
-                (sorted(current_pis) == sorted(other_pis))
-            )
-            
+                current_sort == SortTypes.POLITICAL_IDEOLOGY.value
+            ) and (sorted(current_pis) == sorted(other_pis))
+
             if same_birth_region or same_political_ideology:
                 similar_groups.append(group)
-        
+
         return similar_groups
 
     def set_round1_other_payoffs(self, similar_groups):
@@ -107,18 +109,15 @@ class Group(BaseGroup):
             bonus += Constants.additional_amount
 
         if len(similar_groups) > 0:
-            answers = [
-                g.get_player_by_role("C").should_spend for g in similar_groups
-            ]
+            answers = [g.get_player_by_role("C").should_spend for g in similar_groups]
 
             try:
                 most_common_answer = mode(answers)
             except StatisticsError:
                 most_common_answer = None
 
-            if (
-                most_common_answer and
-                (playerC.same_grouping_should_spend == most_common_answer)
+            if most_common_answer and (
+                playerC.same_grouping_should_spend == most_common_answer
             ):
                 bonus += Constants.additional_amount
 
@@ -130,25 +129,20 @@ class Group(BaseGroup):
         bonus = 0
         playerB = self.get_player_by_role("B")
 
-        other_groups = [
-            g for g in self.subsession.get_groups() if g.id != self.id
-        ]
+        other_groups = [g for g in self.subsession.get_groups() if g.id != self.id]
         deductions = []
 
         for group in other_groups:
             # Player B in round 2 was the deducting player in round 1
-            deductions.append(
-                group.get_player_by_role("B").in_round(1).deduct_amount
-            )
+            deductions.append(group.get_player_by_role("B").in_round(1).deduct_amount)
 
         try:
             most_common_deduction = mode(deductions)
         except StatisticsError:
             most_common_deduction = None
 
-        if (
-            most_common_deduction and
-            (playerB.general_deduction == most_common_deduction)
+        if most_common_deduction and (
+            playerB.general_deduction == most_common_deduction
         ):
             bonus += Constants.additional_amount
 
@@ -167,9 +161,8 @@ class Group(BaseGroup):
             except StatisticsError:
                 most_common_deduction = None
 
-            if (
-                most_common_deduction and
-                (playerB.same_grouping_deduction == most_common_deduction)
+            if most_common_deduction and (
+                playerB.same_grouping_deduction == most_common_deduction
             ):
                 bonus += Constants.additional_amount
 
@@ -184,9 +177,8 @@ class Group(BaseGroup):
             except StatisticsError:
                 most_common_answer = None
 
-            if (
-                most_common_answer and
-                (playerB.should_spend_guess == most_common_answer)
+            if most_common_answer and (
+                playerB.should_spend_guess == most_common_answer
             ):
                 bonus += Constants.additional_amount
 
@@ -195,9 +187,7 @@ class Group(BaseGroup):
 
     def set_payoffs(self):
         playerA = self.get_player_by_role("A")
-        deducting_player = (
-            self.get_player_by_role(self.subsession.deducting_player)
-        )
+        deducting_player = self.get_player_by_role(self.subsession.deducting_player)
 
         # Set if ECU was taken
         if playerA.chose_to_take:
@@ -230,12 +220,12 @@ class Player(BasePlayer):
     comp1 = models.IntegerField(
         label="In Task 1, who will A have the opportunity to take ECU from?",
         choices=[[1, "B"], [2, "C"], [3, "both B and C"]],
-        widget=widgets.RadioSelect
+        widget=widgets.RadioSelect,
     )
     comp2 = models.BooleanField(
         label="In Task 2, will A have the opportunity to take ECU from C?",
         widget=widgets.RadioSelectHorizontal,
-        choices=[[True, "Yes"], [False, "No"]]
+        choices=[[True, "Yes"], [False, "No"]],
     )
     comp3 = models.BooleanField(
         label=(
@@ -243,23 +233,23 @@ class Player(BasePlayer):
             "to A's decision in Task 1?"
         ),
         widget=widgets.RadioSelectHorizontal,
-        choices=[[True, "Yes"], [False, "No"]]
+        choices=[[True, "Yes"], [False, "No"]],
     )
     comp4 = models.IntegerField(
         label="When will C learn about the membership of the group?",
         choices=[
             [1, "at the end of task 1"],
             [2, "at the end of task 2"],
-            [3, "never"]
+            [3, "never"],
         ],
-        widget=widgets.RadioSelect
+        widget=widgets.RadioSelect,
     )
     comp5 = models.IntegerField(
         label=(
             "If, after A takes ECU from B, Participant B chooses to spend 3 "
             "ECU to reduce A's endowment, how many ECU will A lose?"
         ),
-        min=0
+        min=0,
     )
     comp1_wrong = models.IntegerField(initial=0)
     comp2_wrong = models.IntegerField(initial=0)
@@ -299,8 +289,8 @@ class Player(BasePlayer):
         """Returns variables that are used on the instruction screen"""
 
         sorted_by = self.participant.vars["sorted_by"]
-        deducting_player = (
-            self.group.get_player_by_role(self.subsession.deducting_player)
+        deducting_player = self.group.get_player_by_role(
+            self.subsession.deducting_player
         )
 
         return_dict = {"sorted_by": sorted_by}
@@ -312,12 +302,10 @@ class Player(BasePlayer):
             )
 
             if sorted_by == "birth_region":
-                return_dict["same_region"] = REGIONS[deducting_player.br-1]
+                return_dict["same_region"] = REGIONS[deducting_player.br - 1]
             elif sorted_by == "pol_ideology":
                 return_dict["same_ideology"] = (
-                    "progressive"
-                    if deducting_player.pi == 1
-                    else "conservative"
+                    "progressive" if deducting_player.pi == 1 else "conservative"
                 )
 
         return return_dict

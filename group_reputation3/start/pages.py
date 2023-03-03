@@ -1,13 +1,13 @@
-from otree.api import Currency as c, currency_range
-from ._builtin import Page, WaitPage
-from .models import Constants
+from otree.api import Currency as c
+from ._builtin import Page
+
 
 class Consent(Page):
-    form_model = 'player'
-    form_fields = ['accept']
+    form_model = "player"
+    form_fields = ["accept"]
 
     def before_next_page(self):
-        self.player.participant.vars['droppedout'] = not self.player.accept
+        self.player.participant.vars["droppedout"] = not self.player.accept
 
 
 class Declined(Page):
@@ -21,18 +21,12 @@ class Declined(Page):
 
 class Welcome(Page):
     def vars_for_template(self):
-        return {
-            'aud_per_point': c(1).to_real_world_currency(self.session)
-        }
+        return {"aud_per_point": c(1).to_real_world_currency(self.session)}
+
 
 class InternetRequirement(Page):
     def is_displayed(self):
         return self.session.config["online_exp"]
 
 
-page_sequence = [
-    Consent,
-    Declined,
-    Welcome,
-    InternetRequirement
-]
+page_sequence = [Consent, Declined, Welcome, InternetRequirement]

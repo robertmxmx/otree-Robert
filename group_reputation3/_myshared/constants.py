@@ -18,8 +18,9 @@ REGIONS = [
     "Taiwan",
     "USA",
     "Vietnam",
-    "Other"
+    "Other",
 ]
+
 
 class SortTypes(Enum):
     NONE = None

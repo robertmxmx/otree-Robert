@@ -1,4 +1,4 @@
-from otree.api import Currency as c, currency_range
+from otree.api import Currency as c
 from . import pages
 from ._builtin import Bot
 from .models import Constants
@@ -19,12 +19,12 @@ GENERAL_DEDUCTION = 5
 SAME_GROUPING_DEDUCTION = 5
 SHOULD_SPEND_GUESS = 5
 
-class PlayerBot(Bot):
 
+class PlayerBot(Bot):
     def play_round(self):
         if "group" not in self.participant.vars:
             return
-            
+
         if self.round_number == 1:
             yield Submission(pages.Instructions, check_html=False)
             yield Submission(pages.Instructions2)
@@ -37,7 +37,7 @@ class PlayerBot(Bot):
                 "comp1": 1,
                 "comp2": True,
                 "comp3": self.session.config["deterrence"],
-                "comp5": 36
+                "comp5": 36,
             }
 
             if self.session.config["rep_condition"]:
@@ -53,28 +53,25 @@ class PlayerBot(Bot):
             yield Submission(
                 pages.DeductingDecision,
                 {"deduct_amount": DEDUCT_AMOUNT},
-                check_html=False
+                check_html=False,
             )
         else:
             if self.round_number == 1:
-                answers = {
-                    "will_spend": WILL_SPEND,
-                    "should_spend": SHOULD_SPEND
-                }
+                answers = {"will_spend": WILL_SPEND, "should_spend": SHOULD_SPEND}
 
                 if CASE != "no_grouping":
                     answers = {
                         **answers,
-                        "same_grouping_should_spend": SAME_GROUPING_SHOULD_SPEND
+                        "same_grouping_should_spend": SAME_GROUPING_SHOULD_SPEND,
                     }
             else:
-                answers = { "general_deduction": GENERAL_DEDUCTION }
+                answers = {"general_deduction": GENERAL_DEDUCTION}
 
                 if CASE != "no_grouping":
                     answers = {
-                        **answers, 
+                        **answers,
                         "same_grouping_deduction": SAME_GROUPING_DEDUCTION,
-                        "should_spend_guess": SHOULD_SPEND_GUESS
+                        "should_spend_guess": SHOULD_SPEND_GUESS,
                     }
 
             yield (pages.WaitingDecision, answers)
@@ -83,9 +80,8 @@ class PlayerBot(Bot):
 
         if self.round_number == 1:
             if (self.player.role() == "A") and CHOSE_TO_TAKE:
-                expected_payoff += (
-                    Constants.take_amount -
-                    (Constants.deduct["multiplier"] * DEDUCT_AMOUNT)
+                expected_payoff += Constants.take_amount - (
+                    Constants.deduct["multiplier"] * DEDUCT_AMOUNT
                 )
             elif (self.player.role() == "B") and CHOSE_TO_TAKE:
                 expected_payoff -= Constants.take_amount + DEDUCT_AMOUNT
@@ -93,16 +89,14 @@ class PlayerBot(Bot):
                 if WILL_SPEND == DEDUCT_AMOUNT:
                     expected_payoff += Constants.additional_amount
 
-                if (
-                    (CASE != "no_grouping") and
-                    (SHOULD_SPEND == SAME_GROUPING_SHOULD_SPEND)
+                if (CASE != "no_grouping") and (
+                    SHOULD_SPEND == SAME_GROUPING_SHOULD_SPEND
                 ):
                     expected_payoff += Constants.additional_amount
         else:
             if (self.player.role() == "A") and CHOSE_TO_TAKE:
-                expected_payoff += (
-                    Constants.take_amount -
-                    (Constants.deduct["multiplier"] * DEDUCT_AMOUNT)
+                expected_payoff += Constants.take_amount - (
+                    Constants.deduct["multiplier"] * DEDUCT_AMOUNT
                 )
             elif self.player.role() == "B":
                 if DEDUCT_AMOUNT == GENERAL_DEDUCTION:
