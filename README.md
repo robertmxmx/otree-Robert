@@ -41,6 +41,14 @@
 
 # Group Reputation 3
 
+## Simon todo
+
+- Implement new belief questions (refinement of questions for B and C, new questions for A)
+- Yes, "chosen" task, for all participants as config variable, affects whether Task 1 or Task 2 is paid.
+- BUT for bonus question: 
+- Everyone gets the chance to earn a bonus from belief questions.
+- Randomize separately for each participant which belief question is to be rewarded. Store the name of the variable which is the basis of the bonus for each individual. Give them feedback about exactly which question it was that they are getting a bonus for on the payoff page.
+
 ## Toby to review
 
 - Please document in a specific readme for the group reputation 3 app):
