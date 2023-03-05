@@ -6,14 +6,14 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'task2/components/Header.html' %}
+    {% include 'components/Header.html' %}
 
     {% formfield player.chose_to_take label=chose_to_take_label %}
     {% next_button %}
 
     <div class="card bg-light instructions">
     <div class="card-body">
-        {% include 'task2/components/BrPiInfo.html' %}     
+        {% include 'components/BrPiInfo.html' %}     
         {% if subsession.round_number == 1 %}   
             {% if session.config.deterrence %}
             <p>

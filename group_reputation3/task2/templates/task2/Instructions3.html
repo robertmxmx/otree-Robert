@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'task2/components/Header.html' %}<br><br>
+    {% include 'components/Header.html' %}<br><br>
     {% if session.config.online_exp %}
-        {% include 'task2/components/instructions/3shortened.html' %}
+        {% include 'components/instructions/3shortened.html' %}
     {% else %}
-        {% include 'task2/components/instructions/3.html' %}
+        {% include 'components/instructions/3.html' %}
     {% endif %}
 {% endblock %}
 

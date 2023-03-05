@@ -6,8 +6,8 @@
 {{ endblock }}
 
 {{ block content }}
-    {{ include 'task2/components/Header.html' }}
-    {{ include 'task2/components/CalculateModal.html' }}
+    {{ include 'components/Header.html' }}
+    {{ include 'components/CalculateModal.html' }}
     <br />
 
     {{ if subsession.round_number == 1 }}
@@ -32,9 +32,9 @@
             {{ with field_name='will_spend' }}
             <p>
                 I guess B <b>will spend</b> 
-                {{ include 'task2/components/ECUFieldInput.html' }}
+                {{ include 'components/ECUFieldInput.html' }}
                 ECU on deductions from A.
-                {{ include 'task2/components/ECUField.html' }}
+                {{ include 'components/ECUField.html' }}
             </p>
             {{ endwith }}
             {{ endwith }}
@@ -56,9 +56,9 @@
             {{ with field_name='should_spend' }}
             <p>
                 I think B <b>should spend</b> 
-                {{ include 'task2/components/ECUFieldInput.html' }}
+                {{ include 'components/ECUFieldInput.html' }}
                 ECU on deductions from A. 
-                {{ include 'task2/components/ECUField.html' }}
+                {{ include 'components/ECUField.html' }}
             </p>
             {{ endwith }}
             {{ endwith }}
@@ -81,8 +81,8 @@
             {{ with field_control=form.same_grouping_should_spend }}
             {{ with field_name='same_grouping_should_spend' }}
 			<p>
-                {{ include 'task2/components/ECUFieldInput.html' }} ECU
-                {{ include 'task2/components/ECUField.html' }}
+                {{ include 'components/ECUFieldInput.html' }} ECU
+                {{ include 'components/ECUField.html' }}
 			</p>
             {{ endwith }}
             {{ endwith }}
@@ -113,8 +113,8 @@
             {{ with field_control=form.general_deduction }}
             {{ with field_name='general_deduction' }}
             <p>
-                {{ include 'task2/components/ECUFieldInput.html' }} ECU 
-                {{ include 'task2/components/ECUField.html' }}
+                {{ include 'components/ECUFieldInput.html' }} ECU 
+                {{ include 'components/ECUField.html' }}
             </p>
             {{ endwith }}
             {{ endwith }}
@@ -141,8 +141,8 @@
             {{ with field_control=form.same_grouping_deduction }}
             {{ with field_name='same_grouping_deduction' }}
             <p>
-                {{ include 'task2/components/ECUFieldInput.html' }} ECU 
-                {{ include 'task2/components/ECUField.html' }}
+                {{ include 'components/ECUFieldInput.html' }} ECU 
+                {{ include 'components/ECUField.html' }}
             </p>
             {{ endwith }}
             {{ endwith }}
@@ -173,8 +173,8 @@
             {{ with field_name='should_spend_guess' }}
             <p>
                 What is your guess of C's answer in this question?
-                {{ include 'task2/components/ECUFieldInput.html' }} ECU 
-                {{ include 'task2/components/ECUField.html' }}
+                {{ include 'components/ECUFieldInput.html' }} ECU 
+                {{ include 'components/ECUField.html' }}
             </p>
             {{ endwith }}
             {{ endwith }}
