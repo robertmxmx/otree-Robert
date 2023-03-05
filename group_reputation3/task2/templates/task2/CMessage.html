@@ -2,29 +2,30 @@
 {% load otree static %}
 
 {% block title %}
-    Group Membership Message for C
+  Group Membership Message for C
 {% endblock %}
 
 {% block content %}
-    {% include 'components/Header.html' %}
-    <br><br>
+  {% include 'components/Header.html' %}
 
-    {% if player.role == 'A' or player.role == 'B' %}
-    <p>
-        C is now receiving the message below:
-    </p>
-    {% else %}
-    <p>
-        This information was given to A and B at the beginning of the experiment
-    </p>
-    {% endif %}
+  <br>
+  <br>
 
-    <div class="card bg-light instructions">
-        <div class="card-body">
-            {% include 'components/BrPiInfo.html' %}
-        </div>
-    </div><br />
-    {% next_button %}
+  {% if player.role == 'A' or player.role == 'B' %}
+    <p>C is now receiving the message below:</p>
+  {% else %}
+    <p>
+      This information was given to A and B at the beginning of the experiment
+    </p>
+  {% endif %}
+
+  <div class="card bg-light instructions">
+    <div class="card-body">
+      {% include 'components/BrPiInfo.html' %}
+    </div>
+  </div>
+
+  <br>
+
+  {% next_button %}
 {% endblock %}
-
-

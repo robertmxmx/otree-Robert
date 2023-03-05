@@ -1,65 +1,92 @@
 {% load otree static %}
 
 <div id="myModal" class="modal">
-    <div class="modal-content">
-        <div class="w3-container">
-            <div id="calc-result">
-                <h3>Resulting payoffs</h3>
-                <p>
-                    If a participant spends <span class="result1"></span> ECU on deductions, 
-                    this will have the effect of deducting <span class="result2"></span> ECU from A.
-                </p>
-                <p>
-                    So, assuming A decides to take 100 of B’s ECU, the final payoffs would be:
-                </p>
-                <table class="simple-table">
-                    <tr>
-                        <th>A</th>
-                        <th>B</th>
-                        <th>C</th>
-                    </tr>
-                    <tr>
-                        <td>120 - <span class="result2"></span> = <span class="result3"></span></td>
-                        <td>10 - <span class="result1"></span> = <span class="result4"></span></td>
-                        <td>110</td>
-                    </tr>
-                </table>
-            </div>
-            <div id="error-msg">
-                <p>
-                    Please enter a number between {{ Constants.deduct.min }} and {{ Constants.deduct.max }}.
-                </p>
-            </div>
-            <br><br>
-            <div align="right">
-                <button type="button" class="otree-btn-next btn btn-primary"
-                    onclick="document.getElementById('myModal').style.display='none';"> Close </button>
-            </div>
-        </div>
+  <div class="modal-content">
+    <div class="w3-container">
+      <div id="calc-result">
+        <h3>Resulting payoffs</h3>
+
+        <p>
+          If a participant spends <span class="result1"></span> ECU on
+          deductions, this will have the effect of deducting
+          <span class="result2"></span> ECU from A.
+        </p>
+        <p>
+          So, assuming A decides to take 100 of B's ECU, the final payoffs
+          would be:
+        </p>
+
+        <table class="simple-table">
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+          </tr>
+          <tr>
+            <td>
+              120 -
+              <span class="result2"></span> =
+              <span class="result3"></span>
+            </td>
+            <td>
+              10 -
+              <span class="result1"></span> =
+              <span class="result4"></span>
+            </td>
+            <td>110</td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="error-msg">
+        <p>
+          Please enter a number between {{ Constants.deduct.min }} and
+          {{ Constants.deduct.max }}.
+        </p>
+      </div>
+
+      <br>
+      <br>
+
+      <div align="right">
+        <button
+          class="otree-btn-next btn btn-primary"
+          type="button"
+          onclick="document.getElementById('myModal').style.display='none';"
+        > Close </button>
+      </div>
     </div>
+  </div>
 </div>
 
 <script>
-    function setModalContents(deductECU) {
-        var ok;
-        if (deductECU >= {{ Constants.deduct.min }} && deductECU <= {{ Constants.deduct.max }}) {
-            var multDeductECU = {{ Constants.deduct.multiplier }}*deductECU;
+  function setModalContents(deductECU) {
+    var ok;
 
-            $(".result1").text(deductECU);
-            $(".result2").text(multDeductECU);
-            $(".result3").text(120-multDeductECU);
-            $(".result4").text(10-deductECU);
+    if (
+      (deductECU >= {{ Constants.deduct.min }}) && 
+      (deductECU <= {{ Constants.deduct.max }})
+    ) {
+      ok = true;
 
-            $('#calc-result').css('display', 'block');
-            $('#error-msg').css('display', 'none');
-            ok = true;
-        } else {
-            $('#calc-result').css('display', 'none');
-            $('#error-msg').css('display', 'block');
-            ok = false;
-        }
+      var multDeductECU = {{ Constants.deduct.multiplier }} * deductECU;
 
-        $('#myModal').css('display', 'block');
-        return ok;
+      $(".result1").text(deductECU);
+      $(".result2").text(multDeductECU);
+      $(".result3").text(120 - multDeductECU);
+      $(".result4").text(10 - deductECU);
+
+      $('#calc-result').css('display', 'block');
+      $('#error-msg').css('display', 'none');
+    } else {
+      ok = false;
+
+      $('#calc-result').css('display', 'none');
+      $('#error-msg').css('display', 'block');
     }
+
+    $('#myModal').css('display', 'block');
+
+    return ok;
+  }
 </script>

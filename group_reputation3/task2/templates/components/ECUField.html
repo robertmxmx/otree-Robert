@@ -1,11 +1,9 @@
 <button
-    type="button"
-    class="otree-btn-next btn btn-primary" 
-    style="margin: -5px .5rem 0 .5rem;" 
-    onclick="handleCalculate('{{ field_name }}_field');"
->
-    Calculate
-</button>
+  class="otree-btn-next btn btn-primary" 
+  type="button"
+  style="margin: -5px .5rem 0 .5rem;" 
+  onclick="handleCalculate('{{ field_name }}_field');"
+>Calculate</button>
 
 {% if field_control.errors %}
 <text style="color:red">{{ field_control.errors.0 }}</text>

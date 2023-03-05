@@ -2,34 +2,33 @@
 {% load otree static %}
 
 {% block title %}
-    Task {{ subsession.round_number }} Decision
+  Task {{ subsession.round_number }} Decision
 {% endblock %}
 
 {% block content %}
-    {% include 'components/Header.html' %}
+  {% include 'components/Header.html' %}
 
-    {% formfield player.chose_to_take label=chose_to_take_label %}
-    {% next_button %}
+  {% formfield player.chose_to_take label=chose_to_take_label %}
+  {% next_button %}
 
-    <div class="card bg-light instructions">
+  <div class="card bg-light instructions">
     <div class="card-body">
-        {% include 'components/BrPiInfo.html' %}     
-        {% if subsession.round_number == 1 %}   
-            {% if session.config.deterrence %}
-            <p>
-                After this task is completed, A will receive feedback on the outcome before 
-                beginning Task 2.
-            </p>
-            {% else %}
-            <p>
-                After this task is completed, no feedback will be received. You will proceed 
-                straight to Task 2. Feedback will be provided on both tasks at the end.
-            </p>
-            {% endif %}
+      {% include 'components/BrPiInfo.html' %}
+
+      {% if subsession.round_number == 1 %}
+        {% if session.config.deterrence %}
+          <p>
+            After this task is completed, A will receive feedback on the
+            outcome before beginning Task 2.
+          </p>
+        {% else %}
+          <p>
+            After this task is completed, no feedback will be received. You
+            will proceed straight to Task 2. Feedback will be provided on both
+            tasks at the end.
+          </p>
         {% endif %}
+      {% endif %}
     </div>
-</div>
-
+  </div>
 {% endblock %}
-
-

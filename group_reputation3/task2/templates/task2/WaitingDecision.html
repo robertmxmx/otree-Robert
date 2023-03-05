@@ -2,211 +2,218 @@
 {{ load otree static }}
 
 {{ block title }}
-    Task {{ subsession.round_number }} Intermission
+  Task {{ subsession.round_number }} Intermission
 {{ endblock }}
 
 {{ block content }}
-    {{ include 'components/Header.html' }}
-    {{ include 'components/CalculateModal.html' }}
-    <br />
+  {{ include 'components/Header.html' }}
+  {{ include 'components/CalculateModal.html' }}
 
-    {{ if subsession.round_number == 1 }}
+  <br>
+
+  {{ if subsession.round_number == 1 }}
     <p>
-        While you are waiting for A and B to finish their decisions in Task 1,
-        please answer the following questions.
+      While you are waiting for A and B to finish their decisions in Task 1,
+      please answer the following questions.
     </p>
 
     <ul>
+      <li>
+        <p>
+          Please tell us whether you think A will deduct some ECU from
+          B if A chooses to take B's {{ Constants.take_amount}} ECU. If
+          so, how many ECU?
+        </p>
+        <p>
+          (We will compare your answer with the actual decision B makes
+          and, if your guess is correct you will earn an additional
+          {{ Constants.additional_amount }} ECU for this task.)
+        </p>
+
+        {{ with field_control=form.will_spend }}
+          {{ with field_name='will_spend' }}
+            <p>
+              I guess B <b>will spend</b>
+              {{ include 'components/ECUFieldInput.html' }}
+              ECU on deductions from A.
+              {{ include 'components/ECUField.html' }}
+            </p>
+          {{ endwith }}
+        {{ endwith }}
+      </li>
+
+      <li>
+        <p>
+          Please tell us whether you think B <strong>should</strong>
+          deduct some ECU from A if A chooses to take B's
+          {{ Constants.take_amount }} ECU. In other words, is it
+          <strong>socially appropriate</strong> for B to deduct ECU from
+          A? If so, how many ECU?
+        </p>
+        <p>
+          If you think it is not appropriate to deduct from A, then
+          please enter zero.
+        </p>
+
+        {{ with field_control=form.should_spend }}
+          {{ with field_name='should_spend' }}
+            <p>
+              I think B <b>should spend</b>
+              {{ include 'components/ECUFieldInput.html' }}
+              ECU on deductions from A.
+              {{ include 'components/ECUField.html' }}
+            </p>
+          {{ endwith }}
+        {{ endwith }}
+      </li>
+
+      {{ if same_group_sort }}
         <li>
-            <p>
-                Please tell us whether you think A will deduct some ECU from 
-                B if A chooses to take B's {{ Constants.take_amount}} ECU. If
-                so, how many ECU? 
-            </p>
-            <p>
-                (We will compare your answer with the actual decision B makes
-                and, if your guess is correct you will earn an additional
-                {{ Constants.additional_amount }} ECU for this task.)
-            </p>
-            {{ with field_control=form.will_spend }}
-            {{ with field_name='will_spend' }}
-            <p>
-                I guess B <b>will spend</b> 
-                {{ include 'components/ECUFieldInput.html' }}
-                ECU on deductions from A.
-                {{ include 'components/ECUField.html' }}
-            </p>
-            {{ endwith }}
-            {{ endwith }}
-        </li>
+          <p>
+            Finally, note that in today's lab session, there is at least
+            one other group where Participants B and C are
+            {{ same_group_sort }}. Considering the other groups that are
+            {{ same_group_sort }} (excluding your own answer) what do you
+            think is the most common answer given to the last question?
+          </p>
+          <p>
+            (We will compare your answer with the actual answers given and,
+            if your guess is correct you will earn an additional
+            {{ Constants.additional_amount }} ECU for this task.)
+          </p>
 
-        <li>      
-            <p>
-                Please tell us whether you think B <strong>should</strong>
-                deduct some ECU from A if A chooses to take B's
-                {{ Constants.take_amount }} ECU. In other words, is it
-                <strong>socially appropriate</strong> for B to deduct ECU from
-                A? If so, how many ECU?
-            </p>
-            <p>
-                If you think it is not appropriate to deduct from A, then
-                please enter zero.
-            </p>
-            {{ with field_control=form.should_spend }}
-            {{ with field_name='should_spend' }}
-            <p>
-                I think B <b>should spend</b> 
-                {{ include 'components/ECUFieldInput.html' }}
-                ECU on deductions from A. 
-                {{ include 'components/ECUField.html' }}
-            </p>
-            {{ endwith }}
-            {{ endwith }}
-        </li>
-
-        {{ if same_group_sort }}
-		<li>
-			<p>
-				Finally, note that in today's lab session, there is at least
-				one other group where Participants B and C are
-                {{ same_group_sort }}. Considering the other groups that are
-                {{ same_group_sort }} (excluding your own answer) what do you
-                think is the most common answer given to the last question?
-			</p>
-            <p>
-                (We will compare your answer with the actual answers given and,
-                if your guess is correct you will earn an additional
-                {{ Constants.additional_amount }} ECU for this task.)
-            </p>
-            {{ with field_control=form.same_grouping_should_spend }}
+          {{ with field_control=form.same_grouping_should_spend }}
             {{ with field_name='same_grouping_should_spend' }}
-			<p>
+              <p>
                 {{ include 'components/ECUFieldInput.html' }} ECU
                 {{ include 'components/ECUField.html' }}
-			</p>
+              </p>
             {{ endwith }}
-            {{ endwith }}
-		</li>
-        {{ endif }}
-	</ul>
-
-	<p>		
-		You will <strong>need to press 'Calculate'</strong> for each input in
-        order to progress to the next page:   
-	</p>    
-    {{ else }}
-    <p>
-        While you are waiting for A and C to finish their decisions in Task 2,
-        please answer the following questions.
-    </p>
-
-	<ol>	
-		<li>
-			<p>
-				In the present lab session, what do you think was the most
-                commonly chosen level of deduction by Participant B?
-			<p>
-				(We will compare your answer with the actual answers given and,
-                if your guess is correct you will earn an additional
-                {{ Constants.additional_amount }} ECU for this task.)
-    		</p>
-            {{ with field_control=form.general_deduction }}
-            {{ with field_name='general_deduction' }}
-            <p>
-                {{ include 'components/ECUFieldInput.html' }} ECU 
-                {{ include 'components/ECUField.html' }}
-            </p>
-            {{ endwith }}
-            {{ endwith }}
-		</li>
-
-        {{ if same_group_sort }}
-		<li>
-			<p>
-				In today's session, there is at least one other group where
-				Participants B and C are {{ same_group_sort }}.
-			</p>
-			<p>
-				Now we want to ask you the same question as before, but
-                considering <strong>only groups that are
-                {{ same_group_sort }}</strong>, (excluding your own group). What
-                do you think was the most commonly chosen level of deduction by
-                Participant B?
-			</p>
-			<p>
-				(We will compare your answer with the actual answers given and,
-                if your guess is correct you will earn an additional
-                {{ Constants.additional_amount }} ECU for this task.)
-    		</p>
-            {{ with field_control=form.same_grouping_deduction }}
-            {{ with field_name='same_grouping_deduction' }}
-            <p>
-                {{ include 'components/ECUFieldInput.html' }} ECU 
-                {{ include 'components/ECUField.html' }}
-            </p>
-            {{ endwith }}
-            {{ endwith }}
-		</li>	
-		<li>	
-			<p>
-				While you and A were participating in Task 1, we asked C the
-                following question. Please tell us your guess of the most common
-                answer by C's that are {{ same_group_sort }}.
-			</p>
-			<p>
-				(We will compare your answer with the actual answers given and,
-                if your guess is correct you will earn an additional 10 ECU for
-                this task.)
-    		</p>
-            <p>
-                <i>
-                    "Please tell us whether you think B <strong>should</strong>
-                    deduct some ECU from A if A chooses to take B's 100 ECU. In
-                    other words, is it <strong>socially appropriate</strong> for
-                    {{ player.role }} to deduct ECU from A If so, how many ECU?
-                    If you think it is not appropriate to deduct from A then
-                    please enter zero. I think B should spend _____ ECU on
-                    deductions from A
-                </i>
-            </p>
-            {{ with field_control=form.should_spend_guess }}
-            {{ with field_name='should_spend_guess' }}
-            <p>
-                What is your guess of C's answer in this question?
-                {{ include 'components/ECUFieldInput.html' }} ECU 
-                {{ include 'components/ECUField.html' }}
-            </p>
-            {{ endwith }}
-            {{ endwith }}
+          {{ endwith }}
         </li>
-        {{ endif }}
-    </ol>
-	<p>	
-		(You will <strong>need to press 'Calculate'</strong> for each input in
-		order to progress to the next page)
-    </p>
-{{ endif }}
+      {{ endif }}
+    </ul>
 
-{{ next_button }}
+    <p>
+      You will <strong>need to press 'Calculate'</strong> for each input in
+      order to progress to the next page:
+    </p>
+  {{ else }}
+    <p>
+      While you are waiting for A and C to finish their decisions in Task 2,
+      please answer the following questions.
+    </p>
+
+    <ol>
+      <li>
+        <p>
+          In the present lab session, what do you think was the most
+          commonly chosen level of deduction by Participant B?
+        <p>
+          (We will compare your answer with the actual answers given and,
+          if your guess is correct you will earn an additional
+          {{ Constants.additional_amount }} ECU for this task.)
+        </p>
+
+        {{ with field_control=form.general_deduction }}
+          {{ with field_name='general_deduction' }}
+            <p>
+              {{ include 'components/ECUFieldInput.html' }} ECU
+              {{ include 'components/ECUField.html' }}
+            </p>
+          {{ endwith }}
+        {{ endwith }}
+      </li>
+
+      {{ if same_group_sort }}
+        <li>
+          <p>
+            In today's session, there is at least one other group where
+            Participants B and C are {{ same_group_sort }}.
+          </p>
+          <p>
+            Now we want to ask you the same question as before, but
+            considering
+            <strong>only groups that are {{ same_group_sort }}</strong>,
+            (excluding your own group). What do you think was the most commonly
+            chosen level of deduction by Participant B?
+          </p>
+          <p>
+            (We will compare your answer with the actual answers given and,
+            if your guess is correct you will earn an additional
+            {{ Constants.additional_amount }} ECU for this task.)
+          </p>
+
+          {{ with field_control=form.same_grouping_deduction }}
+            {{ with field_name='same_grouping_deduction' }}
+              <p>
+                {{ include 'components/ECUFieldInput.html' }} ECU
+                {{ include 'components/ECUField.html' }}
+              </p>
+            {{ endwith }}
+          {{ endwith }}
+        </li>
+
+        <li>
+          <p>
+            While you and A were participating in Task 1, we asked C the
+            following question. Please tell us your guess of the most common
+            answer by C's that are {{ same_group_sort }}.
+          </p>
+          <p>
+            (We will compare your answer with the actual answers given and,
+            if your guess is correct you will earn an additional 10 ECU for
+            this task.)
+          </p>
+          <p>
+            <i>
+              "Please tell us whether you think B <strong>should</strong>
+              deduct some ECU from A if A chooses to take B's 100 ECU. In
+              other words, is it <strong>socially appropriate</strong> for
+              {{ player.role }} to deduct ECU from A If so, how many ECU?
+              If you think it is not appropriate to deduct from A then
+              please enter zero. I think B should spend _____ ECU on
+              deductions from A
+            </i>
+          </p>
+
+          {{ with field_control=form.should_spend_guess }}
+            {{ with field_name='should_spend_guess' }}
+              <p>
+                What is your guess of C's answer in this question?
+                {{ include 'components/ECUFieldInput.html' }} ECU
+                {{ include 'components/ECUField.html' }}
+              </p>
+            {{ endwith }}
+          {{ endwith }}
+        </li>
+      {{ endif }}
+    </ol>
+
+    <p>
+      (You will <strong>need to press 'Calculate'</strong> for each input in
+      order to progress to the next page)
+    </p>
+  {{ endif }}
+
+  {{ next_button }}
 {{ endblock }}
 
 {{ block scripts }}
-    <script>
-        function handle_enter(event) {
-            if (event.keyCode == 13 || event.which == 13) {
-                return false;
-            }
-        }
+  <script>
+    function handle_enter(event) {
+      if (event.keyCode == 13 || event.which == 13) return false;
+    }
 
-        function handleCalculate(field) {
-            var deductECU = parseFloat($('#'+field).val());
-            
-            const validInput = setModalContents(deductECU);
-            
-            if (validInput) {
-                const name = field.replace('_field', '');
-                $('input[name ="'+name+'"]').val(deductECU);
-            }
-        }
-    </script>
+    function handleCalculate(field) {
+      var deductECU = parseFloat($('#' + field).val());
+      const validInput = setModalContents(deductECU);
+
+      if (validInput) {
+        const name = field.replace('_field', '');
+
+        $('input[name ="' + name + '"]').val(deductECU);
+      }
+    }
+  </script>
 {{ endblock }}

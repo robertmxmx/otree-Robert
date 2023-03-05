@@ -2,24 +2,21 @@
 {% load otree static %}
 
 {% block title %}
-    Task {{ subsession.round_number }} Commencement
+  Task {{ subsession.round_number }} Commencement
 {% endblock %}
 
 {% block content %}
-    {% include 'components/Header.html' %}
+  {% include 'components/Header.html' %}
 
-    {% if subsession.round_number == 1 %}
-    <p>
-        You will now begin Task 1.
-    </p>
-    {% else %}
-    <p>
-        You will now begin Task 2. You are in the same group as you were for Task 1.
-    </p>
-    {% endif %}
+  {% if subsession.round_number == 1 %}
+    <p>You will now begin Task 1.</p>
+  {% else %}
+  <p>
+      You will now begin Task 2. You are in the same group as you were for Task 1.
+  </p>
+  {% endif %}
 
-    {% next_button %}
-
+  {% next_button %}
 {% endblock %}
 
 

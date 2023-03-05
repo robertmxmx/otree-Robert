@@ -5,12 +5,14 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'components/Header.html' %}<br><br>
-    {% if session.config.online_exp %}
-        {% include 'components/instructions/3shortened.html' %}
-    {% else %}
-        {% include 'components/instructions/3.html' %}
-    {% endif %}
+  {% include 'components/Header.html' %}
+  
+  <br>
+  <br>
+
+  {% if session.config.online_exp %}
+    {% include 'components/instructions/3shortened.html' %}
+  {% else %}
+    {% include 'components/instructions/3.html' %}
+  {% endif %}
 {% endblock %}
-
-
