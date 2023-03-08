@@ -46,8 +46,7 @@
 
 ## Simon To Do
 
-- Implement new belief questions (refinement of questions for B and C, new
-  questions for A)
+- Implement new belief questions (refinement of questions for B and C, new questions for A)
 
 - Yes, "chosen" task, for all participants as config variable, affects whether
   Task 1 or Task 2 is paid BUT for bonus question: 
@@ -56,6 +55,26 @@
     rewarded. Store the name of the variable which is the basis of the bonus
     for each individual. Give them feedback about exactly which question it was
     that they are getting a bonus for on the payoff page.
+
+(New additions 8 March 2023)
+
+1. Need to place the belief questions for A, B, C, all in the same part of the sequencing. They come immediately after the Task 1 Decisions, but *before* the Task 1 feedback.
+2. Head the belief questions page "Bonus questions"
+3. On the final payment page, refer to the bonus payment as "Bonus question payment" (if applicable). (Toby to check)
+4. As well as groups formed on the basis of birth region, there are groups formed on the basis of political ideology. And there are groups formed on the basis of no identity criterion. If the latter, they should not receive questions that make reference to "some group criterion".
+	- Simon to show me how an unsorted group will get handled when it comes to the Bonus questions. Some questions make no sense for them, so should not be shown.
+5. Important change to feedback for A: A needs to learn how **B/C would have behaved, even if A does not take**. (In both Task 1 and Task 2.) TOBY to add change to the wording, but leave the logic to be filled in by Simon.
+6. Related: Toby will need to change the instructions for A to make the last change clear.
+7. Make "online experiment" default to UNCHECKED
+8. Change default show up fee to $15 and ECU to 0.30 cents
+9. Update readme to describe new variables correctly
+
+## Toby to do
+
+- change "commonly" to "frequently"
+- change description of the feedback that A will get in the instructions
+- confirm that nothing funny happens if a group is not based on any identity criterion
+- Double check wording of all the belief questions.
 
 ## Toby To Review
 

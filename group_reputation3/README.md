@@ -16,7 +16,7 @@
 - `pi_q1` to `pi_q7` - Answers to the Political Ideology questions.
 - `pi_score` - Sum of `pi_q1` to `pi_q7`. This is needed in the calculation of the above `pol_ideology`.
 - `pol_ideology` - The derived political ideology of the player. See `task1\pages.py::FormGroups::after_all_players_arrive` for more information about how this is calculated.
-- `rl` - Players role in the game: A, B or C.
+- `rl` - Player's role in the game: A, B or C.
 - `sorted_by` - How the group that the player belongs to was sorted by. This can be either by birth region, political ideology or no sort if a suitable sort could not be determined.
 
 ### Task 2
