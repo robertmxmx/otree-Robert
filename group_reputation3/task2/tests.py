@@ -6,12 +6,13 @@ from otree.api import Submission
 
 # Test cases. Uncomment the specific case to use. NOTE: Remember to use the same
 # case in Task 1 tests
-CASE = "no_grouping"
+# CASE = "no_grouping"
 # CASE = "group_by_birth"
-# CASE = "group_by_politics"
+CASE = "group_by_politics"
 
 CHOSE_TO_TAKE = True
 DEDUCT_AMOUNT = 5
+
 WILL_SPEND = 5
 SAME_GROUPING_SHOULD_SPEND = 5
 SHOULD_SPEND = 5
@@ -57,22 +58,23 @@ class PlayerBot(Bot):
             )
         else:
             if self.round_number == 1:
-                answers = {"will_spend": WILL_SPEND, "should_spend": SHOULD_SPEND}
+                answers = { "ee_c_session": 5, "ne_c": 5, "ne_c_c_session": 5 }
 
-                if CASE != "no_grouping":
-                    answers = {
-                        **answers,
-                        "same_grouping_should_spend": SAME_GROUPING_SHOULD_SPEND,
-                    }
+                if self.session.config["rep_condition"] and CASE != "no_grouping":
+                    answers = { **answers, "ee_c_group": 5, "ne_c_c_group": 5 }
             else:
-                answers = {"general_deduction": GENERAL_DEDUCTION}
+                answers = {
+                    "ee_b_session": 5, 
+                    "ne_b": 5, 
+                    "ne_b_b_session": 5, 
+                    "ne_b_c_session": 5,
+                }
 
                 if CASE != "no_grouping":
-                    answers = {
-                        **answers,
-                        "same_grouping_deduction": SAME_GROUPING_DEDUCTION,
-                        "should_spend_guess": SHOULD_SPEND_GUESS,
-                    }
+                    answers = { **answers, "ee_b_group": 5, "ne_b_c_group": 5 }
+
+                    if self.session.config["rep_condition"]:
+                        answers = { **answers, "ne_b_b_group": 5 }
 
             yield (pages.WaitingDecision, answers)
 
@@ -86,39 +88,44 @@ class PlayerBot(Bot):
             elif (self.player.role() == "B") and CHOSE_TO_TAKE:
                 expected_payoff -= Constants.take_amount + DEDUCT_AMOUNT
             elif self.player.role() == "C":
-                if WILL_SPEND == DEDUCT_AMOUNT:
-                    expected_payoff += Constants.additional_amount
-
-                if (CASE != "no_grouping") and (
-                    SHOULD_SPEND == SAME_GROUPING_SHOULD_SPEND
-                ):
-                    expected_payoff += Constants.additional_amount
+                # TODO: Bonus question logic
+                expected_payoff = None
         else:
             if (self.player.role() == "A") and CHOSE_TO_TAKE:
                 expected_payoff += Constants.take_amount - (
                     Constants.deduct["multiplier"] * DEDUCT_AMOUNT
                 )
             elif self.player.role() == "B":
-                if DEDUCT_AMOUNT == GENERAL_DEDUCTION:
-                    expected_payoff += Constants.additional_amount
-
-                if CASE != "no_grouping":
-                    if DEDUCT_AMOUNT == SAME_GROUPING_DEDUCTION:
-                        expected_payoff += Constants.additional_amount
-
-                    if SHOULD_SPEND == SHOULD_SPEND_GUESS:
-                        expected_payoff += Constants.additional_amount
+                # TODO: Bonus question logic
+                expected_payoff = None
             elif (self.player.role() == "C") and CHOSE_TO_TAKE:
                 expected_payoff -= Constants.take_amount + DEDUCT_AMOUNT
 
-        error_message = (
-            f"Player: {self.player.role()}, "
-            f"Actual Payoff: {self.player.payoff}, "
-            f"Expected Payoff: {c(expected_payoff)}"
-        )
-        assert self.player.payoff == c(expected_payoff), error_message
+        if expected_payoff is not None:
+            error_message = (
+                f"Player: {self.player.role()}, "
+                f"Actual Payoff: {self.player.payoff}, "
+                f"Expected Payoff: {c(expected_payoff)}"
+            )
+            assert self.player.payoff == c(expected_payoff), error_message
 
         yield pages.Feedback
 
         if self.session.config["rep_condition"] and self.round_number == 2:
             yield pages.CMessage
+
+        if self.round_number == 2 and self.player.role() == "A":
+            answers = {
+                "ee_a_session": 5,
+                "ne_a": 5,
+                "ne_a_b_session": 5,
+                "ne_a_c_session": 5,
+            }
+
+            if CASE != "no_grouping":
+                answers = { **answers, "ee_a_group": 5, "ne_a_b_group": 5 }
+
+                if self.session.config["rep_condition"]:
+                    answers = { **answers, "ne_a_c_group": 5 }
+
+            yield (pages.BonusQuestions, answers)

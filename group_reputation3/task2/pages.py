@@ -19,6 +19,30 @@ def create_html_table(d):
 
     return content
 
+def get_group_sort(player, group):
+    """
+    Returns text that describes how the group was sorted. Can be:
+    - Politically Conservative/Progressive
+    - From <REGION>
+    - None if sorted randomly
+    """
+    sorted_by = player.participant.vars["sorted_by"]
+
+    if sorted_by == SortTypes.NONE.value:
+        return None
+
+    # Could also use player B as they have the same birth region/ideology
+    player_C = group.get_player_by_role("C")
+
+    if sorted_by == SortTypes.BIRTH_REGION.value:
+        return f"from {REGIONS[player_C.br - 1]}"
+    elif sorted_by == SortTypes.POLITICAL_IDEOLOGY.value:
+        return (
+            "politically progressive"
+            if player_C.pi == 1
+            else "politically conservative"
+        )
+
 
 class Setup(WaitPage):
     group_by_arrival_time = True
@@ -154,32 +178,41 @@ class DeductingDecision(Page):
 
 
 class WaitingDecision(Page):
+    """Page where B/C are asked questions during Task 1/2"""
+
     form_model = "player"
 
     def is_displayed(self):
-        active_players = [
-            self.subsession.taking_player,
-            self.subsession.deducting_player,
-        ]
-
-        return self.player.role() not in active_players
+        return (
+            ((self.round_number == 1) and (self.player.role() == "C")) or
+            ((self.round_number == 2) and (self.player.role() == "B"))
+        )
 
     def get_form_fields(self):
-        similar_groups = self.group.get_similar_groups()
+        similar_groups_exist = len(self.group.get_similar_groups()) > 0
+        reputation_treatment = self.session.config["rep_condition"]
+        fields = []
 
         if self.round_number == 1:
-            form_fields = ["will_spend", "should_spend"]
+            fields.extend(["ee_c_session", "ne_c", "ne_c_c_session"])
 
-            if len(similar_groups) > 0:
-                form_fields.append("same_grouping_should_spend")
+            if reputation_treatment and similar_groups_exist:
+                fields.extend(["ee_c_group", "ne_c_c_group"])
         else:
-            form_fields = ["general_deduction"]
+            fields.extend([
+                "ee_b_session",
+                "ne_b",
+                "ne_b_b_session",
+                "ne_b_c_session"
+            ])
 
-            if len(similar_groups) > 0:
-                form_fields.append("same_grouping_deduction")
-                form_fields.append("should_spend_guess")
+            if similar_groups_exist:
+                fields.extend(["ee_b_group", "ne_b_b_group"])
 
-        return form_fields
+                if reputation_treatment:
+                    fields.extend(["ne_b_c_group"])
+
+        return fields
 
     def vars_for_template(self):
         similar_groups = self.group.get_similar_groups()
@@ -187,23 +220,7 @@ class WaitingDecision(Page):
         if len(similar_groups) == 0:
             return {"same_group_sort": None}
 
-        sorted_by = self.player.participant.vars["sorted_by"]
-
-        # Could also use "other" player as they have the same
-        # birth region/ideology
-        deducting_role = self.subsession.deducting_player
-        deducting_player = self.group.get_player_by_role(deducting_role)
-
-        if sorted_by == SortTypes.BIRTH_REGION.value:
-            group_sort = f"from {REGIONS[deducting_player.br - 1]}"
-        elif sorted_by == SortTypes.POLITICAL_IDEOLOGY.value:
-            group_sort = (
-                "politically progressive"
-                if deducting_player.pi == 1
-                else "politically conservative"
-            )
-
-        return {"same_group_sort": group_sort}
+        return {"same_group_sort": get_group_sort(self.player, self.group)}
 
 
 class CalculatePayoffs(WaitPage):
@@ -312,20 +329,52 @@ class CMessage(Page):
         }
 
 
+class BonusQuestions(Page):
+    form_model = "player"
+
+    def is_displayed(self):
+        return self.round_number == 2 and self.player.role() == "A"
+
+    def get_form_fields(self):
+        fields = ["ee_a_session", "ne_a", "ne_a_b_session", "ne_a_c_session"]
+
+        if len(self.group.get_similar_groups()) > 0:
+            fields.extend(["ee_a_group", "ne_a_b_group"])
+
+            if self.session.config["rep_condition"]:
+                fields.extend(["ne_a_c_group"])
+        
+        return fields
+
+    def vars_for_template(self):
+        similar_groups = self.group.get_similar_groups()
+
+        if len(similar_groups) == 0:
+            return {"same_group_sort": None}
+
+        return {"same_group_sort": get_group_sort(self.player, self.group)}
+
+
 page_sequence = [
     Setup,
+
     Instructions,
     Instructions2,
     VideoInstructions,
     Instructions3,
     Instructions3a,
     Instructions4,
+
     Comprehension,
     Commencement,
+
     TakingDecision,
     DeductingDecision,
     WaitingDecision,
+
     CalculatePayoffs,
     Feedback,
+
     CMessage,
+    BonusQuestions,
 ]

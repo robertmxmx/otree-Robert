@@ -1,0 +1,125 @@
+<div>
+  <p>
+    While you are waiting for A and B to finish their decisions in Task 1,
+    please answer the following questions.
+  </p>
+  <p>
+    For some of these questions, we will be asking you to guess how other
+    people behaved or answered in today's experiment. We will choose one of
+    these questions at random, and compare your answer to people's actual
+    behavior. If your guess is correct, you will earn an additional
+    {{ Constants.additional_amount }} ECU for this task.
+  </p>
+
+  <ul>
+    {{ if session.config.rep_condition and same_group_sort }}
+      <li>
+        <p>
+          In today's lab session, there is at least one other group where
+          participants B and C are {{ same_group_sort }}. Considering the
+          other groups that are {{ same_group_sort }}, but excluding your own
+          group, what do you think is the most frequently chosen amount of
+          deduction by participant B?
+        </p>
+
+        {{ with field_control=form.ee_c_group }}
+          {{ with field_name="ee_c_group" }}
+            <p>
+              I think B's who are {{ same_group_sort }} will most frequently
+              choose to spend 
+              {{ include "components/ECUFieldInput.html" }}
+              ECU on deductions from A.
+              {{ include "components/ECUFieldButton.html" }}
+            </p>
+          {{ endwith }}
+        {{ endwith }}
+      </li>
+    {{ endif }}
+
+    <li>
+      <p>
+        Considering all the groups in the present lab session, but excluding
+        your own group, what do you think is the most frequently chosen
+        amount of deduction by participant B?
+      </p>
+
+      {{ with field_control=form.ee_c_session }}
+        {{ with field_name="ee_c_session" }}
+          <p>
+            I think B's in today's lab session will most frequently choose to
+            spend 
+            {{ include "components/ECUFieldInput.html" }}
+            ECU on deductions from A.
+            {{ include "components/ECUFieldButton.html" }}
+          </p>
+        {{ endwith }}
+      {{ endwith }}
+    </li>
+
+    <li>
+      <p>
+        Please tell us how many ECU you think B <b>should</b> deduct from A?
+        In other words, what do you think is the <b>socially appropriate</b>
+        amount of ECU for B to deduct?
+      </p>
+
+      {{ with field_control=form.ne_c }}
+        {{ with field_name="ne_c" }}
+          <p>
+            I think B should spend
+            {{ include "components/ECUFieldInput.html" }}
+            ECU on deductions from A.
+            {{ include "components/ECUFieldButton.html" }}
+          </p>
+        {{ endwith }}
+      {{ endwith }}
+    </li>
+
+    {{ if session.config.rep_condition and same_group_sort }}
+      <li>
+        <p>
+          Considering all the groups where B and C are {{ same_group_sort }},
+          but excluding your own group, what do you think is the most commonly
+          given answer to the last question?
+        </p>
+
+        {{ with field_control=form.ne_c_c_group }}
+          {{ with field_name="ne_c_c_group" }}
+            <p>
+              I think the most common answer from C's who are
+              {{ same_group_sort }} will be that B should spend
+              {{ include "components/ECUFieldInput.html" }}
+              ECU on deductions from A.
+              {{ include "components/ECUFieldButton.html" }}
+            </p>
+          {{ endwith }}
+        {{ endwith }}
+      </li>
+    {{ endif }}
+
+    <li>
+      <p>
+        Considering all the groups in today's lab session, but excluding your
+        own group, what do you think is the most commonly given answer to the
+        last question?
+      </p>
+
+      {{ with field_control=form.ne_c_c_session }}
+        {{ with field_name="ne_c_c_session" }}
+          <p>
+            I think the most common answer from C's in today's session will be
+            that B should spend 
+            {{ include "components/ECUFieldInput.html" }}
+            ECU on deductions from A.
+            {{ include "components/ECUFieldButton.html" }}
+          </p>
+        {{ endwith }}
+      {{ endwith }}
+    </li>
+  </ul>
+
+  <p>
+    You will <strong>need to press "Calculate"</strong> for each input in
+    order to progress to the next page:
+  </p>
+</div>

@@ -2,7 +2,7 @@
 {{ load otree static }}
 
 {{ block title }}
-  Task {{ subsession.round_number }} Intermission
+  Bonus Questions
 {{ endblock }}
 
 {{ block content }}
@@ -11,11 +11,7 @@
 
   <br>
 
-  {{ if subsession.round_number == 1 }}
-    {{ include "components/belief_questions/C.html" }}
-  {{ else }}
-    {{ include "components/belief_questions/B.html" }}
-  {{ endif }}
+  {{ include "components/belief_questions/A.html" }}
 
   {{ next_button }}
 {{ endblock }}

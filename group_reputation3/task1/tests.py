@@ -4,9 +4,9 @@ from ._builtin import Bot
 
 # Test cases. Uncomment the specific case to use. NOTE: Remember to use the same
 # case in Task 2 tests
-CASE = "no_grouping"
+# CASE = "no_grouping"
 # CASE = "group_by_birth"
-# CASE = "group_by_politics"
+CASE = "group_by_politics"
 
 DEFAULT_SURVEY_ANSWERS = {
     "birth_region": 3,
