@@ -177,33 +177,32 @@ class DeductingDecision(Page):
         }
 
 
-class WaitingDecision(Page):
+class BonusQuestions(Page):
     """Page where B/C are asked questions during Task 1/2"""
 
     form_model = "player"
 
     def is_displayed(self):
-        return (
-            ((self.round_number == 1) and (self.player.role() == "C")) or
-            ((self.round_number == 2) and (self.player.role() == "B"))
-        )
+        return self.round_number == 1
 
     def get_form_fields(self):
         similar_groups_exist = len(self.group.get_similar_groups()) > 0
         reputation_treatment = self.session.config["rep_condition"]
         fields = []
 
-        if self.round_number == 1:
-            fields.extend(["ee_c_session", "ne_c", "ne_c_c_session"])
-
-            if reputation_treatment and similar_groups_exist:
-                fields.extend(["ee_c_group", "ne_c_c_group"])
-        else:
+        if self.player.role() == "A":
             fields.extend([
-                "ee_b_session",
-                "ne_b",
-                "ne_b_b_session",
-                "ne_b_c_session"
+                "ee_a_session", "ne_a", "ne_a_b_session", "ne_a_c_session",
+            ])
+
+            if similar_groups_exist:
+                fields.extend(["ee_a_group", "ne_a_b_group"])
+
+                if reputation_treatment:
+                    fields.extend(["ne_a_c_group"])
+        elif self.player.role() == "B":
+            fields.extend([
+                "ee_b_session", "ne_b", "ne_b_b_session", "ne_b_c_session"
             ])
 
             if similar_groups_exist:
@@ -211,6 +210,11 @@ class WaitingDecision(Page):
 
                 if reputation_treatment:
                     fields.extend(["ne_b_c_group"])
+        elif self.player.role() == "C":
+            fields.extend(["ee_c_session", "ne_c", "ne_c_c_session"])
+
+            if reputation_treatment and similar_groups_exist:
+                fields.extend(["ee_c_group", "ne_c_c_group"])
 
         return fields
 
@@ -303,10 +307,10 @@ class Feedback(Page):
     def before_next_page(self):
         p = self.participant
 
-        if "task2_payoffs" not in p.vars:
-            p.vars["task2_payoffs"] = []
+        if "task_payoffs" not in p.vars:
+            p.vars["task_payoffs"] = []
 
-        p.vars["task2_payoffs"].append(p.payoff)
+        p.vars["task_payoffs"].append(p.payoff)
 
         if "deducting_players" not in p.vars:
             p.vars["deducting_players"] = {"task1": None, "task2": None}
@@ -328,33 +332,6 @@ class CMessage(Page):
             "revealed": True,
         }
 
-
-class BonusQuestions(Page):
-    form_model = "player"
-
-    def is_displayed(self):
-        return self.round_number == 2 and self.player.role() == "A"
-
-    def get_form_fields(self):
-        fields = ["ee_a_session", "ne_a", "ne_a_b_session", "ne_a_c_session"]
-
-        if len(self.group.get_similar_groups()) > 0:
-            fields.extend(["ee_a_group", "ne_a_b_group"])
-
-            if self.session.config["rep_condition"]:
-                fields.extend(["ne_a_c_group"])
-        
-        return fields
-
-    def vars_for_template(self):
-        similar_groups = self.group.get_similar_groups()
-
-        if len(similar_groups) == 0:
-            return {"same_group_sort": None}
-
-        return {"same_group_sort": get_group_sort(self.player, self.group)}
-
-
 page_sequence = [
     Setup,
 
@@ -370,11 +347,10 @@ page_sequence = [
 
     TakingDecision,
     DeductingDecision,
-    WaitingDecision,
+    BonusQuestions,
 
     CalculatePayoffs,
     Feedback,
 
     CMessage,
-    BonusQuestions,
 ]

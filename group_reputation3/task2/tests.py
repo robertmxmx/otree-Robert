@@ -13,18 +13,50 @@ CASE = "group_by_politics"
 CHOSE_TO_TAKE = True
 DEDUCT_AMOUNT = 5
 
-WILL_SPEND = 5
-SAME_GROUPING_SHOULD_SPEND = 5
-SHOULD_SPEND = 5
-GENERAL_DEDUCTION = 5
-SAME_GROUPING_DEDUCTION = 5
-SHOULD_SPEND_GUESS = 5
+def get_bouns_answers(role, rep_condition, same_grouping):
+    answers = {}
+
+    if role == "A":
+        answers = {
+            "ee_a_session": 5,
+            "ne_a": 5,
+            "ne_a_b_session": 5,
+            "ne_a_c_session": 5,
+        }
+
+        if same_grouping:
+            answers = { **answers, "ee_a_group": 5, "ne_a_b_group": 5 }
+
+            if rep_condition:
+                answers = { **answers, "ne_a_c_group": 5 }
+    elif role == "B":
+        answers = {
+            "ee_b_session": 5, 
+            "ne_b": 5, 
+            "ne_b_b_session": 5, 
+            "ne_b_c_session": 5,
+        }
+
+        if same_grouping:
+            answers = { **answers, "ee_b_group": 5, "ne_b_c_group": 5 }
+
+            if rep_condition:
+                answers = { **answers, "ne_b_b_group": 5 }
+    elif role == "C":
+        answers = { "ee_c_session": 5, "ne_c": 5, "ne_c_c_session": 5 }
+
+        if rep_condition and same_grouping:
+            answers = { **answers, "ee_c_group": 5, "ne_c_c_group": 5 }
+
+    return answers
 
 
 class PlayerBot(Bot):
     def play_round(self):
         if "group" not in self.participant.vars:
             return
+
+        rep_condition = self.session.config["rep_condition"]
 
         if self.round_number == 1:
             yield Submission(pages.Instructions, check_html=False)
@@ -41,7 +73,7 @@ class PlayerBot(Bot):
                 "comp5": 36,
             }
 
-            if self.session.config["rep_condition"]:
+            if rep_condition:
                 comp_answers["comp4"] = 2
 
             yield (pages.Comprehension, comp_answers)
@@ -56,54 +88,34 @@ class PlayerBot(Bot):
                 {"deduct_amount": DEDUCT_AMOUNT},
                 check_html=False,
             )
-        else:
-            if self.round_number == 1:
-                answers = { "ee_c_session": 5, "ne_c": 5, "ne_c_c_session": 5 }
 
-                if self.session.config["rep_condition"] and CASE != "no_grouping":
-                    answers = { **answers, "ee_c_group": 5, "ne_c_c_group": 5 }
-            else:
-                answers = {
-                    "ee_b_session": 5, 
-                    "ne_b": 5, 
-                    "ne_b_b_session": 5, 
-                    "ne_b_c_session": 5,
-                }
+        if self.round_number == 1:
+            same_grouping = CASE != "no_grouping"
+            answers = get_bouns_answers(
+                self.player.role(), rep_condition, same_grouping
+            )
 
-                if CASE != "no_grouping":
-                    answers = { **answers, "ee_b_group": 5, "ne_b_c_group": 5 }
-
-                    if self.session.config["rep_condition"]:
-                        answers = { **answers, "ne_b_b_group": 5 }
-
-            yield (pages.WaitingDecision, answers)
+            yield (pages.BonusQuestions, answers)
 
         expected_payoff = Constants.initial_payoffs[self.player.role()]
 
-        if self.round_number == 1:
-            if (self.player.role() == "A") and CHOSE_TO_TAKE:
-                expected_payoff += Constants.take_amount - (
-                    Constants.deduct["multiplier"] * DEDUCT_AMOUNT
-                )
-            elif (self.player.role() == "B") and CHOSE_TO_TAKE:
-                expected_payoff -= Constants.take_amount + DEDUCT_AMOUNT
-            elif self.player.role() == "C":
-                # TODO: Bonus question logic
-                expected_payoff = None
-        else:
-            if (self.player.role() == "A") and CHOSE_TO_TAKE:
-                expected_payoff += Constants.take_amount - (
-                    Constants.deduct["multiplier"] * DEDUCT_AMOUNT
-                )
-            elif self.player.role() == "B":
-                # TODO: Bonus question logic
-                expected_payoff = None
-            elif (self.player.role() == "C") and CHOSE_TO_TAKE:
-                expected_payoff -= Constants.take_amount + DEDUCT_AMOUNT
+        # TODO: Normal payoff and Bonus question payoff
+        if (self.player.role() == "A") and CHOSE_TO_TAKE:
+            # expected_payoff += Constants.take_amount - (
+            #     Constants.deduct["multiplier"] * DEDUCT_AMOUNT
+            # )
+
+            expected_payoff = None
+        elif (self.player.role() == "B") and CHOSE_TO_TAKE:
+            # expected_payoff -= Constants.take_amount + DEDUCT_AMOUNT
+
+            expected_payoff = None
+        elif self.player.role() == "C":
+            expected_payoff = None
 
         if expected_payoff is not None:
             error_message = (
-                f"Player: {self.player.role()}, "
+                f"Player {self.player.role()} - "
                 f"Actual Payoff: {self.player.payoff}, "
                 f"Expected Payoff: {c(expected_payoff)}"
             )
@@ -113,19 +125,3 @@ class PlayerBot(Bot):
 
         if self.session.config["rep_condition"] and self.round_number == 2:
             yield pages.CMessage
-
-        if self.round_number == 2 and self.player.role() == "A":
-            answers = {
-                "ee_a_session": 5,
-                "ne_a": 5,
-                "ne_a_b_session": 5,
-                "ne_a_c_session": 5,
-            }
-
-            if CASE != "no_grouping":
-                answers = { **answers, "ee_a_group": 5, "ne_a_b_group": 5 }
-
-                if self.session.config["rep_condition"]:
-                    answers = { **answers, "ne_a_c_group": 5 }
-
-            yield (pages.BonusQuestions, answers)

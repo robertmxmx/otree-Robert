@@ -2,10 +2,36 @@ from otree.api import Currency as c
 from ._builtin import Page
 
 
-def to_aud(amount, page):
-    return (
-        c(amount).to_real_world_currency(page.session) if amount is not None else None
-    )
+# TODO Move this to end app
+QUESTION_NUMBERS = {
+    "ee_a_group": 1,
+    "ee_a_session": 2,
+    "ne_a": 3,
+    "ne_a_b_group": 4,
+    "ne_a_b_session": 5,
+    "ne_a_c_group": 6,
+    "ne_a_c_session": 7,
+
+    "ee_b_group": 1,
+    "ee_b_session": 2,
+    "ne_b": 3,
+    "ne_b_b_group": 4,
+    "ne_b_b_session": 5,
+    "ne_b_c_group": 6,
+    "ne_b_c_session": 7,
+
+    "ee_c_group": 1,
+    "ee_c_session": 2,
+    "ne_c": 3,
+    "ne_c_c_group": 4,
+    "ne_c_c_session": 5,
+}
+
+def to_aud(amount, session):
+    if amount is None:
+        return None 
+
+    return c(amount).to_real_world_currency(session)
 
 
 class End(Page):
@@ -15,41 +41,37 @@ class End(Page):
         )
 
     def vars_for_template(self):
+        session = self.session
         totalpayoff = 0
-        bonus = None
         p_vars = self.participant.vars
 
-        chosen_task = self.session.config["chosen_task"]
-        chosen_task_name = f"task{chosen_task}"
+        chosen_task = session.config["chosen_task"]
 
-        task2_payoff = p_vars["task2_payoffs"][chosen_task - 1]
-        totalpayoff += task2_payoff
+        task_payoff = p_vars["task_payoffs"][chosen_task - 1]
+        totalpayoff += task_payoff
 
-        if "bonuses" in p_vars:
-            bonus = p_vars["bonuses"]["task1"] + p_vars["bonuses"]["task2"]
-            totalpayoff += bonus
+        belief_bonus = p_vars["belief_bonus"]
+        if belief_bonus["paid"]:
+            totalpayoff += belief_bonus["amount"]
 
         if "survey_bonus" in p_vars:
-            surveybonus = p_vars["survey_bonus"]
-            totalpayoff += surveybonus
+            survey_bonus = p_vars["survey_bonus"]
+            totalpayoff += survey_bonus
 
         self.participant.payoff = c(totalpayoff)
-        self.player.final_payoff = float(to_aud(totalpayoff, self))
-
-        show_guess_feedback = ((chosen_task == 1) and (p_vars["role"] == "C")) or (
-            (chosen_task == 2) and (p_vars["role"] == "B")
-        )
+        self.player.final_payoff = float(to_aud(totalpayoff, session))
 
         return {
-            "bonus": to_aud(bonus, self) if bonus else None,
+            "belief_bonus": {
+                **belief_bonus,
+                "amount": to_aud(belief_bonus["amount"], session),
+                "question": QUESTION_NUMBERS[belief_bonus["question"]]
+            },
             "chosen_task": chosen_task,
-            "correctly_guessed": p_vars["bonuses"][chosen_task_name] > 0,
-            "deducting_player": p_vars["deducting_players"][chosen_task_name],
-            "participation_fee": self.session.config["participation_fee"],
+            "participation_fee": session.config["participation_fee"],
             "role": p_vars["role"],
-            "show_guess_feedback": show_guess_feedback,
-            "survey_bonus": to_aud(surveybonus, self),
-            "task2_payoff": to_aud(task2_payoff, self),
+            "survey_bonus": to_aud(survey_bonus, session),
+            "task_payoff": to_aud(task_payoff, session),
         }
 
 

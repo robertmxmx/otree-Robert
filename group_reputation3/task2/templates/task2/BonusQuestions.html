@@ -5,13 +5,41 @@
   Bonus Questions
 {{ endblock }}
 
+{{ block styles }}
+  <style>
+    li {
+      margin-bottom: 1rem;
+    }
+  </style>
+{{ endblock }}
+
 {{ block content }}
   {{ include "components/Header.html" }}
   {{ include "components/CalculateModal.html" }}
 
   <br>
 
-  {{ include "components/belief_questions/A.html" }}
+  <p>Please answer the following questions.</p>
+  <p>
+    For some of these questions, we will be asking you to guess how other
+    people behaved or answered in today's experiment. We will choose one of
+    these questions at random, and compare your answer to people's actual
+    behavior. If your guess is correct, you will earn an additional
+    {{ Constants.additional_amount }} ECU for this task.
+  </p>
+
+  {{ if player.role == "A" }}
+    {{ include "components/belief_questions/A.html" }}
+  {{ elif player.role == "B" }}
+    {{ include "components/belief_questions/B.html" }}
+  {{ elif player.role == "C" }}
+    {{ include "components/belief_questions/C.html" }}
+  {{ endif }}
+
+  <p>
+    You will <strong>need to press "Calculate"</strong> for each input in
+    order to progress to the next page
+  </p>
 
   {{ next_button }}
 {{ endblock }}
