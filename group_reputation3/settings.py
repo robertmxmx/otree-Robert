@@ -6,8 +6,8 @@ from os import environ
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    "real_world_currency_per_point": 0.15,
-    "participation_fee": 7.00,
+    "real_world_currency_per_point": 0.3,
+    "participation_fee": 15.00,
     "doc": "",
 }
 
@@ -19,9 +19,8 @@ SESSION_CONFIGS = [
         "app_sequence": ["start", "task1", "task2", "ds", "end"],
         "rep_condition": True,
         "deterrence": True,
-        "online_exp": True,
+        "online_exp": False,
         "chosen_task": 1,
-        # 'use_browser_bots': True
     },
 ]
 
