@@ -236,14 +236,16 @@ class CalculatePayoffs(WaitPage):
 
 
 class Feedback(Page):
-    def _get_payoffs(self, final=False):
+    def get_payoffs(self, final=False):
         other_player_role = "C" if self.round_number == 1 else "B"
         payoffs = {}
 
         for p in self.group.get_players():
             role = p.role()
             payoffs[role] = (
-                int(p.participant.payoff) if final else int(p.payoff_after_take)
+                int(p.participant.payoff)
+                if final
+                else int(p.payoff_after_take)
             )
 
             # Show inital payoff of other player. This prevents adding in any
@@ -252,57 +254,42 @@ class Feedback(Page):
             if role == other_player_role:
                 payoffs[role] = Constants.initial_payoffs[role]
 
-        return payoffs
+        return dict(sorted(payoffs.items()))
 
-    def vars_for_template(self):
-        pat = self._get_payoffs()
-        fp = self._get_payoffs(True)
-        tp = self.subsession.taking_player
-        dp = self.subsession.deducting_player
-        ecu_taken = self.group.get_player_by_role(tp).chose_to_take
-        da = int(self.group.get_player_by_role(dp).deduct_amount)
-        mult_da = int(Constants.deduct["multiplier"] * da)
+    def get_vars(self, round_num):
+        player_A = self.group.get_player_by_role("A").in_round(round_num)
+        deducting_player_role = "B" if round_num == 1 else "C"
+        deducting_player = (
+            self.group
+            .get_player_by_role(deducting_player_role)
+            .in_round(round_num)
+        )
 
-        if self.round_number == 1:
-            # Set feedback content. This is done here so that it can be
-            # retrieved in the next round.
-            ta = Constants.take_amount
-            content = ""
-
-            if ecu_taken:
-                content += f"<p>{tp} decided to take {ta} ECU from {dp}</p>"
-            else:
-                content += f"<p>{tp} decided not to take {ta} ECU from {dp}</p>"
-
-            content += "<p>This led to the following distribution of endowments:</p>"
-
-            content += create_html_table(pat)
-
-            if ecu_taken:
-                content += (
-                    f"<p>{dp} chose to spend {da} ECU on deductions. This had "
-                    f"the effect of reducing {tp}'s endowment by {mult_da} "
-                    f"ECU, and reducing {dp}'s endowment by {da} ECU"
-                )
-
-            content += "<p>Final earnings for this task are:</p>"
-            content += create_html_table(fp)
-
-            self.participant.vars["task2a_feedback"] = content
-
-            return {"task2a_feedback": content}
+        deduct_amount = int(deducting_player.deduct_amount)
+        amount_reduced = int(Constants.deduct["multiplier"] * deduct_amount)
 
         return {
-            "task2a_feedback": self.participant.vars["task2a_feedback"],
-            "receiving_info": self.player.role() in [tp, dp],
-            "points_were_taken": ecu_taken,
-            "taking_player": tp,
-            "deducting_player": dp,
-            "payoffs_after_take": dict(sorted(pat.items())),
-            "deduct_amount": da,
-            "multiplied_deduct_amount": mult_da,
-            "final_payoffs": dict(sorted(fp.items())),
+            "chose_to_take": player_A.chose_to_take,
+            "deducting_player": deducting_player_role,
+            "payoffs_after_take": self.get_payoffs(),
+            "deduct_amount": deduct_amount,
+            "amount_reduced": amount_reduced,
+            "final_payoffs": self.get_payoffs(True),
         }
+
+    def vars_for_template(self):
+        round1_vars = self.get_vars(round_num=1)
+
+        if self.round_number == 1:
+            return { "round1": round1_vars }
+        else:
+            return {
+                "round1": round1_vars,
+                "round2": {
+                    **self.get_vars(round_num=2),
+                    "receiving_info": self.player.role() in ["A", "C"],
+                },
+            }
 
     def before_next_page(self):
         p = self.participant
@@ -311,14 +298,6 @@ class Feedback(Page):
             p.vars["task_payoffs"] = []
 
         p.vars["task_payoffs"].append(p.payoff)
-
-        if "deducting_players" not in p.vars:
-            p.vars["deducting_players"] = {"task1": None, "task2": None}
-
-        current_task = "task1" if self.round_number == 1 else "task2"
-        deducting_player = self.subsession.deducting_player
-
-        p.vars["deducting_players"][current_task] = deducting_player
 
 
 class CMessage(Page):

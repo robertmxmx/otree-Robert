@@ -1,0 +1,51 @@
+<div>
+  {{ if results.chose_to_take }}
+    <p>
+      A decided to take {{ Constants.take_amount }} ECU from
+      {{ results.deducting_player }}
+    </p>
+  {{ else }}
+      A decided not to take {{ Constants.take_amount }} ECU from
+      {{ results.deducting_player }}
+  {{ endif }}
+
+  <p>This led to the following distribution of endowments:</p>
+
+  <table class="simple-table">
+    <tr>
+      {{ for player_role, payoff in results.payoffs_after_take.items }}
+        <th>{{ player_role }}</th>
+      {{ endfor }}
+    </tr>
+    <tr>
+      {{ for player_role, payoff in results.payoffs_after_take.items }}
+        <td>{{ payoff }}</td>
+      {{ endfor }}
+    </tr>
+  </table>
+
+  {{ if results.chose_to_take }}
+    <p>
+      {{ results.deducting_player }} chose to spend
+      {{ results.deduct_amount }} ECU on deductions. This had the effect of
+      reducing A's endowment by {{ results.amount_reduced }} ECU, and
+      reducing {{ results.deducting_player }}'s endowment by
+      {{ results.deduct_amount }} ECU
+    </p>
+  {{ endif }}
+
+  <p>Final earnings for this task are:</p>
+
+  <table class="simple-table">
+    <tr>
+      {{ for player_role, payoff in results.final_payoffs.items }}
+        <th>{{ player_role }}</th>
+      {{ endfor }}
+    </tr>
+    <tr>
+      {{ for player_role, payoff in results.final_payoffs.items }}
+        <td>{{ payoff }}</td>
+      {{ endfor }}
+    </tr>
+  </table>
+</div>
