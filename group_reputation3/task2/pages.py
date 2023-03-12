@@ -19,6 +19,7 @@ def create_html_table(d):
 
     return content
 
+
 def get_group_sort(player, group):
     """
     Returns text that describes how the group was sorted. Can be:
@@ -191,9 +192,14 @@ class BonusQuestions(Page):
         fields = []
 
         if self.player.role() == "A":
-            fields.extend([
-                "ee_a_session", "ne_a", "ne_a_b_session", "ne_a_c_session",
-            ])
+            fields.extend(
+                [
+                    "ee_a_session",
+                    "ne_a",
+                    "ne_a_b_session",
+                    "ne_a_c_session",
+                ]
+            )
 
             if similar_groups_exist:
                 fields.extend(["ee_a_group", "ne_a_b_group"])
@@ -201,9 +207,7 @@ class BonusQuestions(Page):
                 if reputation_treatment:
                     fields.extend(["ne_a_c_group"])
         elif self.player.role() == "B":
-            fields.extend([
-                "ee_b_session", "ne_b", "ne_b_b_session", "ne_b_c_session"
-            ])
+            fields.extend(["ee_b_session", "ne_b", "ne_b_b_session", "ne_b_c_session"])
 
             if similar_groups_exist:
                 fields.extend(["ee_b_group", "ne_b_b_group"])
@@ -243,9 +247,7 @@ class Feedback(Page):
         for p in self.group.get_players():
             role = p.role()
             payoffs[role] = (
-                int(p.participant.payoff)
-                if final
-                else int(p.payoff_after_take)
+                int(p.participant.payoff) if final else int(p.payoff_after_take)
             )
 
             # Show inital payoff of other player. This prevents adding in any
@@ -259,11 +261,9 @@ class Feedback(Page):
     def get_vars(self, round_num):
         player_A = self.group.get_player_by_role("A").in_round(round_num)
         deducting_player_role = "B" if round_num == 1 else "C"
-        deducting_player = (
-            self.group
-            .get_player_by_role(deducting_player_role)
-            .in_round(round_num)
-        )
+        deducting_player = self.group.get_player_by_role(
+            deducting_player_role
+        ).in_round(round_num)
 
         deduct_amount = int(deducting_player.deduct_amount)
         amount_reduced = int(Constants.deduct["multiplier"] * deduct_amount)
@@ -281,7 +281,7 @@ class Feedback(Page):
         round1_vars = self.get_vars(round_num=1)
 
         if self.round_number == 1:
-            return { "round1": round1_vars }
+            return {"round1": round1_vars}
         else:
             return {
                 "round1": round1_vars,
@@ -311,25 +311,21 @@ class CMessage(Page):
             "revealed": True,
         }
 
+
 page_sequence = [
     Setup,
-
     Instructions,
     Instructions2,
     VideoInstructions,
     Instructions3,
     Instructions3a,
     Instructions4,
-
     Comprehension,
     Commencement,
-
     TakingDecision,
     DeductingDecision,
     BonusQuestions,
-
     CalculatePayoffs,
     Feedback,
-
     CMessage,
 ]

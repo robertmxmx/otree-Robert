@@ -13,6 +13,7 @@ CASE = "group_by_politics"
 CHOSE_TO_TAKE = True
 DEDUCT_AMOUNT = 5
 
+
 def get_bouns_answers(role, rep_condition, same_grouping):
     answers = {}
 
@@ -25,28 +26,28 @@ def get_bouns_answers(role, rep_condition, same_grouping):
         }
 
         if same_grouping:
-            answers = { **answers, "ee_a_group": 5, "ne_a_b_group": 5 }
+            answers = {**answers, "ee_a_group": 5, "ne_a_b_group": 5}
 
             if rep_condition:
-                answers = { **answers, "ne_a_c_group": 5 }
+                answers = {**answers, "ne_a_c_group": 5}
     elif role == "B":
         answers = {
-            "ee_b_session": 5, 
-            "ne_b": 5, 
-            "ne_b_b_session": 5, 
+            "ee_b_session": 5,
+            "ne_b": 5,
+            "ne_b_b_session": 5,
             "ne_b_c_session": 5,
         }
 
         if same_grouping:
-            answers = { **answers, "ee_b_group": 5, "ne_b_c_group": 5 }
+            answers = {**answers, "ee_b_group": 5, "ne_b_c_group": 5}
 
             if rep_condition:
-                answers = { **answers, "ne_b_b_group": 5 }
+                answers = {**answers, "ne_b_b_group": 5}
     elif role == "C":
-        answers = { "ee_c_session": 5, "ne_c": 5, "ne_c_c_session": 5 }
+        answers = {"ee_c_session": 5, "ne_c": 5, "ne_c_c_session": 5}
 
         if rep_condition and same_grouping:
-            answers = { **answers, "ee_c_group": 5, "ne_c_c_group": 5 }
+            answers = {**answers, "ee_c_group": 5, "ne_c_c_group": 5}
 
     return answers
 

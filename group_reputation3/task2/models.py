@@ -12,8 +12,9 @@ import random
 from _myshared.constants import REGIONS, SortTypes
 
 
-"""Check if <value> is the most commonly appearing value in <compare_list>"""
 def is_most_common(value, compare_list):
+    """Check if <value> is the most commonly appearing value in <compare_list>"""
+
     try:
         list_mode = mode(compare_list)
     except StatisticsError:
@@ -21,16 +22,20 @@ def is_most_common(value, compare_list):
 
     return value == list_mode
 
+
 def get_B(group):
     return group.get_player_by_role("B")
 
+
 def get_C(group):
     return group.get_player_by_role("C")
+
 
 def make_deduct_field():
     return models.CurrencyField(
         min=Constants.deduct["min"], max=Constants.deduct["max"]
     )
+
 
 class Constants(BaseConstants):
     name_in_url = "task2"
@@ -75,11 +80,12 @@ class Group(BaseGroup):
             p.br = p.participant.vars["birth_region"]
             p.pi = p.participant.vars["pol_ideology"]
 
-    """
-    Returns a list of groups (other that the current one) that have been
-    sorted the same as the current group
-    """
     def get_similar_groups(self):
+        """
+        Returns a list of groups (other that the current one) that have been
+        sorted the same as the current group
+        """
+
         current_players = self.get_players()
         current_sort = current_players[0].participant.vars["sorted_by"]
 
@@ -129,15 +135,13 @@ class Group(BaseGroup):
 
         if len(similar_groups) > 0:
             guesses["ee_a_group"] = is_most_common(
-                player_A.ee_a_group,
-                [get_B(g).deduct_amount for g in similar_groups]
+                player_A.ee_a_group, [get_B(g).deduct_amount for g in similar_groups]
             )
 
         guesses["ee_a_session"] = is_most_common(
-            player_A.ee_a_session,
-            [get_B(g).deduct_amount for g in other_groups]
+            player_A.ee_a_session, [get_B(g).deduct_amount for g in other_groups]
         )
-            
+
         if len(similar_groups) > 0:
             guesses["ne_a_b_group"] = is_most_common(
                 player_A.ne_a_b_group, [get_B(g).ne_b for g in similar_groups]
@@ -166,13 +170,11 @@ class Group(BaseGroup):
 
         if len(similar_groups) > 0:
             guesses["ee_b_group"] = is_most_common(
-                player_B.ee_b_group,
-                [get_B(g).deduct_amount for g in similar_groups]
+                player_B.ee_b_group, [get_B(g).deduct_amount for g in similar_groups]
             )
 
         guesses["ee_b_session"] = is_most_common(
-            player_B.ee_b_session,
-            [get_B(g).deduct_amount for g in other_groups]
+            player_B.ee_b_session, [get_B(g).deduct_amount for g in other_groups]
         )
 
         if len(similar_groups) > 0:
@@ -196,26 +198,23 @@ class Group(BaseGroup):
         player_B.set_bonus(guesses)
 
     def set_C_bonus_payoffs(self):
-        guesses = {} # Questions that the player correctly guessed
+        guesses = {}  # Questions that the player correctly guessed
         player_C = self.get_player_by_role("C")
         similar_groups = self.get_similar_groups()
         other_groups = self.get_other_groups()
 
         if self.session.config["rep_condition"] and (len(similar_groups) > 0):
             guesses["ee_c_group"] = is_most_common(
-                player_C.ee_c_group,
-                [get_B(g).deduct_amount for g in similar_groups]
+                player_C.ee_c_group, [get_B(g).deduct_amount for g in similar_groups]
             )
 
         guesses["ee_c_session"] = is_most_common(
-            player_C.ee_c_session,
-            [get_B(g).deduct_amount for g in other_groups]
+            player_C.ee_c_session, [get_B(g).deduct_amount for g in other_groups]
         )
 
         guesses["ne_c_c_session"] = is_most_common(
             player_C.ne_c_c_session, [get_C(g).ne_c for g in other_groups]
         )
-
 
         if self.session.config["rep_condition"] and (len(similar_groups) > 0):
             guesses["ne_c_c_group"] = is_most_common(
@@ -249,6 +248,7 @@ class Group(BaseGroup):
             self.set_A_bonus_payoffs()
             self.set_B_bonus_payoffs()
             self.set_C_bonus_payoffs()
+
 
 class Player(BasePlayer):
     br = models.IntegerField()
@@ -329,8 +329,9 @@ class Player(BasePlayer):
     def role(self):
         return self.participant.vars["role"]
 
-    """Returns variables that are used on the instruction screen"""
     def get_instruction_vars(self):
+        """Returns variables that are used on the instruction screen"""
+
         sorted_by = self.participant.vars["sorted_by"]
         deducting_player = self.group.get_player_by_role(
             self.subsession.deducting_player

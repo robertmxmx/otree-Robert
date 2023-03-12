@@ -11,7 +11,6 @@ QUESTION_NUMBERS = {
     "ne_a_b_session": 5,
     "ne_a_c_group": 6,
     "ne_a_c_session": 7,
-
     "ee_b_group": 1,
     "ee_b_session": 2,
     "ne_b": 3,
@@ -19,7 +18,6 @@ QUESTION_NUMBERS = {
     "ne_b_b_session": 5,
     "ne_b_c_group": 6,
     "ne_b_c_session": 7,
-
     "ee_c_group": 1,
     "ee_c_session": 2,
     "ne_c": 3,
@@ -27,9 +25,10 @@ QUESTION_NUMBERS = {
     "ne_c_c_session": 5,
 }
 
+
 def to_aud(amount, session):
     if amount is None:
-        return None 
+        return None
 
     return c(amount).to_real_world_currency(session)
 
@@ -65,7 +64,7 @@ class End(Page):
             "belief_bonus": {
                 **belief_bonus,
                 "amount": to_aud(belief_bonus["amount"], session),
-                "question": QUESTION_NUMBERS[belief_bonus["question"]]
+                "question": QUESTION_NUMBERS[belief_bonus["question"]],
             },
             "chosen_task": chosen_task,
             "participation_fee": session.config["participation_fee"],
