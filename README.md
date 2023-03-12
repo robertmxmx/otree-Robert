@@ -61,6 +61,7 @@
   - **Simon:** I've tried to clean up the code here. If you want to add the
     wording you will need to edit this file:
     `group_reputation3/task2/templates/components/FeedbackResults.html`
+		- Toby: I've tried to add feedback. Query why the file to amend is in Task 2, not Task 1 directory?
 - Related: Toby will need to change the instructions for A to make the last
   change clear.
 
