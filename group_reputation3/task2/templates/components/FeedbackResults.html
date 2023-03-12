@@ -23,6 +23,10 @@
       {{ endfor }}
     </tr>
   </table>
+  
+   <p>Note that <strong>if</strong> A had chosen to take,  {{ results.deducting_player }} 
+	   had elected to spend {{ results.deduct_amount }} ECU on deductions. 
+	   This would have reduced A's endowment by {{ results.amount_reduced }} ECU.</p>
 
   {{ if results.chose_to_take }}
     <p>
