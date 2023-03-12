@@ -37,7 +37,7 @@ case $1 in
         echo
         echo 'Usage: run.sh OPTION'
         echo
-        echo 'OPTION should be either "dev", "tests" or "prod"'
+        echo 'OPTION should be either "dev", "tests" "format" or "prod"'
         exit 1
         ;;
 esac
