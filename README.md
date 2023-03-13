@@ -66,6 +66,7 @@ INFO:     172.17.0.1:62592 - "GET /p/x3ot5me0/task2/Setup/22 HTTP/1.1" 200 OK
 ````
 This occurred when running a session with 9 participants, two groups were formed on birth region, one formed on political ideology. Reputation and Deterrence treatments both active. We had just finished the feedback for Task 1 when the error kicked in.
 
+
 - Det/Rep -- make sure you have tested all four combinations of these config variables.
 - Line 41 in FeedbackResults.html, I've put in a line saying how much A would have had deducted. But can you please amend this to say:
 
@@ -74,7 +75,6 @@ This occurred when running a session with 9 participants, two groups were formed
 	Where X updates with the correct amount.
 
 - For all the belief questions, remove the calculate buttons
-- Belief questions: the belief questions that should be shown in REP treatment, were not shown to the group based on political values (for all of A, B, and C). Is that because there was only *one* political group?
 - As well as groups formed on the basis of birth region, there are groups
   formed on the basis of political ideology. And there are groups formed on
   the basis of no identity criterion. If the *latter*, they should not receive
