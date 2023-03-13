@@ -150,7 +150,7 @@ class TakingDecision(Page):
 
     def vars_for_template(self):
         chose_to_take_label = (
-            f"Do you with to take {Constants.take_amount} of "
+            f"Do you wish to take {Constants.take_amount} of "
             f"{self.subsession.deducting_player}'s ECU?"
         )
 
