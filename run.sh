@@ -26,7 +26,7 @@ case $1 in
     tests)
         build_run "-v $VOLUME_PATH" "otree test $TEST_NAME $TEST_USERS"
         ;;
-    format)
+    lint)
         docker run --rm --volume "$VOLUME_PATH" --workdir //app pyfound/black:latest_release black .
         ;;
     prod)
@@ -37,7 +37,7 @@ case $1 in
         echo
         echo 'Usage: run.sh OPTION'
         echo
-        echo 'OPTION should be either "dev", "tests" "format" or "prod"'
+        echo 'OPTION should be either "dev", "tests" "lint" or "prod"'
         exit 1
         ;;
 esac
