@@ -243,6 +243,11 @@ class Group(BaseGroup):
                 Constants.deduct["multiplier"] * deducting_player.deduct_amount
             )
 
+        # Set payoff for game. final_payoff is not really the final payoff,
+        # more so the final payoff BEFORE bonuses are given
+        for player in self.get_players():
+            player.final_payoff = player.participant.payoff
+
         # Set payoffs for Bonus Questions
         if self.round_number == 1:
             self.set_A_bonus_payoffs()
@@ -300,6 +305,7 @@ class Player(BasePlayer):
     deduct_amount = models.CurrencyField(
         initial=0, min=Constants.deduct["min"], max=Constants.deduct["max"]
     )
+    final_payoff = models.CurrencyField()
 
     ee_c_group = make_deduct_field()
     ee_c_session = make_deduct_field()

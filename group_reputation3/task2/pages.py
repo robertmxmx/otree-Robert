@@ -240,14 +240,16 @@ class CalculatePayoffs(WaitPage):
 
 
 class Feedback(Page):
-    def get_payoffs(self, final=False):
-        other_player_role = "C" if self.round_number == 1 else "B"
+    def get_payoffs(self, round_num, final=False):
+        other_player_role = "C" if round_num == 1 else "B"
         payoffs = {}
 
         for p in self.group.get_players():
-            role = p.role()
+            player = p.in_round(round_num)
+
+            role = player.role()
             payoffs[role] = (
-                int(p.participant.payoff) if final else int(p.payoff_after_take)
+                int(player.final_payoff) if final else int(player.payoff_after_take)
             )
 
             # Show inital payoff of other player. This prevents adding in any
@@ -271,10 +273,10 @@ class Feedback(Page):
         return {
             "chose_to_take": player_A.chose_to_take,
             "deducting_player": deducting_player_role,
-            "payoffs_after_take": self.get_payoffs(),
+            "payoffs_after_take": self.get_payoffs(round_num),
             "deduct_amount": deduct_amount,
             "amount_reduced": amount_reduced,
-            "final_payoffs": self.get_payoffs(True),
+            "final_payoffs": self.get_payoffs(round_num, final=True),
         }
 
     def vars_for_template(self):
