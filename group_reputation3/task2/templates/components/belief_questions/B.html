@@ -10,7 +10,7 @@
 
         <br>
 
-        {{ with field_control=form.ee_b_group }}
+<em>        {{ with field_control=form.ee_b_group }}
           {{ with field_name="ee_b_group" }}
             I think B's who are {{ same_group_sort }} will most frequently
             choose to spend
@@ -19,17 +19,17 @@
             {{ include "components/ECUFieldButton.html" }}
           {{ endwith }}
         {{ endwith }}
-      </li>
+</em>      </li>
     {{ endif }}
 
     <li>
-      Considering all the groups in the present lab session, but excluding
+      Considering everyone in the present lab session, but excluding
       your own group, what do you think is the most frequently chosen amount
       of deduction by participant B?
 
       <br>
 
-      {{ with field_control=form.ee_b_session }}
+<em>      {{ with field_control=form.ee_b_session }}
         {{ with field_name="ee_b_session" }}
           I think B's in today's lab session will most frequently choose to
           spend
@@ -38,106 +38,108 @@
           {{ include "components/ECUFieldButton.html" }}
         {{ endwith }}
       {{ endwith }}
-    </li>
+</em>    </li>
 
     <li>
-      Please tell us how many ECU you think B <strong>should</strong> deduct
+      Please tell us how many ECU you think participants in role B <strong>should</strong> deduct
       from A? In other words, what do you think is the
       <strong>socially appropriate</strong> amount of ECU for B to deduct?
 
       <br>
 
-      {{ with field_control=form.ne_b }}
+<em>      {{ with field_control=form.ne_b }}
         {{ with field_name="ne_b" }}
-          I think B should spend
+          (<strong>*</strong>) I think B should spend
           {{ include "components/ECUFieldInput.html" }}
           ECU on deductions from A.
           {{ include "components/ECUFieldButton.html" }}
         {{ endwith }}
       {{ endwith }}
-    </li>
+</em>    </li>
 
     {{ if same_group_sort }}
       <li>
-        Considering all the groups where B and C are {{ same_group_sort }}, but
-        excluding your own group, what do you think is the most commonly given
-        answer to the last question?
+        Considering every group where B and C are {{ same_group_sort }}, but
+        excluding your own group, what do you think is the most frequently given
+        answer to the starred (*) question?
         
         <br>
 
-        {{ with field_control=form.ne_b_b_group }}
+<em>        {{ with field_control=form.ne_b_b_group }}
           {{ with field_name="ne_b_b_group" }}
-            I think the most common answer from B's who are
+            I think the most frequent answer from B's who are
             {{ same_group_sort }} will be that B should spend
             {{ include "components/ECUFieldInput.html" }}
             ECU on deductions from A.
             {{ include "components/ECUFieldButton.html" }}
           {{ endwith }}
         {{ endwith }}
-      </li>
+</em>      </li>
     {{ endif }}
     
     <li>
-      Considering all the groups in today's lab session, but excluding your
-      own group, what do you think is the most commonly given answer to the
-      last question?
+      Considering everyone in today's lab session, but excluding your
+      own group, what do you think is the most frequently given answer to the
+      starred (*) question?
 
       <br>
 
-      {{ with field_control=form.ne_b_b_session }}
+<em>      {{ with field_control=form.ne_b_b_session }}
         {{ with field_name="ne_b_b_session" }}
-          I think the most common answer from B's in today's session will be
+          I think the most frequent answer from B's in today's session will be
           that B should spend
           {{ include "components/ECUFieldInput.html" }}
           ECU on deductions from A.
           {{ include "components/ECUFieldButton.html" }}
         {{ endwith }}
       {{ endwith }}
-    </li>
+</em>    </li>
   </ul>
 
   <p>
-    We also asked this question of participant C: "How much do you think B
-    <b>should</b> spend on deductions?"
+    We also asked this question of participant C:</p> 
+	
+	<p>(<strong>*</strong>) "How much do you think B
+        <b>should</b> spend on deductions?"
   </p>
 
   <ul>
     {{ if session.config.rep_condition and same_group_sort }}
       <li>
-        Considering all the groups where B and C are {{ same_group_sort }},
-        but excluding your own group, what do you think is the most commonly
-        given answer by C's to the last question?
+        Considering every group where B and C are {{ same_group_sort }},
+        but excluding your own group, what do you think is the most frequently
+        given answer by C's to the starred (*) question?
 
         <br>
         
-        {{ with field_control=form.ne_b_c_group }}
+<em>        {{ with field_control=form.ne_b_c_group }}
           {{ with field_name="ne_b_c_group" }}
-            I think the most common answer from C's who are
+            I think the most frequent answer from C's who are
             {{ same_group_sort }} will be that B should spend
             {{ include "components/ECUFieldInput.html" }}
             ECU on deductions from A.
             {{ include "components/ECUFieldButton.html" }}
           {{ endwith }}
         {{ endwith }}
-      </li>
+</em>      </li>
     {{ endif }}
 
     <li>
-      Considering all the groups in today's lab session, but excluding your
-      own group, what do you think is the most commonly given answer by C's
-      to the last question?
+      Considering everyone in today's lab session, but excluding your
+      own group, what do you think is the most frequently given answer by C's
+      to the starred (*) question?
 
       <br>
 
-      {{ with field_control=form.ne_b_c_session }}
+<em>      {{ with field_control=form.ne_b_c_session }}
         {{ with field_name="ne_b_c_session" }}
-          I think the most common answer from C's in today's session will be
+          I think the most frequent answer from C's in today's session will be
           that B should spend
           {{ include "components/ECUFieldInput.html" }}
           ECU on deductions from A.
           {{ include "components/ECUFieldButton.html" }}
         {{ endwith }}
       {{ endwith }}
-    </li>
+</em>    </li>
   </ul>
 </div>
