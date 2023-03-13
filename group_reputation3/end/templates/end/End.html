@@ -46,10 +46,12 @@
       <font size="+2"><strong>Total earnings: {{ participant.payoff_plus_participation_fee }}</strong></font>
     </p>
 
+    <p>Your participant ID is: <strong>{{ participant.code }}</strong></p>
+
     <p>
       The experimenter will distribute a receipt for you to
-      sign. Please fill in your <strong>total earnings</strong> and
-      <em>sign</em> your receipt. Then quietly pack up your things and
+      sign. Please fill in your <strong>total earnings</strong>, your <strong>participant id</strong>, and
+      <em><strong>sign</strong></em> your receipt. Then quietly pack up your things and
       leave, dropping your receipt with the experimenter on the way out.
     </p>
 
@@ -58,7 +60,6 @@
       take a photograph of it before you leave.
     </p>
 
-    <p>Your participant ID is: <strong>{{ participant.code }}</strong></p>
   </div>
 
   <button
