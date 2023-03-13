@@ -15,7 +15,6 @@
 
 {{ block content }}
   {{ include "components/Header.html" }}
-  {{ include "components/CalculateModal.html" }}
 
   <br>
 
@@ -36,29 +35,5 @@
     {{ include "components/belief_questions/C.html" }}
   {{ endif }}
 
-  <p>
-    You will <strong>need to press "Calculate"</strong> for each input in
-    order to progress to the next page
-  </p>
-
   {{ next_button }}
-{{ endblock }}
-
-{{ block scripts }}
-  <script>
-    function handle_enter(event) {
-      if (event.keyCode == 13 || event.which == 13) return false;
-    }
-
-    function handleCalculate(field) {
-      const deductECU = parseFloat($("#" + field).val());
-      const validInput = setModalContents(deductECU);
-
-      if (validInput) {
-        const name = field.replace("_field", "");
-
-        $('input[name ="' + name + '"]').val(deductECU);
-      }
-    }
-  </script>
 {{ endblock }}

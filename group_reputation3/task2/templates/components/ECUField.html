@@ -1,0 +1,12 @@
+<!--
+  This does the same as ECUFieldInput, but without the need for a
+  "Calculate" button
+-->
+
+<input 
+  type="number" 
+  id="{{ field_name }}_field" 
+  class="form-control inline-number-field" 
+  name="{{ field_name }}"
+  onkeypress="handle_enter"
+> 

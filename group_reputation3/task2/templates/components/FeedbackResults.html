@@ -1,13 +1,13 @@
 <div>
-  {{ if results.chose_to_take }}
-    <p>
-      A decided to take {{ Constants.take_amount }} ECU from
-      {{ results.deducting_player }}.
-    </p>
-  {{ else }}
-      <p>A decided not to take {{ Constants.take_amount }} ECU from
-      {{ results.deducting_player }}.</p>
-  {{ endif }}
+  <p>
+    {{ if results.chose_to_take }}
+        A decided to take {{ Constants.take_amount }} ECU from
+        {{ results.deducting_player }}.
+    {{ else }}
+        A decided not to take {{ Constants.take_amount }} ECU from
+        {{ results.deducting_player }}.
+    {{ endif }}
+  </p>
 
   <p>This led to the following distribution of endowments:</p>
 
@@ -33,12 +33,16 @@
       reducing {{ results.deducting_player }}'s endowment by
       {{ results.deduct_amount }} ECU.
     </p>
-	
  {{ else }}
-     <p>Note that <strong>if A had chosen to take</strong>,  {{ results.deducting_player }} 
-  	   would have spent {{ results.deduct_amount }} ECU on deductions.</p>
-	   
-	   <p>This would have reduced A's endowment by {{ results.amount_reduced }} ECU.</p>
+    <p>
+      Note that <strong>if A had chosen to take</strong>,
+      {{ results.deducting_player }} would have spent
+      {{ results.deduct_amount }} ECU on deductions.
+    </p>
+    <p>
+      This would have reduced A's endowment by {{ results.amount_reduced }}
+      ECU.
+    </p>
   {{ endif }}
 
   <p>Final earnings for this task are:</p>

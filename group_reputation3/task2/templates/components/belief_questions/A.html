@@ -12,11 +12,11 @@
 
         {{ with field_control=form.ee_a_group }}
           {{ with field_name="ee_a_group" }}
-            <em>I think B's who are {{ same_group_sort }} will most frequently
-                        choose to spend
-                        {{ include "components/ECUFieldInput.html" }}
-                        ECU on deductions from A.</em>
-            {{ include "components/ECUFieldButton.html" }}
+            <em>
+              I think B's who are {{ same_group_sort }} will most frequently
+              choose to spend {{ include "components/ECUField.html" }}
+              ECU on deductions from A.
+            </em>
           {{ endwith }}
         {{ endwith }}
       </li>
@@ -31,12 +31,12 @@
 
       {{ with field_control=form.ee_a_session }}
         {{ with field_name="ee_a_session" }}
-		<em>          I think B's in today's lab session will most frequently choose to
-          spend
-          {{ include "components/ECUFieldInput.html" }}
-          ECU on deductions from A.
-          {{ include "components/ECUFieldButton.html" }}
-	  </em>        {{ endwith }}
+          <em>
+            I think B's in today's lab session will most frequently choose to
+            spend {{ include "components/ECUField.html" }} ECU on deductions
+            from A.
+          </em>
+        {{ endwith }}
       {{ endwith }}
     </li>
 
@@ -47,22 +47,23 @@
 
       <br>
 
-	  <em>      {{ with field_control=form.ne_a }}
+      {{ with field_control=form.ne_a }}
         {{ with field_name="ne_a" }}
-          I think B should spend
-          {{ include "components/ECUFieldInput.html" }}
-          ECU on deductions from A.
-          {{ include "components/ECUFieldButton.html" }}
+          <em>
+            I think B should spend
+            {{ include "components/ECUField.html" }} ECU on deductions
+            from A.
+          </em>
         {{ endwith }}
       {{ endwith }}
-	</em>    </li>
+	  </li>
   </ul>
 
-  <p>
-    We also asked this question of participant B: </p>
+  <p>We also asked this question of participant B:</p>
 	
-	<p>(<strong>*</strong>) "How much do you think B
-    <b>should</b> spend on deductions?"
+	<p>
+    (<strong>*</strong>) "How much do you think B <b>should</b> spend on
+    deductions?"
   </p>
 
   <ul>
@@ -74,16 +75,17 @@
 
         <br>
 
-<em>        {{ with field_control=form.ne_a_b_group }}
+        {{ with field_control=form.ne_a_b_group }}
           {{ with field_name="ne_a_b_group" }}
-            I think the most frequent answer from B's who are
-            {{ same_group_sort }} will be that B should spend
-            {{ include "components/ECUFieldInput.html" }}
-            ECU on deductions from A.
-            {{ include "components/ECUFieldButton.html" }}
+            <em>
+              I think the most frequent answer from B's who are
+              {{ same_group_sort }} will be that B should spend
+              {{ include "components/ECUField.html" }} ECU on deductions
+              from A.
+            </em>
           {{ endwith }}
         {{ endwith }}
-</em>      </li>
+      </li>
     {{ endif }}
 
     <li>
@@ -93,23 +95,23 @@
 
       <br>
 
-<em>      {{ with field_control=form.ne_a_b_session }}
+      {{ with field_control=form.ne_a_b_session }}
         {{ with field_name="ne_a_b_session" }}
-          I think the most frequent answer from B's in today's session will be
-          that B should spend
-          {{ include "components/ECUFieldInput.html" }}
-          ECU on deductions from A.
-          {{ include "components/ECUFieldButton.html" }}
+          <em>
+            I think the most frequent answer from B's in today's session will
+            be that B should spend {{ include "components/ECUField.html" }}
+            ECU on deductions from A.
+          </em>
         {{ endwith }}
       {{ endwith }}
-</em>    </li>
+    </li>
   </ul>
 
-  <p>
-    We also asked this question of participant C: </p>
+  <p>We also asked this question of participant C:</p>
 	
-	<p>(<strong>*</strong>) "How much do you think B
-    <b>should</b> spend on deductions?”
+  <p>
+    (<strong>*</strong>) "How much do you think B <b>should</b> spend on
+    deductions?”
   </p>
 
   <ul>
@@ -121,16 +123,17 @@
 
         <br>
 
-<em>        {{ with field_control=form.ne_a_c_group }}
+        {{ with field_control=form.ne_a_c_group }}
           {{ with field_name="ne_a_c_group" }}
-            I think the most frequent answer from C's who are
-            {{ same_group_sort }} will be that B should spend
-            {{ include "components/ECUFieldInput.html" }}
-            ECU on deductions from A.
-            {{ include "components/ECUFieldButton.html" }}
+            <em>
+              I think the most frequent answer from C's who are
+              {{ same_group_sort }} will be that B should spend
+              {{ include "components/ECUField.html" }}
+              ECU on deductions from A.
+            </em>
           {{ endwith }}
         {{ endwith }}
-</em>      </li>
+      </li>
     {{ endif }}
 
     <li>
@@ -140,15 +143,15 @@
 
       <br>
 
-<em>      {{ with field_control=form.ne_a_c_session }}
+      {{ with field_control=form.ne_a_c_session }}
         {{ with field_name="ne_a_c_session" }}
-          I think the most frequent answer from C's in today's session will be
-          that B should spend
-          {{ include "components/ECUFieldInput.html" }}
-          ECU on deductions from A.
-          {{ include "components/ECUFieldButton.html" }}
+          <em>
+            I think the most frequent answer from C's in today's session will
+            be that B should spend {{ include "components/ECUField.html" }}
+            ECU on deductions from A.
+          </em>
         {{ endwith }}
       {{ endwith }}
-</em>    </li>
+    </li>
   </ul>
 </div>
