@@ -49,8 +49,25 @@
 
 ## Simon To Do
 
+- Bug
+
+````
+  File "/usr/local/lib/python3.11/site-packages/otree/models/subsession.py", line 175, in _gbat_try_to_make_new_group
+    players_for_group = func(self, waiting_players)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/task2/models.py", line 56, in group_by_arrival_time_method
+    group_num = waiting_players[0].participant.vars["group"]
+                ~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+INFO:     172.17.0.1:62592 - "POST /p/cd5jvq37/task2/Feedback/20 HTTP/1.1" 302 Found
+INFO:     172.17.0.1:62592 - "GET /p/cd5jvq37/task2/Setup/22 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:62592 - "POST /p/x3ot5me0/task2/Feedback/20 HTTP/1.1" 302 Found
+INFO:     172.17.0.1:62592 - "GET /p/x3ot5me0/task2/Setup/22 HTTP/1.1" 200 OK
+````
+This occurred when running a session with 9 participants, two groups were formed on birth region, one formed on political ideology. Reputation and Deterrence treatments both active. We had just finished the feedback for Task 1 when the error kicked in.
+
 - Det/Rep -- make sure you have tested all four combinations of these config variables.
-- Line 41 in FeedbackResults.html, I've put in a line saying how much A would have had deducted. But I'd like this to say something like
+- Line 41 in FeedbackResults.html, I've put in a line saying how much A would have had deducted. But can you please amend this to say:
 
 	> 	   This would have led to A earning 120 - {{ results.amount_reduced }} = X ECU.
 
