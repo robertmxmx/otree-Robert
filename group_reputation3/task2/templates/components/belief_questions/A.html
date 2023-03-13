@@ -109,7 +109,7 @@
   </p>
 
   <ul>
-    {{ if same_group_sort }}
+    {{ if session.config.rep_condition and same_group_sort }}
       <li>
         Considering all the groups where B and C are {{ same_group_sort }},
         but excluding your own group, what do you think is the most commonly
