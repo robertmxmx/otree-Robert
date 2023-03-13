@@ -23,5 +23,14 @@
       decision, and once it is confirmed, we will then combine this information
       with A's decision, and use this information to determine the outcome.
     </p>
+	
+    {% if session.config.deterrence %}
+	<p>
+		Note that even if A decides not to take ECU from B, we will still 
+		inform participant A of how B <strong>would have reacted</strong>, 
+		if A had chosen to take.
+	</p>
+    {% endif %}
+	
   </div>
 </div>
