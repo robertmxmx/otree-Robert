@@ -50,22 +50,23 @@
 ## Simon To Do
 
 - Det/Rep -- make sure you have tested all four combinations of these config variables.
+- Line 41 in FeedbackResults.html, I've put in a line saying how much A would have had deducted. But I'd like this to say something like
+
+	> 	   This would have led to A earning 120 - {{ results.amount_reduced }} = X ECU.
+
+	Where X updates with the correct amount.
+
 - For all the belief questions, remove the calculate buttons
-- Can we number the belief questions for easy cross referencing? 
-  "Last question" doesn't always work unambiguously.
+- Belief questions: the belief questions that should be shown in REP treatment, were not shown to the group based on political values (for all of A, B, and C). Is that because there was only *one* political group?
 - As well as groups formed on the basis of birth region, there are groups
   formed on the basis of political ideology. And there are groups formed on
-  the basis of no identity criterion. If the latter, they should not receive
-  questions that make reference to "some group criterion".
-	- Simon to show me how an unsorted group will get handled when it comes to
-    the Bonus questions. Some questions make no sense for them, so should not
-    be shown.
+  the basis of no identity criterion. If the *latter*, they should not receive
+  questions that make reference to "some group criterion". But if political ideology, they still should receive those questions.
 
 ## Toby To Do
 
 - Confirm that nothing funny happens if a group is not based on any identity
   criterion
-- Double check wording of all the belief questions.
 
 ## Toby To Review
 
