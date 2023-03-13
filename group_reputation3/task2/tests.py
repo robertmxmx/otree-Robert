@@ -101,14 +101,16 @@ class PlayerBot(Bot):
         expected_payoff = Constants.initial_payoffs[self.player.role()]
 
         # TODO: Normal payoff and Bonus question payoff
-        if (self.player.role() == "A") and CHOSE_TO_TAKE:
-            # expected_payoff += Constants.take_amount - (
-            #     Constants.deduct["multiplier"] * DEDUCT_AMOUNT
-            # )
+        if self.player.role() == "A":
+            # if CHOSE_TO_TAKE:
+            #     expected_payoff += Constants.take_amount - (
+            #         Constants.deduct["multiplier"] * DEDUCT_AMOUNT
+            #     )
 
             expected_payoff = None
-        elif (self.player.role() == "B") and CHOSE_TO_TAKE:
-            # expected_payoff -= Constants.take_amount + DEDUCT_AMOUNT
+        elif self.player.role() == "B":
+            # if CHOSE_TO_TAKE:
+            #     expected_payoff -= Constants.take_amount + DEDUCT_AMOUNT
 
             expected_payoff = None
         elif self.player.role() == "C":

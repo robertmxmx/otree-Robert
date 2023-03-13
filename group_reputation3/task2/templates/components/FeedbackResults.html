@@ -40,8 +40,10 @@
       {{ results.deduct_amount }} ECU on deductions.
     </p>
     <p>
-      This would have reduced A's endowment by {{ results.amount_reduced }}
-      ECU.
+      This would have led to A earning
+      {{ results.hypothetical_A_payoffs.after_take }} -
+      {{ results.amount_reduced }} =
+      {{ results.hypothetical_A_payoffs.after_deduct }} ECU.
     </p>
   {{ endif }}
 

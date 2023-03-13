@@ -270,12 +270,20 @@ class Feedback(Page):
         deduct_amount = int(deducting_player.deduct_amount)
         amount_reduced = int(Constants.deduct["multiplier"] * deduct_amount)
 
+        # A's payoff if deducting player chose to take
+        after_take = Constants.initial_payoffs["A"] + Constants.take_amount
+        hypothetical_A_payoffs = {
+            "after_take": after_take,
+            "after_deduct": after_take - amount_reduced,
+        }
+
         return {
             "chose_to_take": player_A.chose_to_take,
             "deducting_player": deducting_player_role,
             "payoffs_after_take": self.get_payoffs(round_num),
             "deduct_amount": deduct_amount,
             "amount_reduced": amount_reduced,
+            "hypothetical_A_payoffs": hypothetical_A_payoffs,
             "final_payoffs": self.get_payoffs(round_num, final=True),
         }
 
