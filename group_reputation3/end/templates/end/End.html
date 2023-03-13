@@ -12,6 +12,7 @@
 
     <p>
       Bonus Question Payment
+
       <ul>
         <li>
           Bonus Question {{ belief_bonus.question }} was randomly chosen
@@ -43,16 +44,19 @@
         <li>Bonus: {{ belief_bonus.amount }}</li>
       </ul>
       
-      <font size="+2"><strong>Total earnings: {{ participant.payoff_plus_participation_fee }}</strong></font>
+      <div class="h4 fw-bold">
+        Total earnings: {{ participant.payoff_plus_participation_fee }}
+      </div>
     </p>
 
     <p>Your participant ID is: <strong>{{ participant.code }}</strong></p>
 
     <p>
       The experimenter will distribute a receipt for you to
-      sign. Please fill in your <strong>total earnings</strong>, your <strong>participant id</strong>, and
-      <em><strong>sign</strong></em> your receipt. Then quietly pack up your things and
-      leave, dropping your receipt with the experimenter on the way out.
+      sign. Please fill in your <strong>total earnings</strong>, your
+      <strong>participant id</strong>, and <em><strong>sign</strong></em>
+      your receipt. Then quietly pack up your things and leave, dropping your
+      receipt with the experimenter on the way out.
     </p>
 
     <p>
