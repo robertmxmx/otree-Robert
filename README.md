@@ -29,13 +29,16 @@
      ```
      eb deploy
      ```
+3. Update the environment variables through the AWS configuration options
+   (go to environment page > Configuration > Edit 'Software' > Environment
+   properties). The variables for production can be found in `.prod.env`.
+   Alternatively, use `eb` to set environment variables:
+   ```
+   eb setenv OTREE_PRODUCTION=1 ...
+   ```
 
 ### Notes
 
-- Remember to update the environment variables through the AWS
-  configuration options (go to environment page > Configuration > Edit
-  'Software' > Environment properties). The variables for production can be
-  found in `.prod.env`
 - To reduce costs, first go to environment page > Configuration > Edit
   'Rolling updates and deployments' > Set deployment policy to 'Immutable'.
   Next go back to Configuration > Edit 'Capacity' > Set 'Environment type'

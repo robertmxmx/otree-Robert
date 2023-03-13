@@ -39,10 +39,10 @@ def get_bouns_answers(role, rep_condition, same_grouping):
         }
 
         if same_grouping:
-            answers = {**answers, "ee_b_group": 5, "ne_b_c_group": 5}
+            answers = {**answers, "ee_b_group": 5, "ne_b_b_group": 5}
 
             if rep_condition:
-                answers = {**answers, "ne_b_b_group": 5}
+                answers = {**answers, "ne_b_c_group": 5}
     elif role == "C":
         answers = {"ee_c_session": 5, "ne_c": 5, "ne_c_c_session": 5}
 
@@ -124,5 +124,5 @@ class PlayerBot(Bot):
 
         yield pages.Feedback
 
-        if self.session.config["rep_condition"] and self.round_number == 2:
+        if rep_condition and self.round_number == 2:
             yield pages.CMessage
