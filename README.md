@@ -63,13 +63,9 @@
 
 ## Toby To Do
 
-- Change "commonly" to "frequently"
-- Change description of the feedback that A will get in the instructions (A
-  will learn B's purely hypothetical decision, in DET treatment.)
 - Confirm that nothing funny happens if a group is not based on any identity
   criterion
 - Double check wording of all the belief questions.
-- Fix "with"/"wish" typo
 
 ## Toby To Review
 
