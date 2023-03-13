@@ -68,6 +68,13 @@ This occurred when running a session with 9 participants, two groups were formed
 
 No such error occurred in a session with Det treatment switched off.
 
+- Error in Feedback page
+
+	Running a session with 15 participants, all grouped on political ideology, or on no criterion. Reputation Yes, Deterrence NO.
+
+	On Feedback page after Task 2, saw this:
+
+	![Observe that in summary of Task 1, it is showing the payoffs that are relevant to Task 2. This appeared to happen for every participant.](bug_feedback.png)
 
 - Det/Rep -- make sure you have tested all four combinations of these config variables.
 - Line 41 in FeedbackResults.html, I've put in a line saying how much A would have had deducted. But can you please amend this to say:
