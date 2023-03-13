@@ -49,8 +49,10 @@
 
 ## Simon To Do
 
-(New additions 8 March 2023)
-
+- Det/Rep -- make sure you have tested all four combinations of these config variables.
+- For all the belief questions, remove the calculate buttons
+- Can we number the belief questions for easy cross referencing? 
+  "Last question" doesn't always work unambiguously.
 - As well as groups formed on the basis of birth region, there are groups
   formed on the basis of political ideology. And there are groups formed on
   the basis of no identity criterion. If the latter, they should not receive
@@ -58,32 +60,27 @@
 	- Simon to show me how an unsorted group will get handled when it comes to
     the Bonus questions. Some questions make no sense for them, so should not
     be shown.
+
+## Toby To Do
+
+- Change "commonly" to "frequently"
+- Change description of the feedback that A will get in the instructions (A
+  will learn B's purely hypothetical decision, in DET treatment.)
+- Confirm that nothing funny happens if a group is not based on any identity
+  criterion
+- Double check wording of all the belief questions.
+- Fix "with"/"wish" typo
+
+## Toby To Review
+
 - Important change to feedback for A: A needs to learn how **B/C would have
   behaved, even if A does not take**. (In both Task 1 and Task 2.) TOBY to
   add change to the wording, but leave the logic to be filled in by Simon.
   - **Simon:** I've tried to clean up the code here. If you want to add the
     wording you will need to edit this file:
     `group_reputation3/task2/templates/components/FeedbackResults.html`
-		- Toby: I've tried to add feedback. Query why the file to amend is in Task 2, not Task 1 directory?
-- Related: Toby will need to change the instructions for A to make the last
-  change clear.
-
-## Toby To Do
-
-- Change "commonly" to "frequently"
-- Change description of the feedback that A will get in the instructions
-- Confirm that nothing funny happens if a group is not based on any identity
-  criterion
-- Double check wording of all the belief questions.
-
-## Toby To Review
-
-- Make "online experiment" default to UNCHECKED
-- Change default show up fee to $15 and ECU to 0.30 cents
+		- Toby: I've tried to add feedback. 
 - Update readme to describe new variables correctly
-- Need to place the belief questions for A, B, C, all in the same part of the
-  sequencing. They come immediately after the Task 1 Decisions, but *before*
-  the Task 1 feedback.
 - Head the belief questions page "Bonus questions"
 - On the final payment page, refer to the bonus payment as "Bonus question
   payment" (if applicable). (Toby to check)
