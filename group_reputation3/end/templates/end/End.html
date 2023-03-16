@@ -41,10 +41,7 @@
         {{ endif }}
         
         <li>Task {{ chosen_task }}: {{ task_payoff }}</li>
-
-        {{ if belief_bonus.paid }}
-          <li>Bonus: {{ belief_bonus.amount }}</li>
-        {{ endif }}
+        <li>Bonus: {{ belief_bonus.amount }}</li>
       </ul>
       
       <div class="h4 fw-bold">
