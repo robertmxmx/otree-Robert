@@ -51,46 +51,12 @@
 
 ## Simon To Do
 
-- Det/Rep -- make sure you have tested all four combinations of these
-  config variables.
-  - **Simon:** I've tested all four combinations with bots and have tested
-    2/4 of the combinations without bots successfully (as of 13/03). I will
-    do more testing before Friday.
-
-- As well as groups formed on the basis of birth region, there are groups
-  formed on the basis of political ideology. And there are groups formed on
-  the basis of no identity criterion. If the *latter*, they should not receive
-  questions that make reference to "some group criterion". But if
-  political ideology, they still should receive those questions.
-  - **Simon:** Checked for this behaviour and the software does do this.
 
 ## Toby To Do
 
-- Confirm that nothing funny happens if a group is not based on any identity
-  criterion
 
 ## Toby To Review
 
-- For all the belief questions, remove the calculate buttons
-  - **Simon:** Done
-
-- Line 41 in FeedbackResults.html, I've put in a line saying how much A
-  would have had deducted. But can you please amend this to say:
-  ```
-	This would have led to A earning 120 - {{ results.amount_reduced }} = X ECU.
-  ```
-	Where X updates with the correct amount.
-  - **Simon:** Done
-
-- Error in Feedback page
-
-	Running a session with 15 participants, all grouped on political ideology,
-  or on no criterion. Reputation Yes, Deterrence NO.
-
-	On Feedback page after Task 2, saw this: ![](bug_feedback.png)
-  Observe that in summary of Task 1, it is showing the payoffs that are
-  relevant to Task 2. This appeared to happen for every participant.
-  - **Simon:** This is fixed now
 
 - Bug
   ````
@@ -113,16 +79,6 @@
 
   No such error occurred in a session with Det treatment switched off.
   - **Simon:** I can't reproduce this error at all. I'm hoping this is a one off.
-
-- Update readme to describe new variables correctly
-
-- Yes, "chosen" task, for all participants as config variable, affects whether
-  Task 1 or Task 2 is paid BUT for bonus question: 
-  - Everyone gets the chance to earn a bonus from belief questions.
-  - Randomize separately for each participant which belief question is to be
-    rewarded. Store the name of the variable which is the basis of the bonus
-    for each individual. Give them feedback about exactly which question it was
-    that they are getting a bonus for on the payoff page.
 
 - Please document in a specific readme for the group reputation 3 app):
 	- How to tell whether a given group has a political/birth/no identity
