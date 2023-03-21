@@ -57,6 +57,7 @@
 	c.	No, A will not learn how B reacted in Task 1.
 
 	The correct answer is (a) in the Deterrence treatment, and (c) in the NoDeterrence treatment.
+- Update the Belief questions. See emailed Word document. Just need to add headers to break up the questions. Make sure headings are reasonably large and prominent, compared to default text.
 
 ## Toby To Do
 
