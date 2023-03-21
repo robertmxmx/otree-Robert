@@ -51,6 +51,12 @@
 
 ## Simon To Do
 
+- Comprehension question 3, please change the answers to the following:
+	a.	Yes, A will learn, regardless of whether A takes from B in Task 1.
+	b.	Yes, A will learn, provided A takes from B in Task 1.
+	c.	No, A will not learn how B reacted in Task 1.
+
+	The correct answer is (a) in the Deterrence treatment, and (c) in the NoDeterrence treatment.
 
 ## Toby To Do
 
