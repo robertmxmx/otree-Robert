@@ -58,34 +58,21 @@
 
 	The correct answer is (a) in the Deterrence treatment, and (c) in the NoDeterrence treatment.
 - Update the Belief questions. See emailed Word document. Just need to add headers to break up the questions. Make sure headings are reasonably large and prominent, compared to default text.
+- If a participant hits "No consent" on the Consent page, bring up a popup that has same text as is currently on the "No Consent page". But this popup should have a "Cancel" button, so that if someone cancels, they can go back and still consent. Idea is to make sure that software is not automatically stuck when someone does not consent, because I might be able to find someone else to take that participant's place. 
+- The No Consent page can then be deleted.
+- Develop much more rigorous bots that try out multiple combinations of group formation. (Ideally, I'd like to be able to experiment with programming the bots myself -- so have a think about making this code safe for me to tinker with, if possible?) 
+- Group sorting bug. The software tends to crash 2 pages after the Initial Survey. I think it is having trouble when there is at least one group which is not sorted by either birth region or political ideology. Only one of the three sessions that completed successfully had an unsorted group. Whereas *all* the sessions that crashed had at least one group like this. 
+	- Note that the `sorted_by` variable is empty in unsorted groups, it never contains "no sort" -- is this consistent with what you intended?
+	- Relatedly: Would it be a good idea to specify in the variable `sorted_by` a non-empty value if the group is not sorted by either criterion (e.g. "null")?
+	- Is it possible that oTree code has been updated after you first wrote the group formation algorithm, and this has broken something?
+- Negative payoff bug. Participant `zfpzuxn8` in session `svep3wtq`, received a negative payoff. I think this is because they never got credited with their initial 120 ECU, so after taking their payoff was -100, rather than 20. Investigate and fix.
 
 ## Toby To Do
 
+- Fix the videos so that they do not have embedded metadata
 
 ## Toby To Review
 
-
-- Bug
-  ````
-    File "/usr/local/lib/python3.11/site-packages/otree/models/subsession.py", line 175, in _gbat_try_to_make_new_group
-      players_for_group = func(self, waiting_players)
-                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    File "/app/task2/models.py", line 56, in group_by_arrival_time_method
-      group_num = waiting_players[0].participant.vars["group"]
-                  ~~~~~~~~~~~~~~~^^^
-  IndexError: list index out of range
-  INFO:     172.17.0.1:62592 - "POST /p/cd5jvq37/task2/Feedback/20 HTTP/1.1" 302 Found
-  INFO:     172.17.0.1:62592 - "GET /p/cd5jvq37/task2/Setup/22 HTTP/1.1" 200 OK
-  INFO:     172.17.0.1:62592 - "POST /p/x3ot5me0/task2/Feedback/20 HTTP/1.1" 302 Found
-  INFO:     172.17.0.1:62592 - "GET /p/x3ot5me0/task2/Setup/22 HTTP/1.1" 200 OK
-  ````
-  This occurred when running a session with 9 participants, two groups were
-  formed on birth region, one formed on political ideology. Reputation and
-  Deterrence treatments both active. We had just finished the feedback for
-  Task 1 when the error kicked in.
-
-  No such error occurred in a session with Det treatment switched off.
-  - **Simon:** I can't reproduce this error at all. I'm hoping this is a one off.
 
 - Please document in a specific readme for the group reputation 3 app):
 	- How to tell whether a given group has a political/birth/no identity
