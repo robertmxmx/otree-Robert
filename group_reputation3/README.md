@@ -13,8 +13,8 @@
 
 ## Task 1
 
-| Name          | Description |
-| ------------- | ----------- |
+| Name         | Description |
+| ------------ | ----------- |
 | birth_region | Participant's birth region. See `_myshared/constants.py` for the list of regions. |
 | other_br     | If a participant selects a birth region not from the list, this stores the region they specify instead |
 | pi_q*        | Answers to the Political Ideology questions |

@@ -25,8 +25,12 @@
     these questions at random, and compare your answer to people's actual
     behavior.
   </p>
-  <p><strong>If your guess is correct, you will earn an additional
-      {{ Constants.additional_amount }} ECU for this task.</strong></p>
+  <p>
+    <strong>
+      If your guess is correct, you will earn an additional
+      {{ Constants.additional_amount }} ECU for this task.
+    </strong>
+  </p>
 
   {{ if player.role == "A" }}
     {{ include "components/belief_questions/A.html" }}

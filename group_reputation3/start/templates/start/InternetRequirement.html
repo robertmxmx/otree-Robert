@@ -1,17 +1,16 @@
-{% extends "global/Page.html" %}
-{% load otree static %}
+{{ extends "global/Page.html" }}
+{{ load otree static }}
 
-{% block title %}
-    Internet requirements to participate
-{% endblock %}
+{{ block title }}
+  Internet requirements to participate
+{{ endblock }}
 
-{% block content %}
-
-    <p>
-        <b>Please note:</b> In order for you to complete the experiment, you need a stable 
-        internet connection. It may happen, through no fault of your own, that your 
-        connection is unstable. Unfortunately, if this happens, we will need to exclude 
-        you from the experiment, so that others can complete it.
-    </p>
-
-{% endblock %}
+{{ block content }}
+  <p>
+    <b>Please note:</b> In order for you to complete the experiment, you
+    need a stable internet connection. It may happen, through no fault of
+    your own, that your connection is unstable. Unfortunately, if this
+    happens, we will need to exclude you from the experiment, so that others
+    can complete it.
+  </p>
+{{ endblock }}

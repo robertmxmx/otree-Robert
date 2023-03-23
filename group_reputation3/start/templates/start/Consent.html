@@ -1,43 +1,52 @@
-{% extends "global/Page.html" %}
-{% load otree %}
+{{ extends "global/Page.html" }}
+{{ load otree }}
 
-{% block title %}
-    Consent Form 
-{% endblock %}
+{{ block title }}
+  Consent Form 
+{{ endblock }}
 
-{% block content %}
-    <div class="card bg-light instructions">
-        <div class="card-body">
-            <h3>
-                Title of the Study: Examining decision making by individuals and groups 
-            </h3>
-            <h4>
-                Experimenter: Professor Toby Handfield, Monash University 
-            </h4>
+{{ block content }}
+  <div class="card bg-light instructions">
+    <div class="card-body">
+      <h3>
+        Title of the Study: Examining decision making by individuals and groups 
+      </h3>
 
-            <ul>
-                <li>
-                    I agree to take part in the Monash University research project mentioned above.
-                    I have had the project explained to me, and I have read the Explanatory Statement, which 
-                    I might keep for my records. 
-                </li>
-                <li>
-                    I understand that the points I earned through the session will be converted to cash
-                    at the end of the session. The final amount to be paid may depend from my choices, other participants' decisions, and chance. 
-                </li>
-                <li>
-                    I understand that my participation today is voluntary, that I can choose to not to participate in part or all of the session, 
-                    and that I can withdraw at any stage without being penalised or disadvantaged in any way, though if I do so I will not get paid.
-                </li>
-                <li>
-                    I understand that the de-identified data from this experiment may be made available to other researchers for the scientific purposes
-                    of verification and further analysis, including future research projects. <b> No identification that would allow identification of myself will be shared</b>
-                </li>
-            </ul>
-
-            {% formfield player.accept label='Do you consent to participate in the experiment?' %}
-
-            {% next_button %}
-        </div>
+      <h4>Experimenter: Professor Toby Handfield, Monash University</h4>
+      
+      <ul>
+        <li>
+          I agree to take part in the Monash University research project
+          mentioned above. I have had the project explained to me, and I have
+          read the Explanatory Statement, which I might keep for my records. 
+        </li>
+        <li>
+          I understand that the points I earned through the session will be
+          converted to cash at the end of the session. The final amount to be
+          paid may depend from my choices, other participants' decisions, and
+          chance. 
+        </li>
+        <li>
+          I understand that my participation today is voluntary, that I can
+          choose to not to participate in part or all of the session, and that
+          I can withdraw at any stage without being penalised or disadvantaged
+          in any way, though if I do so I will not get paid.
+        </li>
+        <li>
+          I understand that the de-identified data from this experiment may be
+          made available to other researchers for the scientific purposes of
+          verification and further analysis, including future research
+          projects. <b>No identification that would allow identification of
+          myself will be shared</b>
+        </li>
+      </ul>
+      
+      {{
+        formfield player.accept
+        label='Do you consent to participate in the experiment?'
+      }}
+      
+      {{ next_button }}
     </div>
-{% endblock %}
+  </div>
+{{ endblock }}
