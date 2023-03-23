@@ -1,3 +1,7 @@
+# This Dockerfile assumes that the build context is already in the correct app.
+# For example, if group_reputation3 is the targeted app then we assume we are
+# inside the group_repuration3/ folder
+
 FROM python:alpine
 
 RUN pip install -U otree psycopg2-binary requests
@@ -6,11 +10,7 @@ RUN pip install uvicorn[standard]
 
 WORKDIR /app
 
-# ARG injection does not work with Elastic Beanstalk so this needs to be
-# changed depending on what app is to be deployed
-ARG APP=group_reputation3
-
-COPY ./$APP .
+COPY . .
 
 EXPOSE 8000
 RUN yes | otree resetdb && rm db.sqlite3

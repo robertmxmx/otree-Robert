@@ -1,0 +1,27 @@
+
+services:
+  otree:
+    build:
+      context: ./${APP}
+      dockerfile: ../otree.Dockerfile
+    depends_on:
+      - db
+      - cache
+    ports:
+      - 8000:8000
+      - 80:8000
+    environment:
+      - DATABASE_URL=postgres://postgres:otree@db/django_db
+      - OTREE_ADMIN_PASSWORD=otreee
+      - OTREE_AUTH_LEVEL=STUDY
+      - OTREE_PRODUCTION=1
+      - REDIS_URL=redis://redis:6379
+  cache:
+    image: redis:alpine
+    restart: always
+  db:
+    image: postgres:alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=django_db
+      - POSTGRES_PASSWORD=otree

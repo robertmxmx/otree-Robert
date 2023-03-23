@@ -2,15 +2,6 @@
 
 source ./.env
 
-function build_run {
-    # Builds docker images and runs container with given options/command
-    # - First argument is options to 'docker run'
-    # - Second argument is command for 'docker run' to execute
-
-    docker build -t $APP --build-arg APP=$APP .
-    docker run --rm -it $1 $APP $2
-}
-
 # MINGW formats paths differently
 if [ $(uname | grep MINGW) ]
 then
@@ -19,25 +10,36 @@ else
     VOLUME_PATH="./$APP:/app"
 fi
 
+print_usage () {
+    echo
+    echo 'Usage: run.sh OPTION'
+    echo
+    echo 'OPTION should be either "dev", "tests" "lint" or "prod"'
+}
+
+docker_run () {
+    docker build -f otree.Dockerfile -t $APP ./$APP
+    docker run --rm -it "$@"
+}
+
 case $1 in
     dev)
-        build_run "-p 8000:8000 -v $VOLUME_PATH" "otree devserver 0.0.0.0:8000"
+        RUN_CMD="otree devserver 0.0.0.0:8000"
+        docker_run -v $VOLUME_PATH -p "8000:8000" $APP $RUN_CMD
         ;;
     tests)
-        build_run "-v $VOLUME_PATH" "otree test $TEST_NAME $TEST_USERS"
+        RUN_CMD="otree test $TEST_NAME $TEST_USERS"
+        docker_run $APP $RUN_CMD
         ;;
     lint)
-        docker run --rm --volume "$VOLUME_PATH" --workdir //app pyfound/black:latest_release black .
+        IMAGE="pyfound/black:latest_release"
+        docker run --rm -v $VOLUME_PATH -w //app $IMAGE black .
         ;;
     prod)
-        # Does not require a command as it is already defined in Dockerfile
-        build_run "-p 8000:8000 --env-file .prod.env"
+        docker compose up
         ;;
     *)
-        echo
-        echo 'Usage: run.sh OPTION'
-        echo
-        echo 'OPTION should be either "dev", "tests" "lint" or "prod"'
+        print_usage
         exit 1
         ;;
 esac
