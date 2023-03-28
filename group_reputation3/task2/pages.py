@@ -121,7 +121,10 @@ class Comprehension(Page):
             incorrectqnums.append("2")
             self.player.comp2_wrong += 1
 
-        if self.session.config["deterrence"] != values["comp3"]:
+        deterrence = self.session.config["deterrence"]
+        if (deterrence and values["comp3"] != 1) or (
+            not deterrence and values["comp3"] != 2
+        ):
             incorrectqnums.append("3")
             self.player.comp3_wrong += 1
 

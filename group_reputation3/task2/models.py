@@ -269,13 +269,17 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal,
         choices=[[True, "Yes"], [False, "No"]],
     )
-    comp3 = models.BooleanField(
+    comp3 = models.IntegerField(
         label=(
             "In Task 2, before making a decision, will A learn how B reacted "
             "to A's decision in Task 1?"
         ),
-        widget=widgets.RadioSelectHorizontal,
-        choices=[[True, "Yes"], [False, "No"]],
+        widget=widgets.RadioSelect,
+        choices=[
+            [1, "Yes, A will learn, regardless of whether A takes from B in Task 1"],
+            [2, "Yes, A will learn, provided A takes from B in Task 1"],
+            [3, "No, A will not learn how B reacted in Task 1"],
+        ],
     )
     comp4 = models.IntegerField(
         label="When will C learn about the membership of the group?",
