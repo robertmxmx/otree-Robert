@@ -1,3 +1,5 @@
+import os
+
 from ._builtin import Page, WaitPage
 from .models import Constants
 
@@ -322,20 +324,30 @@ class CMessage(Page):
         }
 
 
-page_sequence = [
-    Setup,
-    Instructions,
-    Instructions2,
-    VideoInstructions,
-    Instructions3,
-    Instructions3a,
-    Instructions4,
-    Comprehension,
-    Commencement,
-    TakingDecision,
-    DeductingDecision,
-    BonusQuestions,
-    CalculatePayoffs,
-    Feedback,
-    CMessage,
-]
+if os.environ.get("DEV_SKIP_PAGES", "0") == "1":
+    page_sequence = [
+        Setup,
+        TakingDecision,
+        DeductingDecision,
+        BonusQuestions,
+        CalculatePayoffs,
+        Feedback,
+    ]
+else:
+    page_sequence = [
+        Setup,
+        Instructions,
+        Instructions2,
+        VideoInstructions,
+        Instructions3,
+        Instructions3a,
+        Instructions4,
+        Comprehension,
+        Commencement,
+        TakingDecision,
+        DeductingDecision,
+        BonusQuestions,
+        CalculatePayoffs,
+        Feedback,
+        CMessage,
+    ]

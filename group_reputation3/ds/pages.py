@@ -1,3 +1,5 @@
+import os
+
 from ._builtin import Page
 
 
@@ -55,5 +57,7 @@ class ExitSurvey(Page):
         ):
             return "A competition was selected but a team was not specified"
 
-
-page_sequence = [ExitSurvey]
+if os.environ.get("DEV_SKIP_PAGES", "0") == "1":
+    page_sequence = []
+else:
+    page_sequence = [ExitSurvey]

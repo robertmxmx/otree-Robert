@@ -1,3 +1,5 @@
+import os
+
 from otree.api import (
     models,
     widgets,
@@ -8,6 +10,8 @@ from otree.api import (
 )
 
 from _myshared.constants import REGIONS
+
+DEV_PREFILL = os.environ.get("DEV_PREFILL", "0") == "1"
 
 
 class Constants(BaseConstants):
@@ -58,79 +62,79 @@ class Group(BaseGroup):
     pass
 
 
+def make_pi(label, reversed=False):
+    return models.IntegerField(
+        label=label,
+        choices=Constants.choices_reversed if reversed else Constants.choices,
+        initial=1 if DEV_PREFILL else None,
+        widget=widgets.RadioSelect,
+    )
+
+
 class Player(BasePlayer):
     birth_region = models.IntegerField(
         label="In what region were you born?",
         choices=[[i + 1, Constants.regions[i]] for i in range(len(Constants.regions))],
+        initial=1 if DEV_PREFILL else None,
         widget=widgets.RadioSelect,
     )
     other_br = models.StringField(label="Other region", blank=True)
 
-    pi_q1 = models.IntegerField(
-        label="""
-            I don't like change. There is too great a chance for things to go
-            wrong when things change. I prefer it when the same people continue
-            doing what they have always done instead of having things change.
-        """,
-        choices=Constants.choices,
-        widget=widgets.RadioSelect,
+    pi_q1 = make_pi(
+        """
+        I don't like change. There is too great a chance for things to go
+        wrong when things change. I prefer it when the same people continue
+        doing what they have always done instead of having things change.
+        """
     )
-    pi_q2 = models.IntegerField(
-        label="""
-            The environment must be protected for the benefit of mankind and its
-            future even if it means that people may have to give up some things
-            or pay more for some things like petrol or automobiles.
+    pi_q2 = make_pi(
+        """
+        The environment must be protected for the benefit of mankind and its
+        future even if it means that people may have to give up some things
+        or pay more for some things like petrol or automobiles.
         """,
-        choices=Constants.choices_reversed,
-        widget=widgets.RadioSelect,
+        reversed=True,
     )
-    pi_q3 = models.IntegerField(
-        label="""
-            We should be a nation of many different types of people in order to
-            have the benefit of many different points of view even if it means
-            that we have to put up with some people and ideas that we don't
-            like.
+    pi_q3 = make_pi(
+        """
+        We should be a nation of many different types of people in order to
+        have the benefit of many different points of view even if it means
+        that we have to put up with some people and ideas that we don't
+        like.
         """,
-        choices=Constants.choices_reversed,
-        widget=widgets.RadioSelect,
+        reversed=True,
     )
-    pi_q4 = models.IntegerField(
-        label="""
-            The main focus of our lives should be getting a good job so that we
-            can have the money we need to get the things we want. After we've
-            done that we can worry about what others need.
-        """,
-        choices=Constants.choices,
-        widget=widgets.RadioSelect,
+    pi_q4 = make_pi(
+        """
+        The main focus of our lives should be getting a good job so that we
+        can have the money we need to get the things we want. After we've
+        done that we can worry about what others need.
+        """
     )
-    pi_q5 = models.IntegerField(
-        label="""
-            There is so much information in newspapers and on the TV that it is
-            hard to know what is true. The government should have the authority
-            to approve or disapprove what kind of information is put before the
-            public.
-        """,
-        choices=Constants.choices,
-        widget=widgets.RadioSelect,
+    pi_q5 = make_pi(
+        """
+        There is so much information in newspapers and on the TV that it is
+        hard to know what is true. The government should have the authority
+        to approve or disapprove what kind of information is put before the
+        public.
+        """
     )
-    pi_q6 = models.IntegerField(
-        label="""
-            Sometimes a person gets himself into trouble or makes a bad decision
-            that hurts himself or even others. The society should do all it can
-            to assist that person so that he can have the opportunity to change
-            and better himself.
+    pi_q6 = make_pi(
+        """
+        Sometimes a person gets himself into trouble or makes a bad decision
+        that hurts himself or even others. The society should do all it can
+        to assist that person so that he can have the opportunity to change
+        and better himself.
         """,
-        choices=Constants.choices_reversed,
-        widget=widgets.RadioSelect,
+        reversed=True,
     )
-    pi_q7 = models.IntegerField(
-        label="""
-            I believe that it is a woman's right to decide for herself whether
-            or not she should have an abortion. The government should not be
-            able to tell anyone how to behave in their private lives.
+    pi_q7 = make_pi(
+        """
+        I believe that it is a woman's right to decide for herself whether
+        or not she should have an abortion. The government should not be
+        able to tell anyone how to behave in their private lives.
         """,
-        choices=Constants.choices_reversed,
-        widget=widgets.RadioSelect,
+        reversed=True,
     )
 
     pol_ideology = models.IntegerField()

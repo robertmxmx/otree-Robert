@@ -1,3 +1,5 @@
+import os
+
 from otree.api import Currency as c
 from ._builtin import Page
 
@@ -29,4 +31,7 @@ class InternetRequirement(Page):
         return self.session.config["online_exp"]
 
 
-page_sequence = [Consent, Declined, Welcome, InternetRequirement]
+if os.environ.get("DEV_SKIP_PAGES", "0") == "1":
+    page_sequence = [Consent, Declined]
+else:
+    page_sequence = [Consent, Declined, Welcome, InternetRequirement]

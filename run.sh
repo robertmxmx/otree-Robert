@@ -17,23 +17,23 @@ print_usage () {
     echo 'OPTION should be either "dev", "tests" "lint" or "prod"'
 }
 
-docker_run () {
+docker_build () {
     docker build -f otree.Dockerfile -t $APP ./$APP
-    docker run --rm -it "$@"
 }
 
 case $1 in
     dev)
-        RUN_CMD="otree devserver 0.0.0.0:8000"
-        docker_run -v $VOLUME_PATH -p "8000:8000" $APP $RUN_CMD
+        docker_build
+        docker run -it --rm -v $VOLUME_PATH -p "8000:8000" \
+            --env-file ./.dev.env $APP otree devserver 0.0.0.0:8000
         ;;
     tests)
-        RUN_CMD="otree test $TEST_NAME $TEST_USERS"
-        docker_run $APP $RUN_CMD
+        docker_build
+        docker run $APP otree test $TEST_NAME $TEST_USERS
         ;;
     lint)
-        IMAGE="pyfound/black:latest_release"
-        docker run --rm -v $VOLUME_PATH -w //app $IMAGE black .
+        docker run --rm -v $VOLUME_PATH -w //app \
+            pyfound/black:latest_release black .
         ;;
     prod)
         docker compose up

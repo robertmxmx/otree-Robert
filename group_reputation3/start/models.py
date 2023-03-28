@@ -1,3 +1,5 @@
+import os
+
 from otree.api import (
     models,
     widgets,
@@ -7,6 +9,8 @@ from otree.api import (
     BasePlayer,
 )
 
+
+DEV_PREFILL = os.environ.get("DEV_PREFILL", "0") == "1"
 
 class Constants(BaseConstants):
     name_in_url = "start"
@@ -26,5 +30,6 @@ class Player(BasePlayer):
     accept = models.BooleanField(
         doc="""Whether subject accepts the consent form""",
         widget=widgets.RadioSelect,
+        initial=True if DEV_PREFILL else None,
         choices=[[True, "Accept"], [False, "Reject"]],
     )
