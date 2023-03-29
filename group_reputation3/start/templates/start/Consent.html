@@ -41,12 +41,44 @@
         </li>
       </ul>
       
-      {{
-        formfield player.accept
-        label='Do you consent to participate in the experiment?'
-      }}
-      
-      {{ next_button }}
+      <button class="btn btn-primary" name="accept" value="True">
+        Accept
+      </button>
+      <button class="btn btn-primary" type="button" onclick="toggle_modal()">
+        Reject
+      </button>
     </div>
   </div>
+
+  <div id="confirmModal" class="modal">
+    <div class="modal-content w3-container">
+      <p>
+        Thank you for your response. Since you do not consent to participate,
+        you may now leave the laboratory. Please inform the experimenter on
+        your way out.
+      </p>
+
+      <div class="d-flex justify-content-end">
+        <button
+          class="otree-btn-next btn btn-primary"
+          type="button"
+          onclick="toggle_modal()"
+        >Cancel</button>
+      </div>
+    </div>
+  </div>
+{{ endblock }}
+
+{{ block scripts }}
+  <script>
+    function toggle_modal() {
+      const modelOpen = $("#confirmModal").css("display");
+
+      if (modelOpen == "none") {
+        $("#confirmModal").css("display", "block");
+      } else {
+        $("#confirmModal").css("display", "none");
+      }
+    }
+  </script>
 {{ endblock }}

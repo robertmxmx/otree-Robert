@@ -11,11 +11,7 @@ class Consent(Page):
     def before_next_page(self):
         self.player.participant.vars["droppedout"] = not self.player.accept
 
-
-class Declined(Page):
-    def is_displayed(self):
-        return not self.player.accept
-
+    # TODO: Test this properly
     def app_after_this_page(self, upcoming_apps):
         if not self.player.accept:
             return upcoming_apps[-1]
@@ -32,6 +28,6 @@ class InternetRequirement(Page):
 
 
 if os.environ.get("DEV_SKIP_PAGES", "0") == "1":
-    page_sequence = [Consent, Declined]
+    page_sequence = [Consent]
 else:
-    page_sequence = [Consent, Declined, Welcome, InternetRequirement]
+    page_sequence = [Consent, Welcome, InternetRequirement]
