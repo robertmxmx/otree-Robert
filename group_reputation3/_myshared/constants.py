@@ -23,6 +23,6 @@ REGIONS = [
 
 
 class SortTypes(Enum):
-    NONE = None
+    NONE = "none"
     BIRTH_REGION = "birth_region"
     POLITICAL_IDEOLOGY = "pol_ideology"

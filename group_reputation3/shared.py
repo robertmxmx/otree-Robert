@@ -1,5 +1,6 @@
 import random
 
+from _myshared.constants import SortTypes
 from _myshared.helpers import find_occurrences, most_common_val, find_based_on_val
 
 
@@ -13,7 +14,7 @@ def set_roles(groups, key_val, players_per_group):
             for p in g:
                 random.shuffle(roles_left)
                 p["role"] = roles_left.pop()
-                p["sorted_by"] = None
+                p["sorted_by"] = SortTypes.NONE.value
     else:
         for g in groups:
             roles_left = roles.copy()

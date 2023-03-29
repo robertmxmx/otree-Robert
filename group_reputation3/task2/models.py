@@ -88,7 +88,7 @@ class Group(BaseGroup):
         current_players = self.get_players()
         current_sort = current_players[0].participant.vars["sorted_by"]
 
-        if not current_sort:
+        if current_sort == SortTypes.NONE.value:
             return []
 
         similar_groups = []
@@ -352,19 +352,23 @@ class Player(BasePlayer):
             self.subsession.deducting_player
         )
 
-        return_dict = {"sorted_by": sorted_by}
-        if sorted_by:
-            return_dict["other_knowledge_player"] = (
+        if sorted_by == SortTypes.NONE.value:
+            return {"sorted_by": None}
+
+        return_dict = {
+            "sorted_by": sorted_by,
+            "other_knowledge_player": (
                 self.subsession.deducting_player
                 if self.role() == self.subsession.taking_player
                 else self.subsession.taking_player
-            )
+            ),
+        }
 
-            if sorted_by == "birth_region":
-                return_dict["same_region"] = REGIONS[deducting_player.br - 1]
-            elif sorted_by == "pol_ideology":
-                return_dict["same_ideology"] = (
-                    "progressive" if deducting_player.pi == 1 else "conservative"
+        if sorted_by == SortTypes.BIRTH_REGION.value:
+            return_dict["same_region"] = REGIONS[deducting_player.br - 1]
+        elif sorted_by == SortTypes.POLITICAL_IDEOLOGY.value:
+            return_dict["same_ideology"] = (
+                "progressive" if deducting_player.pi == 1 else "conservative"
                 )
 
         return return_dict
