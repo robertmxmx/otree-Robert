@@ -312,7 +312,7 @@ class Feedback(Page):
         if "task_payoffs" not in p.vars:
             p.vars["task_payoffs"] = []
 
-        p.vars["task_payoffs"].append(p.payoff)
+        p.vars["task_payoffs"].append(self.player.final_payoff)
 
 
 class CMessage(Page):

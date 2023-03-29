@@ -37,7 +37,7 @@
         {{ include "components/FeedbackResults.html" }}
       {{ endwith }}
     {{ else }}
-      <p>Your earnings from Task 2 are {{ participant.payoff|json }} ECU.</p>
+      <p>Your earnings from Task 2 are {{ player.final_payoff|json }} ECU.</p>
     {{ endif }}
 
     <h4>Payment</h4>

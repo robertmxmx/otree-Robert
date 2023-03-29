@@ -76,8 +76,6 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     def init_round(self):
         for p in self.get_players():
-            p.participant.payoff = 0
-            p.payoff = Constants.initial_payoffs[p.role()]
             p.br = p.participant.vars["birth_region"]
             p.pi = p.participant.vars["pol_ideology"]
 
@@ -225,29 +223,32 @@ class Group(BaseGroup):
         player_C.set_bonus(guesses)
 
     def set_payoffs(self):
+        deduct_role = self.subsession.deducting_player
+        deduct_amount = self.get_player_by_role(deduct_role).deduct_amount
         playerA = self.get_player_by_role("A")
-        deducting_player = self.get_player_by_role(self.subsession.deducting_player)
+
+        payoffs = { **Constants.initial_payoffs }
 
         # Set if ECU was taken
         if playerA.chose_to_take:
-            deducting_player.payoff -= Constants.take_amount
-            playerA.payoff += Constants.take_amount
+            payoffs["A"] = payoffs["A"] + Constants.take_amount
+            payoffs[deduct_role] = payoffs[deduct_role] - Constants.take_amount
 
         # Set all players payoff after the choice of whether to take
-        for p in self.get_players():
-            p.payoff_after_take = p.participant.payoff
+        for player in self.get_players():
+            player.payoff_after_take = payoffs[player.role()]
 
         # Set deduction amount
         if playerA.chose_to_take:
-            deducting_player.payoff -= deducting_player.deduct_amount
-            playerA.payoff -= (
-                Constants.deduct["multiplier"] * deducting_player.deduct_amount
+            payoffs["A"] = payoffs["A"] - (
+                Constants.deduct["multiplier"] * int(deduct_amount)
             )
+            payoffs[deduct_role] = payoffs[deduct_role] - int(deduct_amount)
 
         # Set payoff for game. final_payoff is not really the final payoff,
-        # more so the final payoff BEFORE bonuses are given
+        # but the final payoff BEFORE bonuses are given
         for player in self.get_players():
-            player.final_payoff = player.participant.payoff
+            player.final_payoff = payoffs[player.role()]
 
         # Set payoffs for Bonus Questions
         if self.round_number == 1:
@@ -310,6 +311,9 @@ class Player(BasePlayer):
     deduct_amount = models.CurrencyField(
         initial=0, min=Constants.deduct["min"], max=Constants.deduct["max"]
     )
+
+    # Even though this is named final_payoff, this does not include the bonus
+    # for the belief questions
     final_payoff = models.CurrencyField()
 
     ee_c_group = make_deduct_field()
@@ -379,7 +383,6 @@ class Player(BasePlayer):
             bonus = Constants.additional_amount
 
             self.bonus_paid = True
-            self.payoff += bonus
 
             self.participant.vars["belief_bonus"]["paid"] = True
             self.participant.vars["belief_bonus"]["amount"] = bonus
