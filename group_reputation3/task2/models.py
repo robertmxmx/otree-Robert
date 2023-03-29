@@ -53,15 +53,16 @@ class Subsession(BaseSubsession):
     deducting_player = models.StringField()
 
     def group_by_arrival_time_method(self, waiting_players):
-        group_num = waiting_players[0].participant.vars["group"]
+        if len(waiting_players) > 0:
+            group_num = waiting_players[0].participant.vars["group"]
 
-        potential_group = []
-        for p in waiting_players:
-            if p.participant.vars["group"] == group_num:
-                potential_group.append(p)
+            potential_group = []
+            for p in waiting_players:
+                if p.participant.vars["group"] == group_num:
+                    potential_group.append(p)
 
-        if len(potential_group) == Constants.players_per_group:
-            return potential_group
+            if len(potential_group) == Constants.players_per_group:
+                return potential_group
 
     def creating_session(self):
         # Set player role for the round
