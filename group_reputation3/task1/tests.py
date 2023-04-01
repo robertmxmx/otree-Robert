@@ -35,30 +35,35 @@ PI3 = {
 
 
 # NOTE: This test is not always successful at sorting by what is specifed in
-# the comments. This is due to a combination of oTree sorting bots by arrival
-# time and the bots landing on the wait page at indeterminate times.
+# the below comments. This is due to a combination of oTree sorting bots by
+# arrival time and the bots landing on the wait page at indeterminate times.
 
 class PlayerBot(Bot):
     def play_round(self):
+        id = self.participant.id_in_session
+        inputs = {}
+
         # Sort this group by birth region
-        if self.participant.id_in_session == 1:
-            yield (pages.InitialSurvey, {**BR1, **PI3})
-        elif self.participant.id_in_session in [2, 3]:
-            yield (pages.InitialSurvey, {**BR2, **PI3})
-
+        if id == 1:
+            inputs = {**BR1, **PI3}
+        elif id in [2, 3]:
+            inputs = {**BR2, **PI3}
         # Sort this group by political ideology
-        elif self.participant.id_in_session == 4:
-            yield (pages.InitialSurvey, {**BR2, **PI1})
-        elif self.participant.id_in_session in [5, 6]:
-            yield (pages.InitialSurvey, {**BR2, **PI2})
-
+        elif id == 4:
+            inputs = {**BR2, **PI1}
+        elif id in [5, 6]:
+            inputs = {**BR2, **PI2}
         # Sort this group randomly
-        elif self.participant.id_in_session in [7, 8, 9]:
-            yield (pages.InitialSurvey, {**BR2, **PI3})
-
+        elif id in [7, 8, 9]:
+            inputs = {**BR2, **PI3}
         # Also sort this group by birth region. This ensures at least one
         # gets the extra belief questions
-        if self.participant.id_in_session == 10:
-            yield (pages.InitialSurvey, {**BR1, **PI3})
-        elif self.participant.id_in_session in [11, 12]:
-            yield (pages.InitialSurvey, {**BR2, **PI3})
+        if id == 10:
+            inputs = {**BR1, **PI3}
+        elif id in [11, 12]:
+            inputs = {**BR2, **PI3}
+        # Use the same inputs for the rest of the bots
+        else:
+            inputs = {**BR1, **PI1}
+
+        yield (pages.InitialSurvey, inputs)
