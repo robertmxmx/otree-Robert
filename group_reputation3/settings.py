@@ -21,6 +21,10 @@ SESSION_CONFIGS = [
         "deterrence": True,
         "online_exp": False,
         "chosen_task": 1,
+
+        # Uncomment this to enable bots to test in browser. NOTE: The
+        # variables in .dev.env MUST be set to 0 in order for this to work
+        # "use_browser_bots": True,
     },
 ]
 
