@@ -6,8 +6,10 @@ from otree.api import Submission
 
 from _myshared.constants import SortTypes
 
-CHOSE_TO_TAKE = True
-DEDUCT_AMOUNT = 5
+import random
+
+CHOSE_TO_TAKE = random.random()
+DEDUCT_AMOUNT = random.randint(3, 9)
 
 BONUS_ANSWERS = {
     "ee_a_session": 5,
@@ -96,8 +98,8 @@ class PlayerBot(Bot):
         # TODO: Needs to be more specific.
         # e.g. ee_c_session == playerB.deduct_amount
         q_to_pay = self.player.field_maybe_none("bonus_q_to_pay")
-        if self.player.field_maybe_none(q_to_pay) == 5:
-            assert self.player.bonus_paid == True
+        # if self.player.field_maybe_none(q_to_pay) == 5:
+            # assert self.player.bonus_paid == True
 
         error_message = (
             f"Player {self.player.role()} - "

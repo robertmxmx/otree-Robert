@@ -45,7 +45,7 @@ class PlayerBot(Bot):
 
         # Sort this group by birth region
         if id == 1:
-            inputs = {**BR1, **PI3}
+            inputs = {**BR2, **PI3}
         elif id in [2, 3]:
             inputs = {**BR2, **PI3}
         # Sort this group by political ideology
