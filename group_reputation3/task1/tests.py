@@ -1,8 +1,8 @@
 from . import pages
 from ._builtin import Bot
+import random
 
-
-BR1 = { "birth_region": 1 }
+BR1 = { "birth_region": 1 }        
 BR2 = { "birth_region": 2 }
 
 PI1 = {
@@ -18,7 +18,7 @@ PI2 = {
     "pi_q1": 7,
     "pi_q2": 1,
     "pi_q3": 1,
-    "pi_q4": 7,
+    "pi_q4": 5,
     "pi_q5": 7,
     "pi_q6": 1,
     "pi_q7": 1,
@@ -26,11 +26,20 @@ PI2 = {
 PI3 = {
     "pi_q1": 4,
     "pi_q2": 4,
-    "pi_q3": 4,
+    "pi_q3": 3,
     "pi_q4": 4,
     "pi_q5": 4,
     "pi_q6": 4,
     "pi_q7": 4,
+}
+PI4 = {
+    "pi_q1": 1,
+    "pi_q2": 1,
+    "pi_q3": 3,
+    "pi_q4": 7,
+    "pi_q5": 3,
+    "pi_q6": 3,
+    "pi_q7": 2,
 }
 
 
@@ -42,28 +51,50 @@ class PlayerBot(Bot):
     def play_round(self):
         id = self.participant.id_in_session
         inputs = {}
+        die = random.randint(1, 10)
 
-        # Sort this group by birth region
-        if id == 1:
-            inputs = {**BR2, **PI3}
-        elif id in [2, 3]:
-            inputs = {**BR2, **PI3}
-        # Sort this group by political ideology
-        elif id == 4:
-            inputs = {**BR2, **PI1}
-        elif id in [5, 6]:
-            inputs = {**BR2, **PI2}
-        # Sort this group randomly
-        elif id in [7, 8, 9]:
-            inputs = {**BR2, **PI3}
-        # Also sort this group by birth region. This ensures at least one
-        # gets the extra belief questions
-        if id == 10:
-            inputs = {**BR1, **PI3}
-        elif id in [11, 12]:
-            inputs = {**BR2, **PI3}
-        # Use the same inputs for the rest of the bots
-        else:
+        # Sort by random input
+        if die == 1:
             inputs = {**BR1, **PI1}
+        if die == 2:
+            inputs = {**BR2, **PI1}
+        if die == 3:
+            inputs = {"birth_region": random.randint(1, 14), **PI2}
+        if die == 4:
+            inputs = {"birth_region": random.randint(1, 7), **PI1}
+        if die == 5:
+            inputs = {"birth_region": random.randint(1, 7), **PI4}
+        if die == 6:
+            inputs = {"birth_region": random.randint(1, 3), **PI3}
+        if die == 7:
+            inputs = {"birth_region": random.randint(1, 3), **PI3}
+        if die == 8:
+            inputs = {"birth_region": random.randint(1, 12), **PI2}
+        if die == 9:
+            inputs = {"birth_region": random.randint(3, 7), **PI1}
+        if die == 10:
+            inputs = {"birth_region": random.randint(3, 7), **PI4}
+        # # Sort this group by birth region
+        # if id == 1:
+        #     inputs = {**BR2, **PI3}
+        # elif id in [2, 3]:
+        #     inputs = {**BR2, **PI3}
+        # # Sort this group by political ideology
+        # elif id == 4:
+        #     inputs = {**BR2, **PI1}
+        # elif id in [5, 6]:
+        #     inputs = {**BR2, **PI2}
+        # # Sort this group randomly
+        # elif id in [7, 8, 9]:
+        #     inputs = {**BR2, **PI3}
+        # # Also sort this group by birth region. This ensures at least one
+        # # gets the extra belief questions
+        # if id == 10:
+        #     inputs = {**BR1, **PI3}
+        # elif id in [11, 12]:
+        #     inputs = {**BR2, **PI3}
+        # # Use the same inputs for the rest of the bots
+        # else:
+        #     inputs = {**BR1, **PI1}
 
         yield (pages.InitialSurvey, inputs)

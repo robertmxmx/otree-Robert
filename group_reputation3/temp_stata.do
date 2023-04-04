@@ -1,0 +1,1 @@
+import delimited using "~/github/otree/group_reputation3/__temp_bots_Apr04_23h10m51.2s/all_apps_wide.csv", varnames(1) clear

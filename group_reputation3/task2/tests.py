@@ -8,7 +8,7 @@ from _myshared.constants import SortTypes
 
 import random
 
-CHOSE_TO_TAKE = random.random()
+CHOSE_TO_TAKE = random.choice([True, False])
 DEDUCT_AMOUNT = random.randint(3, 9)
 
 BONUS_ANSWERS = {
