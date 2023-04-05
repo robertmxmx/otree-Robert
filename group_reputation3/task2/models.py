@@ -392,6 +392,7 @@ class Player(BasePlayer):
             self.participant.vars["belief_bonus"]["amount"] = bonus
 
     def get_bonus_questions(self):
+        """Returns a list of bonus questions for the current player"""
         similar_groups_exist = len(self.group.get_similar_groups()) > 0
         reputation_treatment = self.session.config["rep_condition"]
         fields = []
