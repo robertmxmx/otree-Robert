@@ -10,91 +10,28 @@ CHOSE_TO_TAKE = True
 DEDUCT_AMOUNT = 5
 
 BONUS_ANSWERS = {
-    "A": {
-        "base": {
-            "ee_a_session": 5,
-            "ne_a": 5,
-            "ne_a_b_session": 5,
-            "ne_a_c_session": 5,
-        },
-        "same_grouping": {
-            "ee_a_group": 5,
-            "ne_a_b_group": 5,
-        },
-        "rep_condition": {
-            "ne_a_c_group": 5,
-        },
-    },
-    "B": {
-        "base": {
-            "ee_b_session": 5,
-            "ne_b": 5,
-            "ne_b_b_session": 5,
-            "ne_b_c_session": 5,
-        },
-        "same_grouping": {
-            "ee_b_group": 5,
-            "ne_b_b_group": 5,
-        },
-        "rep_condition": {
-            "ne_b_c_group": 5,
-        },
-    },
-    "C": {
-        "base": {
-            "ee_c_session": 5,
-            "ne_c": 5,
-            "ne_c_c_session": 5,
-        },
-        "same_grouping": {},
-        "rep_condition": {
-            "ee_c_group": 5,
-            "ne_c_c_group": 5,
-        },
-    },
+    "ee_a_session": 5,
+    "ne_a": 5,
+    "ne_a_b_session": 5,
+    "ne_a_c_session": 5,
+    "ee_a_group": 5,
+    "ne_a_b_group": 5,
+    "ne_a_c_group": 5,
+
+    "ee_b_session": 5,
+    "ne_b": 5,
+    "ne_b_b_session": 5,
+    "ne_b_c_session": 5,
+    "ee_b_group": 5,
+    "ne_b_b_group": 5,
+    "ne_b_c_group": 5,
+
+    "ee_c_session": 5,
+    "ne_c": 5,
+    "ne_c_c_session": 5,
+    "ee_c_group": 5,
+    "ne_c_c_group": 5,
 }
-
-
-def get_bouns_answers(role, rep_condition, same_grouping):
-    role_answers = BONUS_ANSWERS[role]
-    answers = {**role_answers["base"]}
-
-    if same_grouping:
-        answers = {**answers, **role_answers["same_grouping"]}
-
-        if rep_condition:
-            answers = {**answers, **role_answers["rep_condition"]}
-
-    return answers
-
-"""
-Return a list of sort types where these sort types have more than 1 group.
-For example: if there are 2 birth region groups and 1 political ideology group
-this array will return: ["birth_region"]
-"""
-def get_same_groupings(players):
-    birth_region_players = 0
-    political_ideology_players = 0
-    same_groupings = []
-    
-    for player in players:
-        sorted_by = player.participant.vars["sorted_by"]
-
-        if sorted_by == SortTypes.NONE.value:
-            continue
-        elif sorted_by == SortTypes.BIRTH_REGION.value:
-            birth_region_players += 1
-        elif sorted_by == SortTypes.POLITICAL_IDEOLOGY.value:
-            political_ideology_players += 1
-
-    if birth_region_players > Constants.players_per_group:
-        same_groupings.append(SortTypes.BIRTH_REGION.value)
-
-    if political_ideology_players > Constants.players_per_group:
-        same_groupings.append(SortTypes.POLITICAL_IDEOLOGY.value)
-
-    return same_groupings
-
 
 class PlayerBot(Bot):
     def play_round(self):
@@ -136,11 +73,9 @@ class PlayerBot(Bot):
             )
 
         if round_num == 1:
-            same_groupings = get_same_groupings(self.subsession.get_players())
-            same_grouping = self.participant.vars["sorted_by"] in same_groupings
-
-            answers = get_bouns_answers(
-                self.player.role(), rep_condition, same_grouping
+            question_list = self.player.get_bonus_questions()
+            answers = dict(
+                (question, BONUS_ANSWERS[question]) for question in question_list
             )
 
             yield (pages.BonusQuestions, answers)
