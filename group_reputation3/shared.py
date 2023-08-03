@@ -5,29 +5,47 @@ from _myshared.helpers import find_occurrences, most_common_val, find_based_on_v
 
 
 def set_roles(groups, key_val, players_per_group):
+    """
+    Set roles for players in given groups, based on the state of the group. This
+    will assign the most occuring value to the role that is furthest
+    (alphabetically) from "A"
+    """
+
     if len(groups) == 0:
         return []
+
+    # Create array of letters up to `players_per_group`. For example,
+    # if `players_per_group = 4` this makes: ["A", "B", "C", "D"]
     roles = [chr(i) for i in range(ord("A"), ord("A") + players_per_group)]
+
+    # Randomly assign a role to players
     if key_val is None:
         for g in groups:
             roles_left = roles.copy()
+
             for p in g:
                 random.shuffle(roles_left)
                 p["role"] = roles_left.pop()
                 p["sorted_by"] = SortTypes.NONE.value
-    else:
-        for g in groups:
-            roles_left = roles.copy()
-            occs = find_occurrences(g, key_val)
-            most_occuring_val = sorted(occs, key=occs.get, reverse=True)[0]
-            for p in g:
-                if p[key_val] != most_occuring_val:
-                    p["role"] = roles_left.pop(0)
-            for p in g:
-                if p[key_val] == most_occuring_val:
-                    random.shuffle(roles_left)
-                    p["role"] = roles_left.pop()
-                p["sorted_by"] = key_val
+
+        return groups
+
+    for g in groups:
+        roles_left = roles.copy()
+        occs = find_occurrences(g, key_val)
+        most_occuring_val = sorted(occs, key=occs.get, reverse=True)[0]
+
+        for p in g:
+            if p[key_val] != most_occuring_val:
+                p["role"] = roles_left.pop(0)
+
+        for p in g:
+            if p[key_val] == most_occuring_val:
+                random.shuffle(roles_left)
+                p["role"] = roles_left.pop()
+
+            p["sorted_by"] = key_val
+
     return groups
 
 

@@ -227,7 +227,7 @@ class Group(BaseGroup):
         deduct_amount = self.get_player_by_role(deduct_role).deduct_amount
         playerA = self.get_player_by_role("A")
 
-        payoffs = { **Constants.initial_payoffs }
+        payoffs = {**Constants.initial_payoffs}
 
         # Set if ECU was taken
         if playerA.chose_to_take:
@@ -369,7 +369,7 @@ class Player(BasePlayer):
         elif sorted_by == SortTypes.POLITICAL_IDEOLOGY.value:
             return_dict["same_ideology"] = (
                 "progressive" if deducting_player.pi == 1 else "conservative"
-                )
+            )
 
         return return_dict
 

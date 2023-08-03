@@ -12,6 +12,7 @@ from otree.api import (
 
 DEV_PREFILL = os.environ.get("DEV_PREFILL", "0") == "1"
 
+
 class Constants(BaseConstants):
     name_in_url = "start"
     players_per_group = None
