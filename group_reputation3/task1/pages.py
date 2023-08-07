@@ -67,7 +67,7 @@ class FormGroups(WaitPage):
                 continue
 
             p.set_pi_score()
-            scores.append(p.pi_score)
+            scores.append(p.pi_noisy)
             valid_players.append(p)
 
         scores.sort()
@@ -82,9 +82,9 @@ class FormGroups(WaitPage):
         high_per = scores[math.ceil(HIGH_PERC * len(scores)) - 1]
 
         for p in valid_players:
-            if p.pi_score >= high_per:
+            if p.pi_noisy >= high_per:
                 p.pol_ideology = 1
-            elif p.pi_score <= low_per:
+            elif p.pi_noisy <= low_per:
                 p.pol_ideology = 3
             else:
                 p.pol_ideology = 2

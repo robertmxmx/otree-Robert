@@ -1,4 +1,5 @@
 import os
+import random
 
 from otree.api import (
     models,
@@ -139,6 +140,8 @@ class Player(BasePlayer):
 
     pol_ideology = models.IntegerField()
     pi_score = models.IntegerField()
+    pi_noisy = models.FloatField()
+
     rl = models.StringField()
     sorted_by = models.StringField()
 
@@ -154,3 +157,7 @@ class Player(BasePlayer):
                 self.pi_q7,
             ]
         )
+
+        # Generate a random number between 0 and 0.2 inclusive
+        rand_num = random.randint(0, 20) / 100
+        self.pi_noisy = self.pi_score + rand_num
