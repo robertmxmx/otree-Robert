@@ -8,8 +8,7 @@ services:
       - db
       - cache
     ports:
-      - 8000:8000
-      - 80:8000
+      - 5173:8000
     environment:
       - DATABASE_URL=postgres://postgres:otree@db/django_db
       - OTREE_ADMIN_PASSWORD=otreee
