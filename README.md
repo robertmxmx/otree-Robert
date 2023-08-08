@@ -11,9 +11,28 @@
    chmod +x ./run.sh
    ./run.sh prod
    ```
+   To run tests
+   
+   ````
+   ./run.sh tests -e
+	````
+   
 4. The app runs at http://localhost:8000 and the login credentials are:
 	- Username: **admin**
 	- Password: **otreee**
+
+5. To change basic config of tests, edit `.env`
+
+## Fixing up docker issues
+
+- Try
+
+	````
+	docker stop $(docker ps -a -q)
+	````
+
+- Or: `docker system prune -a`
+
 
 ## Deploy
 
