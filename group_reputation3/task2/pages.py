@@ -192,40 +192,7 @@ class BonusQuestions(Page):
         return self.round_number == 1
 
     def get_form_fields(self):
-        similar_groups_exist = len(self.group.get_similar_groups()) > 0
-        reputation_treatment = self.session.config["rep_condition"]
-        fields = []
-
-        if self.player.role() == "A":
-            fields.extend(
-                [
-                    "ee_a_session",
-                    "ne_a",
-                    "ne_a_b_session",
-                    "ne_a_c_session",
-                ]
-            )
-
-            if similar_groups_exist:
-                fields.extend(["ee_a_group", "ne_a_b_group"])
-
-                if reputation_treatment:
-                    fields.extend(["ne_a_c_group"])
-        elif self.player.role() == "B":
-            fields.extend(["ee_b_session", "ne_b", "ne_b_b_session", "ne_b_c_session"])
-
-            if similar_groups_exist:
-                fields.extend(["ee_b_group", "ne_b_b_group"])
-
-                if reputation_treatment:
-                    fields.extend(["ne_b_c_group"])
-        elif self.player.role() == "C":
-            fields.extend(["ee_c_session", "ne_c", "ne_c_c_session"])
-
-            if reputation_treatment and similar_groups_exist:
-                fields.extend(["ee_c_group", "ne_c_c_group"])
-
-        return fields
+        return self.player.get_bonus_questions()
 
     def vars_for_template(self):
         similar_groups = self.group.get_similar_groups()
