@@ -7,21 +7,22 @@
    APP=non_id5
    ```
 3. In this folder, run the below in a terminal
-   ```
+   ```sh
    chmod +x ./run.sh
    ./run.sh prod
+
+   # For development use:
+   ./run.sh dev
    ```
-   To run tests
-   
-   ````
-   ./run.sh tests -e
-	````
-   
 4. The app runs at http://localhost:8000 and the login credentials are:
 	- Username: **admin**
 	- Password: **otreee**
-
 5. To change basic config of tests, edit `.env`
+6. To run tests
+   ```
+   ./run.sh tests -e
+	 ```
+   
 
 ## Fixing up docker issues
 

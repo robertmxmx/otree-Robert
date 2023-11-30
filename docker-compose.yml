@@ -5,8 +5,10 @@ services:
       context: ./${APP}
       dockerfile: ../otree.Dockerfile
     depends_on:
-      - db
-      - cache
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
     ports:
       - 80:8000
       - 8000:8000
@@ -19,9 +21,19 @@ services:
   cache:
     image: redis:alpine
     restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
   db:
     image: postgres:alpine
     restart: always
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
     environment:
       - POSTGRES_DB=django_db
       - POSTGRES_PASSWORD=otree

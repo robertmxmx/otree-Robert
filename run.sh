@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source ./.env
+. ./.env
 
 # MINGW formats paths differently
 VOLUME_PATH="$([ $(uname | grep MINGW) ] && echo //)$(pwd)/$APP:/app"
