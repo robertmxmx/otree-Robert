@@ -15,7 +15,7 @@ SESSION_CONFIGS = [
     {
         "name": "gr",
         "display_name": "Group Reputation",
-        "num_demo_participants": 6,
+        "num_demo_participants": 9,
         "app_sequence": ["start", "task1", "task2", "ds", "end"],
         "rep_condition": True,
         "deterrence": True,
@@ -27,6 +27,15 @@ SESSION_CONFIGS = [
     },
 ]
 
+ROOMS = [
+    {
+        'name':'toby_lab',
+        'display_name':"Toby's Lab",
+        'participant_label_file':'lab_number.txt',
+    },
+]
+
+
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
 LANGUAGE_CODE = "en"
@@ -35,8 +44,6 @@ LANGUAGE_CODE = "en"
 REAL_WORLD_CURRENCY_CODE = "AUD"
 USE_POINTS = True
 POINTS_DECIMAL_PLACES = 2
-
-ROOMS = []
 
 ADMIN_USERNAME = "admin"
 # for security, best to set admin password in an environment variable
